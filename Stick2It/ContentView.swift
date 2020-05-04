@@ -9,8 +9,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let goals = ["Goal One", "Goal Two", "Goal Three"]
+    let testGoal2 = Goal(goalName: "Name2", done: true)
+    
+    var testGoalList = [Goal(goalName: "Goal 1", done: true), Goal(goalName: "Goal 2", done: false), Goal(goalName: "Goal 3", done: false), Goal(goalName: "Goal 4", done: true)]
+    
     var body: some View {
-        Text("Hello World")
+
+        VStack{
+            Text("Top")
+            
+            GoalBox(goal: testGoal2)
+            
+            ForEach(testGoalList, id: \.id) {
+                GoalBox(goal: $0)
+            }
+            
+            Text("Bottom")
+        }
+    .padding()
     }
 }
 
