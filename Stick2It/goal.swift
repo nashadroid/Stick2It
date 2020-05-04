@@ -14,6 +14,8 @@ import SwiftUI
 struct Goal: Hashable {
     var id = UUID()
     var goalName: String = "DefaultGoal"
+    var startTime: String = "00:00"
+    var endTime: String = "00:00"
     var done: Bool = false
     
     mutating func updateDone(){

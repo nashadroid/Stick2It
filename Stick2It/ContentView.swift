@@ -10,33 +10,32 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let goals = ["Goal One", "Goal Two", "Goal Three"]
-    //let testGoal2 = Goal(goalName: "Name2", done: true)
     
-    var testGoalList = [Goal(goalName: "Goal 1", done: true), Goal(goalName: "Goal 2", done: false), Goal(done: false), Goal(goalName: "Goal 4", done: true)]
+    var defaultGoalList = [Goal(goalName: "Goal 1", done: true), Goal(goalName: "Goal 2", done: false), Goal(goalName: "Goal 3", done: false), Goal(goalName: "Goal 4", done: true)]
     
     var body: some View {
-
-        VStack{
-            //Text("Top")
+        Color.white
+            .overlay(
+                VStack{
+                    
+                    ForEach(defaultGoalList, id: \.id) {
+                        GoalBox(goal: $0)
+                        
+                        .padding(5)
+                        
+                    }
+                    
+                    
+                }
+                .padding()
+        )
+        .edgesIgnoringSafeArea(.all)
             
-            //GoalBox(goal: testGoal2)
-            
-            ForEach(testGoalList, id: \.id) {
-                GoalBox(goal: $0)
-                
-                //.background(Color.white.shadow(radius: 10))
-                //.overlay(Rectangle().stroke(Color.white, lineWidth: 4))
-                .padding(5)
-                
-                
-                
-            }
-            
-            //Text("Bottom")
-        }
-    .padding()
+    
+    
     }
+    
+
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -44,3 +43,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

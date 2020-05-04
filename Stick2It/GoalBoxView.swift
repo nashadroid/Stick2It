@@ -14,29 +14,42 @@ struct GoalBox: View {
     
     var body: some View {
         
-        
+        Button(action: {
+            //TODO: Make sure this gets saved somewhere
+             self.didTap = !self.didTap
+        }) {
         
         HStack{
             
-            Text(goal.goalName)
-                .font(.headline)
-                .fontWeight(.heavy)
-                .padding(10)
-                .foregroundColor(didTap ? Color.white : Color.black)
+            VStack(alignment: .leading){
+                Text(goal.goalName)
+                    .font(.headline)
+                    .fontWeight(.heavy)
+                    .padding(.leading, 10)
+                    .foregroundColor(didTap ? Color.white : Color.black)
+                Text("\(goal.startTime) - \(goal.endTime)")
+                    //.italic()
+                    .font(.footnote)
+                    .padding(.leading, 10)
+                    .foregroundColor(didTap ? Color.white : Color.gray)
+                
+                    
+            }
             Spacer()
             
-            Button(action: {
-                //TODO: Make sure this gets saved somewhere
-                 self.didTap = !self.didTap
-            }) {
-                Text(self.didTap  ? "Done" : "To-Do")
+//            Button(action: {
+//                //TODO: Make sure this gets saved somewhere
+//                 self.didTap = !self.didTap
+//            }) {
+                Text(self.didTap ? "Done" : "To-Do")
                 .foregroundColor(Color.white)
                 .fontWeight(.heavy)
+                .padding()
+                .background(didTap ? Color.green : Color.red)
             }
-            .padding()
-            .background(didTap ? Color.green : Color.red)
+            
         }
-        .background(didTap ? Color.green.shadow(radius: 10) : Color.white.shadow(radius: 10))
+        .background(didTap ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
         
         
         //.shadow(radius: 10)
@@ -47,7 +60,7 @@ struct GoalBox: View {
     }
 }
 
-var testGoal = Goal(goalName: "Name1", done: true)
+    var testGoal = Goal(goalName: "Name1", startTime: "00:00", endTime: "00:00", done: true)
 
 struct GoalBox_Previews: PreviewProvider {
     
