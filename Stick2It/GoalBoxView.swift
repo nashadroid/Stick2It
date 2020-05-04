@@ -24,7 +24,7 @@ struct GoalBox: View {
             Button(action: {
                 //goal.updateDone()
                 print("Button Tapped")
-                 self.didTap = true
+                 self.didTap = !self.didTap
             }) {
             Text(goal.done ? "Done" : "To-Do")
                 .foregroundColor(didTap ? Color.green : Color.red)
