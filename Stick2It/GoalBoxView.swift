@@ -9,14 +9,16 @@
 import SwiftUI
 
 struct GoalBox: View {
-    var goal: Goal
-    @State private var didTap:Bool = false
+    @State var goal: Goal
+    //@State private var didTap:Bool = false
     
     var body: some View {
         
         Button(action: {
             //TODO: Make sure this gets saved somewhere
-             self.didTap = !self.didTap
+             //self.didTap = !self.didTap
+            let temp: Bool = !self.goal.done
+            self.goal.done = temp
         }) {
         
         HStack{
@@ -26,12 +28,12 @@ struct GoalBox: View {
                     .font(.headline)
                     .fontWeight(.heavy)
                     .padding(.leading, 10)
-                    .foregroundColor(didTap ? Color.white : Color.black)
+                    .foregroundColor(self.goal.done ? Color.white : Color.black)
                 Text("\(goal.startTime) - \(goal.endTime)")
                     //.italic()
                     .font(.footnote)
                     .padding(.leading, 10)
-                    .foregroundColor(didTap ? Color.white : Color.gray)
+                    .foregroundColor(self.goal.done ? Color.white : Color.gray)
                 
                     
             }
@@ -41,15 +43,15 @@ struct GoalBox: View {
 //                //TODO: Make sure this gets saved somewhere
 //                 self.didTap = !self.didTap
 //            }) {
-                Text(self.didTap ? "Done" : "To-Do")
+                Text(self.goal.done ? "Done" : "To-Do")
                 .foregroundColor(Color.white)
                 .fontWeight(.heavy)
                 .padding()
-                .background(didTap ? Color.green : Color.red)
+                .background(self.goal.done ? Color.green : Color.red)
             }
             
         }
-        .background(didTap ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
+        .background(self.goal.done ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
         
         
         //.shadow(radius: 10)
