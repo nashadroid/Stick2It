@@ -21,6 +21,8 @@ struct GoalBox: View {
             Text(goal.goalName)
                 .font(.headline)
                 .fontWeight(.heavy)
+                .padding(10)
+                .foregroundColor(didTap ? Color.white : Color.black)
             Spacer()
             
             Button(action: {
@@ -34,7 +36,11 @@ struct GoalBox: View {
             .padding()
             .background(didTap ? Color.green : Color.red)
         }
-        //.padding()
+        .background(didTap ? Color.green.shadow(radius: 10) : Color.white.shadow(radius: 10))
+        
+        
+        //.shadow(radius: 10)
+        
         
     
     
@@ -48,7 +54,7 @@ struct GoalBox_Previews: PreviewProvider {
     static var previews: some View {
         
         GoalBox(goal: testGoal)
-        .previewLayout(.fixed(width: 300, height: 70))
+        //.previewLayout(.fixed(width: 300, height: 70))
         
     }
 }

@@ -13,7 +13,7 @@ import SwiftUI
 
 struct Goal: Hashable {
     var id = UUID()
-    var goalName: String = "sampleGoal"
+    var goalName: String = "DefaultGoal"
     var done: Bool = false
     
     mutating func updateDone(){

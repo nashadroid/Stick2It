@@ -13,7 +13,7 @@ struct ContentView: View {
     let goals = ["Goal One", "Goal Two", "Goal Three"]
     //let testGoal2 = Goal(goalName: "Name2", done: true)
     
-    var testGoalList = [Goal(goalName: "Goal 1", done: true), Goal(goalName: "Goal 2", done: false), Goal(goalName: "Goal 3", done: false), Goal(goalName: "Goal 4", done: true)]
+    var testGoalList = [Goal(goalName: "Goal 1", done: true), Goal(goalName: "Goal 2", done: false), Goal(done: false), Goal(goalName: "Goal 4", done: true)]
     
     var body: some View {
 
@@ -24,6 +24,13 @@ struct ContentView: View {
             
             ForEach(testGoalList, id: \.id) {
                 GoalBox(goal: $0)
+                
+                //.background(Color.white.shadow(radius: 10))
+                //.overlay(Rectangle().stroke(Color.white, lineWidth: 4))
+                .padding(5)
+                
+                
+                
             }
             
             //Text("Bottom")
