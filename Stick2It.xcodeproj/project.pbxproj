@@ -16,6 +16,7 @@
 		84AE44DC246071BC00043CDA /* Stick2ItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44DB246071BC00043CDA /* Stick2ItTests.swift */; };
 		84AE44E7246071BC00043CDA /* Stick2ItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44E6246071BC00043CDA /* Stick2ItUITests.swift */; };
 		84AE44F524607ED500043CDA /* goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44F424607ED400043CDA /* goal.swift */; };
+		84AE44F724607F3400043CDA /* GoalBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44F624607F3400043CDA /* GoalBoxView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		84AE44E6246071BC00043CDA /* Stick2ItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stick2ItUITests.swift; sourceTree = "<group>"; };
 		84AE44E8246071BC00043CDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84AE44F424607ED400043CDA /* goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = goal.swift; sourceTree = "<group>"; };
+		84AE44F624607F3400043CDA /* GoalBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalBoxView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				84AE44C6246071BA00043CDA /* SceneDelegate.swift */,
 				84AE44C8246071BA00043CDA /* ContentView.swift */,
 				84AE44F424607ED400043CDA /* goal.swift */,
+				84AE44F624607F3400043CDA /* GoalBoxView.swift */,
 				84AE44CA246071BB00043CDA /* Assets.xcassets */,
 				84AE44CF246071BB00043CDA /* LaunchScreen.storyboard */,
 				84AE44D2246071BB00043CDA /* Info.plist */,
@@ -274,6 +277,7 @@
 				84AE44C5246071BA00043CDA /* AppDelegate.swift in Sources */,
 				84AE44C7246071BA00043CDA /* SceneDelegate.swift in Sources */,
 				84AE44C9246071BA00043CDA /* ContentView.swift in Sources */,
+				84AE44F724607F3400043CDA /* GoalBoxView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
