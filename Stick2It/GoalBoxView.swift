@@ -34,7 +34,7 @@ struct GoalBox: View {
             .padding()
             .background(didTap ? Color.green : Color.red)
         }
-        .padding()
+        //.padding()
         
     
     
