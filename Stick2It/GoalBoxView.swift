@@ -14,6 +14,8 @@ struct GoalBox: View {
     
     var body: some View {
         
+        
+        
         HStack{
             
             Text(goal.goalName)
@@ -22,13 +24,15 @@ struct GoalBox: View {
             Spacer()
             
             Button(action: {
-                //goal.updateDone()
-                print("Button Tapped")
+                //TODO: Make sure this gets saved somewhere
                  self.didTap = !self.didTap
             }) {
-            Text(goal.done ? "Done" : "To-Do")
-                .foregroundColor(didTap ? Color.green : Color.red)
+                Text(self.didTap  ? "Done" : "To-Do")
+                .foregroundColor(Color.white)
+                .fontWeight(.heavy)
             }
+            .padding()
+            .background(didTap ? Color.green : Color.red)
         }
         .padding()
         
