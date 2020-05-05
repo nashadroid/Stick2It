@@ -19,6 +19,8 @@ struct GoalBox: View {
              //self.didTap = !self.didTap
             let temp: Bool = !self.goal.done
             self.goal.done = temp
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.impactOccurred()
         }) {
         
         HStack{
