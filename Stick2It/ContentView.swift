@@ -9,12 +9,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var userData: UserData
     
     var body: some View {
         Color.white
             .overlay(
                 VStack{
-                    ForEach(GoalData) {goal in
+                    ForEach(userData.userGoals) {goal in
                         GoalBox(goal: goal)
                         .padding(5)
                     }
@@ -28,6 +29,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        .environmentObject(UserData())
     }
 }
 
