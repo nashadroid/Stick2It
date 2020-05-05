@@ -9,12 +9,14 @@ A clean approach to goal setting and routine tracking. Increase your productivit
  - Daily view of today's goals
  - Easy checklist systems to mark completion
  - Intuitive color-coded display of completion of tasks
+ - Quickly add and remove tasks
 
 ### Enhanced Experience:
  - Display of day's goals and routine as a linear calendar
  - Outline of day adjustable through simple touch interactions
  - Easy navigation to weekly, monthly, perhaps yearly views
  - Area for notes and reflection
+ - Catagorize and color code activities by type
 
 ### Beyond:
  - Integration with iCal and Google Cal
