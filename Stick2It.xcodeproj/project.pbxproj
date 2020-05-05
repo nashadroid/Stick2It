@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8420A71D2461062800E44DC9 /* todaySample.json in Resources */ = {isa = PBXBuildFile; fileRef = 8420A71C2461062800E44DC9 /* todaySample.json */; };
 		84AE44C5246071BA00043CDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44C4246071BA00043CDA /* AppDelegate.swift */; };
 		84AE44C7246071BA00043CDA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44C6246071BA00043CDA /* SceneDelegate.swift */; };
 		84AE44C9246071BA00043CDA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44C8246071BA00043CDA /* ContentView.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8420A71C2461062800E44DC9 /* todaySample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = todaySample.json; sourceTree = "<group>"; };
 		84AE44C1246071BA00043CDA /* Stick2It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stick2It.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AE44C4246071BA00043CDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84AE44C6246071BA00043CDA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8420A71B246105D900E44DC9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8420A71C2461062800E44DC9 /* todaySample.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		84AE44B8246071BA00043CDA = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +118,7 @@
 				84AE44C8246071BA00043CDA /* ContentView.swift */,
 				84AE44F624607F3400043CDA /* GoalBoxView.swift */,
 				84AE44F424607ED400043CDA /* goal.swift */,
+				8420A71B246105D900E44DC9 /* Resources */,
 				84AE44CA246071BB00043CDA /* Assets.xcassets */,
 				84AE44CF246071BB00043CDA /* LaunchScreen.storyboard */,
 				84AE44D2246071BB00043CDA /* Info.plist */,
@@ -249,6 +260,7 @@
 				84AE44D1246071BB00043CDA /* LaunchScreen.storyboard in Resources */,
 				84AE44CE246071BB00043CDA /* Preview Assets.xcassets in Resources */,
 				84AE44CB246071BB00043CDA /* Assets.xcassets in Resources */,
+				8420A71D2461062800E44DC9 /* todaySample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
