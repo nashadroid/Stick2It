@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GoalBox: View {
     @EnvironmentObject var userData: UserData
-    @State var goal: Goal
+    @State var goal: Goal //TODO: Change this to be an index or ID only
     
     var goalIndex: Int {
         userData.userGoals.firstIndex(where: { $0.id == goal.id })!
@@ -34,12 +34,12 @@ struct GoalBox: View {
                     .font(.headline)
                     .fontWeight(.heavy)
                     .padding(.leading, 10)
-                    .foregroundColor(self.goal.done ? Color.white : Color.black)
+                    .foregroundColor(self.userData.userGoals[self.goalIndex].done ? Color.white : Color.black)
                 Text("\(goal.startTime) - \(goal.endTime)")
                     //.italic()
                     .font(.footnote)
                     .padding(.leading, 10)
-                    .foregroundColor(self.goal.done ? Color.white : Color.gray)
+                    .foregroundColor(self.userData.userGoals[self.goalIndex].done ? Color.white : Color.gray)
                 
                     
             }
@@ -49,15 +49,15 @@ struct GoalBox: View {
 //                //TODO: Make sure this gets saved somewhere
 //                 self.didTap = !self.didTap
 //            }) {
-                Text(self.goal.done ? "Done" : "To-Do")
+                Text(self.userData.userGoals[self.goalIndex].done ? "Done" : "To-Do")
                 .foregroundColor(Color.white)
                 .fontWeight(.heavy)
                 .padding()
-                .background(self.goal.done ? Color.green : Color.red)
+                .background(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.red)
             }
             
         }
-        .background(self.goal.done ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
+        .background(self.userData.userGoals[self.goalIndex].done ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
         
         
         //.shadow(radius: 10)
@@ -74,8 +74,8 @@ struct GoalBox_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        GoalBox(goal: testGoal)
-        //.previewLayout(.fixed(width: 300, height: 70))
+        GoalBox(goal: GoalData[0])
+        .environmentObject(UserData())
         
     }
 }
