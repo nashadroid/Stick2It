@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8420A71D2461062800E44DC9 /* todaySample.json in Resources */ = {isa = PBXBuildFile; fileRef = 8420A71C2461062800E44DC9 /* todaySample.json */; };
+		8420A720246106B200E44DC9 /* LoadSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A71F246106B200E44DC9 /* LoadSample.swift */; };
 		84AE44C5246071BA00043CDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44C4246071BA00043CDA /* AppDelegate.swift */; };
 		84AE44C7246071BA00043CDA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44C6246071BA00043CDA /* SceneDelegate.swift */; };
 		84AE44C9246071BA00043CDA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44C8246071BA00043CDA /* ContentView.swift */; };
@@ -16,7 +17,7 @@
 		84AE44D1246071BB00043CDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84AE44CF246071BB00043CDA /* LaunchScreen.storyboard */; };
 		84AE44DC246071BC00043CDA /* Stick2ItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44DB246071BC00043CDA /* Stick2ItTests.swift */; };
 		84AE44E7246071BC00043CDA /* Stick2ItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44E6246071BC00043CDA /* Stick2ItUITests.swift */; };
-		84AE44F524607ED500043CDA /* goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44F424607ED400043CDA /* goal.swift */; };
+		84AE44F524607ED500043CDA /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44F424607ED400043CDA /* Goal.swift */; };
 		84AE44F724607F3400043CDA /* GoalBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44F624607F3400043CDA /* GoalBoxView.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		8420A71C2461062800E44DC9 /* todaySample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = todaySample.json; sourceTree = "<group>"; };
+		8420A71F246106B200E44DC9 /* LoadSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadSample.swift; sourceTree = "<group>"; };
 		84AE44C1246071BA00043CDA /* Stick2It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stick2It.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AE44C4246071BA00043CDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84AE44C6246071BA00043CDA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,7 +55,7 @@
 		84AE44E2246071BC00043CDA /* Stick2ItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Stick2ItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AE44E6246071BC00043CDA /* Stick2ItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stick2ItUITests.swift; sourceTree = "<group>"; };
 		84AE44E8246071BC00043CDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84AE44F424607ED400043CDA /* goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = goal.swift; sourceTree = "<group>"; };
+		84AE44F424607ED400043CDA /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		84AE44F624607F3400043CDA /* GoalBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalBoxView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +92,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		8420A71E2461065F00E44DC9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				84AE44F424607ED400043CDA /* Goal.swift */,
+				8420A71F246106B200E44DC9 /* LoadSample.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		84AE44B8246071BA00043CDA = {
 			isa = PBXGroup;
 			children = (
@@ -113,11 +124,11 @@
 		84AE44C3246071BA00043CDA /* Stick2It */ = {
 			isa = PBXGroup;
 			children = (
+				8420A71E2461065F00E44DC9 /* Models */,
 				84AE44C4246071BA00043CDA /* AppDelegate.swift */,
 				84AE44C6246071BA00043CDA /* SceneDelegate.swift */,
 				84AE44C8246071BA00043CDA /* ContentView.swift */,
 				84AE44F624607F3400043CDA /* GoalBoxView.swift */,
-				84AE44F424607ED400043CDA /* goal.swift */,
 				8420A71B246105D900E44DC9 /* Resources */,
 				84AE44CA246071BB00043CDA /* Assets.xcassets */,
 				84AE44CF246071BB00043CDA /* LaunchScreen.storyboard */,
@@ -285,11 +296,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84AE44F524607ED500043CDA /* goal.swift in Sources */,
+				84AE44F524607ED500043CDA /* Goal.swift in Sources */,
 				84AE44C5246071BA00043CDA /* AppDelegate.swift in Sources */,
 				84AE44C7246071BA00043CDA /* SceneDelegate.swift in Sources */,
 				84AE44C9246071BA00043CDA /* ContentView.swift in Sources */,
 				84AE44F724607F3400043CDA /* GoalBoxView.swift in Sources */,
+				8420A720246106B200E44DC9 /* LoadSample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,29 +1,38 @@
-{"Wake up, out of bed": {
-  "startTime": "9:00 am",
-  "endTime": "9:18 am",
-  "done": true},
-"Run":{
+[
+  {
+    "goal": "Wake up, out of bed",
+    "startTime": "9:00 am",
+    "endTime": "9:18 am",
+    "done": true},
+  {
+  "goal": "Run",
   "startTime": "9:25 am",
   "endTime": "10:00 am",
   "done": true},
-"Shower, Brush Teeth": {
+  {
+  "goal": "Shower, Brush Teeth",
   "startTime": "10:10 am",
   "endTime": "10:30 am",
   "done": false},
-"Breakfast":{
+  {
+  "goal": "Breakfast",
   "startTime": "10:30 am",
   "endTime": "11:00 am",
   "done": false},
-"Programming":{
+  {
+  "goal": "Programming",
   "startTime": "11:00 am",
   "endTime": "1:00 pm",
   "done": false},
-"Lunch":{
+  {
+  "goal": "Lunch",
   "startTime": "1:00 pm",
   "endTime": "2:00 pm",
   "done": false},
-"Music":{
+  {
+  "goal": "Music",
   "startTime": "1:00 pm",
   "endTime": "2:00 pm",
-  "done": false}
-}
+  "done": false
+  }
+]
