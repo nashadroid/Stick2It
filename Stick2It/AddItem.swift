@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct AddItem: View {
+    @Environment(\.presentationMode) var presentationMode
     @State private var name: String = ""
     @State private var startTime: String = ""
     @State private var endTime: String = ""
@@ -39,10 +40,10 @@ struct AddItem: View {
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 20)
             
-            
         }
         .padding()
-        .background(Color.white)
+        .background(Color.white.shadow(radius: 7))
+        .padding()
     }
 }
 
