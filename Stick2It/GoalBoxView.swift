@@ -9,16 +9,20 @@
 import SwiftUI
 
 struct GoalBox: View {
+    @EnvironmentObject var userData: UserData
     @State var goal: Goal
-    //@State private var didTap:Bool = false
+    
+    var goalIndex: Int {
+        userData.userGoals.firstIndex(where: { $0.id == goal.id })!
+    }
     
     var body: some View {
         
         Button(action: {
             //TODO: Make sure this gets saved somewhere
              //self.didTap = !self.didTap
-            let temp: Bool = !self.goal.done
-            self.goal.done = temp
+            self.goal.done.toggle()
+            self.userData.userGoals[self.goalIndex].done.toggle()
             let generator = UIImpactFeedbackGenerator(style: .heavy)
             generator.impactOccurred()
         }) {
