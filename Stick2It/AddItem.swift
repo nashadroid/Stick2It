@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct AddItem: View {
-    @Environment(\.presentationMode) var presentationMode
+    // @Environment(\.presentationMode) var presentationMode
     @State private var name: String = ""
     @State private var startTime: String = ""
     @State private var endTime: String = ""
@@ -17,13 +17,17 @@ struct AddItem: View {
     
     var body: some View {
         VStack(alignment: .leading){
+            Text("New Goal")
+                .font(.largeTitle)
+                .multilineTextAlignment(.center)
+                
+            
             Text("Goal Name:")
                 .font(.headline)
                 .fontWeight(.heavy)
+                .padding(.top, 40)
             TextField("Enter goal name", text: $name)
                 .multilineTextAlignment(.center)
-            
-            
             
             Text("Start Time:")
                 .font(.headline)
@@ -40,10 +44,12 @@ struct AddItem: View {
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 20)
             
+            
+            
         }
         .padding()
         .background(Color.white.shadow(radius: 7))
-        .padding()
+        .padding(30)
     }
 }
 

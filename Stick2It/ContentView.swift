@@ -10,25 +10,50 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var userData: UserData
-    @State var show = false
+    @State var addingItem = false
     
     var body: some View {
         Color.white
             .overlay(
+                
+                ZStack{
 
-                VStack{
-                    ForEach(userData.userGoals) {goal in
-                        GoalBox(goal: goal)
-                        .padding(5)
+                    VStack{
+                        ForEach(userData.userGoals) {goal in
+                            GoalBox(goal: goal)
+                            .padding(5)
+                        }
+                        
+                        Button(action: {self.addingItem.toggle()}) {
+                            Text("Add")
+                        }
+                        
                     }
+                    .padding()
+                    //.sheet(isPresented: $show, content: { AddItem() })
                     
-                    Button(action: {self.show = true}) {
-                        Text("Add")
+                    if(addingItem){
+
+                        GeometryReader{_ in
+                        
+                            AddItem()
+                        
+                        }.background(
+                            
+                            Color.black.opacity(0.65)
+                                .edgesIgnoringSafeArea(.all)
+                                .onTapGesture {
+                                        
+                                        self.addingItem.toggle()
+                                    
+                                }
+                        
+                        )
+
+                        
                     }
                     
                 }
-                .padding()
-                .sheet(isPresented: $show, content: { AddItem() })
             
         )
         .edgesIgnoringSafeArea(.all)
