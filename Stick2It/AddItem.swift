@@ -20,29 +20,51 @@ struct AddItem: View {
             Text("New Goal")
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
+                .foregroundColor(Color.black)
+            
+            VStack(alignment: .leading){
+                Text("Goal Name:")
+                    .font(.headline)
+                    .fontWeight(.heavy)
+                    .padding(.leading, 5)
+                    .foregroundColor(Color.black)
+                TextField("Enter goal name", text: $name)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(5)
+            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1))
+            .padding(.top, 20)
+            
+            VStack(alignment: .leading){
+                Text("Start Time:")
+                    .font(.headline)
+                    .fontWeight(.heavy)
+                    .padding(.leading, 5)
+                    .foregroundColor(Color.black)
+                TextField("Enter Start Time", text: $startTime)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(5)
+            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1))
+            .padding(.top, 20)
+            
+            VStack(alignment: .leading){
+                Text("End Time:")
+                    .font(.headline)
+                    .fontWeight(.heavy)
+                    .padding(.leading, 5)
+                    .foregroundColor(Color.black)
+                    //.multilineTextAlignment(.leading)
                 
+                TextField("Enter End Time", text: $endTime)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(5)
+            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1))
+            .padding(.top, 20)
             
-            Text("Goal Name:")
-                .font(.headline)
-                .fontWeight(.heavy)
-                .padding(.top, 40)
-            TextField("Enter goal name", text: $name)
-                .multilineTextAlignment(.center)
             
-            Text("Start Time:")
-                .font(.headline)
-                .fontWeight(.heavy)
-                .padding(.top, 20)
-            TextField("Enter Start Time", text: $startTime)
-                .multilineTextAlignment(.center)
-            
-            Text("End Time:")
-                .font(.headline)
-                .fontWeight(.heavy)
-                .padding(.top, 20)
-            TextField("Enter End Time", text: $endTime)
-                .multilineTextAlignment(.center)
-                .padding(.bottom, 20)
+                //.padding(.bottom, 20)
             
             
             
