@@ -11,7 +11,7 @@ import SwiftUI
 //TODO: Change id to customized
 //TODO: Try Default Values
 
-struct Goal: Hashable {
+struct Goal: Hashable, Codable, Identifiable {
     var id = UUID()
     var goalName: String = "DefaultGoal"
     var startTime: String = "00:00"
