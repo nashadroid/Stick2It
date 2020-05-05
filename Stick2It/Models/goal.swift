@@ -12,15 +12,10 @@ import SwiftUI
 //TODO: Try Default Values
 
 struct Goal: Hashable, Codable, Identifiable {
-    var id = UUID()
-    var goalName: String = "DefaultGoal"
-    var startTime: String = "00:00"
-    var endTime: String = "00:00"
-    var done: Bool = false
-    
-    mutating func updateDone(){
-        self.done = true
-    }
-    
+    var id: Int
+    var goalName: String
+    var startTime: String
+    var endTime: String
+    var done: Bool
 }
 

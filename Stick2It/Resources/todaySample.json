@@ -1,38 +1,65 @@
 [
-  {
-    "goal": "Wake up, out of bed",
-    "startTime": "9:00 am",
-    "endTime": "9:18 am",
-    "done": true},
-  {
-  "goal": "Run",
-  "startTime": "9:25 am",
-  "endTime": "10:00 am",
-  "done": true},
-  {
-  "goal": "Shower, Brush Teeth",
-  "startTime": "10:10 am",
-  "endTime": "10:30 am",
-  "done": false},
-  {
-  "goal": "Breakfast",
-  "startTime": "10:30 am",
-  "endTime": "11:00 am",
-  "done": false},
-  {
-  "goal": "Programming",
-  "startTime": "11:00 am",
-  "endTime": "1:00 pm",
-  "done": false},
-  {
-  "goal": "Lunch",
-  "startTime": "1:00 pm",
-  "endTime": "2:00 pm",
-  "done": false},
-  {
-  "goal": "Music",
-  "startTime": "1:00 pm",
-  "endTime": "2:00 pm",
-  "done": false
-  }
+    {
+        "id": 1001,
+        "goalName": "Wake up, out of bed",
+        "startTime": "9:00 am",
+        "endTime": "9:18 am",
+        "done": true
+    },
+    {
+        "id": 1002,
+        "goalName": "Run",
+        "startTime": "9:25 am",
+        "endTime": "10:00 am",
+        "done": true
+    },
+    {
+        "id": 1003,
+        "goalName": "Shower, Brush Teeth",
+        "startTime": "10:10 am",
+        "endTime": "10:30 am",
+        "done": true
+    },
+    {
+        "id": 1004,
+        "goalName": "Breakfast",
+        "startTime": "10:30 am",
+        "endTime": "11:00 am",
+        "done": false
+    },
+    {
+        "id": 1005,
+        "goalName": "Programming",
+        "startTime": "11:00 am",
+        "endTime": "1:00 pm",
+        "done": false
+    },
+    {
+        "id": 1006,
+        "goalName": "Lunch",
+        "startTime": "1:00 pm",
+        "endTime": "2:00 pm",
+        "done": false
+    },
+    {
+        "id": 1007,
+        "goalName": "Music",
+        "startTime": "2:00 pm",
+        "endTime": "3:00 pm",
+        "done": false
+    },
+    {
+        "id": 1008,
+        "goalName": "Video Animation",
+        "startTime": "3:00 pm",
+        "endTime": "4:00 pm",
+        "done": false
+    },
+    {
+        "id": 1009,
+        "goalName": "Journal",
+        "startTime": "11:30 pm",
+        "endTime": "11:59 pm",
+        "done": false
+    }
 ]

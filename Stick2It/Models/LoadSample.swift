@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-let landmarkData: [Goal] = load("landmarkData.json")
+var GoalData: [Goal] = load("todaySample.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data

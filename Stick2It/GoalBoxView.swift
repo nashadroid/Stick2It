@@ -64,7 +64,7 @@ struct GoalBox: View {
     }
 }
 
-    var testGoal = Goal(goalName: "Name1", startTime: "00:00", endTime: "00:00", done: true)
+var testGoal = Goal(id: 2020, goalName: "Name1", startTime: "00:00", endTime: "00:00", done: true)
 
 struct GoalBox_Previews: PreviewProvider {
     
