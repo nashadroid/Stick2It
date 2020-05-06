@@ -10,6 +10,7 @@ import SwiftUI
 
 struct AddItem: View {
     // @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var userData: UserData
     @State private var name: String = ""
     @State private var startTime: String = ""
     @State private var endTime: String = ""
@@ -66,6 +67,9 @@ struct AddItem: View {
             .padding(.top, 20)
             
             Button(action:{
+                
+                self.userData.addData(self.name, self.startTime, self.endTime)
+                
             }){
                 Text("Add Goal")
                 .multilineTextAlignment(.center)
