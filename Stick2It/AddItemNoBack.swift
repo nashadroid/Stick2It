@@ -11,6 +11,7 @@ import SwiftUI
 
 struct AddItemNoBack: View {
     @EnvironmentObject var userData: UserData
+    @State var addingItem = true
     @State private var name: String = ""
     @State private var startTime: String = ""
     @State private var endTime: String = ""
@@ -68,6 +69,7 @@ struct AddItemNoBack: View {
             Button(action:{
                 
                 self.userData.addData(self.name, self.startTime, self.endTime)
+                self.addingItem.toggle()
                 
             }){
                 Text("Add Goal")

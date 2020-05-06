@@ -31,12 +31,12 @@ struct ContentView: View {
             )
             .edgesIgnoringSafeArea(.all)
             
-            VStack(alignment: .leading){
+            VStack(alignment: .leading, spacing: 0){
                 Text("Today's Goals")
                     .foregroundColor(Color.black)
                     .font(.largeTitle)
                     .fontWeight(.heavy)
-                    .padding()
+                    .padding(.leading, 20)
                     .multilineTextAlignment(.leading)
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(spacing: 10){
@@ -59,7 +59,7 @@ struct ContentView: View {
                                 self.addingItem.toggle()
                         }
                         
-                    AddItemNoBack(userData: self._userData)
+                    AddItemNoBack(userData: self._userData, addingItem: self.addingItem)
                         .padding(.top, 40)
                 
                 }.background(
