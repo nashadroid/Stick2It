@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct AddItem: View {
+struct AddItemNoBack: View {
     // @Environment(\.presentationMode) var presentationMode
     @State private var name: String = ""
     @State private var startTime: String = ""
@@ -21,7 +21,7 @@ struct AddItem: View {
                 .font(.largeTitle)
                 .fontWeight(.heavy)
                 .multilineTextAlignment(.center)
-                .foregroundColor(Color.black)
+                .foregroundColor(Color.white)
                 
             
             VStack(alignment: .leading){
@@ -29,12 +29,12 @@ struct AddItem: View {
                     .font(.footnote)
                     .fontWeight(.heavy)
                     .padding(.leading, 5)
-                    .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
+                    .foregroundColor(Color.white)
                 TextField("Enter goal name", text: $name)
                     .multilineTextAlignment(.center)
             }
             .padding(5)
-            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1))
+            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
             .padding(.top, 20)
             
             VStack(alignment: .leading){
@@ -42,12 +42,12 @@ struct AddItem: View {
                     .font(.footnote)
                     .fontWeight(.heavy)
                     .padding(.leading, 5)
-                    .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
+                    .foregroundColor(Color.white)
                 TextField("Enter Start Time", text: $startTime)
                     .multilineTextAlignment(.center)
             }
             .padding(5)
-            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1))
+            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
             .padding(.top, 20)
             
             VStack(alignment: .leading){
@@ -55,14 +55,14 @@ struct AddItem: View {
                     .font(.footnote)
                     .fontWeight(.heavy)
                     .padding(.leading, 5)
-                    .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
+                    .foregroundColor(Color.white)
                     //.multilineTextAlignment(.leading)
                 
                 TextField("Enter End Time", text: $endTime)
                     .multilineTextAlignment(.center)
             }
             .padding(5)
-            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1))
+            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
             .padding(.top, 20)
             
             Button(action:{
@@ -77,13 +77,12 @@ struct AddItem: View {
             
         }
         .padding()
-        .background(Color.white.shadow(radius: 7))
         .padding(30)
     }
 }
 
-struct AddItem_Previews: PreviewProvider {
+struct AddItemNoBack_Previews: PreviewProvider {
     static var previews: some View {
-        AddItem()
+        AddItemNoBack()
     }
 }

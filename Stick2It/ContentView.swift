@@ -38,7 +38,7 @@ struct ContentView: View {
                                         self.addingItem.toggle()
                                 }
                                 
-                            AddItem()
+                            AddItemNoBack()
                                 .padding(.top, 40)
                         
                         }.background(
