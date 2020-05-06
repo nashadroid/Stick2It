@@ -30,22 +30,23 @@ struct ContentView: View {
                         
                     }
                     .padding()
-                    //.sheet(isPresented: $show, content: { AddItem() })
                     
                     if(addingItem){
-
                         GeometryReader{_ in
-                        
+                            BlurView(style: .light)
+                                .onTapGesture {
+                                        self.addingItem.toggle()
+                                }
+                                
                             AddItem()
+                                .padding(.top, 40)
                         
                         }.background(
                             
                             Color.black.opacity(0.65)
                                 .edgesIgnoringSafeArea(.all)
                                 .onTapGesture {
-                                        
-                                        self.addingItem.toggle()
-                                    
+                                        self.addingItem.toggle() //TODO Delete one of these
                                 }
                         
                         )
