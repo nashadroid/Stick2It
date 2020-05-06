@@ -13,48 +13,67 @@ struct ContentView: View {
     @State var addingItem = false
     
     var body: some View {
-        Color.white
-            .overlay(
                 
-                ZStack{
-                    ScrollView(.vertical, showsIndicators: false){
-                        VStack(spacing: 10){
-                            ForEach(userData.userGoals) {goal in
-                                GoalBox(goal: goal)
-                            }
-                            
-                            Button(action: {self.addingItem.toggle()}) {
-                                Text("Add")
-                            }
-                            
+        ZStack{
+            
+            GeometryReader{_ in
+                BlurView(style: .light)
+                    .onTapGesture {
+                            self.addingItem.toggle()
+                    }
+                    
+            
+            }.background(
+                
+                Color.white.opacity(1.0)
+                    .edgesIgnoringSafeArea(.all)
+                
+            )
+            .edgesIgnoringSafeArea(.all)
+            
+            VStack(alignment: .leading){
+                Text("Today's Goals")
+                    .foregroundColor(Color.black)
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .padding()
+                    .multilineTextAlignment(.leading)
+                ScrollView(.vertical, showsIndicators: false){
+                    VStack(spacing: 10){
+                        ForEach(userData.userGoals) {goal in
+                            GoalBox(goal: goal)
                         }
-                        .padding()
-                    }
-                    .padding(.top, 100)
                         
-                        if(addingItem){
-                            GeometryReader{_ in
-                                BlurView(style: .light)
-                                    .onTapGesture {
-                                            self.addingItem.toggle()
-                                    }
-                                    
-                                AddItemNoBack(userData: self._userData)
-                                    .padding(.top, 40)
-                            
-                            }.background(
-                                
-                                Color.black.opacity(0.65)
-                                    .edgesIgnoringSafeArea(.all)
-                                    .onTapGesture {
-                                            self.addingItem.toggle() //TODO Delete one of these
-                                    }
-                            )
+                        Button(action: {self.addingItem.toggle()}) {
+                            Text("Add")
+                        }
                         
                     }
+                    .padding()
                 }
-        )
-        .edgesIgnoringSafeArea(.all)
+            }
+            if(addingItem){
+                GeometryReader{_ in
+                    BlurView(style: .light)
+                        .onTapGesture {
+                                self.addingItem.toggle()
+                        }
+                        
+                    AddItemNoBack(userData: self._userData)
+                        .padding(.top, 40)
+                
+                }.background(
+                    
+                    Color.black.opacity(0.65)
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                                self.addingItem.toggle() //TODO Delete one of these
+                        }
+                    
+                )
+                .edgesIgnoringSafeArea(.all)
+            }
+        }
     }
 }
 
