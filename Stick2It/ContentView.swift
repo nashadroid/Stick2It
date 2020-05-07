@@ -43,14 +43,15 @@ struct ContentView: View {
                                 GoalBox(goal: goal)
                             }
                         }
-                        
-                        Button(action: {self.addingItem.toggle()}) {
-                            Text("Add")
-                        }
+//                        
+//                        Button(action: {self.addingItem.toggle()}) {
+//                            Text("Add")
+//                        }
                     }
                     .padding()
                     .frame(minWidth: UIScreen.main.bounds.size.width)
                 }
+                
             }
             if(addingItem){
                 GeometryReader{_ in
@@ -70,6 +71,14 @@ struct ContentView: View {
                         }
                 )
                 .edgesIgnoringSafeArea(.all)
+            }
+            else{
+                Button(action: {self.addingItem.toggle()}) {
+                    AddButton()
+                        .scaleEffect(0.2)
+                        .offset(x: 120, y: 320)
+                }
+                
             }
         }
     }
