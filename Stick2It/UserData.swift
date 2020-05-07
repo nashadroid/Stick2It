@@ -12,55 +12,27 @@ import Combine
 final class UserData: ObservableObject  {
     @Published var userGoals = loadSavedData()
     
-    func addData(_ goalName: String, _ startTime: String, _ endTime: String){
+    func addData(_ goalName: String, _ startTime: String, _ endTime: String, _ date: String, _ project: String){
         
-        
-        let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, done: false)
+        let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, date: date, project: project, done: false)
         
         userGoals += [newGoal]
-        
-        
     }
     
     func saveData(){
-        
-        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        
         let encoder = JSONEncoder()
-        
         if let data = try? encoder.encode(self.userGoals) {
             UserDefaults.standard.set(data, forKey: "Usergoals")
         }
-        
-        let str = "Test Message"
-        let url = path.appendingPathComponent("goals.json")
-        
-        print(url)
-
-        do {
-            try str.write(to: url, atomically: true, encoding: .utf8)
-            let input = try String(contentsOf: url)
-            print(input)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        //let fileManager = FileManager.default
-        
     }
     
     func loadData( _ key: String){
-        print("Attempting to load...")
         if let savedGoals = UserDefaults.standard.object(forKey: key) as? Data {
-            print("found saved object")
             let decoder = JSONDecoder()
             if let loadedGoals = try? decoder.decode([Goal].self, from: savedGoals) {
-                print(loadedGoals[0].goalName)
                 self.userGoals += loadedGoals
             }
         }
-        
     }
-    
 }
 

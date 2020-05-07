@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-var GoalData: [Goal] = load("todaySample.json")
+var GoalData: [Goal] =  [Goal(id: 2020, goalName: "Name1", startTime: "00:00", endTime: "00:00", date: "000000", project: "none", done: true)]
 
 //= load("todaySample.json")
 

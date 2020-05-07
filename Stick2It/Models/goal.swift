@@ -12,10 +12,15 @@ import SwiftUI
 //TODO: Try Default Values
 
 struct Goal: Hashable, Codable, Identifiable {
+    
+    
+    
     var id: Int
     var goalName: String
     var startTime: String
     var endTime: String
+    var date: String = "none"
+    var project: String = "none"
     var done: Bool
 }
 

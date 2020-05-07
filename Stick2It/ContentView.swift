@@ -12,8 +12,6 @@ struct ContentView: View {
     @EnvironmentObject var userData: UserData
     @State var addingItem = false
     
-    
-    
     var body: some View {
                 
         ZStack{
@@ -34,10 +32,12 @@ struct ContentView: View {
                     .foregroundColor(Color.black)
                     .font(.largeTitle)
                     .fontWeight(.heavy)
-                    .padding(.leading, 20)
+                    .padding()
+                    .padding(.leading, 10)
                     .multilineTextAlignment(.leading)
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(spacing: 10){
+                        
                         ForEach(userData.userGoals) {goal in
                             GoalBox(goal: goal)
                         }
@@ -61,13 +61,11 @@ struct ContentView: View {
                         .padding(.top, 40)
                 
                 }.background(
-                    
                     Color.black.opacity(0.65)
                         .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
-                                self.addingItem.toggle() //TODO Delete one of these
+                                self.addingItem.toggle()
                         }
-                    
                 )
                 .edgesIgnoringSafeArea(.all)
             }

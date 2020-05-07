@@ -15,6 +15,8 @@ struct AddItemNoBack: View {
     @State private var name: String = ""
     @State private var startTime: String = ""
     @State private var endTime: String = ""
+    @State private var date: String = "none"
+    @State private var project: String = "none"
     
     
     var body: some View {
@@ -67,8 +69,12 @@ struct AddItemNoBack: View {
             .padding(.top, 20)
             
             Button(action:{
+                let today = Date()
+                let formatter1 = DateFormatter()
+                formatter1.dateFormat = "YD"
+                print(formatter1.string(from: today))
                 
-                self.userData.addData(self.name, self.startTime, self.endTime)
+                self.userData.addData(self.name, self.startTime, self.endTime, formatter1.string(from: today), "none")
                 self.userData.saveData()
                 self.addingItem.toggle()
                 

@@ -14,6 +14,8 @@ struct AddItem: View {
     @State private var name: String = ""
     @State private var startTime: String = ""
     @State private var endTime: String = ""
+    @State private var date: String = "none"
+    @State private var project: String = "none"
     
     
     var body: some View {
@@ -24,7 +26,6 @@ struct AddItem: View {
                 .multilineTextAlignment(.center)
                 .foregroundColor(Color.black)
                 
-            
             VStack(alignment: .leading){
                 Text("Goal Name:")
                     .font(.footnote)
@@ -57,7 +58,6 @@ struct AddItem: View {
                     .fontWeight(.heavy)
                     .padding(.leading, 5)
                     .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
-                    //.multilineTextAlignment(.leading)
                 
                 TextField("Enter End Time", text: $endTime)
                     .multilineTextAlignment(.center)
@@ -67,18 +67,17 @@ struct AddItem: View {
             .padding(.top, 20)
             
             Button(action:{
+                let today = Date()
+                let formatter1 = DateFormatter()
+                formatter1.dateFormat = "YD"
+                print(formatter1.string(from: today))
                 
-                self.userData.addData(self.name, self.startTime, self.endTime)
-                
+                self.userData.addData(self.name, self.startTime, self.endTime, formatter1.string(from: today), "none")
             }){
                 Text("Add Goal")
                 .multilineTextAlignment(.center)
                 .padding()
             }
-            
-            
-            
-            
         }
         .padding()
         .background(Color.white.shadow(radius: 7))
