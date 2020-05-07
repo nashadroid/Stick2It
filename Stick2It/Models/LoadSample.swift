@@ -20,7 +20,8 @@ func loadSavedData() -> [Goal]{
             return GoalData
         }
     }
-    return [Goal(id: UUID().hashValue, goalName: "DefGoal", startTime: "-", endTime: "-", done: false)]
+    return []
+//    return [Goal(id: UUID().hashValue, goalName: "DefGoal", startTime: "-", endTime: "-", done: false)]
 }
 
 func load<T: Decodable>(_ filename: String) -> T {

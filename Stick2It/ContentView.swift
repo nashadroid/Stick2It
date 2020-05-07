@@ -23,13 +23,9 @@ struct ContentView: View {
                     .onTapGesture {
                             self.addingItem.toggle()
                     }
-                    
-            
             }.background(
-                
                 Color.white.opacity(1.0)
                     .edgesIgnoringSafeArea(.all)
-                
             )
             .edgesIgnoringSafeArea(.all)
             
@@ -49,11 +45,9 @@ struct ContentView: View {
                         Button(action: {self.addingItem.toggle()}) {
                             Text("Add")
                         }
-//                        Button(action: {self.userData.loadData("Usergoals")}) {
-//                            Text("Load")
-//                        }
                     }
                     .padding()
+                    .frame(minWidth: UIScreen.main.bounds.size.width)
                 }
             }
             if(addingItem){

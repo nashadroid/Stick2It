@@ -35,7 +35,6 @@ struct GoalBox: View {
                     .padding(.leading, 10)
                     .foregroundColor(self.userData.userGoals[self.goalIndex].done ? Color.white : Color.black)
                 Text("\(goal.startTime) - \(goal.endTime)")
-                    //.italic()
                     .font(.footnote)
                     .padding(.leading, 10)
                     .foregroundColor(self.userData.userGoals[self.goalIndex].done ? Color.white : Color.gray)
@@ -53,13 +52,6 @@ struct GoalBox: View {
             
         }
         .background(self.userData.userGoals[self.goalIndex].done ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
-        
-        
-        //.shadow(radius: 10)
-        
-        
-    
-    
     }
 }
 
