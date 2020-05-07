@@ -11,11 +11,11 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var userData: UserData
     @State var addingItem = false
+    @State var date: String = "none"
     
     var body: some View {
                 
         ZStack{
-            
             GeometryReader{_ in
                 BlurView(style: .light)
                     .onTapGesture {
@@ -39,7 +39,9 @@ struct ContentView: View {
                     VStack(spacing: 10){
                         
                         ForEach(userData.userGoals) {goal in
-                            GoalBox(goal: goal)
+                            if self.date == goal.date{
+                                GoalBox(goal: goal)
+                            }
                         }
                         
                         Button(action: {self.addingItem.toggle()}) {
