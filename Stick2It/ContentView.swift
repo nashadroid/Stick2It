@@ -43,7 +43,7 @@ struct ContentView: View {
                                 GoalBox(goal: goal)
                             }
                         }
-//                        
+//
 //                        Button(action: {self.addingItem.toggle()}) {
 //                            Text("Add")
 //                        }
@@ -75,9 +75,10 @@ struct ContentView: View {
             else{
                 Button(action: {self.addingItem.toggle()}) {
                     AddButton()
-                        .scaleEffect(0.2)
-                        .offset(x: 120, y: 320)
                 }
+                .scaleEffect(0.2)
+                .offset(x: 120, y: 320)
+
                 
             }
         }

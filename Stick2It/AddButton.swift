@@ -27,6 +27,7 @@ struct AddButton: View {
             .fill(Color.gray)
             .frame(width: size*7/10, height: size/10)
         }
+        
     }
 }
 
