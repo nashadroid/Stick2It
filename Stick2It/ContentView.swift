@@ -49,9 +49,9 @@ struct ContentView: View {
                         Button(action: {self.addingItem.toggle()}) {
                             Text("Add")
                         }
-                        Button(action: {self.userData.loadData("Usergoals")}) {
-                            Text("Load")
-                        }
+//                        Button(action: {self.userData.loadData("Usergoals")}) {
+//                            Text("Load")
+//                        }
                     }
                     .padding()
                 }

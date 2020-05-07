@@ -19,9 +19,9 @@ struct GoalBox: View {
     var body: some View {
         
         Button(action: {
-            //TODO: Make sure this gets saved somewhere
             self.goal.done.toggle()
             self.userData.userGoals[self.goalIndex].done.toggle()
+            self.userData.saveData()
             let generator = UIImpactFeedbackGenerator(style: .heavy)
             generator.impactOccurred()
         }) {

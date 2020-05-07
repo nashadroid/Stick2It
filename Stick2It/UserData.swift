@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 final class UserData: ObservableObject  {
-    @Published var userGoals = GoalData
+    @Published var userGoals = loadSavedData()
     
     func addData(_ goalName: String, _ startTime: String, _ endTime: String){
         
