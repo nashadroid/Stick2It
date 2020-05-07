@@ -20,7 +20,6 @@ struct GoalBox: View {
         
         Button(action: {
             //TODO: Make sure this gets saved somewhere
-             //self.didTap = !self.didTap
             self.goal.done.toggle()
             self.userData.userGoals[self.goalIndex].done.toggle()
             let generator = UIImpactFeedbackGenerator(style: .heavy)
@@ -45,10 +44,6 @@ struct GoalBox: View {
             }
             Spacer()
             
-//            Button(action: {
-//                //TODO: Make sure this gets saved somewhere
-//                 self.didTap = !self.didTap
-//            }) {
                 Text(self.userData.userGoals[self.goalIndex].done ? "Done" : "To-Do")
                 .foregroundColor(Color.white)
                 .fontWeight(.heavy)

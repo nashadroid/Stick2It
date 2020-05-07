@@ -12,6 +12,8 @@ struct ContentView: View {
     @EnvironmentObject var userData: UserData
     @State var addingItem = false
     
+    
+    
     var body: some View {
                 
         ZStack{
@@ -47,7 +49,9 @@ struct ContentView: View {
                         Button(action: {self.addingItem.toggle()}) {
                             Text("Add")
                         }
-                        
+                        Button(action: {self.userData.loadData("Usergoals")}) {
+                            Text("Load")
+                        }
                     }
                     .padding()
                 }

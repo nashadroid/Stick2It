@@ -8,7 +8,16 @@
 
 import SwiftUI
 
-var GoalData: [Goal] = load("todaySample.json")
+if let savedGoals = UserDefaults.standard.object(forKey: key) as? Data {
+    print("found saved object")
+    let decoder = JSONDecoder()
+    if let loadedGoals = try? decoder.decode([Goal].self, from: savedGoals) {
+        print(loadedGoals[0].goalName)
+        var GoalData: [Goal] = loadedGoals
+    }
+}
+
+var GoalData: [Goal] = [Goal(id: UUID().hashValue, goalName: "Default Goal", startTime: "00:00", endTime: "00:00", done: false)]//= load("todaySample.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data

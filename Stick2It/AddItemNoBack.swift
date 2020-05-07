@@ -69,6 +69,7 @@ struct AddItemNoBack: View {
             Button(action:{
                 
                 self.userData.addData(self.name, self.startTime, self.endTime)
+                self.userData.saveData()
                 self.addingItem.toggle()
                 
             }){
