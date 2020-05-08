@@ -13,8 +13,6 @@ import SwiftUI
 
 struct Goal: Hashable, Codable, Identifiable {
     
-    
-    
     var id: Int
     var goalName: String
     var startTime: String

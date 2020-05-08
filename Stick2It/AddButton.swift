@@ -20,11 +20,11 @@ struct AddButton: View {
                 .shadow(radius: size/10)
             
             RoundedRectangle(cornerRadius: size/20, style: .continuous)
-            .fill(Color.gray)
+            .fill(Color.blue)
             .frame(width: size/10, height: size*7/10)
             
             RoundedRectangle(cornerRadius: size/20, style: .continuous)
-            .fill(Color.gray)
+            .fill(Color.blue)
             .frame(width: size*7/10, height: size/10)
         }
         

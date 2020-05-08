@@ -12,12 +12,25 @@ var GoalData: [Goal] =  []
 
 //= load("todaySample.json")
 
-func loadSavedData() -> [Goal]{
+func loadSavedGoals() -> [Goal]{
     if let savedGoals = UserDefaults.standard.object(forKey: "Usergoals") as? Data {
         let decoder = JSONDecoder()
         if let loadedGoals = try? decoder.decode([Goal].self, from: savedGoals) {
             GoalData = loadedGoals
             return GoalData
+        }
+    }
+    return []
+}
+
+var RoutineData: [Routine] = []
+
+func loadSavedRoutines() -> [Routine]{
+    if let savedRoutines = UserDefaults.standard.object(forKey: "UserRoutines") as? Data {
+        let decoder = JSONDecoder()
+        if let loadedRoutine = try? decoder.decode([Routine].self, from: savedRoutines) {
+            RoutineData = loadedRoutine
+            return loadedRoutine
         }
     }
     return []

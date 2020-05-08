@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 final class UserData: ObservableObject  {
-    @Published var userGoals = loadSavedData()
+    @Published var userGoals = loadSavedGoals()
     
     func addData(_ goalName: String, _ startTime: String, _ endTime: String, _ date: String, _ project: String){
         
@@ -34,5 +34,13 @@ final class UserData: ObservableObject  {
             }
         }
     }
+    
+//    func removeGoal(id: Int){
+//        ForEach(self.userGoals) {goal in
+//            if id == goal.id{
+//                GoalBox(goal: goal)
+//            }
+//        }
+//    }
 }
 

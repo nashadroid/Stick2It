@@ -8,14 +8,23 @@
 
 import SwiftUI
 
+enum CurrentView {
+    case TodayView
+    case RoutineView
+}
+
 struct ContentView: View {
+    
     @EnvironmentObject var userData: UserData
     @State var addingItem = false
     @State var date: String = "none"
+    @State var currentView = CurrentView.TodayView
     
     var body: some View {
                 
         ZStack{
+            
+            //This is the background to prevent dark mode from affecting visuals.
             GeometryReader{_ in
                 BlurView(style: .light)
                     .onTapGesture {
@@ -27,32 +36,13 @@ struct ContentView: View {
             )
             .edgesIgnoringSafeArea(.all)
             
-            VStack(alignment: .leading, spacing: 0){
-                Text("Today's Goals")
-                    .foregroundColor(Color.black)
-                    .font(.largeTitle)
-                    .fontWeight(.heavy)
-                    .padding()
-                    .padding(.leading, 10)
-                    .multilineTextAlignment(.leading)
-                ScrollView(.vertical, showsIndicators: false){
-                    VStack(spacing: 10){
-                        
-                        ForEach(userData.userGoals) {goal in
-                            if self.date == goal.date{
-                                GoalBox(goal: goal)
-                            }
-                        }
-//
-//                        Button(action: {self.addingItem.toggle()}) {
-//                            Text("Add")
-//                        }
-                    }
-                    .padding()
-                    .frame(minWidth: UIScreen.main.bounds.size.width)
-                }
-                
+            if(currentView == CurrentView.TodayView){
+                TodayView(userData: _userData, date: date)
             }
+            
+            
+            
+            //The add item view can appear over any other view
             if(addingItem){
                 GeometryReader{_ in
                     BlurView(style: .light)
@@ -78,6 +68,7 @@ struct ContentView: View {
                 }
                 .scaleEffect(0.2)
                 .offset(x: 120, y: 320)
+                //TODO: This needs to be adjusted to work with all screen sizes
 
                 
             }
