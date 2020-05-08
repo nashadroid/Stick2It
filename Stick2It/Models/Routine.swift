@@ -11,7 +11,7 @@ import SwiftUI
 struct Routine: Hashable, Codable, Identifiable {
     
     var id: Int
-    var RoutineName: String
+    var routineName: String
     var startTime: String
     var endTime: String
     var repeatOn: [String] = ["all"]
