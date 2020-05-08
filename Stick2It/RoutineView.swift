@@ -1,5 +1,5 @@
 //
-//  TodayView.swift
+//  RoutineView.swift
 //  Stick2It
 //
 //  Created by Nashad Rahman on 5/8/20.
@@ -8,13 +8,12 @@
 
 import SwiftUI
 
-struct TodayView: View {
+struct RoutineView: View {
     @EnvironmentObject var userData: UserData
-    @State var date: String = "none"
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0){
-            Text("Today's Goals")
+            Text("Routines")
                 .foregroundColor(Color.black)
                 .font(.largeTitle)
                 .fontWeight(.heavy)
@@ -24,26 +23,21 @@ struct TodayView: View {
             ScrollView(.vertical, showsIndicators: false){
                 VStack(spacing: 10){
                     
-                    ForEach(userData.userGoals) {goal in
-                        if self.date == goal.date{
-                            GoalBox(goal: goal)
-                        }
+                    ForEach(userData.userRoutines) {routine in
+                        RoutineBox(routine: routine)
                     }
-                    //
-                    //                        Button(action: {self.addingItem.toggle()}) {
-                    //                            Text("Add")
-                    //                        }
                 }
                 .padding()
                 .frame(minWidth: UIScreen.main.bounds.size.width)
             }
             
         }
+        
     }
 }
 
-struct TodayView_Previews: PreviewProvider {
+struct RoutineView_Previews: PreviewProvider {
     static var previews: some View {
-        TodayView()
+        RoutineView()
     }
 }

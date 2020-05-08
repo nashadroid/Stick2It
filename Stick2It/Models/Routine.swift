@@ -16,5 +16,5 @@ struct Routine: Hashable, Codable, Identifiable {
     var endTime: String
     var repeatOn: [String] = ["all"]
     var project: String = "none"
-    var done: Bool
+    
 }
