@@ -146,15 +146,15 @@
 			isa = PBXGroup;
 			children = (
 				8420A71E2461065F00E44DC9 /* Models */,
+				84AE44C8246071BA00043CDA /* ContentView.swift */,
+				8420A72D2465C3CF00E44DC9 /* TodayView.swift */,
+				8420A7312465FE9900E44DC9 /* RoutineView.swift */,
 				84AE44C4246071BA00043CDA /* AppDelegate.swift */,
 				8420A7232461F2EE00E44DC9 /* UserData.swift */,
-				8420A7312465FE9900E44DC9 /* RoutineView.swift */,
 				8420A7332465FFA700E44DC9 /* RoutineBox.swift */,
 				8420A7352466095500E44DC9 /* RoutineBoxSAMPLE.swift */,
 				84AE44C6246071BA00043CDA /* SceneDelegate.swift */,
 				8420A7272462657D00E44DC9 /* BlurView.swift */,
-				84AE44C8246071BA00043CDA /* ContentView.swift */,
-				8420A72D2465C3CF00E44DC9 /* TodayView.swift */,
 				8420A72B2464A13300E44DC9 /* AddButton.swift */,
 				84AE44F624607F3400043CDA /* GoalBoxView.swift */,
 				8420A72524620A1D00E44DC9 /* AddItem.swift */,
