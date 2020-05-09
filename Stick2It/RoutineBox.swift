@@ -63,7 +63,7 @@ struct RoutineBox: View {
             
             
         }
-        //.background(Color.green.shadow(radius: 7))
+        .background(Color.green.shadow(radius: 7))
     }
     
     

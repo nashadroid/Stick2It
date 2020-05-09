@@ -10,8 +10,10 @@ import SwiftUI
 
 struct RoutineView: View {
     @EnvironmentObject var userData: UserData
+    @State var addingRoutine: Bool
     
     var body: some View {
+        ZStack{
         VStack(alignment: .leading, spacing: 0){
             Text("Routines")
                 .foregroundColor(Color.black)
@@ -32,12 +34,42 @@ struct RoutineView: View {
             }
             
         }
+            if(addingRoutine){
+                GeometryReader{_ in
+                    BlurView(style: .light)
+                        .onTapGesture {
+                            self.addingRoutine.toggle()
+                    }
+                    
+                    AddRoutineNoBack(userData: self._userData, addingItem: self.addingRoutine)
+                        .padding(.top, 40)
+                    
+                }.background(
+                    Color.black.opacity(0.65)
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            self.addingRoutine.toggle()
+                    }
+                )
+                    .edgesIgnoringSafeArea(.all)
+            }
+            else{
+                Button(action: {self.addingRoutine.toggle()}) {
+                    AddButton()
+                }
+                .scaleEffect(0.2)
+                .offset(x: 120, y: 320)
+                //TODO: This needs to be adjusted to work with all screen sizes
+                
+                
+            }
+        }
         
     }
 }
-
-struct RoutineView_Previews: PreviewProvider {
-    static var previews: some View {
-        RoutineView()
-    }
-}
+//
+//struct RoutineView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RoutineView()
+//    }
+//}
