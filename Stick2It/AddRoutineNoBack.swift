@@ -17,7 +17,7 @@ struct AddRoutineNoBack: View {
     @State private var endTime: String = ""
     @State private var date: String = "none"
     @State private var project: String = "none"
-    @State private var repeatDays = ["Mondays, Tuesdays"]
+    @State private var repeatDays = [1,2]
     
     
     var body: some View {

@@ -16,12 +16,6 @@ struct RoutineBox: View {
         userData.userRoutines.firstIndex(where: { $0.id == routine.id })!
     }
     
-    //    var routineName = "Routine "
-    //    var startTime = "9:35 am"
-    //    var endTime = "10:05 pm"
-    //    var repeatOn: [String] = ["Monday", "Wednesday", "Friday", "Saturday"]
-    //    var project: String = "none"
-    //
     var body: some View{
         VStack() {
             
@@ -55,18 +49,19 @@ struct RoutineBox: View {
                     .fontWeight(.bold)
                     .padding(4)
                     .foregroundColor(Color.white)
-                Text(self.userData.userRoutines[self.routineIndex].repeatOn.joined(separator: ", "))
-                    .italic()
-                    .padding(4)
-                    .foregroundColor(Color.white)
+                
+                ForEach(self.userData.userRoutines[self.routineIndex].repeatOn, id: \.self) {dayNumber in
+                    
+                    Text(Calendar.current.weekdaySymbols[dayNumber])
+                        .italic()
+                        .padding(4)
+                        .foregroundColor(Color.white)
+                    
+                }
             }
-            
-            
         }
         .background(Color.green.shadow(radius: 7))
     }
-    
-    
 }
 
 //struct RoutineBox_Previews: PreviewProvider {

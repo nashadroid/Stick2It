@@ -44,7 +44,7 @@ final class UserData: ObservableObject  {
 //        }
 //    }
     
-    func addRoutine(_ routineName: String, _ startTime: String, _ endTime: String, _ repeatOn: [String], _ project: String){
+    func addRoutine(_ routineName: String, _ startTime: String, _ endTime: String, _ repeatOn: [Int], _ project: String){
         
         let newRoutine = Routine(id: UUID().hashValue, routineName: routineName, startTime: startTime, endTime: endTime, repeatOn: repeatOn, project: project)
         
