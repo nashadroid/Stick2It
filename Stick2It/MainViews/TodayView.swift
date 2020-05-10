@@ -67,7 +67,7 @@ struct TodayView: View {
                     AddButton()
                 }
                 .scaleEffect(0.2)
-                .offset(x: 110, y: 300)
+                .offset(x: 130, y: 270)
                 //TODO: This needs to be adjusted to work with all screen sizes
                 
                 

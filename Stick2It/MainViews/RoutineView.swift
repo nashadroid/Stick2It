@@ -58,7 +58,7 @@ struct RoutineView: View {
                     AddButton()
                 }
                 .scaleEffect(0.2)
-                .offset(x: 120, y: 320)
+                .offset(x: 130, y: 270)
                 //TODO: This needs to be adjusted to work with all screen sizes
                 
                 
