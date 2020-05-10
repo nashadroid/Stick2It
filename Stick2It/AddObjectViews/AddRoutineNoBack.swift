@@ -23,15 +23,29 @@ struct AddRoutineNoBack: View {
     
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false){
-            VStack{
-                Text("New Routine")
-                    .font(.largeTitle)
-                    .fontWeight(.heavy)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Color.white)
-                    
+        
+        VStack{
+            
+            HStack{
+                Button(action: {self.addingItem.toggle()})
+                {
+                    Text("Cancel")
+                        .foregroundColor(Color.white)
+                        .padding()
+                }
+                Spacer()
+            }
+            
+            Text("New Routine")
+                .font(.largeTitle)
+                .fontWeight(.heavy)
+                .multilineTextAlignment(.center)
+                .foregroundColor(Color.white)
+                //.padding(1)
                 
+            
+            ScrollView(.vertical, showsIndicators: false){
+                VStack{
                 VStack(alignment: .leading){
                     Text("Routine Name:")
                         .font(.footnote)
@@ -43,7 +57,6 @@ struct AddRoutineNoBack: View {
                 }
                 .padding(5)
                 .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-                .padding(.top, 20)
                 
                 VStack(alignment: .leading){
                     Text("Start Time:")
@@ -73,22 +86,22 @@ struct AddRoutineNoBack: View {
                 .padding(.top, 20)
                 
                 HStack{
+                    
+                    ForEach(self.daysOfWeek.indices){index in
                         
-                        ForEach(self.daysOfWeek.indices){index in
-                            
-                            Button(action: {
-                                self.daysSelected[index].toggle()
-                            }){
-                                Text(self.daysOfWeek[index])
-                                }
-                            .padding(5)
-                            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1))
-                            .background(self.daysSelected[index] ? Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.3) : Color.clear)
-                            .foregroundColor(Color.white)
+                        Button(action: {
+                            self.daysSelected[index].toggle()
+                        }){
+                            Text(self.daysOfWeek[index])
                         }
-                        
-                        
+                        .padding(5)
+                        .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1))
+                        .background(self.daysSelected[index] ? Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.3) : Color.clear)
+                        .foregroundColor(Color.white)
                     }
+                    
+                    
+                }
                 //.padding()
                 
                 Button(action:{
@@ -105,15 +118,18 @@ struct AddRoutineNoBack: View {
                         .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
                         .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                         .padding(.top, 20)
-                        
+                    
                 }
-                
+                }
+            .padding(5)
                 
             }
-            .padding()
+            //.padding()
             //.background(Color(red: 0.0, green: 0.0, blue: 0.0, opacity: 0.00001)) //This is annoying, but it needs to exist to prevent accidental closure of view
-            .padding(30)
+                .padding(.leading, 30)
+                .padding(.trailing, 30)
         }
+        //.padding(.leading,20)
     }
 }
 
