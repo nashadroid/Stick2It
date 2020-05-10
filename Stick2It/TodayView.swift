@@ -31,10 +31,10 @@ struct TodayView: View {
                                 GoalBox(goal: goal)
                             }
                         }
-                        //
-                        //                        Button(action: {self.addingItem.toggle()}) {
-                        //                            Text("Add")
-                        //                        }
+                        
+                        Button(action: {self.userData.checkRoutineAddGoalsAsNeeded(date: self.date, dayNum: 1)}) {
+                            Text("Refresh")
+                        }
                     }
                     .padding()
                     .frame(minWidth: UIScreen.main.bounds.size.width)

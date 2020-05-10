@@ -67,6 +67,58 @@ final class UserData: ObservableObject  {
         }
     }
     
+    func getDaysRoutines(dayNum: Int) -> [Routine]{
+        var routinesToReturn: [Routine] = []
+        
+        for routine in self.userRoutines{
+            if routine.repeatOn.contains(dayNum){
+                routinesToReturn += [routine]
+            }
+        }
+        
+        return routinesToReturn
+    }
+    
+    func getNewGoalsFromRoutines(routines: [Routine], date: String) -> [Goal]{
+        var goalsToReturn: [Goal] = []
+        
+        for routine in routines {
+            goalsToReturn += [Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: routine.startTime, endTime: routine.endTime, date: date, project: routine.project, done: false)]
+        }
+        
+        return goalsToReturn
+    }
+    
+    func addGoalAvoidingRepeat(goalToBeAdded: Goal){
+        
+        for usergoal in userGoals {
+            
+            if(usergoal.date == goalToBeAdded.date && usergoal.goalName == goalToBeAdded.goalName && usergoal.startTime == goalToBeAdded.startTime) {
+                
+                return
+                
+            }
+            
+        }
+        
+        userGoals += [goalToBeAdded]
+        
+    }
+    
+    //TODO: CHange everything to be a date object
+    func checkRoutineAddGoalsAsNeeded(date: String, dayNum: Int){
+        
+        let dayRoutines = getDaysRoutines(dayNum: dayNum)
+        
+        for routine in dayRoutines{
+            
+            let tempGoal = Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: routine.startTime, endTime: routine.endTime, date: date, project: routine.project, done: false)
+            
+            self.addGoalAvoidingRepeat(goalToBeAdded: tempGoal)
+            
+        }
+        
+    }
     
 }
 
