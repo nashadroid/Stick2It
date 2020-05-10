@@ -21,78 +21,91 @@ struct AddItemNoBack: View {
     
     var body: some View {
         VStack{
+            
+            HStack{
+                Button(action: {self.addingItem.toggle()})
+                {
+                    Text("Cancel")
+                        .foregroundColor(Color.white)
+                        .padding()
+                }
+                Spacer()
+            }
+            
             Text("New Goal")
                 .font(.largeTitle)
                 .fontWeight(.heavy)
                 .multilineTextAlignment(.center)
                 .foregroundColor(Color.white)
-                
             
-            VStack(alignment: .leading){
-                Text("Goal Name:")
-                    .font(.footnote)
-                    .fontWeight(.heavy)
-                    .padding(.leading, 5)
-                    .foregroundColor(Color.white)
-                TextField("Enter goal name", text: $name)
-                    .multilineTextAlignment(.center)
-            }
-            .padding(5)
-            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-            .padding(.top, 20)
-            
-            VStack(alignment: .leading){
-                Text("Start Time:")
-                    .font(.footnote)
-                    .fontWeight(.heavy)
-                    .padding(.leading, 5)
-                    .foregroundColor(Color.white)
-                TextField("Enter Start Time", text: $startTime)
-                    .multilineTextAlignment(.center)
-            }
-            .padding(5)
-            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-            .padding(.top, 20)
-            
-            VStack(alignment: .leading){
-                Text("End Time:")
-                    .font(.footnote)
-                    .fontWeight(.heavy)
-                    .padding(.leading, 5)
-                    .foregroundColor(Color.white)
-                
-                TextField("Enter End Time", text: $endTime)
-                    .multilineTextAlignment(.center)
-            }
-            .padding(5)
-            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-            .padding(.top, 20)
-            
-            Button(action:{
-                let today = Date()
-                let formatter1 = DateFormatter()
-                formatter1.dateFormat = "YD"
-                print(formatter1.string(from: today))
-                
-                self.userData.addData(self.name, self.startTime, self.endTime, formatter1.string(from: today), "none")
-                self.userData.saveData()
-                self.addingItem.toggle()
-                
-            }){
-                Text("Add Goal")
-                    .foregroundColor(Color.white)
-                    .multilineTextAlignment(.center)
-                    .padding()
-                    .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
+            ScrollView(.vertical, showsIndicators: false){
+                VStack{
+                    VStack(alignment: .leading){
+                        Text("Goal Name:")
+                            .font(.footnote)
+                            .fontWeight(.heavy)
+                            .padding(.leading, 5)
+                            .foregroundColor(Color.white)
+                        TextField("Enter goal name", text: $name)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding(5)
+                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                    
+                    VStack(alignment: .leading){
+                        Text("Start Time:")
+                            .font(.footnote)
+                            .fontWeight(.heavy)
+                            .padding(.leading, 5)
+                            .foregroundColor(Color.white)
+                        TextField("Enter Start Time", text: $startTime)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     .padding(.top, 20)
                     
+                    VStack(alignment: .leading){
+                        Text("End Time:")
+                            .font(.footnote)
+                            .fontWeight(.heavy)
+                            .padding(.leading, 5)
+                            .foregroundColor(Color.white)
+                        
+                        TextField("Enter End Time", text: $endTime)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding(5)
+                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                    .padding(.top, 20)
+                    
+                    Button(action:{
+                        let today = Date()
+                        let formatter1 = DateFormatter()
+                        formatter1.dateFormat = "YD"
+                        print(formatter1.string(from: today))
+                        
+                        self.userData.addData(self.name, self.startTime, self.endTime, formatter1.string(from: today), "none")
+                        self.userData.saveData()
+                        self.addingItem.toggle()
+                        
+                    }){
+                        Text("Add Goal")
+                            .foregroundColor(Color.white)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
+                            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                            .padding(.top, 20)
+                        
+                    }
+                }
+            .padding(5)
+                
             }
-            
+            .padding(.leading, 30)
+            .padding(.trailing, 30)
         }
-        .padding()
-        .background(Color(red: 0.0, green: 0.0, blue: 0.0, opacity: 0.00001)) //This is annoying, but it needs to exist to prevent accidental closure of view
-        .padding(30)
     }
 }
 
