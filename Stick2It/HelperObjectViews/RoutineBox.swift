@@ -50,13 +50,14 @@ struct RoutineBox: View {
                     .padding(4)
                     .foregroundColor(Color.white)
                 
-                ForEach(self.userData.userRoutines[self.routineIndex].repeatOn, id: \.self) {dayNumber in
+                ForEach(0..<self.userData.userRoutines[self.routineIndex].repeatOn.count) {index in
                     
-                    Text(Calendar.current.weekdaySymbols[dayNumber])
-                        .italic()
-                        .padding(4)
-                        .foregroundColor(Color.white)
-                    
+                    if(self.userData.userRoutines[self.routineIndex].repeatOn[index]){
+                            Text(Calendar.current.weekdaySymbols[index])
+                                .italic()
+                                .padding(4)
+                                .foregroundColor(Color.white)
+                    }
                 }
             }
         }

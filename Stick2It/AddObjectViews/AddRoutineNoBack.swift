@@ -83,7 +83,7 @@ struct AddRoutineNoBack: View {
                                 }
                             .padding(5)
                             .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1))
-                            .background(self.daysSelected[index] ? Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1) : Color.clear)
+                            .background(self.daysSelected[index] ? Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.3) : Color.clear)
                             .foregroundColor(Color.white)
                         }
                         
@@ -92,7 +92,7 @@ struct AddRoutineNoBack: View {
                 //.padding()
                 
                 Button(action:{
-                    self.userData.addRoutine(self.name, self.startTime, self.endTime, self.repeatDays, "none")
+                    self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, "none")
                     self.userData.saveRoutine()
                     self.addingItem.toggle()
                     print(self.userData.userRoutines[0])
@@ -111,7 +111,7 @@ struct AddRoutineNoBack: View {
                 
             }
             .padding()
-            .background(Color(red: 0.0, green: 0.0, blue: 0.0, opacity: 0.00001)) //This is annoying, but it needs to exist to prevent accidental closure of view
+            //.background(Color(red: 0.0, green: 0.0, blue: 0.0, opacity: 0.00001)) //This is annoying, but it needs to exist to prevent accidental closure of view
             .padding(30)
         }
     }

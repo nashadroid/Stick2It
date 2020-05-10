@@ -12,6 +12,7 @@ struct TodayView: View {
     @EnvironmentObject var userData: UserData
     @State var date: String = "none"
     @State var addingItem: Bool = false
+    let dayIndex = Calendar.current.component(.weekday, from: Date()) - 1
     
     var body: some View {
         ZStack{
@@ -32,7 +33,7 @@ struct TodayView: View {
                             }
                         }
                         
-                        Button(action: {self.userData.checkRoutineAddGoalsAsNeeded(date: self.date, dayNum: 1)}) {
+                        Button(action: {self.userData.checkRoutineAddGoalsAsNeeded(date: self.date, dayNum: self.dayIndex)}) {
                             Text("Refresh")
                         }
                     }
