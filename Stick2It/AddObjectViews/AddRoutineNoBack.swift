@@ -41,95 +41,90 @@ struct AddRoutineNoBack: View {
                 .fontWeight(.heavy)
                 .multilineTextAlignment(.center)
                 .foregroundColor(Color.white)
-                //.padding(1)
-                
             
             ScrollView(.vertical, showsIndicators: false){
                 VStack{
-                VStack(alignment: .leading){
-                    Text("Routine Name:")
-                        .font(.footnote)
-                        .fontWeight(.heavy)
-                        .padding(.leading, 5)
-                        .foregroundColor(Color.white)
-                    TextField("Enter Routine name", text: $name)
-                        .multilineTextAlignment(.center)
-                }
-                .padding(5)
-                .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-                
-                VStack(alignment: .leading){
-                    Text("Start Time:")
-                        .font(.footnote)
-                        .fontWeight(.heavy)
-                        .padding(.leading, 5)
-                        .foregroundColor(Color.white)
-                    TextField("Enter Start Time", text: $startTime)
-                        .multilineTextAlignment(.center)
-                }
-                .padding(5)
-                .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-                .padding(.top, 20)
-                
-                VStack(alignment: .leading){
-                    Text("End Time:")
-                        .font(.footnote)
-                        .fontWeight(.heavy)
-                        .padding(.leading, 5)
-                        .foregroundColor(Color.white)
-                    
-                    TextField("Enter End Time", text: $endTime)
-                        .multilineTextAlignment(.center)
-                }
-                .padding(5)
-                .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-                .padding(.top, 20)
-                
-                HStack{
-                    
-                    ForEach(self.daysOfWeek.indices){index in
-                        
-                        Button(action: {
-                            self.daysSelected[index].toggle()
-                        }){
-                            Text(self.daysOfWeek[index])
-                        }
-                        .padding(5)
-                        .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1))
-                        .background(self.daysSelected[index] ? Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.3) : Color.clear)
-                        .foregroundColor(Color.white)
+                    VStack(alignment: .leading){
+                        Text("Routine Name:")
+                            .font(.footnote)
+                            .fontWeight(.heavy)
+                            .padding(.leading, 5)
+                            .foregroundColor(Color.white)
+                        TextField("Enter Routine name", text: $name)
+                            .multilineTextAlignment(.center)
                     }
+                    .padding(5)
+                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     
+                    VStack(alignment: .leading){
+                        Text("Start Time:")
+                            .font(.footnote)
+                            .fontWeight(.heavy)
+                            .padding(.leading, 5)
+                            .foregroundColor(Color.white)
+                        TextField("Enter Start Time", text: $startTime)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding(5)
+                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                    .padding(.top, 20)
                     
+                    VStack(alignment: .leading){
+                        Text("End Time:")
+                            .font(.footnote)
+                            .fontWeight(.heavy)
+                            .padding(.leading, 5)
+                            .foregroundColor(Color.white)
+                        
+                        TextField("Enter End Time", text: $endTime)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding(5)
+                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                    .padding(.top, 20)
+                    
+                    HStack{
+                        
+                        ForEach(self.daysOfWeek.indices){index in
+                            
+                            Button(action: {
+                                self.daysSelected[index].toggle()
+                            }){
+                                Text(self.daysOfWeek[index])
+                            }
+                            .padding(5)
+                            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1))
+                            .background(self.daysSelected[index] ? Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.3) : Color.clear)
+                            .foregroundColor(Color.white)
+                        }
+                        
+                        
+                    }
+                    .padding(.top, 10)
+                    
+                    Button(action:{
+                        self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, "none")
+                        self.userData.saveRoutine()
+                        self.addingItem.toggle()
+                        print(self.userData.userRoutines[0])
+                        
+                    }){
+                        Text("Add Routine")
+                            .foregroundColor(Color.white)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
+                            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                            .padding(.top, 20)
+                        
+                    }
                 }
-                .padding(.top, 10)
-                
-                Button(action:{
-                    self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, "none")
-                    self.userData.saveRoutine()
-                    self.addingItem.toggle()
-                    print(self.userData.userRoutines[0])
-                    
-                }){
-                    Text("Add Routine")
-                        .foregroundColor(Color.white)
-                        .multilineTextAlignment(.center)
-                        .padding()
-                        .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
-                        .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-                        .padding(.top, 20)
-                    
-                }
-                }
-            .padding(5)
+                .padding(5)
                 
             }
-            //.padding()
-            //.background(Color(red: 0.0, green: 0.0, blue: 0.0, opacity: 0.00001)) //This is annoying, but it needs to exist to prevent accidental closure of view
                 .padding(.leading, 30)
                 .padding(.trailing, 30)
         }
-        //.padding(.leading,20)
     }
 }
 
