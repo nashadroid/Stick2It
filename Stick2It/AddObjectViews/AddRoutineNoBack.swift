@@ -102,7 +102,7 @@ struct AddRoutineNoBack: View {
                     
                     
                 }
-                //.padding()
+                .padding(.top, 10)
                 
                 Button(action:{
                     self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, "none")
