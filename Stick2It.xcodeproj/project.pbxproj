@@ -124,6 +124,37 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		8420A7412467A20300E44DC9 /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				84AE44C8246071BA00043CDA /* ContentView.swift */,
+				8420A72D2465C3CF00E44DC9 /* TodayView.swift */,
+				8420A7312465FE9900E44DC9 /* RoutineView.swift */,
+			);
+			path = MainViews;
+			sourceTree = "<group>";
+		};
+		8420A7422467A23E00E44DC9 /* HelperObjectViews */ = {
+			isa = PBXGroup;
+			children = (
+				84AE44F624607F3400043CDA /* GoalBoxView.swift */,
+				8420A7332465FFA700E44DC9 /* RoutineBox.swift */,
+				8420A72B2464A13300E44DC9 /* AddButton.swift */,
+				8420A7272462657D00E44DC9 /* BlurView.swift */,
+			);
+			path = HelperObjectViews;
+			sourceTree = "<group>";
+		};
+		8420A7432467A26D00E44DC9 /* AddObjectViews */ = {
+			isa = PBXGroup;
+			children = (
+				8420A72524620A1D00E44DC9 /* AddItem.swift */,
+				8420A72924626A8100E44DC9 /* AddItemNoBack.swift */,
+				8420A73E24671A7300E44DC9 /* AddRoutineNoBack.swift */,
+			);
+			path = AddObjectViews;
+			sourceTree = "<group>";
+		};
 		84AE44B8246071BA00043CDA = {
 			isa = PBXGroup;
 			children = (
@@ -148,17 +179,10 @@
 			isa = PBXGroup;
 			children = (
 				8420A71E2461065F00E44DC9 /* Models */,
-				84AE44C8246071BA00043CDA /* ContentView.swift */,
-				8420A72D2465C3CF00E44DC9 /* TodayView.swift */,
-				8420A7312465FE9900E44DC9 /* RoutineView.swift */,
 				8420A7232461F2EE00E44DC9 /* UserData.swift */,
-				84AE44F624607F3400043CDA /* GoalBoxView.swift */,
-				8420A7332465FFA700E44DC9 /* RoutineBox.swift */,
-				8420A72524620A1D00E44DC9 /* AddItem.swift */,
-				8420A72B2464A13300E44DC9 /* AddButton.swift */,
-				8420A72924626A8100E44DC9 /* AddItemNoBack.swift */,
-				8420A73E24671A7300E44DC9 /* AddRoutineNoBack.swift */,
-				8420A7272462657D00E44DC9 /* BlurView.swift */,
+				8420A7412467A20300E44DC9 /* MainViews */,
+				8420A7422467A23E00E44DC9 /* HelperObjectViews */,
+				8420A7432467A26D00E44DC9 /* AddObjectViews */,
 				8420A7352466095500E44DC9 /* RoutineBoxSAMPLE.swift */,
 				84AE44C6246071BA00043CDA /* SceneDelegate.swift */,
 				84AE44C4246071BA00043CDA /* AppDelegate.swift */,
