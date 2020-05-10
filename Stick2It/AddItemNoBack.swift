@@ -1,8 +1,8 @@
 //
-//  AddItem.swift
+//  AddItemNoBack.swift
 //  Stick2It
 //
-//  Created by Nashad Rahman on 5/5/20.
+//  Created by Nashad Rahman on 5/7/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
 //  This view helps create a new goal

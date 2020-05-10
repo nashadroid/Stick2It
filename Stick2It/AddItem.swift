@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct AddItem: View {
-    // @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userData: UserData
     @State private var name: String = ""
     @State private var startTime: String = ""
