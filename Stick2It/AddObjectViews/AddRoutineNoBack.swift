@@ -18,6 +18,8 @@ struct AddRoutineNoBack: View {
     @State private var date: String = "none"
     @State private var project: String = "none"
     @State private var repeatDays = [1,2]
+    @State var daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
+    @State var daysSelected = [false,false,false,false,false,false,false]
     
     
     var body: some View {
@@ -83,6 +85,25 @@ struct AddRoutineNoBack: View {
             .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
             .padding(.top, 20)
             
+            HStack{
+                    
+                    ForEach(self.daysOfWeek.indices){index in
+                        
+                        Button(action: {
+                            self.daysSelected[index].toggle()
+                        }){
+                            Text(self.daysOfWeek[index])
+                            }
+                        .padding(5)
+                        .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1))
+                        .background(self.daysSelected[index] ? Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1 : Color.clear)
+                        .foregroundColor(Color.white)
+                    }
+                    
+                    
+                }
+            .padding()
+            
             Button(action:{
                 self.userData.addRoutine(self.name, self.startTime, self.endTime, self.repeatDays, "none")
                 self.userData.saveRoutine()
@@ -99,6 +120,7 @@ struct AddRoutineNoBack: View {
                     .padding(.top, 20)
                     
             }
+            
             
         }
         .padding()
