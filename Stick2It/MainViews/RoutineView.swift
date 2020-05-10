@@ -14,26 +14,26 @@ struct RoutineView: View {
     
     var body: some View {
         ZStack{
-        VStack(alignment: .leading, spacing: 0){
-            Text("Routines")
-                .foregroundColor(Color.black)
-                .font(.largeTitle)
-                .fontWeight(.heavy)
-                .padding()
-                .padding(.leading, 10)
-                .multilineTextAlignment(.leading)
-            ScrollView(.vertical, showsIndicators: false){
-                VStack(spacing: 10){
-                    
-                    ForEach(userData.userRoutines) {routine in
-                        RoutineBox(routine: routine)
+            VStack(alignment: .leading, spacing: 0){
+                Text("Routines")
+                    .foregroundColor(Color.black)
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .padding()
+                    .padding(.leading, 10)
+                    .multilineTextAlignment(.leading)
+                ScrollView(.vertical, showsIndicators: false){
+                    VStack(spacing: 10){
+                        
+                        ForEach(userData.userRoutines) {routine in
+                            RoutineBox(routine: routine)
+                        }
                     }
+                    .padding()
+                    .frame(minWidth: UIScreen.main.bounds.size.width)
                 }
-                .padding()
-                .frame(minWidth: UIScreen.main.bounds.size.width)
+                
             }
-            
-        }
             if(addingRoutine){
                 GeometryReader{_ in
                     BlurView(style: .light)
@@ -41,7 +41,7 @@ struct RoutineView: View {
                             self.addingRoutine.toggle()
                     }
                     
-                    AddRoutineNoBack(userData: self._userData, addingItem: self.addingRoutine)
+                    AddRoutineNoBack(userData: self._userData, addingItem: self.$addingRoutine)
                         .padding(.top, 40)
                     
                 }.background(

@@ -11,7 +11,7 @@ import SwiftUI
 
 struct AddItemNoBack: View {
     @EnvironmentObject var userData: UserData
-    @State var addingItem = true
+    @Binding var addingItem: Bool
     @State private var name: String = ""
     @State private var startTime: String = ""
     @State private var endTime: String = ""
@@ -98,6 +98,6 @@ struct AddItemNoBack: View {
 
 struct AddItemNoBack_Previews: PreviewProvider {
     static var previews: some View {
-        AddItemNoBack()
+        AddItemNoBack(addingItem: .constant(false))
     }
 }

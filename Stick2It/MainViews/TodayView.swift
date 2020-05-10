@@ -50,7 +50,7 @@ struct TodayView: View {
                             self.addingItem.toggle()
                     }
                     
-                    AddItemNoBack(userData: self._userData, addingItem: self.addingItem)
+                    AddItemNoBack(userData: self._userData, addingItem: self.$addingItem)
                         .padding(.top, 40)
                     
                 }.background(

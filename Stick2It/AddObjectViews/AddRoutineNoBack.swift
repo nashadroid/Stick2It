@@ -11,7 +11,7 @@ import SwiftUI
 
 struct AddRoutineNoBack: View {
     @EnvironmentObject var userData: UserData
-    @State var addingItem = true
+    @Binding var addingItem: Bool
     @State private var name: String = ""
     @State private var startTime: String = ""
     @State private var endTime: String = ""
@@ -118,7 +118,9 @@ struct AddRoutineNoBack: View {
 }
 
 struct AddRoutineNoBack_Previews: PreviewProvider {
+    @State var addingItem: Bool = false
+    
     static var previews: some View {
-        AddRoutineNoBack()
+        AddRoutineNoBack(addingItem: .constant(false))
     }
 }
