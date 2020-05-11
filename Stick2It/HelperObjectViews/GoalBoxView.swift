@@ -52,7 +52,7 @@ struct GoalBox: View {
             
         }
         .background(self.userData.userGoals[self.goalIndex].done ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
-        .simultaneousGesture(LongPressGesture().onEnded { _ in
+        .simultaneousGesture(LongPressGesture(minimumDuration: 1).onEnded { _ in
             self.userData.removeGoal(goal: self.goal)
         })
     }

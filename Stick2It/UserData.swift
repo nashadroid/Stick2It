@@ -40,6 +40,12 @@ final class UserData: ObservableObject  {
     func removeGoal(goal: Goal){
         self.userGoals.removeAll { $0 == goal}
     }
+    func removeRoutine(routine: Routine){
+        self.userRoutines.removeAll { $0 == routine}
+    }
+    func removeProject(project: Project){
+        self.userProjects.removeAll { $0 == project}
+    }
     
     func addRoutine(_ routineName: String, _ startTime: Date, _ endTime: Date, _ repeatOn: [Bool], _ project: String){
         

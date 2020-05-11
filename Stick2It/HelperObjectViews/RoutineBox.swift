@@ -13,55 +13,60 @@ struct RoutineBox: View {
     @State var routine: Routine //TODO: Change this to be an index or ID only
     
     var routineIndex: Int {
-        userData.userRoutines.firstIndex(where: { $0.id == routine.id })!
+        userData.userRoutines.firstIndex(where: { $0.id == routine.id }) ?? 0
     }
     
     var body: some View{
-        VStack() {
-            
-            Text(self.userData.userRoutines[self.routineIndex].routineName)
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(4)
-                .foregroundColor(Color.white)
-            
-            
-            Text("\(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].startTime)) - \(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].endTime))")
-                .foregroundColor(Color.white)
-            
-            
-            VStack(alignment: .leading, spacing: 0){
-                HStack{
-                    
-                    Text("Project:")
-                        .font(.body)
-                        .fontWeight(.bold)
-                        .padding(4)
-                        .foregroundColor(Color.white)
-                    
-                    Text(self.userData.userRoutines[self.routineIndex].project)
-                        .font(.body)
-                        .padding(4)
-                        .foregroundColor(Color.white)
-                    Spacer()
-                }
-                Text("Repeated On:")
+        
+        Button(action: {}){
+            VStack() {
+                
+                Text(self.userData.userRoutines[self.routineIndex].routineName)
+                    .font(.title)
                     .fontWeight(.bold)
                     .padding(4)
                     .foregroundColor(Color.white)
                 
-                ForEach(0..<self.userData.userRoutines[self.routineIndex].repeatOn.count) {index in
+                
+                Text("\(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].startTime)) - \(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].endTime))")
+                    .foregroundColor(Color.white)
+                
+                
+                VStack(alignment: .leading, spacing: 0){
+                    HStack{
+                        
+                        Text("Project:")
+                            .font(.body)
+                            .fontWeight(.bold)
+                            .padding(4)
+                            .foregroundColor(Color.white)
+                        
+                        Text(self.userData.userRoutines[self.routineIndex].project)
+                            .font(.body)
+                            .padding(4)
+                            .foregroundColor(Color.white)
+                        Spacer()
+                    }
+                    Text("Repeated On:")
+                        .fontWeight(.bold)
+                        .padding(4)
+                        .foregroundColor(Color.white)
                     
-                    if(self.userData.userRoutines[self.routineIndex].repeatOn[index]){
+                    ForEach(0..<self.userData.userRoutines[self.routineIndex].repeatOn.count) {index in
+                        
+                        if(self.userData.userRoutines[self.routineIndex].repeatOn[index]){
                             Text(Calendar.current.weekdaySymbols[index])
                                 .italic()
                                 .padding(4)
                                 .foregroundColor(Color.white)
+                        }
                     }
                 }
             }
-        }
-        .background(Color.green.shadow(radius: 7))
+            .background(Color.green.shadow(radius: 7))
+        }.simultaneousGesture(LongPressGesture(minimumDuration: 1).onEnded { _ in
+            self.userData.removeRoutine(routine: self.routine)
+        })
     }
 }
 
