@@ -95,7 +95,21 @@ final class UserData: ObservableObject  {
                 return
             }
         }
+        print("New Goal Being Added From Routine")
         userGoals += [goalToBeAdded]
+    }
+    
+    func combineTimeAndDay(time: Date, day: Date) -> Date {
+        
+        var components = DateComponents()
+        components.hour = Calendar.current.component(.hour, from: time)
+        components.minute = Calendar.current.component(.minute, from: time)
+        components.day = Calendar.current.component(.day, from: day)
+        components.month = Calendar.current.component(.month, from: day)
+        components.year = Calendar.current.component(.year, from: day)
+        let date = Calendar.current.date(from: components) ?? Date()
+        
+        return date
     }
     
     //TODO: CHange everything to be a date object
@@ -103,7 +117,15 @@ final class UserData: ObservableObject  {
         let dayRoutines = getDaysRoutines(dayNum: dayNum)
         
         for routine in dayRoutines{
-            let tempGoal = Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: routine.startTime, endTime: routine.endTime, project: routine.project, done: false)
+            print(routine.routineName)
+            
+            let startDate = combineTimeAndDay(time: routine.startTime, day: Date())
+            let endDate = combineTimeAndDay(time: routine.endTime, day: Date())
+            
+            print(startDate)
+            
+            let tempGoal = Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: startDate, endTime: endDate, project: routine.project, done: false)
+            
             self.addGoalAvoidingRepeat(goalToBeAdded: tempGoal)
         }
         self.saveData()
@@ -114,8 +136,8 @@ final class UserData: ObservableObject  {
         let newProject = Project(id: UUID().hashValue, projectName: projectName)
         self.userProjects += [newProject]
         self.saveProjects()
-        
     }
+    
     func loadProjects(){
         
         if let savedProjects = UserDefaults.standard.object(forKey: "Projects") as? Data {
@@ -124,7 +146,6 @@ final class UserData: ObservableObject  {
                 self.userProjects += loadedProjects
             }
         }
-        
     }
     
     func saveProjects(){
