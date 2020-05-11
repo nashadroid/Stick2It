@@ -10,9 +10,8 @@
 		8420A71D2461062800E44DC9 /* todaySample.json in Resources */ = {isa = PBXBuildFile; fileRef = 8420A71C2461062800E44DC9 /* todaySample.json */; };
 		8420A720246106B200E44DC9 /* LoadSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A71F246106B200E44DC9 /* LoadSample.swift */; };
 		8420A7242461F2EE00E44DC9 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A7232461F2EE00E44DC9 /* UserData.swift */; };
-		8420A72624620A1D00E44DC9 /* AddItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A72524620A1D00E44DC9 /* AddItem.swift */; };
 		8420A7282462657D00E44DC9 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A7272462657D00E44DC9 /* BlurView.swift */; };
-		8420A72A24626A8100E44DC9 /* AddItemNoBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A72924626A8100E44DC9 /* AddItemNoBack.swift */; };
+		8420A72A24626A8100E44DC9 /* AddGoalNoBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A72924626A8100E44DC9 /* AddGoalNoBack.swift */; };
 		8420A72C2464A13300E44DC9 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A72B2464A13300E44DC9 /* AddButton.swift */; };
 		8420A72E2465C3CF00E44DC9 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A72D2465C3CF00E44DC9 /* TodayView.swift */; };
 		8420A7302465FA9A00E44DC9 /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A72F2465FA9A00E44DC9 /* Routine.swift */; };
@@ -58,9 +57,8 @@
 		8420A71C2461062800E44DC9 /* todaySample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = todaySample.json; sourceTree = "<group>"; };
 		8420A71F246106B200E44DC9 /* LoadSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadSample.swift; sourceTree = "<group>"; };
 		8420A7232461F2EE00E44DC9 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		8420A72524620A1D00E44DC9 /* AddItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItem.swift; sourceTree = "<group>"; };
 		8420A7272462657D00E44DC9 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
-		8420A72924626A8100E44DC9 /* AddItemNoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemNoBack.swift; sourceTree = "<group>"; };
+		8420A72924626A8100E44DC9 /* AddGoalNoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalNoBack.swift; sourceTree = "<group>"; };
 		8420A72B2464A13300E44DC9 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		8420A72D2465C3CF00E44DC9 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		8420A72F2465FA9A00E44DC9 /* Routine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
@@ -161,8 +159,7 @@
 		8420A7432467A26D00E44DC9 /* AddObjectViews */ = {
 			isa = PBXGroup;
 			children = (
-				8420A72524620A1D00E44DC9 /* AddItem.swift */,
-				8420A72924626A8100E44DC9 /* AddItemNoBack.swift */,
+				8420A72924626A8100E44DC9 /* AddGoalNoBack.swift */,
 				8420A73E24671A7300E44DC9 /* AddRoutineNoBack.swift */,
 				8452261F2469150300E9CA66 /* AddProjectNoBack.swift */,
 			);
@@ -369,7 +366,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8420A7302465FA9A00E44DC9 /* Routine.swift in Sources */,
-				8420A72624620A1D00E44DC9 /* AddItem.swift in Sources */,
 				8452261C24690E3D00E9CA66 /* ProjectView.swift in Sources */,
 				8420A7452467A69A00E44DC9 /* DaysOfWeekSelector.swift in Sources */,
 				8420A7362466095500E44DC9 /* RoutineBoxSAMPLE.swift in Sources */,
@@ -383,7 +379,7 @@
 				8420A72C2464A13300E44DC9 /* AddButton.swift in Sources */,
 				84AE44C9246071BA00043CDA /* ContentView.swift in Sources */,
 				84AE44F724607F3400043CDA /* GoalBoxView.swift in Sources */,
-				8420A72A24626A8100E44DC9 /* AddItemNoBack.swift in Sources */,
+				8420A72A24626A8100E44DC9 /* AddGoalNoBack.swift in Sources */,
 				8452261A246909AC00E9CA66 /* TimeFormatters.swift in Sources */,
 				8420A7322465FE9900E44DC9 /* RoutineView.swift in Sources */,
 				8420A72E2465C3CF00E44DC9 /* TodayView.swift in Sources */,

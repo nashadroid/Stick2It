@@ -32,7 +32,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
             endingLineNumber = "33"
-            landmarkName = "loadData(_:)"
+            landmarkName = "loadGoal(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

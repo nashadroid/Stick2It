@@ -14,21 +14,21 @@ final class UserData: ObservableObject  {
     @Published var userRoutines = loadSavedRoutines()
     @Published var userProjects = loadSavedProjects()
     
-    func addData(_ goalName: String, _ startTime: Date, _ endTime: Date, _ date: String, _ project: String){
+    func addGoal(_ goalName: String, _ startTime: Date, _ endTime: Date, _ date: String, _ project: String){
         
         let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, date: date, project: project, done: false)
         
         userGoals += [newGoal]
     }
     
-    func saveData(){
+    func saveGoal(){
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(self.userGoals) {
             UserDefaults.standard.set(data, forKey: "Usergoals")
         }
     }
     
-    func loadData( _ key: String){
+    func loadGoal( _ key: String){
         if let savedGoals = UserDefaults.standard.object(forKey: key) as? Data {
             let decoder = JSONDecoder()
             if let loadedGoals = try? decoder.decode([Goal].self, from: savedGoals) {
@@ -114,7 +114,6 @@ final class UserData: ObservableObject  {
         return date
     }
     
-    //TODO: CHange everything to be a date object
     func checkRoutineAddGoalsAsNeeded(dayNum: Int){
         let dayRoutines = getDaysRoutines(dayNum: dayNum)
         
@@ -130,7 +129,7 @@ final class UserData: ObservableObject  {
             
             self.addGoalAvoidingRepeat(goalToBeAdded: tempGoal)
         }
-        self.saveData()
+        self.saveGoal()
     }
     
     func addProject(projectName: String){

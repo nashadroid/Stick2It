@@ -85,8 +85,8 @@ struct AddItemNoBack: View {
                         formatter1.dateFormat = "YD"
                         print(formatter1.string(from: today))
                         
-                        self.userData.addData(self.name, self.startTime, self.endTime, formatter1.string(from: today), "none")
-                        self.userData.saveData()
+                        self.userData.addGoal(self.name, self.startTime, self.endTime, formatter1.string(from: today), "none")
+                        self.userData.saveGoal()
                         self.addingItem.toggle()
                         
                     }){

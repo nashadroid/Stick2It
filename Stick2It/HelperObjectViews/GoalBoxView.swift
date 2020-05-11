@@ -21,7 +21,7 @@ struct GoalBox: View {
         Button(action: {
             self.goal.done.toggle()
             self.userData.userGoals[self.goalIndex].done.toggle()
-            self.userData.saveData()
+            self.userData.saveGoal()
             let generator = UIImpactFeedbackGenerator(style: .heavy)
             generator.impactOccurred()
         }) {
