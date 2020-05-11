@@ -26,7 +26,7 @@ struct RoutineBox: View {
                 .foregroundColor(Color.white)
             
             
-            Text("\(self.userData.userRoutines[self.routineIndex].startTime) - \(self.userData.userRoutines[self.routineIndex].endTime)")
+            Text("\(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].startTime)) - \(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].endTime))")
                 .foregroundColor(Color.white)
             
             
