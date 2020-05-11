@@ -33,7 +33,7 @@ struct TodayView: View {
                             }
                         }
                         
-                        Button(action: {self.userData.checkRoutineAddGoalsAsNeeded(date: self.date, dayNum: self.dayIndex)}) {
+                        Button(action: {self.userData.checkRoutineAddGoalsAsNeeded(dayNum: self.dayIndex)}) {
                             Text("Refresh")
                         }
                     }

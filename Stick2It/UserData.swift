@@ -107,13 +107,13 @@ final class UserData: ObservableObject  {
     }
     
     //TODO: CHange everything to be a date object
-    func checkRoutineAddGoalsAsNeeded(date: String, dayNum: Int){
+    func checkRoutineAddGoalsAsNeeded(dayNum: Int){
         
         let dayRoutines = getDaysRoutines(dayNum: dayNum)
         
         for routine in dayRoutines{
             
-            let tempGoal = Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: routine.startTime, endTime: routine.endTime, date: date, project: routine.project, done: false)
+            let tempGoal = Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: routine.startTime, endTime: routine.endTime, project: routine.project, done: false)
             
             self.addGoalAvoidingRepeat(goalToBeAdded: tempGoal)
             
