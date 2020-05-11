@@ -28,7 +28,7 @@ struct TodayView: View {
                     VStack(spacing: 10){
                         
                         ForEach(userData.userGoals) {goal in
-                            if self.date == goal.date{
+                            if  Calendar.current.isDateInToday(goal.startTime){
                                 GoalBox(goal: goal)
                             }
                         }
