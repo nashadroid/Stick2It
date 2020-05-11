@@ -37,13 +37,9 @@ final class UserData: ObservableObject  {
         }
     }
     
-//    func removeGoal(id: Int){
-//        ForEach(self.userGoals) {goal in
-//            if id == goal.id{
-//                GoalBox(goal: goal)
-//            }
-//        }
-//    }
+    func removeGoal(goal: Goal){
+        self.userGoals.removeAll { $0 == goal}
+    }
     
     func addRoutine(_ routineName: String, _ startTime: Date, _ endTime: Date, _ repeatOn: [Bool], _ project: String){
         
