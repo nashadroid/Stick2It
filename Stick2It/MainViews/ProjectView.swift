@@ -25,8 +25,8 @@ struct ProjectView: View {
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(spacing: 10){
                         
-                        ForEach(userData.userRoutines) {routine in
-                            RoutineBox(routine: routine)
+                        ForEach(userData.userProjects) {project in
+                            Text(project.projectName)
                         }
                     }
                     .padding()

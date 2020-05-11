@@ -47,7 +47,7 @@ struct ContentView: View {
                     Image(systemName: "add")
                     Text("Today")
                     
-                    }).tag(0)
+                }).tag(0)
                 
                 RoutineView(userData: _userData, addingRoutine: false).tabItem({
                     
@@ -55,7 +55,12 @@ struct ContentView: View {
                     Text("Routines")
                     
                 }).tag(0)
+                
+                ProjectView(userData: _userData, addingProject: false).tabItem({
                     
+                    Text("Projects")
+                    
+                })
                 
                 
             }
