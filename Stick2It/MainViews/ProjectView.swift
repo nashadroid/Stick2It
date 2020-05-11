@@ -41,7 +41,7 @@ struct ProjectView: View {
                             self.addingProject.toggle()
                     }
                     
-                    AddRoutineNoBack(userData: self._userData, addingItem: self.$addingProject)
+                    AddProjectNoBack(userData: self._userData, addingItem: self.$addingProject)
                         .padding(.top, 40)
                     
                 }.background(
