@@ -36,6 +36,17 @@ func loadSavedRoutines() -> [Routine]{
     return []
 }
 
+func loadSavedProjects() -> [Project]{
+    
+    if let savedProjects = UserDefaults.standard.object(forKey: "UserProjects") as? Data {
+        let decoder = JSONDecoder()
+        if let loadedProjects = try? decoder.decode([Project].self, from: savedProjects) {
+            return loadedProjects
+        }
+    }
+    return []
+}
+
 
 
 func load<T: Decodable>(_ filename: String) -> T {

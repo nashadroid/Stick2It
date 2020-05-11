@@ -22,6 +22,8 @@
 		8420A73F24671A7300E44DC9 /* AddRoutineNoBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A73E24671A7300E44DC9 /* AddRoutineNoBack.swift */; };
 		8420A7452467A69A00E44DC9 /* DaysOfWeekSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A7442467A69A00E44DC9 /* DaysOfWeekSelector.swift */; };
 		8452261A246909AC00E9CA66 /* TimeFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84522619246909AC00E9CA66 /* TimeFormatters.swift */; };
+		8452261C24690E3D00E9CA66 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452261B24690E3D00E9CA66 /* ProjectView.swift */; };
+		8452261E24690FF800E9CA66 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452261D24690FF800E9CA66 /* Project.swift */; };
 		84AE44C5246071BA00043CDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44C4246071BA00043CDA /* AppDelegate.swift */; };
 		84AE44C7246071BA00043CDA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44C6246071BA00043CDA /* SceneDelegate.swift */; };
 		84AE44C9246071BA00043CDA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44C8246071BA00043CDA /* ContentView.swift */; };
@@ -67,6 +69,8 @@
 		8420A73E24671A7300E44DC9 /* AddRoutineNoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoutineNoBack.swift; sourceTree = "<group>"; };
 		8420A7442467A69A00E44DC9 /* DaysOfWeekSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysOfWeekSelector.swift; sourceTree = "<group>"; };
 		84522619246909AC00E9CA66 /* TimeFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatters.swift; sourceTree = "<group>"; };
+		8452261B24690E3D00E9CA66 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		8452261D24690FF800E9CA66 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		84AE44C1246071BA00043CDA /* Stick2It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stick2It.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AE44C4246071BA00043CDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84AE44C6246071BA00043CDA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 			children = (
 				84AE44F424607ED400043CDA /* goal.swift */,
 				8420A72F2465FA9A00E44DC9 /* Routine.swift */,
+				8452261D24690FF800E9CA66 /* Project.swift */,
 				8420A71F246106B200E44DC9 /* LoadSample.swift */,
 				84522619246909AC00E9CA66 /* TimeFormatters.swift */,
 			);
@@ -135,6 +140,7 @@
 				84AE44C8246071BA00043CDA /* ContentView.swift */,
 				8420A72D2465C3CF00E44DC9 /* TodayView.swift */,
 				8420A7312465FE9900E44DC9 /* RoutineView.swift */,
+				8452261B24690E3D00E9CA66 /* ProjectView.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
@@ -361,8 +367,10 @@
 			files = (
 				8420A7302465FA9A00E44DC9 /* Routine.swift in Sources */,
 				8420A72624620A1D00E44DC9 /* AddItem.swift in Sources */,
+				8452261C24690E3D00E9CA66 /* ProjectView.swift in Sources */,
 				8420A7452467A69A00E44DC9 /* DaysOfWeekSelector.swift in Sources */,
 				8420A7362466095500E44DC9 /* RoutineBoxSAMPLE.swift in Sources */,
+				8452261E24690FF800E9CA66 /* Project.swift in Sources */,
 				84AE44F524607ED500043CDA /* goal.swift in Sources */,
 				8420A73F24671A7300E44DC9 /* AddRoutineNoBack.swift in Sources */,
 				8420A7282462657D00E44DC9 /* BlurView.swift in Sources */,
