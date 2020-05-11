@@ -13,8 +13,8 @@ struct AddItemNoBack: View {
     @EnvironmentObject var userData: UserData
     @Binding var addingItem: Bool
     @State private var name: String = ""
-    @State private var startTime: String = ""
-    @State private var endTime: String = ""
+    @State private var startTime: Date = Date()
+    @State private var endTime: Date = Date()
     @State private var date: String = "none"
     @State private var project: String = "none"
     
@@ -58,8 +58,8 @@ struct AddItemNoBack: View {
                             .fontWeight(.heavy)
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
-                        TextField("Enter Start Time", text: $startTime)
-                            .multilineTextAlignment(.center)
+                        DatePicker("Please enter a date", selection: $startTime, in: Date()..., displayedComponents: .hourAndMinute)
+                        .labelsHidden()
                     }
                     .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
@@ -72,8 +72,8 @@ struct AddItemNoBack: View {
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
                         
-                        TextField("Enter End Time", text: $endTime)
-                            .multilineTextAlignment(.center)
+                        DatePicker("Please enter a date", selection: $endTime, in: Date()..., displayedComponents: .hourAndMinute)
+                        .labelsHidden()
                     }
                     .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
@@ -101,6 +101,7 @@ struct AddItemNoBack: View {
                     }
                 }
             .padding(5)
+            .padding(.bottom,500)
                 
             }
             .padding(.leading, 30)
