@@ -185,8 +185,8 @@
 		84AE44C3246071BA00043CDA /* Stick2It */ = {
 			isa = PBXGroup;
 			children = (
-				8420A71E2461065F00E44DC9 /* Models */,
 				8420A7232461F2EE00E44DC9 /* UserData.swift */,
+				8420A71E2461065F00E44DC9 /* Models */,
 				8420A7412467A20300E44DC9 /* MainViews */,
 				8420A7422467A23E00E44DC9 /* HelperObjectViews */,
 				8420A7432467A26D00E44DC9 /* AddObjectViews */,
