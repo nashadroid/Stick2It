@@ -24,11 +24,11 @@ struct RoutineBox: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(4)
-                .foregroundColor(Color.white)
+                .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
             
             
             Text("\(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].startTime)) - \(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].endTime))")
-                .foregroundColor(Color.white)
+                .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
             
             
             VStack(alignment: .leading, spacing: 0){
@@ -38,33 +38,24 @@ struct RoutineBox: View {
                         .font(.body)
                         .fontWeight(.bold)
                         .padding(4)
-                        .foregroundColor(Color.white)
+                        .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
                     
                     Text(self.userData.userRoutines[self.routineIndex].project)
                         .font(.body)
                         .padding(4)
-                        .foregroundColor(Color.white)
+                        .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
                     Spacer()
                 }
                 Text("Repeated On: " + getShortStringFromRepeatDays(repeatedOn: self.userData.userRoutines[self.routineIndex].repeatOn))
                     .fontWeight(.bold)
                     .padding(4)
-                    .foregroundColor(Color.white)
+                    .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
                 
-//                ForEach(0..<self.userData.userRoutines[self.routineIndex].repeatOn.count) {index in
-//
-//                    if(self.userData.userRoutines[self.routineIndex].repeatOn[index]){
-//                        Text(Calendar.current.weekdaySymbols[index])
-//                            .italic()
-//                            .padding(4)
-//                            .foregroundColor(Color.white)
-//                    }
-//                }
             }
         }
-        .background(Color.green.shadow(radius: 7))
+        .background(self.userData.userRoutines[self.routineIndex].running ? Color.green.shadow(radius: 7) : Color.gray.shadow(radius: 7))
         .onTapGesture {
-            
+            self.userData.userRoutines[self.routineIndex].running.toggle()
         }
         .onLongPressGesture {
             self.userData.removeRoutine(routine: self.routine)

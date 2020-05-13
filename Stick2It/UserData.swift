@@ -77,7 +77,7 @@ final class UserData: ObservableObject  {
         var routinesToReturn: [Routine] = []
         
         for routine in self.userRoutines{
-            if routine.repeatOn[dayNum]{
+            if routine.repeatOn[dayNum] && routine.running {
                 routinesToReturn += [routine]
             }
         }

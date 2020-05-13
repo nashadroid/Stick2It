@@ -64,7 +64,7 @@ struct AddRoutineNoBack: View {
                             .foregroundColor(Color.white)
                         
                         
-                            DatePicker("Please enter a date", selection: $startTime, in: Date()..., displayedComponents: .hourAndMinute)
+                            DatePicker("Please enter a date", selection: $startTime, displayedComponents: .hourAndMinute)
                                 .labelsHidden()
                                 .multilineTextAlignment(.center)
                         
@@ -80,7 +80,7 @@ struct AddRoutineNoBack: View {
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
                         
-                        DatePicker("Please enter a date", selection: $endTime, in: Date()..., displayedComponents: .hourAndMinute)
+                        DatePicker("Please enter a date", selection: $endTime, displayedComponents: .hourAndMinute)
                             .labelsHidden()
                             .multilineTextAlignment(.center)
                         

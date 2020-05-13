@@ -58,7 +58,7 @@ struct AddItemNoBack: View {
                             .fontWeight(.heavy)
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
-                        DatePicker("Please enter a date", selection: $startTime, in: Date()..., displayedComponents: .hourAndMinute)
+                        DatePicker("Please enter a date", selection: $startTime, displayedComponents: .hourAndMinute)
                         .labelsHidden()
                     }
                     .padding(5)
@@ -72,7 +72,7 @@ struct AddItemNoBack: View {
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
                         
-                        DatePicker("Please enter a date", selection: $endTime, in: Date()..., displayedComponents: .hourAndMinute)
+                        DatePicker("Please enter a date", selection: $endTime, displayedComponents: .hourAndMinute)
                         .labelsHidden()
                     }
                     .padding(5)
