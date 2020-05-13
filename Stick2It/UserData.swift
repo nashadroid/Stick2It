@@ -39,12 +39,15 @@ final class UserData: ObservableObject  {
     
     func removeGoal(goal: Goal){
         self.userGoals.removeAll { $0 == goal}
+        self.saveGoal()
     }
     func removeRoutine(routine: Routine){
         self.userRoutines.removeAll { $0 == routine}
+        self.saveRoutine()
     }
     func removeProject(project: Project){
         self.userProjects.removeAll { $0 == project}
+        self.saveProjects()
     }
     
     func addRoutine(_ routineName: String, _ startTime: Date, _ endTime: Date, _ repeatOn: [Bool], _ project: String){
