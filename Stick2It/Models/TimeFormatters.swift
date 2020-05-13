@@ -15,3 +15,31 @@ func getTimeStringFromDate(_ date: Date) -> String{
     return formatter2.string(from: date)
     
 }
+
+func getShortStringFromRepeatDays(repeatedOn: [Bool]) -> String {
+    var strToReturn: String = ""
+    
+    if(repeatedOn[0]){
+        strToReturn += "Sun "
+    }
+    if(repeatedOn[1]){
+        strToReturn += "Mon "
+    }
+    if(repeatedOn[2]){
+        strToReturn += "Tue "
+    }
+    if(repeatedOn[3]){
+        strToReturn += "Wed "
+    }
+    if(repeatedOn[4]){
+        strToReturn += "Thu "
+    }
+    if(repeatedOn[5]){
+        strToReturn += "Fri "
+    }
+    if(repeatedOn[0]){
+        strToReturn += "Sat"
+    }
+    
+    return strToReturn
+}

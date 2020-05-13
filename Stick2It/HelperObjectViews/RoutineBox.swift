@@ -46,20 +46,20 @@ struct RoutineBox: View {
                         .foregroundColor(Color.white)
                     Spacer()
                 }
-                Text("Repeated On:")
+                Text("Repeated On: " + getShortStringFromRepeatDays(repeatedOn: self.userData.userRoutines[self.routineIndex].repeatOn))
                     .fontWeight(.bold)
                     .padding(4)
                     .foregroundColor(Color.white)
                 
-                ForEach(0..<self.userData.userRoutines[self.routineIndex].repeatOn.count) {index in
-                    
-                    if(self.userData.userRoutines[self.routineIndex].repeatOn[index]){
-                        Text(Calendar.current.weekdaySymbols[index])
-                            .italic()
-                            .padding(4)
-                            .foregroundColor(Color.white)
-                    }
-                }
+//                ForEach(0..<self.userData.userRoutines[self.routineIndex].repeatOn.count) {index in
+//
+//                    if(self.userData.userRoutines[self.routineIndex].repeatOn[index]){
+//                        Text(Calendar.current.weekdaySymbols[index])
+//                            .italic()
+//                            .padding(4)
+//                            .foregroundColor(Color.white)
+//                    }
+//                }
             }
         }
         .background(Color.green.shadow(radius: 7))
