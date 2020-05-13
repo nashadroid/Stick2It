@@ -22,6 +22,7 @@ final class UserData: ObservableObject  {
     }
     
     func saveGoal(){
+        self.userGoals = self.userGoals.sorted(by: {$0.startTime < $1.startTime })
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(self.userGoals) {
             UserDefaults.standard.set(data, forKey: "Usergoals")
@@ -58,6 +59,7 @@ final class UserData: ObservableObject  {
     }
     
     func saveRoutine(){
+        self.userRoutines = self.userRoutines.sorted(by: {$0.startTime < $1.startTime })
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(self.userRoutines) {
             UserDefaults.standard.set(data, forKey: "UserRoutines")
@@ -85,14 +87,14 @@ final class UserData: ObservableObject  {
     }
     
     //I think this can be deleted
-    func getNewGoalsFromRoutines(routines: [Routine], date: String) -> [Goal]{
-        var goalsToReturn: [Goal] = []
-        
-        for routine in routines {
-            goalsToReturn += [Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: routine.startTime, endTime: routine.endTime, date: date, project: routine.project, done: false)]
-        }
-        return goalsToReturn
-    }
+//    func getNewGoalsFromRoutines(routines: [Routine], date: String) -> [Goal]{
+//        var goalsToReturn: [Goal] = []
+//
+//        for routine in routines {
+//            goalsToReturn += [Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: routine.startTime, endTime: routine.endTime, date: date, project: routine.project, done: false)]
+//        }
+//        return goalsToReturn
+//    }
     func addGoalAvoidingRepeat(goalToBeAdded: Goal){
         
         for usergoal in userGoals {
@@ -100,7 +102,6 @@ final class UserData: ObservableObject  {
                 return
             }
         }
-        print("New Goal Being Added From Routine")
         userGoals += [goalToBeAdded]
     }
     
@@ -121,12 +122,10 @@ final class UserData: ObservableObject  {
         let dayRoutines = getDaysRoutines(dayNum: dayNum)
         
         for routine in dayRoutines{
-            print(routine.routineName)
             
             let startDate = combineTimeAndDay(time: routine.startTime, day: Date())
             let endDate = combineTimeAndDay(time: routine.endTime, day: Date())
             
-            print(startDate)
             
             let tempGoal = Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: startDate, endTime: endDate, project: routine.project, done: false)
             
