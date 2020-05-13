@@ -17,15 +17,7 @@ struct GoalBox: View {
     }
     
     var body: some View {
-        
-        Button(action: {
-            self.goal.done.toggle()
-            self.userData.userGoals[self.goalIndex].done.toggle()
-            self.userData.saveGoal()
-            let generator = UIImpactFeedbackGenerator(style: .heavy)
-            generator.impactOccurred()
-        }) {
-            
+
             HStack{
                 
                 VStack(alignment: .leading){
@@ -49,12 +41,18 @@ struct GoalBox: View {
                     .padding()
                     .background(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.red)
             }
-            
-        }
-        .background(self.userData.userGoals[self.goalIndex].done ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
-        .simultaneousGesture(LongPressGesture(minimumDuration: 1).onEnded { _ in
-            self.userData.removeGoal(goal: self.goal)
-        })
+            .background(self.userData.userGoals[self.goalIndex].done ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
+            .onTapGesture {
+                self.goal.done.toggle()
+                self.userData.userGoals[self.goalIndex].done.toggle()
+                self.userData.saveGoal()
+                let generator = UIImpactFeedbackGenerator(style: .heavy)
+                generator.impactOccurred()
+            }
+            .onLongPressGesture {
+                self.userData.removeGoal(goal: self.goal)
+            }
+        
     }
 }
 
