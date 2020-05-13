@@ -108,6 +108,26 @@ struct AddRoutineNoBack: View {
                     }
                     .padding(.top, 10)
                     
+                    VStack(alignment: .leading){
+                        Text("Project:")
+                            .font(.footnote)
+                            .fontWeight(.heavy)
+                            .padding(.leading, 5)
+                            .foregroundColor(Color.white)
+                        
+                        Picker(selection: $project, label: Text("Project")) {
+                            Text("none")
+                            ForEach(0 ..< userData.userProjects.count) {
+                                Text(self.userData.userProjects[$0].projectName)
+
+                            }
+                        }
+                        .labelsHidden()
+                    }
+                    .padding(5)
+                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                    .padding(.top, 20)
+                    
                     Button(action:{
                         self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, "none")
                         self.userData.saveRoutine()
