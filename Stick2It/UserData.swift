@@ -9,6 +9,43 @@
 import SwiftUI
 import Combine
 
+var GoalData: [Goal] =  []
+
+func loadSavedGoals() -> [Goal]{
+    if let savedGoals = UserDefaults.standard.object(forKey: "Usergoals") as? Data {
+        let decoder = JSONDecoder()
+        if let loadedGoals = try? decoder.decode([Goal].self, from: savedGoals) {
+            GoalData = loadedGoals
+            return GoalData
+        }
+    }
+    return []
+}
+
+var RoutineData: [Routine] = []
+
+func loadSavedRoutines() -> [Routine]{
+    if let savedRoutines = UserDefaults.standard.object(forKey: "UserRoutines") as? Data {
+        let decoder = JSONDecoder()
+        if let loadedRoutine = try? decoder.decode([Routine].self, from: savedRoutines) {
+            RoutineData = loadedRoutine
+            return loadedRoutine
+        }
+    }
+    return []
+}
+
+func loadSavedProjects() -> [Project]{
+    
+    if let savedProjects = UserDefaults.standard.object(forKey: "UserProjects") as? Data {
+        let decoder = JSONDecoder()
+        if let loadedProjects = try? decoder.decode([Project].self, from: savedProjects) {
+            return loadedProjects
+        }
+    }
+    return []
+}
+
 final class UserData: ObservableObject  {
     @Published var userGoals = loadSavedGoals()
     @Published var userRoutines = loadSavedRoutines()
@@ -29,14 +66,14 @@ final class UserData: ObservableObject  {
         }
     }
     
-    func loadGoal( _ key: String){
-        if let savedGoals = UserDefaults.standard.object(forKey: key) as? Data {
-            let decoder = JSONDecoder()
-            if let loadedGoals = try? decoder.decode([Goal].self, from: savedGoals) {
-                self.userGoals += loadedGoals
-            }
-        }
-    }
+//    func loadGoal( _ key: String){
+//        if let savedGoals = UserDefaults.standard.object(forKey: key) as? Data {
+//            let decoder = JSONDecoder()
+//            if let loadedGoals = try? decoder.decode([Goal].self, from: savedGoals) {
+//                self.userGoals += loadedGoals
+//            }
+//        }
+//    }
     
     func removeGoal(goal: Goal){
         self.userGoals.removeAll { $0 == goal}
@@ -66,14 +103,14 @@ final class UserData: ObservableObject  {
         }
     }
     
-    func loadRoutine( _ key: String){
-        if let savedGoals = UserDefaults.standard.object(forKey: key) as? Data {
-            let decoder = JSONDecoder()
-            if let loadedGoals = try? decoder.decode([Goal].self, from: savedGoals) {
-                self.userGoals += loadedGoals
-            }
-        }
-    }
+//    func loadRoutine( _ key: String){
+//        if let savedGoals = UserDefaults.standard.object(forKey: key) as? Data {
+//            let decoder = JSONDecoder()
+//            if let loadedGoals = try? decoder.decode([Goal].self, from: savedGoals) {
+//                self.userGoals += loadedGoals
+//            }
+//        }
+//    }
     
     func getDaysRoutines(dayNum: Int) -> [Routine]{
         var routinesToReturn: [Routine] = []
