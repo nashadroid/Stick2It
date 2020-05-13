@@ -14,26 +14,26 @@ struct ProjectView: View {
     
     var body: some View {
         ZStack{
-            VStack(alignment: .leading, spacing: 0){
-                Text("Projects")
-                    .foregroundColor(Color.black)
-                    .font(.largeTitle)
-                    .fontWeight(.heavy)
-                    .padding()
-                    .padding(.leading, 10)
-                    .multilineTextAlignment(.leading)
-                ScrollView(.vertical, showsIndicators: false){
-                    VStack(spacing: 10){
-                        
-                        ForEach(userData.userProjects) {project in
-                            Text(project.projectName)
-                        }
+//            VStack(alignment: .leading, spacing: 0){
+//                Text("Projects")
+//                    .foregroundColor(Color.black)
+//                    .font(.largeTitle)
+//                    .fontWeight(.heavy)
+//                    .padding()
+//                    .padding(.leading, 10)
+//                    .multilineTextAlignment(.leading)
+            NavigationView {
+                List(userData.userProjects) {project in
+                    NavigationLink(destination: ProjectDetailedView()){
+                        Text(project.projectName)
                     }
-                    .padding()
-                    .frame(minWidth: UIScreen.main.bounds.size.width)
                 }
-                
+                .navigationBarTitle(Text("Projects"))
             }
+            
+            //.padding()
+                //.frame(minWidth: UIScreen.main.bounds.size.width)
+            //}
             if(addingProject){
                 GeometryReader{_ in
                     BlurView(style: .light)
