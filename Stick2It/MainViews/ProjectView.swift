@@ -24,7 +24,7 @@ struct ProjectView: View {
 //                    .multilineTextAlignment(.leading)
             NavigationView {
                 List(userData.userProjects) {project in
-                    NavigationLink(destination: ProjectDetailedView()){
+                    NavigationLink(destination: ProjectDetailedView(project: project)){
                         Text(project.projectName)
                     }
                 }

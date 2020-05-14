@@ -30,6 +30,7 @@ struct GoalBox: View {
                         .font(.footnote)
                         .padding(.leading, 10)
                         .foregroundColor(self.userData.userGoals[self.goalIndex].done ? Color.white : Color.gray)
+                    Text(goal.project)
                     
                     
                 }

@@ -16,7 +16,7 @@ struct AddItemNoBack: View {
     @State private var startTime: Date = Date()
     @State private var endTime: Date = Date()
     @State private var date: String = "none"
-    @State private var project: String = "none"
+    @State private var project: String = "Test"
     
     
     var body: some View {
@@ -86,6 +86,10 @@ struct AddItemNoBack: View {
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
                         
+                        NavigationView {
+                        Form {
+                            Section {
+                        
                         Picker(selection: $project, label: Text("Project")) {
                             Text("none")
                             ForEach(0 ..< userData.userProjects.count) {
@@ -94,6 +98,9 @@ struct AddItemNoBack: View {
                             }
                         }
                         .labelsHidden()
+                                .pickerStyle(WheelPickerStyle())
+                                
+                            }}}
                     }
                     .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
@@ -107,7 +114,7 @@ struct AddItemNoBack: View {
                         formatter1.dateFormat = "YD"
                         print(formatter1.string(from: today))
                         
-                        self.userData.addGoal(self.name, self.startTime, self.endTime, formatter1.string(from: today), "none")
+                        self.userData.addGoal(self.name, self.startTime, self.endTime, formatter1.string(from: today), self.project)
                         self.userData.saveGoal()
                         self.addingItem.toggle()
                         
