@@ -16,7 +16,7 @@ struct AddItemNoBack: View {
     @State private var startTime: Date = Date()
     @State private var endTime: Date = Date()
     @State private var date: String = "none"
-    @State private var project: String = "Test"
+    @State private var project: String = "none"
     
     
     var body: some View {
@@ -86,21 +86,23 @@ struct AddItemNoBack: View {
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
                         
-                        NavigationView {
-                        Form {
-                            Section {
+//                        NavigationView {
+//                        Form {
+//                            Section {
                         
-                        Picker(selection: $project, label: Text("Project")) {
+                        Picker("Select Project", selection: $project) {
                             Text("none")
-                            ForEach(0 ..< userData.userProjects.count) {
-                                Text(self.userData.userProjects[$0].projectName)
+                            ForEach(userData.userProjects.map({ (project: Project) -> String in project.projectName}), id: \.self) {option in
+                                Text(option)
 
                             }
                         }
                         .labelsHidden()
-                                .pickerStyle(WheelPickerStyle())
+                        .pickerStyle(WheelPickerStyle())
+                        
+                        Text(project)
                                 
-                            }}}
+//                            }}}
                     }
                     .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
@@ -112,7 +114,7 @@ struct AddItemNoBack: View {
                         let today = Date()
                         let formatter1 = DateFormatter()
                         formatter1.dateFormat = "YD"
-                        print(formatter1.string(from: today))
+                        print(self.project)
                         
                         self.userData.addGoal(self.name, self.startTime, self.endTime, formatter1.string(from: today), self.project)
                         self.userData.saveGoal()
