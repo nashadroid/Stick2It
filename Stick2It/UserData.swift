@@ -51,13 +51,22 @@ final class UserData: ObservableObject  {
     @Published var userRoutines = loadSavedRoutines()
     @Published var userProjects = loadSavedProjects()
     
+    //Add objects
     func addGoal(_ goalName: String, _ startTime: Date, _ endTime: Date, _ date: String, _ project: String){
-        
         let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, date: date, project: project, done: false)
-        
         userGoals += [newGoal]
     }
+    func addRoutine(_ routineName: String, _ startTime: Date, _ endTime: Date, _ repeatOn: [Bool], _ project: String){
+        let newRoutine = Routine(id: UUID().hashValue, routineName: routineName, startTime: startTime, endTime: endTime, repeatOn: repeatOn, project: project)
+        userRoutines += [newRoutine]
+    }
+    func addProject(projectName: String){
+        let newProject = Project(id: UUID().hashValue, projectName: projectName)
+        self.userProjects += [newProject]
+        self.saveProjects()
+    }
     
+    //Save Objects
     func saveGoal(){
         self.userGoals.sort(by: {$0.startTime < $1.startTime })
         let encoder = JSONEncoder()
@@ -65,16 +74,21 @@ final class UserData: ObservableObject  {
             UserDefaults.standard.set(data, forKey: "Usergoals")
         }
     }
+    func saveRoutine(){
+        self.userRoutines.sort(by: {$0.startTime < $1.startTime })
+        let encoder = JSONEncoder()
+        if let data = try? encoder.encode(self.userRoutines) {
+            UserDefaults.standard.set(data, forKey: "UserRoutines")
+        }
+    }
+    func saveProjects(){
+        let encoder = JSONEncoder()
+        if let data = try? encoder.encode(self.userProjects) {
+            UserDefaults.standard.set(data, forKey: "UserProjects")
+        }
+    }
     
-//    func loadGoal( _ key: String){
-//        if let savedGoals = UserDefaults.standard.object(forKey: key) as? Data {
-//            let decoder = JSONDecoder()
-//            if let loadedGoals = try? decoder.decode([Goal].self, from: savedGoals) {
-//                self.userGoals += loadedGoals
-//            }
-//        }
-//    }
-    
+    //Remove Objects
     func removeGoal(goal: Goal){
         self.userGoals.removeAll { $0 == goal}
         self.saveGoal()
@@ -88,73 +102,7 @@ final class UserData: ObservableObject  {
         self.saveProjects()
     }
     
-    func addRoutine(_ routineName: String, _ startTime: Date, _ endTime: Date, _ repeatOn: [Bool], _ project: String){
-        
-        let newRoutine = Routine(id: UUID().hashValue, routineName: routineName, startTime: startTime, endTime: endTime, repeatOn: repeatOn, project: project)
-        
-        userRoutines += [newRoutine]
-    }
-    
-    func saveRoutine(){
-        self.userRoutines.sort(by: {$0.startTime < $1.startTime })
-        let encoder = JSONEncoder()
-        if let data = try? encoder.encode(self.userRoutines) {
-            UserDefaults.standard.set(data, forKey: "UserRoutines")
-        }
-    }
-    
-//    func loadRoutine( _ key: String){
-//        if let savedGoals = UserDefaults.standard.object(forKey: key) as? Data {
-//            let decoder = JSONDecoder()
-//            if let loadedGoals = try? decoder.decode([Goal].self, from: savedGoals) {
-//                self.userGoals += loadedGoals
-//            }
-//        }
-//    }
-    
-    func getDaysRoutines(dayNum: Int) -> [Routine]{
-        var routinesToReturn: [Routine] = []
-        
-        for routine in self.userRoutines{
-            if routine.repeatOn[dayNum] && routine.running {
-                routinesToReturn += [routine]
-            }
-        }
-        return routinesToReturn
-    }
-    
-    //I think this can be deleted
-//    func getNewGoalsFromRoutines(routines: [Routine], date: String) -> [Goal]{
-//        var goalsToReturn: [Goal] = []
-//
-//        for routine in routines {
-//            goalsToReturn += [Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: routine.startTime, endTime: routine.endTime, date: date, project: routine.project, done: false)]
-//        }
-//        return goalsToReturn
-//    }
-    func addGoalAvoidingRepeat(goalToBeAdded: Goal){
-        
-        for usergoal in userGoals {
-            if(usergoal.date == goalToBeAdded.date && usergoal.goalName == goalToBeAdded.goalName && usergoal.startTime == goalToBeAdded.startTime) {
-                return
-            }
-        }
-        userGoals += [goalToBeAdded]
-    }
-    
-    func combineTimeAndDay(time: Date, day: Date) -> Date {
-        
-        var components = DateComponents()
-        components.hour = Calendar.current.component(.hour, from: time)
-        components.minute = Calendar.current.component(.minute, from: time)
-        components.day = Calendar.current.component(.day, from: day)
-        components.month = Calendar.current.component(.month, from: day)
-        components.year = Calendar.current.component(.year, from: day)
-        let date = Calendar.current.date(from: components) ?? Date()
-        
-        return date
-    }
-    
+    //Add goals from routine methods
     func checkRoutineAddGoalsAsNeeded(dayNum: Int){
         let dayRoutines = getDaysRoutines(dayNum: dayNum)
         
@@ -170,31 +118,35 @@ final class UserData: ObservableObject  {
         }
         self.saveGoal()
     }
-    
-    func addProject(projectName: String){
-         
-        let newProject = Project(id: UUID().hashValue, projectName: projectName)
-        self.userProjects += [newProject]
-        self.saveProjects()
-    }
-    
-    func loadProjects(){
+    func getDaysRoutines(dayNum: Int) -> [Routine]{
+        var routinesToReturn: [Routine] = []
         
-        if let savedProjects = UserDefaults.standard.object(forKey: "Projects") as? Data {
-            let decoder = JSONDecoder()
-            if let loadedProjects = try? decoder.decode([Project].self, from: savedProjects) {
-                self.userProjects += loadedProjects
+        for routine in self.userRoutines{
+            if routine.repeatOn[dayNum] && routine.running {
+                routinesToReturn += [routine]
             }
         }
+        return routinesToReturn
     }
-    
-    func saveProjects(){
+    func combineTimeAndDay(time: Date, day: Date) -> Date {
         
-        let encoder = JSONEncoder()
-        if let data = try? encoder.encode(self.userProjects) {
-            UserDefaults.standard.set(data, forKey: "UserProjects")
+        var components = DateComponents()
+        components.hour = Calendar.current.component(.hour, from: time)
+        components.minute = Calendar.current.component(.minute, from: time)
+        components.day = Calendar.current.component(.day, from: day)
+        components.month = Calendar.current.component(.month, from: day)
+        components.year = Calendar.current.component(.year, from: day)
+        let date = Calendar.current.date(from: components) ?? Date()
+        return date
+    }
+    func addGoalAvoidingRepeat(goalToBeAdded: Goal){
+        
+        for usergoal in userGoals {
+            if(usergoal.date == goalToBeAdded.date && usergoal.goalName == goalToBeAdded.goalName && usergoal.startTime == goalToBeAdded.startTime) {
+                return
+            }
         }
-        
+        userGoals += [goalToBeAdded]
     }
 }
 
