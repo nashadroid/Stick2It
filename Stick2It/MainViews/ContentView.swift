@@ -36,10 +36,6 @@ struct ContentView: View {
             )
                 .edgesIgnoringSafeArea(.all)
             
-//            if(currentView == CurrentView.TodayView){
-//                TodayView(userData: _userData, date: date)
-//            }
-            
             TabView {
                 
                 TodayView(userData: _userData, date: date).tabItem({

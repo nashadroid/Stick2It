@@ -26,7 +26,6 @@ struct RoutineBox: View {
                 .padding(4)
                 .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
             
-            
             Text("\(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].startTime)) - \(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].endTime))")
                 .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
             
