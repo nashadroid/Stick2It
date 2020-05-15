@@ -100,7 +100,6 @@ struct AddItemNoBack: View {
                         .labelsHidden()
                         .pickerStyle(WheelPickerStyle())
                         
-                        Text(project)
                                 
 //                            }}}
                     }

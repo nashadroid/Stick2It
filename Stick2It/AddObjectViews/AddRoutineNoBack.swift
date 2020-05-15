@@ -115,21 +115,23 @@ struct AddRoutineNoBack: View {
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
                         
-                        Picker(selection: $project, label: Text("Project")) {
+                        Picker("Select Project", selection: $project) {
                             Text("none")
-                            ForEach(0 ..< userData.userProjects.count) {
-                                Text(self.userData.userProjects[$0].projectName)
-
+                            ForEach(userData.userProjects.map({ (project: Project) -> String in project.projectName}), id: \.self) {option in
+                                Text(option)
                             }
                         }
                         .labelsHidden()
+                        .pickerStyle(WheelPickerStyle())
                     }
                     .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     .padding(.top, 20)
                     
+                    
+                    
                     Button(action:{
-                        self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, "none")
+                        self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, self.project)
                         self.userData.saveRoutine()
                         self.addingItem.toggle()
                         print(self.userData.userRoutines[0])
