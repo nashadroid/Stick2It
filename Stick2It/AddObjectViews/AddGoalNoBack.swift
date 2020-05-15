@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-struct AddItemNoBack: View {
+struct AddGoalNoBack: View {
     @EnvironmentObject var userData: UserData
     @Binding var addingItem: Bool
     @State private var name: String = ""
@@ -85,11 +85,6 @@ struct AddItemNoBack: View {
                             .fontWeight(.heavy)
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
-                        
-//                        NavigationView {
-//                        Form {
-//                            Section {
-                        
                         Picker("Select Project", selection: $project) {
                             Text("none")
                             ForEach(userData.userProjects.map({ (project: Project) -> String in project.projectName}), id: \.self) {option in
@@ -99,15 +94,10 @@ struct AddItemNoBack: View {
                         }
                         .labelsHidden()
                         .pickerStyle(WheelPickerStyle())
-                        
-                                
-//                            }}}
                     }
                     .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     .padding(.top, 20)
-                    
-                    
                     
                     Button(action:{
                         let today = Date()
@@ -142,6 +132,6 @@ struct AddItemNoBack: View {
 
 struct AddItemNoBack_Previews: PreviewProvider {
     static var previews: some View {
-        AddItemNoBack(addingItem: .constant(false))
+        AddGoalNoBack(addingItem: .constant(false))
     }
 }
