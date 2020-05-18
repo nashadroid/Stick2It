@@ -51,6 +51,7 @@ struct GoalBox: View {
             }
             .onLongPressGesture {
                 self.userData.removeGoal(goal: self.goal)
+                //EditGoal(goal: Goal, editingGoal: <#T##Binding<Bool>#>)
             }
         
     }

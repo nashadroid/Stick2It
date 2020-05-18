@@ -12,6 +12,7 @@ struct TodayView: View {
     @EnvironmentObject var userData: UserData
     @State var date: String = "none"
     @State var addingItem: Bool = false
+    @State var editingItem: Bool = false
     let dayIndex = Calendar.current.component(.weekday, from: Date()) - 1
     
     var body: some View {
@@ -69,6 +70,35 @@ struct TodayView: View {
                 }
                 .scaleEffect(0.2)
                 .offset(x: 130, y: 270)
+                //TODO: This needs to be adjusted to work with all screen sizes
+                
+                
+            }
+            if(editingItem){
+                GeometryReader{_ in
+                    BlurView(style: .light)
+                        .onTapGesture {
+                            self.addingItem.toggle()
+                    }
+                    
+                    EditGoal(userData: self._userData, goal: self.userData.userGoals[0], editingGoal: self.$editingItem)
+                        .padding(.top, 40)
+                    
+                }.background(
+                    Color.black.opacity(0.65)
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            self.addingItem.toggle()
+                    }
+                )
+                    .edgesIgnoringSafeArea(.all)
+            }
+            else{
+                Button(action: {self.editingItem.toggle()}) {
+                    AddButton()
+                }
+                .scaleEffect(0.2)
+                .offset(x: 30, y: 270)
                 //TODO: This needs to be adjusted to work with all screen sizes
                 
                 
