@@ -33,6 +33,15 @@ struct EditGoal: View {
                         .padding()
                 }
                 Spacer()
+                
+                Button(action: {
+                    self.userData.removeGoal(goal: self.userData.userGoals[self.goalIndex])
+                    self.editingGoal.toggle()
+                }) {
+                    Text("Delete")
+                        .foregroundColor(Color.white)
+                        .padding()
+                }
             }
             
             Text("Edit Goal")
@@ -112,7 +121,7 @@ struct EditGoal: View {
                         self.editingGoal.toggle()
                         
                     }){
-                        Text("Add Goal")
+                        Text("Update Goal")
                             .foregroundColor(Color.white)
                             .multilineTextAlignment(.center)
                             .padding()

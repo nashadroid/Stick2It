@@ -47,9 +47,7 @@ struct TodayView: View {
                     }
                     .padding()
                     .frame(minWidth: UIScreen.main.bounds.size.width)
-                    
                 }
-                
             }
             
             if(addingItem){
@@ -58,10 +56,8 @@ struct TodayView: View {
                         .onTapGesture {
                             self.addingItem.toggle()
                     }
-                    
                     AddGoalNoBack(userData: self._userData, addingItem: self.$addingItem)
                         .padding(.top, 40)
-                    
                 }.background(
                     Color.black.opacity(0.65)
                         .edgesIgnoringSafeArea(.all)
@@ -78,19 +74,16 @@ struct TodayView: View {
                 .scaleEffect(0.2)
                 .offset(x: 130, y: 270)
                 //TODO: This needs to be adjusted to work with all screen sizes
-                
-                
             }
+            
             if(editingItem){
                 GeometryReader{_ in
                     BlurView(style: .light)
                         .onTapGesture {
                             self.addingItem.toggle()
                     }
-                    
                     EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, editingGoal: self.$editingItem)
                         .padding(.top, 40)
-                    
                 }.background(
                     Color.black.opacity(0.65)
                         .edgesIgnoringSafeArea(.all)
@@ -100,17 +93,6 @@ struct TodayView: View {
                 )
                     .edgesIgnoringSafeArea(.all)
             }
-            else{
-                Button(action: {self.editingItem.toggle()}) {
-                    AddButton()
-                }
-                .scaleEffect(0.2)
-                .offset(x: 30, y: 270)
-                //TODO: This needs to be adjusted to work with all screen sizes
-                
-                
-            }
-            
         }
     }
 }
