@@ -52,8 +52,8 @@ final class UserData: ObservableObject  {
     @Published var userProjects = loadSavedProjects()
     
     //Add objects
-    func addGoal(_ goalName: String, _ startTime: Date, _ endTime: Date, _ date: String, _ project: String){
-        let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, date: date, project: project, done: false)
+    func addGoal(_ goalName: String, _ startTime: Date, _ endTime: Date, _ project: String){
+        let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, project: project, done: false)
         userGoals += [newGoal]
     }
     func addRoutine(_ routineName: String, _ startTime: Date, _ endTime: Date, _ repeatOn: [Bool], _ project: String){
@@ -142,7 +142,7 @@ final class UserData: ObservableObject  {
     func addGoalAvoidingRepeat(goalToBeAdded: Goal){
         
         for usergoal in userGoals {
-            if(usergoal.date == goalToBeAdded.date && usergoal.goalName == goalToBeAdded.goalName && usergoal.startTime == goalToBeAdded.startTime) {
+            if(usergoal.goalName == goalToBeAdded.goalName && usergoal.startTime == goalToBeAdded.startTime) {
                 return
             }
         }

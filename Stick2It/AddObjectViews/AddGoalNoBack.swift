@@ -99,7 +99,7 @@ struct AddGoalNoBack: View {
                     .padding(.top, 20)
                     
                     Button(action:{
-                        self.userData.addGoal(self.name, self.startTime, self.endTime, "0", self.project)
+                        self.userData.addGoal(self.name, self.startTime, self.endTime, self.project)
                         self.userData.saveGoal()
                         self.addingItem.toggle()
                     }){

@@ -17,7 +17,6 @@ struct Goal: Hashable, Codable, Identifiable {
     var goalName: String
     var startTime: Date
     var endTime: Date
-    var date: String = "none" //TODO: Delete, it is obsolete
     var project: String = "none"
     var done: Bool
 }
