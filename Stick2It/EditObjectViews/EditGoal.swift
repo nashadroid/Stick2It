@@ -101,7 +101,6 @@ struct EditGoal: View {
                             Text("none")
                             ForEach(userData.userProjects.map({ (project: Project) -> String in project.projectName}), id: \.self) {option in
                                 Text(option)
-
                             }
                         }
                         .labelsHidden()
@@ -112,11 +111,6 @@ struct EditGoal: View {
                     .padding(.top, 20)
                     
                     Button(action:{
-                        //let today = Date()
-                        let formatter1 = DateFormatter()
-                        formatter1.dateFormat = "YD"
-                        
-                        //self.userData.addGoal(self.name, self.startTime, self.endTime, formatter1.string(from: today), self.project)
                         self.userData.saveGoal()
                         self.editingGoal.toggle()
                         

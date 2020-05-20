@@ -89,7 +89,6 @@ struct AddGoalNoBack: View {
                             Text("none")
                             ForEach(userData.userProjects.map({ (project: Project) -> String in project.projectName}), id: \.self) {option in
                                 Text(option)
-
                             }
                         }
                         .labelsHidden()
@@ -100,15 +99,9 @@ struct AddGoalNoBack: View {
                     .padding(.top, 20)
                     
                     Button(action:{
-                        let today = Date()
-                        let formatter1 = DateFormatter()
-                        formatter1.dateFormat = "YD"
-                        print(self.project)
-                        
-                        self.userData.addGoal(self.name, self.startTime, self.endTime, formatter1.string(from: today), self.project)
+                        self.userData.addGoal(self.name, self.startTime, self.endTime, "0", self.project)
                         self.userData.saveGoal()
                         self.addingItem.toggle()
-                        
                     }){
                         Text("Add Goal")
                             .foregroundColor(Color.white)
@@ -122,7 +115,6 @@ struct AddGoalNoBack: View {
                 }
             .padding(5)
             .padding(.bottom,500)
-                
             }
             .padding(.leading, 30)
             .padding(.trailing, 30)
