@@ -10,7 +10,7 @@ import SwiftUI
 
 struct EditGoal: View {
     @EnvironmentObject var userData: UserData
-    var goal: Goal
+    var goalID: Int
     @Binding var editingGoal: Bool
     @State private var name: String = ""
     @State private var startTime: Date = Date()
@@ -19,7 +19,7 @@ struct EditGoal: View {
     @State private var project: String = "none"
     
     var goalIndex: Int {
-        userData.userGoals.firstIndex(where: { $0.id == goal.id }) ?? 0
+        userData.userGoals.firstIndex(where: { $0.id == goalID }) ?? 0
     }
     
     var body: some View {

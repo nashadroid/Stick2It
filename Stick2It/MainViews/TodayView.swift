@@ -13,6 +13,7 @@ struct TodayView: View {
     @State var date: String = "none"
     @State var addingItem: Bool = false
     @State var editingItem: Bool = false
+    @State var goalBeingEditedID: Int = 0
     let dayIndex = Calendar.current.component(.weekday, from: Date()) - 1
     
     var body: some View {
@@ -31,6 +32,12 @@ struct TodayView: View {
                         ForEach(userData.userGoals) {goal in
                             if  Calendar.current.isDateInToday(goal.startTime){
                                 GoalBox(goal: goal)
+                                .onLongPressGesture {
+                                    //self.userData.removeGoal(goal: goal)
+                                    //EditGoal(goal: Goal, editingGoal: <#T##Binding<Bool>#>)
+                                    self.goalBeingEditedID = goal.id
+                                    self.editingItem.toggle()
+                                }
                             }
                         }
                         
@@ -81,7 +88,7 @@ struct TodayView: View {
                             self.addingItem.toggle()
                     }
                     
-                    EditGoal(userData: self._userData, goal: self.userData.userGoals[0], editingGoal: self.$editingItem)
+                    EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, editingGoal: self.$editingItem)
                         .padding(.top, 40)
                     
                 }.background(
