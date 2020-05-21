@@ -12,11 +12,6 @@ struct EditGoal: View {
     @EnvironmentObject var userData: UserData
     var goalID: Int
     @Binding var editingGoal: Bool
-    @State private var name: String = ""
-    @State private var startTime: Date = Date()
-    @State private var endTime: Date = Date()
-    @State private var date: String = "none"
-    @State private var project: String = "none"
     
     var goalIndex: Int {
         userData.userGoals.firstIndex(where: { $0.id == goalID }) ?? 0

@@ -12,14 +12,7 @@ struct EditRoutine: View {
     @EnvironmentObject var userData: UserData
     @Binding var editingRoutine: Bool
     let routineID: Int
-    @State private var name: String = ""
-    @State private var startTime: Date = Date()
-    @State private var endTime: Date = Date()
-    @State private var date: String = "none"
-    @State private var project: String = "none"
-    @State private var repeatDays = [1,2]
     @State var daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
-    @State var daysSelected = [false,false,false,false,false,false,false]
     
     var routineIndex: Int {
         userData.userRoutines.firstIndex(where: { $0.id == routineID }) ?? 0
@@ -138,14 +131,9 @@ struct EditRoutine: View {
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     .padding(.top, 20)
                     
-                    
-                    
                     Button(action:{
-                        //self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, self.project)
-                        //self.userData.userRoutines[self.routineIndex].repeatOn = self.daysSelected
                         self.userData.saveRoutine()
                         self.editingRoutine.toggle()
-                        
                     }){
                         Text("Save Routine")
                             .foregroundColor(Color.white)
