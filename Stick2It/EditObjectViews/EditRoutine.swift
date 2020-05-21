@@ -141,10 +141,10 @@ struct EditRoutine: View {
                     
                     
                     Button(action:{
-                        self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, self.project)
+                        //self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, self.project)
+                        self.userData.userRoutines[self.routineIndex].repeatOn = self.daysSelected
                         self.userData.saveRoutine()
                         self.editingRoutine.toggle()
-                        print(self.userData.userRoutines[0])
                         
                     }){
                         Text("Save Routine")

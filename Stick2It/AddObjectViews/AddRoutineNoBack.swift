@@ -134,7 +134,6 @@ struct AddRoutineNoBack: View {
                         self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, self.project)
                         self.userData.saveRoutine()
                         self.addingItem.toggle()
-                        print(self.userData.userRoutines[0])
                         
                     }){
                         Text("Add Routine")
