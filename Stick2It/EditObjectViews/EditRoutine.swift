@@ -104,13 +104,13 @@ struct EditRoutine: View {
                         ForEach(self.daysOfWeek.indices){index in
                             
                             Button(action: {
-                                self.daysSelected[index].toggle()
+                                self.userData.userRoutines[self.routineIndex].repeatOn[index].toggle()
                             }){
                                 Text(self.daysOfWeek[index])
                             }
                             .padding(5)
                             .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1))
-                            .background(self.daysSelected[index] ? Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.3) : Color.clear)
+                            .background(self.userData.userRoutines[self.routineIndex].repeatOn[index] ? Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.3) : Color.clear)
                             .foregroundColor(Color.white)
                         }
                         
@@ -142,7 +142,7 @@ struct EditRoutine: View {
                     
                     Button(action:{
                         //self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, self.project)
-                        self.userData.userRoutines[self.routineIndex].repeatOn = self.daysSelected
+                        //self.userData.userRoutines[self.routineIndex].repeatOn = self.daysSelected
                         self.userData.saveRoutine()
                         self.editingRoutine.toggle()
                         
