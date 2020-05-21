@@ -33,8 +33,6 @@ struct TodayView: View {
                             if  Calendar.current.isDateInToday(goal.startTime){
                                 GoalBox(goal: goal)
                                 .onLongPressGesture {
-                                    //self.userData.removeGoal(goal: goal)
-                                    //EditGoal(goal: Goal, editingGoal: <#T##Binding<Bool>#>)
                                     self.goalBeingEditedID = goal.id
                                     self.editingItem.toggle()
                                 }
@@ -80,7 +78,7 @@ struct TodayView: View {
                 GeometryReader{_ in
                     BlurView(style: .light)
                         .onTapGesture {
-                            self.addingItem.toggle()
+                            self.addingItem.toggle() //TODO: Fix
                     }
                     EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, editingGoal: self.$editingItem)
                         .padding(.top, 40)

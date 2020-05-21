@@ -56,10 +56,6 @@ struct RoutineBox: View {
         .onTapGesture {
             self.userData.userRoutines[self.routineIndex].running.toggle()
         }
-        .onLongPressGesture {
-            self.userData.removeRoutine(routine: self.routine)
-        }
-        
     }
 }
 

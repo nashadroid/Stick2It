@@ -11,6 +11,8 @@ import SwiftUI
 struct RoutineView: View {
     @EnvironmentObject var userData: UserData
     @State var addingRoutine: Bool
+    @State var routineBeingEditedID: Int = 0
+    @State var editingRoutine: Bool = false
     
     var body: some View {
         ZStack{
@@ -27,6 +29,10 @@ struct RoutineView: View {
                         
                         ForEach(userData.userRoutines) {routine in
                             RoutineBox(routine: routine)
+                            .onLongPressGesture {
+                                self.routineBeingEditedID = routine.id
+                                self.editingRoutine.toggle()
+                            }
                         }
                     }
                     .padding()
@@ -60,8 +66,24 @@ struct RoutineView: View {
                 .scaleEffect(0.2)
                 .offset(x: 130, y: 270)
                 //TODO: This needs to be adjusted to work with all screen sizes
-                
-                
+            }
+            
+            if(editingRoutine){
+                GeometryReader{_ in
+                    BlurView(style: .light)
+                        .onTapGesture {
+                            self.editingRoutine.toggle()
+                    }
+                    EditRoutine(editingRoutine: self.$editingRoutine, routineID: self.routineBeingEditedID)
+                        .padding(.top, 40)
+                }.background(
+                    Color.black.opacity(0.65)
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            self.editingRoutine.toggle()
+                    }
+                )
+                    .edgesIgnoringSafeArea(.all)
             }
         }
         
