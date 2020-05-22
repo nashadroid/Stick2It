@@ -33,14 +33,16 @@ struct RoutineBox: View {
                     
                     Spacer()
                     
-                    Text("Project:")
-                        .font(.footnote)
-                        .fontWeight(.bold)
-                        .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
-                    
-                    Text(self.userData.userRoutines[self.routineIndex].project)
-                        .font(.footnote)
-                        .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
+                    if(self.userData.userRoutines[self.routineIndex].project != "none"){
+                        Text("Project:")
+                            .font(.footnote)
+                            .fontWeight(.bold)
+                            .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
+                        
+                        Text(self.userData.userRoutines[self.routineIndex].project)
+                            .font(.footnote)
+                            .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
+                    }
                 }
                 Text(getShortStringFromRepeatDays(repeatedOn: self.userData.userRoutines[self.routineIndex].repeatOn))
                     .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
