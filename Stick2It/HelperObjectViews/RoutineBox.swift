@@ -20,35 +20,35 @@ struct RoutineBox: View {
         
         VStack() {
             
-            Text(self.userData.userRoutines[self.routineIndex].routineName)
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(4)
-                .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
-            
-            Text("\(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].startTime)) - \(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].endTime))")
-                .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
-            
-            
             VStack(alignment: .leading, spacing: 0){
+                Text(self.userData.userRoutines[self.routineIndex].routineName)
+                    .font(.headline)
+                    .fontWeight(.heavy)
+                    .padding(.leading, 10)
+                    .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
+                
                 HStack{
+                    Text("\(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].startTime)) - \(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].endTime))")
+                    .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
+                    .padding(.leading, 10)
+                    .font(.footnote)
+                    
+                    Spacer()
                     
                     Text("Project:")
-                        .font(.body)
+                        .font(.footnote)
                         .fontWeight(.bold)
-                        .padding(4)
                         .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
                     
                     Text(self.userData.userRoutines[self.routineIndex].project)
-                        .font(.body)
-                        .padding(4)
+                        .font(.footnote)
                         .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
-                    Spacer()
+                        .padding(.trailing, 10)
                 }
-                Text("Repeated On: " + getShortStringFromRepeatDays(repeatedOn: self.userData.userRoutines[self.routineIndex].repeatOn))
-                    .fontWeight(.bold)
-                    .padding(4)
+                Text(getShortStringFromRepeatDays(repeatedOn: self.userData.userRoutines[self.routineIndex].repeatOn))
                     .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
+                    .padding(.leading, 10)
+                    .font(.footnote)
                 
             }
         }
