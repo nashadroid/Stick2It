@@ -78,7 +78,7 @@ struct TodayView: View {
                 GeometryReader{_ in
                     BlurView(style: .light)
                         .onTapGesture {
-                            self.addingItem.toggle() //TODO: Fix
+                            self.editingItem.toggle()
                     }
                     EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, editingGoal: self.$editingItem)
                         .padding(.top, 40)
@@ -86,7 +86,7 @@ struct TodayView: View {
                     Color.black.opacity(0.65)
                         .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
-                            self.addingItem.toggle()
+                            self.editingItem.toggle()
                     }
                 )
                     .edgesIgnoringSafeArea(.all)

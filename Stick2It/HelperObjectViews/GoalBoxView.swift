@@ -26,6 +26,7 @@ struct GoalBox: View {
                         .fontWeight(.heavy)
                         .padding(.leading, 10)
                         .foregroundColor(self.userData.userGoals[self.goalIndex].done ? Color.white : Color.black)
+                        .lineLimit(1)
                     Text("\(getTimeStringFromDate(goal.startTime)) - \(getTimeStringFromDate(goal.endTime))")
                         .font(.footnote)
                         .padding(.leading, 10)

@@ -31,16 +31,12 @@ struct ProjectView: View {
                 .navigationBarTitle(Text("Projects"))
             }
             
-            //.padding()
-                //.frame(minWidth: UIScreen.main.bounds.size.width)
-            //}
             if(addingProject){
                 GeometryReader{_ in
                     BlurView(style: .light)
                         .onTapGesture {
                             self.addingProject.toggle()
                     }
-                    
                     AddProjectNoBack(userData: self._userData, addingItem: self.$addingProject)
                         .padding(.top, 40)
                     
