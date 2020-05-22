@@ -150,8 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				84AE44F624607F3400043CDA /* GoalBoxView.swift */,
-				84522621246C55D200E9CA66 /* ProjectDetailedView.swift */,
 				8420A7332465FFA700E44DC9 /* RoutineBox.swift */,
+				84522621246C55D200E9CA66 /* ProjectDetailedView.swift */,
 				8420A72B2464A13300E44DC9 /* AddButton.swift */,
 				8420A7272462657D00E44DC9 /* BlurView.swift */,
 				8420A7442467A69A00E44DC9 /* DaysOfWeekSelector.swift */,

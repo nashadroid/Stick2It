@@ -24,13 +24,11 @@ struct RoutineBox: View {
                 Text(self.userData.userRoutines[self.routineIndex].routineName)
                     .font(.headline)
                     .fontWeight(.heavy)
-                    .padding(.leading, 10)
                     .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
                 
                 HStack{
                     Text("\(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].startTime)) - \(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].endTime))")
                     .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
-                    .padding(.leading, 10)
                     .font(.footnote)
                     
                     Spacer()
@@ -43,14 +41,13 @@ struct RoutineBox: View {
                     Text(self.userData.userRoutines[self.routineIndex].project)
                         .font(.footnote)
                         .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
-                        .padding(.trailing, 10)
                 }
                 Text(getShortStringFromRepeatDays(repeatedOn: self.userData.userRoutines[self.routineIndex].repeatOn))
                     .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
-                    .padding(.leading, 10)
                     .font(.footnote)
                 
             }
+        .padding(10)
         }
         .background(self.userData.userRoutines[self.routineIndex].running ? Color.green.shadow(radius: 7) : Color.gray.shadow(radius: 7))
         .onTapGesture {
