@@ -19,6 +19,15 @@ func getTimeStringFromDate(_ date: Date) -> String{
 func getShortStringFromRepeatDays(repeatedOn: [Bool]) -> String {
     var strToReturn: String = ""
     
+    if repeatedOn[1...5].allSatisfy({$0}){
+        if repeatedOn.allSatisfy({$0}){
+            return "Everyday"
+        }
+        else{
+            return "Weekdays"
+        }
+    }
+    
     if(repeatedOn[0]){
         strToReturn += "Sun "
     }
@@ -37,9 +46,11 @@ func getShortStringFromRepeatDays(repeatedOn: [Bool]) -> String {
     if(repeatedOn[5]){
         strToReturn += "Fri "
     }
-    if(repeatedOn[0]){
+    if(repeatedOn[6]){
         strToReturn += "Sat"
     }
+    
+    
     
     return strToReturn
 }
