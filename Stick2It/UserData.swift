@@ -51,6 +51,10 @@ final class UserData: ObservableObject  {
     @Published var userRoutines = loadSavedRoutines()
     @Published var userProjects = loadSavedProjects()
     
+    init() {
+        checkRoutineAddGoalsAsNeeded(dayNum: Calendar.current.component(.weekday, from: Date()) - 1)
+    }
+    
     //Add objects
     func addGoal(_ goalName: String, _ startTime: Date, _ endTime: Date, _ project: String){
         let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, project: project, done: false)
