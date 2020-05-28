@@ -9,26 +9,22 @@
 import SwiftUI
 import Combine
 
-var GoalData: [Goal] =  []
+
 
 func loadSavedGoals() -> [Goal]{
     if let savedGoals = UserDefaults.standard.object(forKey: "Usergoals") as? Data {
         let decoder = JSONDecoder()
         if let loadedGoals = try? decoder.decode([Goal].self, from: savedGoals) {
-            GoalData = loadedGoals
-            return GoalData
+            return loadedGoals
         }
     }
     return []
 }
 
-var RoutineData: [Routine] = []
-
 func loadSavedRoutines() -> [Routine]{
     if let savedRoutines = UserDefaults.standard.object(forKey: "UserRoutines") as? Data {
         let decoder = JSONDecoder()
         if let loadedRoutine = try? decoder.decode([Routine].self, from: savedRoutines) {
-            RoutineData = loadedRoutine
             return loadedRoutine
         }
     }
