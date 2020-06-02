@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8416DA332476D43700AD7E96 /* EditRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416DA322476D43700AD7E96 /* EditRoutine.swift */; };
+		8416DA352486C04400AD7E96 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416DA342486C04400AD7E96 /* Orientation.swift */; };
 		8420A71D2461062800E44DC9 /* todaySample.json in Resources */ = {isa = PBXBuildFile; fileRef = 8420A71C2461062800E44DC9 /* todaySample.json */; };
 		8420A7242461F2EE00E44DC9 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A7232461F2EE00E44DC9 /* UserData.swift */; };
 		8420A7282462657D00E44DC9 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A7272462657D00E44DC9 /* BlurView.swift */; };
@@ -56,6 +57,7 @@
 
 /* Begin PBXFileReference section */
 		8416DA322476D43700AD7E96 /* EditRoutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoutine.swift; sourceTree = "<group>"; };
+		8416DA342486C04400AD7E96 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		8420A71C2461062800E44DC9 /* todaySample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = todaySample.json; sourceTree = "<group>"; };
 		8420A7232461F2EE00E44DC9 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		8420A7272462657D00E44DC9 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				8420A72F2465FA9A00E44DC9 /* Routine.swift */,
 				8452261D24690FF800E9CA66 /* Project.swift */,
 				84522619246909AC00E9CA66 /* TimeFormatters.swift */,
+				8416DA342486C04400AD7E96 /* Orientation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				84C1C3092472EB850049E5B9 /* EditGoal.swift in Sources */,
 				84AE44C5246071BA00043CDA /* AppDelegate.swift in Sources */,
 				8416DA332476D43700AD7E96 /* EditRoutine.swift in Sources */,
+				8416DA352486C04400AD7E96 /* Orientation.swift in Sources */,
 				8420A7242461F2EE00E44DC9 /* UserData.swift in Sources */,
 				84AE44C7246071BA00043CDA /* SceneDelegate.swift in Sources */,
 				8420A72C2464A13300E44DC9 /* AddButton.swift in Sources */,

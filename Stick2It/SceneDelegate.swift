@@ -33,6 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = UIHostingController(
                 rootView: ContentView(date: formatter1.string(from: today))
                     .environmentObject(UserData())
+                    .environmentObject(OrientationInfo())
             )
             self.window = window
             window.makeKeyAndVisible()
