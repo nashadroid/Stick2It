@@ -10,36 +10,43 @@ import SwiftUI
 
 struct RoutineView: View {
     @EnvironmentObject var userData: UserData
+    @EnvironmentObject var orientationInfo : OrientationInfo
     @State var addingRoutine: Bool
     @State var routineBeingEditedID: Int = 0
     @State var editingRoutine: Bool = false
     
     var body: some View {
         ZStack{
-            VStack(alignment: .leading, spacing: 0){
-                Text("Routines")
-                    .foregroundColor(Color.black)
-                    .font(.largeTitle)
-                    .fontWeight(.heavy)
-                    .padding()
-                    .padding(.leading, 10)
-                    .multilineTextAlignment(.leading)
-                ScrollView(.vertical, showsIndicators: false){
-                    VStack(spacing: 10){
-                        
-                        ForEach(userData.userRoutines) {routine in
-                            RoutineBox(routine: routine)
-                            .onLongPressGesture {
-                                self.routineBeingEditedID = routine.id
-                                self.editingRoutine.toggle()
+            if(orientationInfo.orientation == .portrait){
+                VStack(alignment: .leading, spacing: 0){
+                    Text("Routines")
+                        .foregroundColor(Color.black)
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                        .padding()
+                        .padding(.leading, 10)
+                        .multilineTextAlignment(.leading)
+                    ScrollView(.vertical, showsIndicators: false){
+                        VStack(spacing: 10){
+                            
+                            ForEach(userData.userRoutines) {routine in
+                                RoutineBox(routine: routine)
+                                    .onLongPressGesture {
+                                        self.routineBeingEditedID = routine.id
+                                        self.editingRoutine.toggle()
+                                }
                             }
                         }
+                        .padding()
+                        .frame(minWidth: UIScreen.main.bounds.size.width)
                     }
-                    .padding()
-                    .frame(minWidth: UIScreen.main.bounds.size.width)
+                    
                 }
-                
             }
+            else{
+                Text("Landscape")
+            }
+            
             if(addingRoutine){
                 GeometryReader{_ in
                     BlurView(style: .light)

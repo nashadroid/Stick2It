@@ -3,7 +3,8 @@
 //  Stick2It
 //
 //  Created by Nashad Rahman on 6/2/20.
-//  Copyright © 2020 NashApps. All rights reserved.
+//  From https://forums.developer.apple.com/thread/126878
+//
 //
 
 import SwiftUI
