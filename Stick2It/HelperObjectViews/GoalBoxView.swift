@@ -50,10 +50,6 @@ struct GoalBox: View {
                 let generator = UIImpactFeedbackGenerator(style: .heavy)
                 generator.impactOccurred()
             }
-//            .onLongPressGesture {
-//                self.userData.removeGoal(goal: self.goal)
-//                //EditGoal(goal: Goal, editingGoal: <#T##Binding<Bool>#>)
-//            }
         
     }
 }

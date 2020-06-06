@@ -34,10 +34,6 @@ struct ProjectDetailedView: View {
                                 GoalBox(goal: goal)
                             }
                         }
-                        
-//                        Button(action: {self.userData.checkRoutineAddGoalsAsNeeded(dayNum: self.dayIndex)}) {
-//                            Text("Refresh")
-//                        }
                     }
                     .padding()
                     .frame(minWidth: UIScreen.main.bounds.size.width)

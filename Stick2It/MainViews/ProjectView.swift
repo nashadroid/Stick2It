@@ -14,14 +14,6 @@ struct ProjectView: View {
     
     var body: some View {
         ZStack{
-//            VStack(alignment: .leading, spacing: 0){
-//                Text("Projects")
-//                    .foregroundColor(Color.black)
-//                    .font(.largeTitle)
-//                    .fontWeight(.heavy)
-//                    .padding()
-//                    .padding(.leading, 10)
-//                    .multilineTextAlignment(.leading)
             NavigationView {
                 List(userData.userProjects) {project in
                     NavigationLink(destination: ProjectDetailedView(project: project)){
