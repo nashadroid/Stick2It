@@ -54,3 +54,14 @@ func getShortStringFromRepeatDays(repeatedOn: [Bool]) -> String {
     
     return strToReturn
 }
+
+func getPastWeek() -> [Date]{
+    var listOfDays: [Date] = []
+    //var aDate = Date()
+    
+    for i in -7...0{
+        listOfDays += [Calendar.current.date(byAdding: .day, value: i, to: Date())!] //TODO: Fix this!
+    }
+    
+    return listOfDays
+}

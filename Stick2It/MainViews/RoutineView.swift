@@ -45,7 +45,7 @@ struct RoutineView: View {
             }
             else{
                 HStack{
-                    ForEach(1...10, id: \.self){ row in
+                    ForEach(getPastWeek(), id: \.self){ day in
                         VStack{
                             ForEach(self.userData.userGoals.filter {Calendar.current.isDateInToday($0.startTime)}, id: \.self){ goal in
                                 Rectangle()
