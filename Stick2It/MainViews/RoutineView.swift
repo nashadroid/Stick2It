@@ -47,9 +47,9 @@ struct RoutineView: View {
                 HStack{
                     ForEach(1...10, id: \.self){ row in
                         VStack{
-                            ForEach(self.userData.userGoals.filter {Calendar.current.isDateInToday($0.startTime)}, id: \.self){ column in
+                            ForEach(self.userData.userGoals.filter {Calendar.current.isDateInToday($0.startTime)}, id: \.self){ goal in
                                 Rectangle()
-                                    .fill(Color.green )
+                                    .fill(goal.done ? Color.green : Color.red)
                                 .frame(width: 20, height: 20)
                             }
                         }
