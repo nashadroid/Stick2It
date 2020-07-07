@@ -44,16 +44,22 @@ struct RoutineView: View {
                 }
             }
             else{
-                Text("Landscape")
-                Rectangle()
-                .fill(Color.red)
-                .frame(width: 20, height: 20)
-                Rectangle()
-                .fill(Color.red)
-                .frame(width: 20, height: 20)
-                Rectangle()
-                .fill(Color.red)
-                .frame(width: 20, height: 20)
+                HStack{
+                    VStack{
+                        Text("Landscape")
+                        Rectangle()
+                        .fill(Color.red)
+                        .frame(width: 20, height: 20)
+                        Rectangle()
+                        .fill(Color.red)
+                        .frame(width: 20, height: 20)
+                        Rectangle()
+                        .fill(Color.red)
+                        .frame(width: 20, height: 20)
+                    }
+                    
+                }
+                
             }
             
             if(addingRoutine){
