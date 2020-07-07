@@ -45,19 +45,15 @@ struct RoutineView: View {
             }
             else{
                 HStack{
-                    VStack{
-                        Text("Landscape")
-                        Rectangle()
-                        .fill(Color.red)
-                        .frame(width: 20, height: 20)
-                        Rectangle()
-                        .fill(Color.red)
-                        .frame(width: 20, height: 20)
-                        Rectangle()
-                        .fill(Color.red)
-                        .frame(width: 20, height: 20)
+                    ForEach(1...10, id: \.self){ row in
+                        VStack{
+                            ForEach(self.userData.userGoals.filter {Calendar.current.isDateInToday($0.startTime)}, id: \.self){ column in
+                                Rectangle()
+                                    .fill(Color.green )
+                                .frame(width: 20, height: 20)
+                            }
+                        }
                     }
-                    
                 }
                 
             }
