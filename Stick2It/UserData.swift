@@ -148,6 +148,25 @@ final class UserData: ObservableObject  {
         }
         userGoals += [goalToBeAdded]
     }
+    
+    func goalDoneOnDay(goalName: String, Date: Date) -> Int{
+        
+        var done: [Bool] = []
+        done = self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: Date) && $0.goalName == goalName}).map({return $0.done})
+        
+        if (done.count == 1){
+            if done[0] == true {
+                return 1
+            }
+            else{
+                return 0
+            }
+        }
+        else{
+            return -1
+        }
+        
+    }
 }
 
 

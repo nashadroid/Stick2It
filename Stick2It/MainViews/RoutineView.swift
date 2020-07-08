@@ -44,13 +44,14 @@ struct RoutineView: View {
                 }
             }
             else{
-                HStack{
-                    ForEach(getPastWeek(), id: \.self){ day in
-                        VStack{
-                            ForEach(self.userData.userGoals.filter {Calendar.current.isDate(day, inSameDayAs: $0.startTime)}, id: \.self){ goal in
+                VStack{
+                    ForEach(userData.userRoutines, id: \.self){ routine in
+                        HStack{
+                            ForEach(getPastWeek(), id: \.self){ day in
                                 Rectangle()
-                                    .fill(goal.done ? Color.green : Color.red)
-                                .frame(width: 20, height: 20)
+                                    .fill(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == 1 ? Color.green : Color.red)
+                                    .opacity(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == -1 ? 0.1 : 1)
+                                    .frame(width: 20, height: 20)
                             }
                         }
                     }
