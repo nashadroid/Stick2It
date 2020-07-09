@@ -24,7 +24,7 @@ struct AddRoutineNoBack: View {
     
     var body: some View {
         
-        VStack{
+        VStack(alignment: .center){
             
             HStack{
                 Button(action: {self.addingItem.toggle()})
@@ -32,6 +32,7 @@ struct AddRoutineNoBack: View {
                     Text("Cancel")
                         .foregroundColor(Color.white)
                         .padding()
+                        .padding(.leading,10)
                 }
                 Spacer()
             }

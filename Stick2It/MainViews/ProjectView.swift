@@ -31,6 +31,7 @@ struct ProjectView: View {
                     }
                     AddProjectNoBack(userData: self._userData, addingItem: self.$addingProject)
                         .padding(.top, 40)
+                        .padding(.leading, -10)
                     
                 }.background(
                     Color.black.opacity(0.65)

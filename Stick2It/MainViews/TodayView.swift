@@ -56,6 +56,7 @@ struct TodayView: View {
                     }
                     AddGoalNoBack(userData: self._userData, addingItem: self.$addingItem)
                         .padding(.top, 40)
+                        .padding(.leading, -10)
                 }.background(
                     Color.black.opacity(0.65)
                         .edgesIgnoringSafeArea(.all)
@@ -82,6 +83,7 @@ struct TodayView: View {
                     }
                     EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, editingGoal: self.$editingItem)
                         .padding(.top, 40)
+                        .padding(.leading, -10)
                 }.background(
                     Color.black.opacity(0.65)
                         .edgesIgnoringSafeArea(.all)

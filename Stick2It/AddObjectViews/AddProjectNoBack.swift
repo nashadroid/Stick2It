@@ -23,6 +23,7 @@ struct AddProjectNoBack: View {
                     Text("Cancel")
                         .foregroundColor(Color.white)
                         .padding()
+                        .padding(.leading, -10)
                 }
                 Spacer()
             }
