@@ -20,6 +20,7 @@
 		8420A7342465FFA700E44DC9 /* RoutineBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A7332465FFA700E44DC9 /* RoutineBox.swift */; };
 		8420A73F24671A7300E44DC9 /* AddRoutineNoBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A73E24671A7300E44DC9 /* AddRoutineNoBack.swift */; };
 		8420A7452467A69A00E44DC9 /* DaysOfWeekSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A7442467A69A00E44DC9 /* DaysOfWeekSelector.swift */; };
+		843DCF6724B8C6720060BEF5 /* ReflectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843DCF6624B8C6720060BEF5 /* ReflectView.swift */; };
 		8452261A246909AC00E9CA66 /* TimeFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84522619246909AC00E9CA66 /* TimeFormatters.swift */; };
 		8452261C24690E3D00E9CA66 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452261B24690E3D00E9CA66 /* ProjectView.swift */; };
 		8452261E24690FF800E9CA66 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452261D24690FF800E9CA66 /* Project.swift */; };
@@ -69,6 +70,7 @@
 		8420A7332465FFA700E44DC9 /* RoutineBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineBox.swift; sourceTree = "<group>"; };
 		8420A73E24671A7300E44DC9 /* AddRoutineNoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoutineNoBack.swift; sourceTree = "<group>"; };
 		8420A7442467A69A00E44DC9 /* DaysOfWeekSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysOfWeekSelector.swift; sourceTree = "<group>"; };
+		843DCF6624B8C6720060BEF5 /* ReflectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectView.swift; sourceTree = "<group>"; };
 		84522619246909AC00E9CA66 /* TimeFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatters.swift; sourceTree = "<group>"; };
 		8452261B24690E3D00E9CA66 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		8452261D24690FF800E9CA66 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				8420A72D2465C3CF00E44DC9 /* TodayView.swift */,
 				8420A7312465FE9900E44DC9 /* RoutineView.swift */,
 				8452261B24690E3D00E9CA66 /* ProjectView.swift */,
+				843DCF6624B8C6720060BEF5 /* ReflectView.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				8452261A246909AC00E9CA66 /* TimeFormatters.swift in Sources */,
 				8420A7322465FE9900E44DC9 /* RoutineView.swift in Sources */,
 				8420A72E2465C3CF00E44DC9 /* TodayView.swift in Sources */,
+				843DCF6724B8C6720060BEF5 /* ReflectView.swift in Sources */,
 				845226202469150300E9CA66 /* AddProjectNoBack.swift in Sources */,
 				8420A7342465FFA700E44DC9 /* RoutineBox.swift in Sources */,
 			);

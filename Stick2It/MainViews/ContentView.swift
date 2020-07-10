@@ -19,7 +19,8 @@ struct ContentView: View {
     @EnvironmentObject var userData: UserData
     @State var addingItem = false
     @State var date: String = "none"
-    @State var currentView = CurrentView.TodayView
+    @State var currentView = CurrentView.TodayView //TODO: I think this can go
+    @State var selection = 1
     
     var body: some View {
         
@@ -37,27 +38,34 @@ struct ContentView: View {
             )
                 .edgesIgnoringSafeArea(.all)
             
-            TabView {
+            TabView(selection: $selection) {
+                
+                ReflectView().tabItem({
+                    
+                    Image(systemName: "add")
+                    Text("Reflect")
+                    
+                }).tag(0)
                 
                 TodayView(userData: _userData, date: date).tabItem({
                     
                     Image(systemName: "add")
                     Text("Today")
                     
-                }).tag(0)
+                }).tag(1)
                 
                 RoutineView(userData: _userData, addingRoutine: false).tabItem({
                     
                     Image(systemName: "add")
-                    Text("Routines")
+                    Text("Plan")
                     
-                }).tag(0)
+                }).tag(2)
                 
-                ProjectView(userData: _userData, addingProject: false).tabItem({
-                    
-                    Text("Projects")
-                    
-                })
+//                ProjectView(userData: _userData, addingProject: false).tabItem({
+//
+//                    Text("Projects")
+//
+//                })
                 
                 
             }
