@@ -25,12 +25,12 @@ struct ReflectionGoalBox: View {
                         .font(.headline)
                         .fontWeight(.heavy)
                         .padding(.leading, 10)
-                        .foregroundColor(self.userData.userGoals[self.goalIndex].done ? Color.white : Color.black)
+                        .foregroundColor(Color.white)
                         .lineLimit(1)
                     Text("\(getTimeStringFromDate(goal.startTime)) - \(getTimeStringFromDate(goal.endTime))")
                         .font(.footnote)
                         .padding(.leading, 10)
-                        .foregroundColor(self.userData.userGoals[self.goalIndex].done ? Color.white : Color.gray)
+                        .foregroundColor(Color.white)
                     
                     
                 }
@@ -53,9 +53,3 @@ struct ReflectionGoalBox: View {
         
     }
 }
-
-//struct ReflectionGoalBox_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ReflectionGoalBox()
-//    }
-//}
