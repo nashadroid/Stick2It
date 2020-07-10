@@ -11,7 +11,7 @@ import SwiftUI
 struct RoutineView: View {
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var orientationInfo : OrientationInfo
-    @State var addingRoutine: Bool
+    @State var addingRoutine: Bool = false
     @State var routineBeingEditedID: Int = 0
     @State var editingRoutine: Bool = false
     
