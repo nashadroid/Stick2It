@@ -65,3 +65,7 @@ func getPastWeek() -> [Date]{
     
     return listOfDays
 }
+
+func getYesterday() -> Date {
+    return Calendar.current.date(byAdding: .day, value: -1, to: Date())! //TODO: Fix this!
+}

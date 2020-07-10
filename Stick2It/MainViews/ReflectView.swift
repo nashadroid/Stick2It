@@ -17,29 +17,27 @@ struct ReflectView: View {
     var body: some View {
         ZStack{
             if(orientationInfo.orientation == .portrait){
+                
                 VStack(alignment: .leading, spacing: 0){
-                    Text("Reflect")
-                        .foregroundColor(Color.black)
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                        .padding()
-                        .padding(.leading, 10)
-                        .multilineTextAlignment(.leading)
+                    Text("Yesterday's Goals")
+                    .foregroundColor(Color.black)
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .padding()
+                    .padding(.leading, 10)
+                    .multilineTextAlignment(.leading)
                     ScrollView(.vertical, showsIndicators: false){
                         VStack(spacing: 10){
                             
-                            ForEach(userData.userRoutines) {routine in
-                                RoutineBox(routine: routine)
-                                    .onLongPressGesture {
-                                        self.routineBeingEditedID = routine.id
-                                        self.editingRoutine.toggle()
-                                }
+                            ForEach(self.userData.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: getYesterday())})) {goal in
+                                
+                                GoalBox(goal: goal)
+                                
                             }
                         }
                         .padding()
                         .frame(minWidth: UIScreen.main.bounds.size.width)
                     }
-                    
                 }
             }
             else{
@@ -54,7 +52,7 @@ struct ReflectView: View {
                                         Rectangle()
                                             .fill(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == 1 ? Color.green : Color.red)
                                             .opacity(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == -1 ? 0.1 : 1)
-                                            .frame(width: 20, height: 20)
+                                            .frame(width: 30, height: 30)
                                     }
                                 }
                             }
