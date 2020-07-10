@@ -31,7 +31,7 @@ struct ReflectView: View {
                             
                             ForEach(self.userData.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: getYesterday())})) {goal in
                                 
-                                GoalBox(goal: goal)
+                                ReflectionGoalBox(goal: goal)
                                 
                             }
                         }
