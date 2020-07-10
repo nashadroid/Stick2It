@@ -36,13 +36,13 @@ struct ReflectionGoalBox: View {
                 }
                 Spacer()
                 
-                Text(self.userData.userGoals[self.goalIndex].done ? "Done" : "To-Do")
+                Text(" ")
                     .foregroundColor(Color.white)
                     .fontWeight(.heavy)
                     .padding()
-                    .background(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.red)
+                    //.background(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.red)
             }
-            .background(self.userData.userGoals[self.goalIndex].done ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
+            .background(self.userData.userGoals[self.goalIndex].done ? Color.green.shadow(radius: 7) : Color.red.shadow(radius: 7)).opacity(0.95)
             .onTapGesture {
                 self.goal.done.toggle()
                 self.userData.userGoals[self.goalIndex].done.toggle()
