@@ -14,7 +14,7 @@ struct ReflectButton: View {
         HStack{
             
             VStack(alignment: .center){
-                Text("Reflect")
+                Text("How is Today?")
                     .font(.headline)
                     .padding(15)
                     .padding(.leading, 30)
