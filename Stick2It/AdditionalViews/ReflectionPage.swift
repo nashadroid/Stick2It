@@ -9,20 +9,39 @@
 import SwiftUI
 
 struct ReflectionPage: View {
-    @State private var name: String = "Tim"
+    @Binding var reflecting: Bool
+    @State private var todayReflect: String = ""
+    @State private var tomorrowMessage: String = ""
     
     var body: some View {
-        VStack{
+        VStack(alignment: .leading){
             Text("How is today going?")
-            TextField("Enter your name", text: $name)
-            Text("Hello, \(name)!")
+                .font(.headline)
+                .padding(15)
+                .foregroundColor(Color.black)
+            TextField("Write something about today", text: $todayReflect)
+                .padding(15)
+            Text("What would you like to tell yourself tomorrow?")
+                .font(.headline)
+                .padding(15)
+                .foregroundColor(Color.black)
+            TextField("Write something for tomorrow", text: $tomorrowMessage)
+                .padding(15)
+            HStack{
+                Spacer()
+                Button(action: {self.reflecting.toggle()}) {
+                       Text("Done")
+                }
+                .padding(20)
+                Spacer()
+                
+            }
+            
         }
-        .background(Color.white.shadow(radius: 10))
-    }
-}
-
-struct ReflectionPage_Previews: PreviewProvider {
-    static var previews: some View {
-        ReflectionPage()
+        .background(
+            RoundedRectangle(cornerRadius: 5)
+                .fill(Color(red: 246/255, green: 247/255, blue: 248/255))
+                .shadow(radius: 7)
+        )
     }
 }

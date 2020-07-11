@@ -8,17 +8,13 @@
 
 import SwiftUI
 
-enum todayOverlay {
-    case adding, editting, reflecting, none
-}
-
 struct TodayView: View {
     @EnvironmentObject var userData: UserData
     @State var date: String = "none"
     @State var addingItem: Bool = false
     @State var editingItem: Bool = false
+    @State var reflecting: Bool = false
     @State var goalBeingEditedID: Int = 0
-    @State var overlay = todayOverlay.none
     let dayIndex = Calendar.current.component(.weekday, from: Date()) - 1
     let generator = UIImpactFeedbackGenerator(style: .heavy)
     
@@ -46,10 +42,11 @@ struct TodayView: View {
                         }
                         Button(action: {
                             self.generator.impactOccurred()
-                            self.addingItem.toggle()
+                            self.reflecting.toggle()
                         }){
                             
                             ReflectButton()
+                            
                         }
                         .padding(.top, 10)
                     }
@@ -102,6 +99,31 @@ struct TodayView: View {
                     }
                 )
                     .edgesIgnoringSafeArea(.all)
+            }
+            
+            if(reflecting){
+                GeometryReader{_ in
+                    BlurView(style: .light)
+                        .onTapGesture {
+                            self.reflecting.toggle()
+                    }
+                    VStack{
+                        Spacer()
+                        ReflectionPage(reflecting: self.$reflecting)
+                            .padding(20)
+                        Spacer()
+                    }
+                }.background(
+                    Color.black.opacity(0.65)
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            self.editingItem.toggle()
+                    }
+                )
+                    .edgesIgnoringSafeArea(.all)
+                
+                
+                
             }
         }
     }
