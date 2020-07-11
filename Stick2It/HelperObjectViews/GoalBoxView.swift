@@ -42,8 +42,7 @@ struct GoalBox: View {
                     .padding()
                     .background(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.red)
             }
-            .background(
-                self.userData.userGoals[self.goalIndex].done ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
+            .background(self.userData.userGoals[self.goalIndex].done ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
             .onTapGesture {
                 self.goal.done.toggle()
                 self.userData.userGoals[self.goalIndex].done.toggle()
