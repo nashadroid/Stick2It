@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ReflectionPage: View {
-    @Binding var reflecting: Bool
+    @Binding var currentOverlay: overlayViews
     @State private var todayReflect: String = ""
     @State private var tomorrowMessage: String = ""
     
@@ -29,7 +29,7 @@ struct ReflectionPage: View {
                 .padding(15)
             HStack{
                 Spacer()
-                Button(action: {self.reflecting.toggle()}) {
+                Button(action: {self.currentOverlay = .none}) {
                        Text("Done")
                 }
                 .padding(20)

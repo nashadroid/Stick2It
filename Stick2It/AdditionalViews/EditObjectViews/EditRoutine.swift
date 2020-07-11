@@ -10,7 +10,7 @@ import SwiftUI
 
 struct EditRoutine: View {
     @EnvironmentObject var userData: UserData
-    @Binding var editingRoutine: Bool
+    @Binding var currentOverlay: overlayViews
     let routineID: Int
     @State var daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
     
@@ -22,7 +22,7 @@ struct EditRoutine: View {
         VStack{
             
             HStack{
-                Button(action: {self.editingRoutine.toggle()})
+                Button(action: {self.currentOverlay = .none})
                 {
                     Text("Cancel")
                         .foregroundColor(Color.white)
@@ -31,7 +31,7 @@ struct EditRoutine: View {
                 Spacer()
                 Button(action: {
                     self.userData.removeRoutine(routine: self.userData.userRoutines[self.routineIndex])
-                    self.editingRoutine.toggle()
+                    self.currentOverlay = .none
                 }) {
                     Text("Delete")
                         .foregroundColor(Color.white)
@@ -133,7 +133,7 @@ struct EditRoutine: View {
                     
                     Button(action:{
                         self.userData.saveRoutine()
-                        self.editingRoutine.toggle()
+                        self.currentOverlay = .none
                     }){
                         Text("Save Routine")
                             .foregroundColor(Color.white)

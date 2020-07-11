@@ -11,7 +11,7 @@ import SwiftUI
 
 struct AddGoalNoBack: View {
     @EnvironmentObject var userData: UserData
-    @Binding var addingItem: Bool
+    @Binding var currentOverlay: overlayViews
     @State private var name: String = ""
     @State private var startTime: Date = Date()
     @State private var endTime: Date = Date()
@@ -23,12 +23,12 @@ struct AddGoalNoBack: View {
         VStack{
             
             HStack{
-                Button(action: {self.addingItem.toggle()})
+                Button(action: {self.currentOverlay = .none})
                 {
                     Text("Cancel")
                         .foregroundColor(Color.white)
                         .padding()
-                        .padding(.leading, -10)
+                        //.padding(.leading, -10)
                 }
                 Spacer()
             }
@@ -102,7 +102,7 @@ struct AddGoalNoBack: View {
                     Button(action:{
                         self.userData.addGoal(self.name, self.startTime, self.endTime, self.project)
                         self.userData.saveGoal()
-                        self.addingItem.toggle()
+                        self.currentOverlay = .none
                     }){
                         Text("Add Goal")
                             .foregroundColor(Color.white)
@@ -123,8 +123,8 @@ struct AddGoalNoBack: View {
     }
 }
 
-struct AddItemNoBack_Previews: PreviewProvider {
-    static var previews: some View {
-        AddGoalNoBack(addingItem: .constant(false))
-    }
-}
+//struct AddItemNoBack_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddGoalNoBack(currentOverlay: constant(.addGoal))
+//    }
+//}

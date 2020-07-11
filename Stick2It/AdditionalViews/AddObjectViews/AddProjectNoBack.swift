@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AddProjectNoBack: View {
     @EnvironmentObject var userData: UserData
-    @Binding var addingItem: Bool
+    @Binding var currentOverlay: overlayViews
     @State private var projectName: String = ""
     
     var body: some View {
@@ -18,7 +18,7 @@ struct AddProjectNoBack: View {
         VStack{
             
             HStack{
-                Button(action: {self.addingItem.toggle()})
+                Button(action: {self.currentOverlay = .none})
                 {
                     Text("Cancel")
                         .foregroundColor(Color.white)
@@ -51,7 +51,7 @@ struct AddProjectNoBack: View {
                     Button(action:{
                         self.userData.addProject(projectName: self.projectName)
                         self.userData.saveRoutine()
-                        self.addingItem.toggle()
+                        self.currentOverlay = .none
                         print(self.userData.userRoutines[0])
                         
                     }){
@@ -74,8 +74,8 @@ struct AddProjectNoBack: View {
     }
 }
 
-struct AddProjectNoBack_Previews: PreviewProvider {
-    static var previews: some View {
-        AddProjectNoBack(addingItem: .constant(false))
-    }
-}
+//struct AddProjectNoBack_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddProjectNoBack(addingItem: .constant(false))
+//    }
+//}

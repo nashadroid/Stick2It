@@ -54,7 +54,7 @@ struct ContentView: View {
                     
                 }).tag(1)
                 
-                RoutineView(userData: _userData, addingRoutine: false).tabItem({
+                RoutineView(userData: _userData).tabItem({
                     
                     Image(systemName: "add")
                     Text("Plan")

@@ -9,15 +9,12 @@
 import SwiftUI
 
 enum overlayViews {
-    case addGoal, editGoal, reflect, none
+    case addGoal, editGoal, reflect, addRoutine, editRoutine, addProject, none
 }
 
 struct TodayView: View {
     @EnvironmentObject var userData: UserData
     @State var date: String = "none"
-    @State var addingItem: Bool = false
-    @State var editingItem: Bool = false
-    @State var reflecting: Bool = false
     @State var goalBeingEditedID: Int = 0
     @State var currentOverlay = overlayViews.none
     let dayIndex = Calendar.current.component(.weekday, from: Date()) - 1
@@ -140,9 +137,9 @@ struct TodayView: View {
             return AnyView(GeometryReader{_ in
                 BlurView(style: .light)
                     .onTapGesture {
-                        self.addingItem.toggle()
+                        self.currentOverlay = .none
                 }
-                AddGoalNoBack(userData: self._userData, addingItem: self.$addingItem)
+                AddGoalNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
                     .padding(.top, 40)
                     .padding(.leading, -10)
             }.background(
@@ -159,9 +156,9 @@ struct TodayView: View {
             return AnyView(GeometryReader{_ in
                 BlurView(style: .light)
                     .onTapGesture {
-                        self.editingItem.toggle()
+                        self.currentOverlay = .none
                 }
-                EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, editingGoal: self.$editingItem)
+                EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, currentOverlay: self.$currentOverlay)
                     .padding(.top, 40)
                     .padding(.leading, -10)
             }.background(
@@ -182,7 +179,7 @@ struct TodayView: View {
                 }
                 VStack{
                     Spacer()
-                    ReflectionPage(reflecting: self.$reflecting)
+                    ReflectionPage(currentOverlay: self.$currentOverlay)
                         .padding(20)
                     Spacer()
                 }
@@ -196,7 +193,7 @@ struct TodayView: View {
                 .edgesIgnoringSafeArea(.all)
             )
             
-        case .none:
+        default:
             return AnyView(Text(""))
             
         }
