@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct ReflectButton: View {
-    let generator = UIImpactFeedbackGenerator(style: .heavy)
     
     var body: some View {
         HStack{
@@ -17,20 +16,25 @@ struct ReflectButton: View {
             VStack(alignment: .center){
                 Text("Reflect")
                     .font(.headline)
-                    .fontWeight(.heavy)
                     .padding(15)
                     .padding(.leading, 30)
                     .padding(.trailing, 30)
-                    .foregroundColor(Color.white)
+                    .foregroundColor(Color.blue)
                     .lineLimit(1)
+                    .cornerRadius(10)
                 
             }
         }
-        .border(Color.white, width: 3)
-        .background(Color(red: 0.3, green: 0.4, blue: 0.9).shadow(radius: 7))
-        .onTapGesture {
-            self.generator.impactOccurred()
-        }
+//        .border(Color.white, width: 3)
+            
+            .background(
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(Color(red: 246/255, green: 247/255, blue: 248/255))
+                    .shadow(radius: 7)
+            )
+//        .onTapGesture {
+//            self.generator.impactOccurred()
+//        }
     }
 }
 

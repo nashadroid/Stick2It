@@ -8,13 +8,19 @@
 
 import SwiftUI
 
+enum todayOverlay {
+    case adding, editting, reflecting, none
+}
+
 struct TodayView: View {
     @EnvironmentObject var userData: UserData
     @State var date: String = "none"
     @State var addingItem: Bool = false
     @State var editingItem: Bool = false
     @State var goalBeingEditedID: Int = 0
+    @State var overlay = todayOverlay.none
     let dayIndex = Calendar.current.component(.weekday, from: Date()) - 1
+    let generator = UIImpactFeedbackGenerator(style: .heavy)
     
     var body: some View {
         ZStack{
@@ -38,13 +44,27 @@ struct TodayView: View {
                                 }
                             }
                         }
-                        ReflectButton()
-                            .padding(.top, 10)
+                        Button(action: {
+                            self.generator.impactOccurred()
+                            self.addingItem.toggle()
+                        }){
+                            
+                            ReflectButton()
+                        }
+                        .padding(.top, 10)
                     }
                     .padding()
                     .frame(minWidth: UIScreen.main.bounds.size.width)
                 }
             }
+            // ADD BUTTON
+            Button(action: {self.addingItem.toggle()}) {
+                AddButton()
+            }
+            .scaleEffect(0.2)
+            .offset(x: 130, y: 270)
+            //TODO: This needs to be adjusted to work with all screen sizes
+            
             
             if(addingItem){
                 GeometryReader{_ in
@@ -63,14 +83,6 @@ struct TodayView: View {
                     }
                 )
                     .edgesIgnoringSafeArea(.all)
-            }
-            else{
-                Button(action: {self.addingItem.toggle()}) {
-                    AddButton()
-                }
-                .scaleEffect(0.2)
-                .offset(x: 130, y: 270)
-                //TODO: This needs to be adjusted to work with all screen sizes
             }
             
             if(editingItem){
