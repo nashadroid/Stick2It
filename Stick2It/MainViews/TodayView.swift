@@ -38,10 +38,8 @@ struct TodayView: View {
                                 }
                             }
                         }
-                        
-                        Button(action: {self.userData.checkRoutineAddGoalsAsNeeded(dayNum: self.dayIndex)}) {
-                            Text("Refresh")
-                        }
+                        ReflectButton()
+                            .padding(.top, 10)
                     }
                     .padding()
                     .frame(minWidth: UIScreen.main.bounds.size.width)
