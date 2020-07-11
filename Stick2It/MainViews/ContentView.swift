@@ -9,17 +9,15 @@
 
 import SwiftUI
 
-enum CurrentView {
-    case TodayView
-    case RoutineView
+enum overlayViews {
+    case addGoal, editGoal, reflect, addRoutine, editRoutine, addProject, none
 }
 
 struct ContentView: View {
     
     @EnvironmentObject var userData: UserData
+    @State var currentOverlay : overlayViews = .none
     @State var addingItem = false
-    @State var date: String = "none"
-    @State var currentView = CurrentView.TodayView //TODO: I think this can go
     @State var selection = 1
     
     var body: some View {
@@ -41,24 +39,18 @@ struct ContentView: View {
             TabView(selection: $selection) {
                 
                 ReflectView().tabItem({
-                    
-                    Image(systemName: "add")
+//                    Image(systemName: "add")
                     Text("Reflect")
-                    
                 }).tag(0)
                 
-                TodayView(userData: _userData, date: date).tabItem({
-                    
+                TodayView(userData: _userData).tabItem({
                     Image(systemName: "add")
                     Text("Today")
-                    
                 }).tag(1)
                 
                 RoutineView(userData: _userData).tabItem({
-                    
                     Image(systemName: "add")
                     Text("Plan")
-                    
                 }).tag(2)
                 
 //                ProjectView(userData: _userData, addingProject: false).tabItem({
@@ -68,9 +60,11 @@ struct ContentView: View {
 //                })
                 
                 
+                
             }
         }
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

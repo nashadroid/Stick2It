@@ -16,7 +16,6 @@ struct RoutineView: View {
     
     var body: some View {
         ZStack{
-            if(orientationInfo.orientation == .portrait){
                 VStack(alignment: .leading, spacing: 0){
                     Text("Routines")
                         .foregroundColor(Color.black)
@@ -39,9 +38,8 @@ struct RoutineView: View {
                         .padding()
                         .frame(minWidth: UIScreen.main.bounds.size.width)
                     }
-                    
                 }
-            }
+            
             Button(action: {self.currentOverlay = .addRoutine}) {
                             AddButton()
                         }
@@ -49,51 +47,7 @@ struct RoutineView: View {
                         .offset(x: 130, y: 270)
                         //TODO: This needs to be adjusted to work with all screen sizes
             overlayView()
-            
-//            if(addingRoutine){
-//                GeometryReader{_ in
-//                    BlurView(style: .light)
-//                        .onTapGesture {
-//                            self.currentOverlay = .none
-//                    }
-//
-//                    AddRoutineNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
-//                        .padding(.top, 40)
-//                        .padding(.leading, -10)
-//
-//                }.background(
-//                    Color.black.opacity(0.65)
-//                        .edgesIgnoringSafeArea(.all)
-//                        .onTapGesture {
-//                            self.currentOverlay = .none
-//                    }
-//                )
-//                    .edgesIgnoringSafeArea(.all)
-//            }
-//            else{
-//
-//            }
-//
-//            if(editingRoutine){
-//                GeometryReader{_ in
-//                    BlurView(style: .light)
-//                        .onTapGesture {
-//                            self.currentOverlay = .none
-//                    }
-//                    EditRoutine(currentOverlay: self.$currentOverlay, routineID: self.routineBeingEditedID)
-//                        .padding(.top, 40)
-//                        .padding(.leading, -10)
-//                }.background(
-//                    Color.black.opacity(0.65)
-//                        .edgesIgnoringSafeArea(.all)
-//                        .onTapGesture {
-//                            self.currentOverlay = .none
-//                    }
-//                )
-//                    .edgesIgnoringSafeArea(.all)
-//            }
         }
-        
     }
     
     func overlayView() -> AnyView {
@@ -149,9 +103,3 @@ struct RoutineView: View {
     }
     
 }
-//
-//struct RoutineView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RoutineView()
-//    }
-//}

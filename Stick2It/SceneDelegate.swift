@@ -26,12 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             
-            let today = Date()
-            let formatter1 = DateFormatter()
-            formatter1.dateFormat = "YD"
-            
             window.rootViewController = UIHostingController(
-                rootView: ContentView(date: formatter1.string(from: today))
+                rootView: ContentView()
                     .environmentObject(UserData())
                     .environmentObject(OrientationInfo())
             )
