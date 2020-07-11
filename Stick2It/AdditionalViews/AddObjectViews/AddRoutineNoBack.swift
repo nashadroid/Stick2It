@@ -31,8 +31,8 @@ struct AddRoutineNoBack: View {
                 {
                     Text("Cancel")
                         .foregroundColor(Color.white)
-                        .padding()
-                        .padding(.leading,10)
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
                 }
                 Spacer()
             }
@@ -151,8 +151,9 @@ struct AddRoutineNoBack: View {
                 .padding(.bottom,500)
                 
             }
-                .padding(30)
         }
+        .padding(.leading, 30)
+        .padding(.trailing, 30)
     }
 }
 

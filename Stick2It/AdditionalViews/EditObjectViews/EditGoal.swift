@@ -25,7 +25,8 @@ struct EditGoal: View {
                 {
                     Text("Cancel")
                         .foregroundColor(Color.white)
-                        .padding()
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
                 }
                 Spacer()
                 
@@ -35,7 +36,8 @@ struct EditGoal: View {
                 }) {
                     Text("Delete")
                         .foregroundColor(Color.white)
-                        .padding()
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
                 }
             }
             
@@ -124,9 +126,10 @@ struct EditGoal: View {
             .padding(.bottom,500)
                 
             }
-            .padding(.leading, 30)
-            .padding(.trailing, 30)
+            
         }
+        .padding(.leading, 30)
+        .padding(.trailing, 30)
     }
 }
 

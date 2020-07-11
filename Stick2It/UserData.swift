@@ -9,8 +9,6 @@
 import SwiftUI
 import Combine
 
-
-
 func loadSavedGoals() -> [Goal]{
     if let savedGoals = UserDefaults.standard.object(forKey: "Usergoals") as? Data {
         let decoder = JSONDecoder()
@@ -43,12 +41,16 @@ func loadSavedProjects() -> [Project]{
 }
 
 final class UserData: ObservableObject  {
-    @Published var userGoals = loadSavedGoals()
-    @Published var userRoutines = loadSavedRoutines()
-    @Published var userProjects = loadSavedProjects()
+    @Published var userGoals: [Goal]
+    @Published var userRoutines: [Routine]
+    @Published var userProjects: [Project]
     
     init() {
+        userGoals = loadSavedGoals()
+        userRoutines = loadSavedRoutines()
+        userProjects = loadSavedProjects()
         checkRoutineAddGoalsAsNeeded(dayNum: Calendar.current.component(.weekday, from: Date()) - 1)
+        
     }
     
     //Add objects
@@ -101,6 +103,14 @@ final class UserData: ObservableObject  {
         self.userProjects.removeAll { $0 == project}
         self.saveProjects()
     }
+    
+    //Refresh
+    func refresh() {
+        userGoals = loadSavedGoals()
+        userRoutines = loadSavedRoutines()
+        userProjects = loadSavedProjects()
+    }
+    
     
     //Add goals from routine methods
     func checkRoutineAddGoalsAsNeeded(dayNum: Int){

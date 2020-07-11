@@ -23,34 +23,19 @@ struct ContentView: View {
     var body: some View {
         
         ZStack{
-            
-            //This is the background to prevent dark mode from affecting visuals.
-            GeometryReader{_ in
-                BlurView(style: .light)
-                    .onTapGesture {
-                        self.addingItem.toggle()
-                }
-            }.background(
-                Color.white.opacity(1.0)
-                    .edgesIgnoringSafeArea(.all)
-            )
-                .edgesIgnoringSafeArea(.all)
-            
             TabView(selection: $selection) {
                 
                 ReflectView().tabItem({
 //                    Image(systemName: "add")
-                    Text("Reflect")
+                    Text("Past")
                 }).tag(0)
                 
-                TodayView(userData: _userData).tabItem({
-                    Image(systemName: "add")
+                TodayView().tabItem({
                     Text("Today")
                 }).tag(1)
                 
-                RoutineView(userData: _userData).tabItem({
-                    Image(systemName: "add")
-                    Text("Plan")
+                RoutineView().tabItem({
+                    Text("Future")
                 }).tag(2)
                 
 //                ProjectView(userData: _userData, addingProject: false).tabItem({
@@ -58,9 +43,6 @@ struct ContentView: View {
 //                    Text("Projects")
 //
 //                })
-                
-                
-                
             }
         }
     }

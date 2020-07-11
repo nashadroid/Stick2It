@@ -22,11 +22,15 @@ struct EditRoutine: View {
         VStack{
             
             HStack{
-                Button(action: {self.currentOverlay = .none})
+                Button(action: {
+                    self.currentOverlay = .none
+                    self.userData.refresh()
+                })
                 {
                     Text("Cancel")
                         .foregroundColor(Color.white)
-                        .padding()
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
                 }
                 Spacer()
                 Button(action: {
@@ -35,7 +39,8 @@ struct EditRoutine: View {
                 }) {
                     Text("Delete")
                         .foregroundColor(Color.white)
-                        .padding()
+                    .padding(.top, 15)
+                    .padding(.bottom, 15)
                 }
             }
             
@@ -149,8 +154,9 @@ struct EditRoutine: View {
                 .padding(.bottom,500)
                 
             }
-                .padding(30)
         }
+        .padding(.leading, 30)
+        .padding(.trailing, 30)
     }
 }
 

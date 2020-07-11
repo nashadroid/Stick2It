@@ -27,11 +27,12 @@ struct AddGoalNoBack: View {
                 {
                     Text("Cancel")
                         .foregroundColor(Color.white)
-                        .padding()
-                        //.padding(.leading, -10)
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
                 }
                 Spacer()
             }
+            
             
             Text("New Goal")
                 .font(.largeTitle)
@@ -117,9 +118,9 @@ struct AddGoalNoBack: View {
             .padding(5)
             .padding(.bottom,500)
             }
-            .padding(.leading, 30)
-            .padding(.trailing, 30)
         }
+        .padding(.leading, 30)
+        .padding(.trailing, 30)
     }
 }
 
