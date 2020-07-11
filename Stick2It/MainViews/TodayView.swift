@@ -8,6 +8,10 @@
 
 import SwiftUI
 
+enum overlayViews {
+    case addGoal, editGoal, reflect, none
+}
+
 struct TodayView: View {
     @EnvironmentObject var userData: UserData
     @State var date: String = "none"
@@ -15,6 +19,7 @@ struct TodayView: View {
     @State var editingItem: Bool = false
     @State var reflecting: Bool = false
     @State var goalBeingEditedID: Int = 0
+    @State var currentOverlay = overlayViews.none
     let dayIndex = Calendar.current.component(.weekday, from: Date()) - 1
     let generator = UIImpactFeedbackGenerator(style: .heavy)
     
@@ -36,13 +41,13 @@ struct TodayView: View {
                                 GoalBox(goal: goal)
                                 .onLongPressGesture {
                                     self.goalBeingEditedID = goal.id
-                                    self.editingItem.toggle()
+                                    self.currentOverlay = .editGoal
                                 }
                             }
                         }
                         Button(action: {
                             self.generator.impactOccurred()
-                            self.reflecting.toggle()
+                            self.currentOverlay = .reflect
                         }){
                             
                             ReflectButton()
@@ -55,77 +60,147 @@ struct TodayView: View {
                 }
             }
             // ADD BUTTON
-            Button(action: {self.addingItem.toggle()}) {
+            Button(action: {self.currentOverlay = .addGoal}) {
                 AddButton()
             }
             .scaleEffect(0.2)
             .offset(x: 130, y: 270)
             //TODO: This needs to be adjusted to work with all screen sizes
             
+            overlayView()
             
-            if(addingItem){
-                GeometryReader{_ in
-                    BlurView(style: .light)
-                        .onTapGesture {
-                            self.addingItem.toggle()
-                    }
-                    AddGoalNoBack(userData: self._userData, addingItem: self.$addingItem)
-                        .padding(.top, 40)
-                        .padding(.leading, -10)
-                }.background(
-                    Color.black.opacity(0.65)
-                        .edgesIgnoringSafeArea(.all)
-                        .onTapGesture {
-                            self.addingItem.toggle()
-                    }
-                )
-                    .edgesIgnoringSafeArea(.all)
-            }
-            
-            if(editingItem){
-                GeometryReader{_ in
-                    BlurView(style: .light)
-                        .onTapGesture {
-                            self.editingItem.toggle()
-                    }
-                    EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, editingGoal: self.$editingItem)
-                        .padding(.top, 40)
-                        .padding(.leading, -10)
-                }.background(
-                    Color.black.opacity(0.65)
-                        .edgesIgnoringSafeArea(.all)
-                        .onTapGesture {
-                            self.editingItem.toggle()
-                    }
-                )
-                    .edgesIgnoringSafeArea(.all)
-            }
-            
-            if(reflecting){
-                GeometryReader{_ in
-                    BlurView(style: .light)
-                        .onTapGesture {
-                            self.reflecting.toggle()
-                    }
-                    VStack{
-                        Spacer()
-                        ReflectionPage(reflecting: self.$reflecting)
-                            .padding(20)
-                        Spacer()
-                    }
-                }.background(
-                    Color.black.opacity(0.65)
-                        .edgesIgnoringSafeArea(.all)
-                        .onTapGesture {
-                            self.editingItem.toggle()
-                    }
-                )
-                    .edgesIgnoringSafeArea(.all)
-                
-                
-                
-            }
+//            if(addingItem){
+//                GeometryReader{_ in
+//                    BlurView(style: .light)
+//                        .onTapGesture {
+//                            self.addingItem.toggle()
+//                    }
+//                    AddGoalNoBack(userData: self._userData, addingItem: self.$addingItem)
+//                        .padding(.top, 40)
+//                        .padding(.leading, -10)
+//                }.background(
+//                    Color.black.opacity(0.65)
+//                        .edgesIgnoringSafeArea(.all)
+//                        .onTapGesture {
+//                            self.addingItem.toggle()
+//                    }
+//                )
+//                    .edgesIgnoringSafeArea(.all)
+//            }
+//
+//            if(editingItem){
+//                GeometryReader{_ in
+//                    BlurView(style: .light)
+//                        .onTapGesture {
+//                            self.editingItem.toggle()
+//                    }
+//                    EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, editingGoal: self.$editingItem)
+//                        .padding(.top, 40)
+//                        .padding(.leading, -10)
+//                }.background(
+//                    Color.black.opacity(0.65)
+//                        .edgesIgnoringSafeArea(.all)
+//                        .onTapGesture {
+//                            self.editingItem.toggle()
+//                    }
+//                )
+//                    .edgesIgnoringSafeArea(.all)
+//            }
+//
+//            if(reflecting){
+//                GeometryReader{_ in
+//                    BlurView(style: .light)
+//                        .onTapGesture {
+//                            self.reflecting.toggle()
+//                    }
+//                    VStack{
+//                        Spacer()
+//                        ReflectionPage(reflecting: self.$reflecting)
+//                            .padding(20)
+//                        Spacer()
+//                    }
+//                }.background(
+//                    Color.black.opacity(0.65)
+//                        .edgesIgnoringSafeArea(.all)
+//                        .onTapGesture {
+//                            self.editingItem.toggle()
+//                    }
+//                )
+//                    .edgesIgnoringSafeArea(.all)
+//
+//
+//
+//            }
         }
+    }
+    func overlayView() -> AnyView {
+        
+        switch self.currentOverlay {
+        case .addGoal:
+            return AnyView(GeometryReader{_ in
+                BlurView(style: .light)
+                    .onTapGesture {
+                        self.addingItem.toggle()
+                }
+                AddGoalNoBack(userData: self._userData, addingItem: self.$addingItem)
+                    .padding(.top, 40)
+                    .padding(.leading, -10)
+            }.background(
+                Color.black.opacity(0.65)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        self.currentOverlay = .none
+                }
+            )
+                .edgesIgnoringSafeArea(.all)
+            )
+            
+        case .editGoal:
+            return AnyView(GeometryReader{_ in
+                BlurView(style: .light)
+                    .onTapGesture {
+                        self.editingItem.toggle()
+                }
+                EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, editingGoal: self.$editingItem)
+                    .padding(.top, 40)
+                    .padding(.leading, -10)
+            }.background(
+                Color.black.opacity(0.65)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        self.currentOverlay = .none
+                }
+            )
+                .edgesIgnoringSafeArea(.all)
+            )
+            
+        case .reflect:
+            return AnyView(GeometryReader{_ in
+                BlurView(style: .light)
+                    .onTapGesture {
+                        self.currentOverlay = .none
+                }
+                VStack{
+                    Spacer()
+                    ReflectionPage(reflecting: self.$reflecting)
+                        .padding(20)
+                    Spacer()
+                }
+            }.background(
+                Color.black.opacity(0.65)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        self.currentOverlay = .none
+                }
+            )
+                .edgesIgnoringSafeArea(.all)
+            )
+            
+        case .none:
+            return AnyView(Text(""))
+            
+        }
+        
     }
 }
 
