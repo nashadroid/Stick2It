@@ -22,9 +22,14 @@ struct TodayView: View {
                     .foregroundColor(Color.black)
                     .font(.largeTitle)
                     .fontWeight(.heavy)
-                    .padding()
-                    .padding(.leading, 10)
+                    .padding(.top, 10)
+                    .padding(.leading, 20)
                     .multilineTextAlignment(.leading)
+                Text(userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Tomorrow") ))
+                    .italic()
+                    .foregroundColor(.gray)
+                    .padding(.leading, 20)
+                    .padding(.bottom, 10)
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(spacing: 10){
                         
