@@ -21,11 +21,11 @@ struct RoutineBox: View {
             Text(self.userData.userRoutines[self.routineIndex].routineName)
                 .font(.headline)
                 .fontWeight(.heavy)
-                .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
+                .foregroundColor(Color.white)
             
             HStack{
                 Text("\(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].startTime)) - \(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].endTime))")
-                    .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
+                    .foregroundColor(Color.white)
                     .font(.footnote)
                 
                 Spacer()
@@ -34,20 +34,26 @@ struct RoutineBox: View {
                     Text("Project:")
                         .font(.footnote)
                         .fontWeight(.bold)
-                        .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
+                        .foregroundColor(Color.white)
                     
                     Text(self.userData.userRoutines[self.routineIndex].project)
                         .font(.footnote)
-                        .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
+                        .foregroundColor(Color.white)
                 }
             }
             Text(getShortStringFromRepeatDays(repeatedOn: self.userData.userRoutines[self.routineIndex].repeatOn))
-                .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
+                .foregroundColor(Color.white)
                 .font(.footnote)
             
         }
         .padding()
-        .background(self.userData.userRoutines[self.routineIndex].running ? Color.green.shadow(radius: 7) : Color.gray.shadow(radius: 7))
+        .background(
+            
+            RoundedRectangle(cornerRadius: 5)
+                .fill(Color.green)
+                .opacity(self.userData.userRoutines[self.routineIndex].running ? 1 : 0.4)
+                .shadow(radius: 7)
+        )
         .onTapGesture {
             self.userData.userRoutines[self.routineIndex].running.toggle()
         }

@@ -43,7 +43,12 @@ struct ReflectionGoalBox: View {
                     //.background(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.red)
             }
             .background(
-                self.userData.userGoals[self.goalIndex].done ? Color.green.shadow(radius: 7) : Color.red.shadow(radius: 7)).opacity(0.75)
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.red)
+                    .opacity(0.75)
+                    .shadow(radius: 7)
+            )
+                    
             .onLongPressGesture {
                 self.goal.done.toggle()
                 self.userData.userGoals[self.goalIndex].done.toggle()
