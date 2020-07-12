@@ -112,7 +112,11 @@ struct TodayView: View {
                 }
                 VStack{
                     Spacer()
-                    ReflectionPage(currentOverlay: self.$currentOverlay)
+                    ReflectionPage(
+                        currentOverlay: self.$currentOverlay,
+                        todayReflect: self.userData.getNote(day: getStringFromDate(date: Date())+"Today"),
+                        tomorrowMessage: self.userData.getNote(day: getStringFromDate(date: Date())+"Tomorrow")
+                    )
                         .padding(20)
                     Spacer()
                 }

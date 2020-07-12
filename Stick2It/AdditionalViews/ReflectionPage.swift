@@ -11,8 +11,9 @@ import SwiftUI
 struct ReflectionPage: View {
     @EnvironmentObject var userData: UserData
     @Binding var currentOverlay: overlayViews
-    @State private var todayReflect: String = ""
-    @State private var tomorrowMessage: String = ""
+    @State var todayReflect: String = ""
+    @State var tomorrowMessage: String = ""
+    
     
     var body: some View {
         VStack(alignment: .leading){
@@ -33,7 +34,8 @@ struct ReflectionPage: View {
                 Spacer()
                 Button(action: {
                     self.currentOverlay = .none
-                    self.userData.addNote(note: self.todayReflect)
+                    self.userData.addNote(note: self.todayReflect, day: getStringFromDate(date: Date())+"Today")
+                    self.userData.addNote(note: self.tomorrowMessage, day: getStringFromDate(date: Date())+"Tomorrow")
                 }) {
                        Text("Done")
                 }

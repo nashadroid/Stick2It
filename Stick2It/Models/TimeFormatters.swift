@@ -83,3 +83,9 @@ func getNextHour() -> Date {
 func getYesterday() -> Date {
     return Calendar.current.date(byAdding: .day, value: -1, to: Date())! //TODO: Fix this!
 }
+
+func getStringFromDate(date: Date) -> String {
+    let formatter1 = DateFormatter()
+    formatter1.dateFormat = "YD"
+    return formatter1.string(from: date)
+}
