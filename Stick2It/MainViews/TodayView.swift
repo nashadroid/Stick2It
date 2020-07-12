@@ -8,8 +8,6 @@
 
 import SwiftUI
 
-
-
 struct TodayView: View {
     @EnvironmentObject var userData: UserData
     @State var goalBeingEditedID: Int = 0

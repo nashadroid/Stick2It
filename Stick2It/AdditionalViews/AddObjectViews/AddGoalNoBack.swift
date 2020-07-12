@@ -13,8 +13,8 @@ struct AddGoalNoBack: View {
     @EnvironmentObject var userData: UserData
     @Binding var currentOverlay: overlayViews
     @State private var name: String = ""
-    @State private var startTime: Date = Date()
-    @State private var endTime: Date = Date()
+    @State private var startTime: Date = getLastHour()
+    @State private var endTime: Date = getNextHour()
     @State private var date: String = "none"
     @State private var project: String = "none"
     

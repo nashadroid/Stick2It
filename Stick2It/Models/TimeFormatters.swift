@@ -65,6 +65,20 @@ func getPastWeek() -> [Date]{
     
     return listOfDays
 }
+func getLastHour() -> Date {
+    if let roundedHours = try? Calendar.current.date(bySetting: .minute, value: 0, of: Date()){
+        if let lastHour = try? Calendar.current.date(byAdding: .hour, value: -1, to: roundedHours) {
+            return lastHour
+        }
+    }
+    return Date()
+}
+func getNextHour() -> Date {
+    if let roundedHours = try? Calendar.current.date(bySetting: .minute, value: 0, of: Date()){
+        return roundedHours
+    }
+    return Date()
+}
 
 func getYesterday() -> Date {
     return Calendar.current.date(byAdding: .day, value: -1, to: Date())! //TODO: Fix this!

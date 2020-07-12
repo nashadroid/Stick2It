@@ -17,40 +17,36 @@ struct RoutineBox: View {
     }
     
     var body: some View{
-        
-        VStack() {
+        VStack(alignment: .leading, spacing: 0){
+            Text(self.userData.userRoutines[self.routineIndex].routineName)
+                .font(.headline)
+                .fontWeight(.heavy)
+                .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
             
-            VStack(alignment: .leading, spacing: 0){
-                Text(self.userData.userRoutines[self.routineIndex].routineName)
-                    .font(.headline)
-                    .fontWeight(.heavy)
-                    .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
-                
-                HStack{
-                    Text("\(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].startTime)) - \(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].endTime))")
+            HStack{
+                Text("\(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].startTime)) - \(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].endTime))")
                     .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
                     .font(.footnote)
+                
+                Spacer()
+                
+                if(self.userData.userRoutines[self.routineIndex].project != "none"){
+                    Text("Project:")
+                        .font(.footnote)
+                        .fontWeight(.bold)
+                        .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
                     
-                    Spacer()
-                    
-                    if(self.userData.userRoutines[self.routineIndex].project != "none"){
-                        Text("Project:")
-                            .font(.footnote)
-                            .fontWeight(.bold)
-                            .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
-                        
-                        Text(self.userData.userRoutines[self.routineIndex].project)
-                            .font(.footnote)
-                            .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
-                    }
+                    Text(self.userData.userRoutines[self.routineIndex].project)
+                        .font(.footnote)
+                        .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
                 }
-                Text(getShortStringFromRepeatDays(repeatedOn: self.userData.userRoutines[self.routineIndex].repeatOn))
-                    .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
-                    .font(.footnote)
-                
             }
-        .padding(10)
+            Text(getShortStringFromRepeatDays(repeatedOn: self.userData.userRoutines[self.routineIndex].repeatOn))
+                .foregroundColor(self.userData.userRoutines[self.routineIndex].running ? Color.white : Color.black)
+                .font(.footnote)
+            
         }
+        .padding()
         .background(self.userData.userRoutines[self.routineIndex].running ? Color.green.shadow(radius: 7) : Color.gray.shadow(radius: 7))
         .onTapGesture {
             self.userData.userRoutines[self.routineIndex].running.toggle()

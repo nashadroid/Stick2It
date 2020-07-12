@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ReflectionPage: View {
+    @EnvironmentObject var userData: UserData
     @Binding var currentOverlay: overlayViews
     @State private var todayReflect: String = ""
     @State private var tomorrowMessage: String = ""
@@ -19,8 +20,9 @@ struct ReflectionPage: View {
                 .font(.headline)
                 .padding(15)
                 .foregroundColor(Color.black)
-            TextField("Write something about today", text: $todayReflect)
-                .padding(15)
+            TextField("Write something about today", text: self.$todayReflect)
+            .padding(15)
+            
             Text("What would you like to tell yourself tomorrow?")
                 .font(.headline)
                 .padding(15)
@@ -29,7 +31,10 @@ struct ReflectionPage: View {
                 .padding(15)
             HStack{
                 Spacer()
-                Button(action: {self.currentOverlay = .none}) {
+                Button(action: {
+                    self.currentOverlay = .none
+                    self.userData.addNote(note: self.todayReflect)
+                }) {
                        Text("Done")
                 }
                 .padding(20)

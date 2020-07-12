@@ -40,15 +40,28 @@ func loadSavedProjects() -> [Project]{
     return []
 }
 
+func loadSavedNotes() -> [Project]{
+    
+    if let savedNotes = UserDefaults.standard.object(forKey: "UserNotes") as? Data {
+        let decoder = JSONDecoder()
+        if let loadedNotes = try? decoder.decode([Project].self, from: savedNotes) {
+            return loadedNotes
+        }
+    }
+    return []
+}
+
 final class UserData: ObservableObject  {
     @Published var userGoals: [Goal]
     @Published var userRoutines: [Routine]
     @Published var userProjects: [Project]
+    @Published var userNotes: Dictionary<Int, String>
     
     init() {
         userGoals = loadSavedGoals()
         userRoutines = loadSavedRoutines()
         userProjects = loadSavedProjects()
+        userNotes = [1: "Note"]
         checkRoutineAddGoalsAsNeeded(dayNum: Calendar.current.component(.weekday, from: Date()) - 1)
         
     }
@@ -66,6 +79,10 @@ final class UserData: ObservableObject  {
         let newProject = Project(id: UUID().hashValue, projectName: projectName)
         self.userProjects += [newProject]
         self.saveProjects()
+    }
+    func addNote(note: String) {
+        userNotes[1] = note
+        saveNotes()
     }
     
     //Save Objects
@@ -88,6 +105,9 @@ final class UserData: ObservableObject  {
         if let data = try? encoder.encode(self.userProjects) {
             UserDefaults.standard.set(data, forKey: "UserProjects")
         }
+    }
+    func saveNotes(){
+        UserDefaults.standard.set(self.userNotes, forKey: "UserProjects")
     }
     
     //Remove Objects

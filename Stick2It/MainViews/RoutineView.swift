@@ -16,36 +16,36 @@ struct RoutineView: View {
     
     var body: some View {
         ZStack{
-                VStack(alignment: .leading, spacing: 0){
-                    Text("Routines")
-                        .foregroundColor(Color.black)
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                        .padding()
-                        .padding(.leading, 10)
-                        .multilineTextAlignment(.leading)
-                    ScrollView(.vertical, showsIndicators: false){
-                        VStack(spacing: 10){
-                            
-                            ForEach(userData.userRoutines) {routine in
-                                RoutineBox(routine: routine)
-                                    .onLongPressGesture {
-                                        self.routineBeingEditedID = routine.id
-                                        self.currentOverlay = .editRoutine
-                                }
+            VStack(alignment: .leading, spacing: 0){
+                Text("Routines")
+                    .foregroundColor(Color.black)
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .padding()
+                    .padding(.leading, 10)
+                    .multilineTextAlignment(.leading)
+                ScrollView(.vertical, showsIndicators: false){
+                    VStack(spacing: 10){
+                        
+                        ForEach(userData.userRoutines) {routine in
+                            RoutineBox(routine: routine)
+                                .onLongPressGesture {
+                                    self.routineBeingEditedID = routine.id
+                                    self.currentOverlay = .editRoutine
                             }
                         }
-                        .padding()
-                        .frame(minWidth: UIScreen.main.bounds.size.width)
                     }
+                    .padding()
+                    .frame(minWidth: UIScreen.main.bounds.size.width)
                 }
+            }
             
             Button(action: {self.currentOverlay = .addRoutine}) {
-                            AddButton()
-                        }
-                        .scaleEffect(0.2)
-                        .offset(x: 130, y: 270)
-                        //TODO: This needs to be adjusted to work with all screen sizes
+                AddButton()
+            }
+            .scaleEffect(0.2)
+            .offset(x: 130, y: 270)
+            //TODO: This needs to be adjusted to work with all screen sizes
             overlayView()
         }
     }
