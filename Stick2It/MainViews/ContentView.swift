@@ -13,6 +13,9 @@ enum overlayViews {
     case addGoal, editGoal, reflect, addRoutine, editRoutine, addProject, none
 }
 
+let generator = UIImpactFeedbackGenerator(style: .heavy)
+let softGenerator = UIImpactFeedbackGenerator(style: .soft)
+
 struct ContentView: View {
     
     @EnvironmentObject var userData: UserData

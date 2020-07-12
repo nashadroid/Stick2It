@@ -13,7 +13,6 @@ struct TodayView: View {
     @State var goalBeingEditedID: Int = 0
     @State var currentOverlay = overlayViews.none
     let dayIndex = Calendar.current.component(.weekday, from: Date()) - 1
-    let generator = UIImpactFeedbackGenerator(style: .heavy)
     
     var body: some View {
         ZStack{
@@ -43,7 +42,7 @@ struct TodayView: View {
                             }
                         }
                         Button(action: {
-                            self.generator.impactOccurred()
+                            softGenerator.impactOccurred()
                             self.currentOverlay = .reflect
                         }){
                             

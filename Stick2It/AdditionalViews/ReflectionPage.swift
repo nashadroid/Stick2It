@@ -36,6 +36,7 @@ struct ReflectionPage: View {
                     self.currentOverlay = .none
                     self.userData.addNote(note: self.todayReflect, day: getStringFromDate(date: Date())+"Today")
                     self.userData.addNote(note: self.tomorrowMessage, day: getStringFromDate(date: Date())+"Tomorrow")
+                    softGenerator.impactOccurred()
                 }) {
                        Text("Done")
                 }

@@ -56,6 +56,7 @@ struct RoutineBox: View {
         )
         .onTapGesture {
             self.userData.userRoutines[self.routineIndex].running.toggle()
+            softGenerator.impactOccurred()
         }
     }
 }
