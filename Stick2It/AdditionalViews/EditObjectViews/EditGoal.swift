@@ -31,10 +31,10 @@ struct EditGoal: View {
                 Spacer()
                 
                 Button(action: {
-                    self.userData.removeGoal(goal: self.userData.userGoals[self.goalIndex])
+                    self.userData.saveGoal()
                     self.currentOverlay = .none
                 }) {
-                    Text("Delete")
+                    Text("Done")
                         .foregroundColor(Color.white)
                         .padding(.top, 15)
                         .padding(.bottom, 15)
@@ -121,6 +121,16 @@ struct EditGoal: View {
                             .padding(.top, 20)
                         
                     }
+                    
+                    Button(action: {
+                        self.userData.removeGoal(goal: self.userData.userGoals[self.goalIndex])
+                        self.currentOverlay = .none
+                    }) {
+                        Text("Delete")
+                            .foregroundColor(Color.red)
+                            
+                    }
+                    .padding(.top, 30)
                 }
             .padding(5)
             .padding(.bottom,500)
