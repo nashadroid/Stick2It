@@ -9,8 +9,6 @@
 import SwiftUI
 import Combine
 
-
-
 func loadSavedGoals() -> [Goal]{
     if let savedGoals = UserDefaults.standard.object(forKey: "Usergoals") as? Data {
         let decoder = JSONDecoder()
@@ -42,13 +40,30 @@ func loadSavedProjects() -> [Project]{
     return []
 }
 
+func loadSavedNotes() -> [Project]{
+    
+    if let savedNotes = UserDefaults.standard.object(forKey: "UserNotes") as? Data {
+        let decoder = JSONDecoder()
+        if let loadedNotes = try? decoder.decode([Project].self, from: savedNotes) {
+            return loadedNotes
+        }
+    }
+    return []
+}
+
 final class UserData: ObservableObject  {
-    @Published var userGoals = loadSavedGoals()
-    @Published var userRoutines = loadSavedRoutines()
-    @Published var userProjects = loadSavedProjects()
+    @Published var userGoals: [Goal]
+    @Published var userRoutines: [Routine]
+    @Published var userProjects: [Project]
+    @Published var userNotes: Dictionary<Int, String>
     
     init() {
+        userGoals = loadSavedGoals()
+        userRoutines = loadSavedRoutines()
+        userProjects = loadSavedProjects()
+        userNotes = [1: "Note"]
         checkRoutineAddGoalsAsNeeded(dayNum: Calendar.current.component(.weekday, from: Date()) - 1)
+        
     }
     
     //Add objects
@@ -64,6 +79,10 @@ final class UserData: ObservableObject  {
         let newProject = Project(id: UUID().hashValue, projectName: projectName)
         self.userProjects += [newProject]
         self.saveProjects()
+    }
+    func addNote(note: String) {
+        userNotes[1] = note
+        saveNotes()
     }
     
     //Save Objects
@@ -87,6 +106,9 @@ final class UserData: ObservableObject  {
             UserDefaults.standard.set(data, forKey: "UserProjects")
         }
     }
+    func saveNotes(){
+        UserDefaults.standard.set(self.userNotes, forKey: "UserProjects")
+    }
     
     //Remove Objects
     func removeGoal(goal: Goal){
@@ -101,6 +123,14 @@ final class UserData: ObservableObject  {
         self.userProjects.removeAll { $0 == project}
         self.saveProjects()
     }
+    
+    //Refresh
+    func refresh() {
+        userGoals = loadSavedGoals()
+        userRoutines = loadSavedRoutines()
+        userProjects = loadSavedProjects()
+    }
+    
     
     //Add goals from routine methods
     func checkRoutineAddGoalsAsNeeded(dayNum: Int){

@@ -11,10 +11,10 @@ import SwiftUI
 
 struct AddRoutineNoBack: View {
     @EnvironmentObject var userData: UserData
-    @Binding var addingItem: Bool
+    @Binding var currentOverlay: overlayViews
     @State private var name: String = ""
-    @State private var startTime: Date = Date()
-    @State private var endTime: Date = Date()
+    @State private var startTime: Date = getLastHour()
+    @State private var endTime: Date = getNextHour()
     @State private var date: String = "none"
     @State private var project: String = "none"
     @State private var repeatDays = [1,2]
@@ -27,12 +27,12 @@ struct AddRoutineNoBack: View {
         VStack(alignment: .center){
             
             HStack{
-                Button(action: {self.addingItem.toggle()})
+                Button(action: {self.currentOverlay = .none})
                 {
                     Text("Cancel")
                         .foregroundColor(Color.white)
-                        .padding()
-                        .padding(.leading,10)
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
                 }
                 Spacer()
             }
@@ -134,7 +134,7 @@ struct AddRoutineNoBack: View {
                     Button(action:{
                         self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, self.project)
                         self.userData.saveRoutine()
-                        self.addingItem.toggle()
+                        self.currentOverlay = .none
                         
                     }){
                         Text("Add Routine")
@@ -151,15 +151,16 @@ struct AddRoutineNoBack: View {
                 .padding(.bottom,500)
                 
             }
-                .padding(30)
         }
+        .padding(.leading, 30)
+        .padding(.trailing, 30)
     }
 }
 
-struct AddRoutineNoBack_Previews: PreviewProvider {
-    @State var addingItem: Bool = false
-    
-    static var previews: some View {
-        AddRoutineNoBack(addingItem: .constant(false))
-    }
-}
+//struct AddRoutineNoBack_Previews: PreviewProvider {
+//    @State var addingItem: Bool = false
+//    
+//    static var previews: some View {
+//        AddRoutineNoBack(currentOverlay: self.$currentOverlay)
+//    }
+//}

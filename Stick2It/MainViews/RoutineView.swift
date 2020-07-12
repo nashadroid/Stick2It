@@ -11,70 +11,57 @@ import SwiftUI
 struct RoutineView: View {
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var orientationInfo : OrientationInfo
-    @State var addingRoutine: Bool
+    @State var currentOverlay = overlayViews.none
     @State var routineBeingEditedID: Int = 0
-    @State var editingRoutine: Bool = false
     
     var body: some View {
         ZStack{
-            if(orientationInfo.orientation == .portrait){
-                VStack(alignment: .leading, spacing: 0){
-                    Text("Routines")
-                        .foregroundColor(Color.black)
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                        .padding()
-                        .padding(.leading, 10)
-                        .multilineTextAlignment(.leading)
-                    ScrollView(.vertical, showsIndicators: false){
-                        VStack(spacing: 10){
-                            
-                            ForEach(userData.userRoutines) {routine in
-                                RoutineBox(routine: routine)
-                                    .onLongPressGesture {
-                                        self.routineBeingEditedID = routine.id
-                                        self.editingRoutine.toggle()
-                                }
+            VStack(alignment: .leading, spacing: 0){
+                Text("Routines")
+                    .foregroundColor(Color.black)
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .padding()
+                    .padding(.leading, 10)
+                    .multilineTextAlignment(.leading)
+                ScrollView(.vertical, showsIndicators: false){
+                    VStack(spacing: 10){
+                        
+                        ForEach(userData.userRoutines) {routine in
+                            RoutineBox(routine: routine)
+                                .onLongPressGesture {
+                                    self.routineBeingEditedID = routine.id
+                                    self.currentOverlay = .editRoutine
                             }
                         }
-                        .padding()
-                        .frame(minWidth: UIScreen.main.bounds.size.width)
                     }
-                    
-                }
-            }
-            else{
-                ScrollView{
-                    HStack{
-                        VStack(alignment: .trailing){
-                            ForEach(userData.userRoutines, id: \.self){ routine in
-                                HStack{
-                                    Text(routine.routineName)
-                                        .fontWeight(.bold)
-                                    ForEach(getPastWeek(), id: \.self){ day in
-                                        Rectangle()
-                                            .fill(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == 1 ? Color.green : Color.red)
-                                            .opacity(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == -1 ? 0.1 : 1)
-                                            .frame(width: 20, height: 20)
-                                    }
-                                }
-                            }
-                        }
-                        .padding(.leading)
-                        .padding(.top,80)
-                        Spacer()
-                    }
+                    .padding()
+                    .frame(minWidth: UIScreen.main.bounds.size.width)
                 }
             }
             
-            if(addingRoutine){
+            Button(action: {self.currentOverlay = .addRoutine}) {
+                AddButton()
+            }
+            .scaleEffect(0.2)
+            .offset(x: 130, y: 270)
+            //TODO: This needs to be adjusted to work with all screen sizes
+            overlayView()
+        }
+    }
+    
+    func overlayView() -> AnyView {
+        
+        switch self.currentOverlay {
+        case .addRoutine:
+            return AnyView(
                 GeometryReader{_ in
                     BlurView(style: .light)
                         .onTapGesture {
-                            self.addingRoutine.toggle()
+                            self.currentOverlay = .none
                     }
                     
-                    AddRoutineNoBack(userData: self._userData, addingItem: self.$addingRoutine)
+                    AddRoutineNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
                         .padding(.top, 40)
                         .padding(.leading, -10)
                     
@@ -82,45 +69,37 @@ struct RoutineView: View {
                     Color.black.opacity(0.65)
                         .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
-                            self.addingRoutine.toggle()
+                            self.currentOverlay = .none
                     }
                 )
                     .edgesIgnoringSafeArea(.all)
-            }
-            else{
-                Button(action: {self.addingRoutine.toggle()}) {
-                    AddButton()
-                }
-                .scaleEffect(0.2)
-                .offset(x: 130, y: 270)
-                //TODO: This needs to be adjusted to work with all screen sizes
-            }
+            )
             
-            if(editingRoutine){
+        case .editRoutine:
+            return AnyView(
                 GeometryReader{_ in
                     BlurView(style: .light)
                         .onTapGesture {
-                            self.editingRoutine.toggle()
+                            self.currentOverlay = .none
                     }
-                    EditRoutine(editingRoutine: self.$editingRoutine, routineID: self.routineBeingEditedID)
+                    EditRoutine(currentOverlay: self.$currentOverlay, routineID: self.routineBeingEditedID)
                         .padding(.top, 40)
                         .padding(.leading, -10)
                 }.background(
                     Color.black.opacity(0.65)
                         .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
-                            self.editingRoutine.toggle()
+                            self.currentOverlay = .none
                     }
                 )
                     .edgesIgnoringSafeArea(.all)
-            }
+            )
+            
+        default:
+            return AnyView(Text(""))
+            
         }
         
     }
+    
 }
-//
-//struct RoutineView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RoutineView()
-//    }
-//}

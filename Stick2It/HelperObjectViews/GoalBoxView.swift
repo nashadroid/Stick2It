@@ -17,39 +17,39 @@ struct GoalBox: View {
     }
     
     var body: some View {
-
-            HStack{
-                
-                VStack(alignment: .leading){
-                    Text(goal.goalName)
-                        .font(.headline)
-                        .fontWeight(.heavy)
-                        .padding(.leading, 10)
-                        .foregroundColor(self.userData.userGoals[self.goalIndex].done ? Color.white : Color.black)
-                        .lineLimit(1)
-                    Text("\(getTimeStringFromDate(goal.startTime)) - \(getTimeStringFromDate(goal.endTime))")
-                        .font(.footnote)
-                        .padding(.leading, 10)
-                        .foregroundColor(self.userData.userGoals[self.goalIndex].done ? Color.white : Color.gray)
-                    
-                    
-                }
-                Spacer()
-                
-                Text(self.userData.userGoals[self.goalIndex].done ? "Done" : "To-Do")
-                    .foregroundColor(Color.white)
+        
+        HStack{
+            
+            VStack(alignment: .leading){
+                Text(goal.goalName)
+                    .font(.headline)
                     .fontWeight(.heavy)
-                    .padding()
-                    .background(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.red)
+                    .padding(.leading, 10)
+                    .foregroundColor(self.userData.userGoals[self.goalIndex].done ? Color.white : Color.black)
+                    .lineLimit(1)
+                Text("\(getTimeStringFromDate(goal.startTime)) - \(getTimeStringFromDate(goal.endTime))")
+                    .font(.footnote)
+                    .padding(.leading, 10)
+                    .foregroundColor(self.userData.userGoals[self.goalIndex].done ? Color.white : Color.gray)
+                
+                
             }
-            .background(self.userData.userGoals[self.goalIndex].done ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
-            .onTapGesture {
-                self.goal.done.toggle()
-                self.userData.userGoals[self.goalIndex].done.toggle()
-                self.userData.saveGoal()
-                let generator = UIImpactFeedbackGenerator(style: .heavy)
-                generator.impactOccurred()
-            }
+            Spacer()
+            
+            Text(self.userData.userGoals[self.goalIndex].done ? "Done" : "To-Do")
+                .foregroundColor(Color.white)
+                .fontWeight(.heavy)
+                .padding()
+                .background(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.red)
+        }
+        .background(self.userData.userGoals[self.goalIndex].done ? Color.green.shadow(radius: 7) : Color.white.shadow(radius: 7))
+        .onTapGesture {
+            self.goal.done.toggle()
+            self.userData.userGoals[self.goalIndex].done.toggle()
+            self.userData.saveGoal()
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.impactOccurred()
+        }
         
     }
 }

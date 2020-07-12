@@ -11,7 +11,7 @@ import SwiftUI
 struct EditGoal: View {
     @EnvironmentObject var userData: UserData
     var goalID: Int
-    @Binding var editingGoal: Bool
+    @Binding var currentOverlay: overlayViews
     
     var goalIndex: Int {
         userData.userGoals.firstIndex(where: { $0.id == goalID }) ?? 0
@@ -21,21 +21,23 @@ struct EditGoal: View {
         VStack{
             
             HStack{
-                Button(action: {self.editingGoal.toggle()})
+                Button(action: {self.currentOverlay = .none})
                 {
                     Text("Cancel")
                         .foregroundColor(Color.white)
-                        .padding()
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
                 }
                 Spacer()
                 
                 Button(action: {
                     self.userData.removeGoal(goal: self.userData.userGoals[self.goalIndex])
-                    self.editingGoal.toggle()
+                    self.currentOverlay = .none
                 }) {
                     Text("Delete")
                         .foregroundColor(Color.white)
-                        .padding()
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
                 }
             }
             
@@ -107,7 +109,7 @@ struct EditGoal: View {
                     
                     Button(action:{
                         self.userData.saveGoal()
-                        self.editingGoal.toggle()
+                        self.currentOverlay = .none
                         
                     }){
                         Text("Update Goal")
@@ -124,9 +126,10 @@ struct EditGoal: View {
             .padding(.bottom,500)
                 
             }
-            .padding(.leading, 30)
-            .padding(.trailing, 30)
+            
         }
+        .padding(.leading, 30)
+        .padding(.trailing, 30)
     }
 }
 

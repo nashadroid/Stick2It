@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ProjectView: View {
     @EnvironmentObject var userData: UserData
+    @State var currentOverlay = overlayViews.none
     @State var addingProject: Bool = false
     
     var body: some View {
@@ -29,7 +30,7 @@ struct ProjectView: View {
                         .onTapGesture {
                             self.addingProject.toggle()
                     }
-                    AddProjectNoBack(userData: self._userData, addingItem: self.$addingProject)
+                    AddProjectNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
                         .padding(.top, 40)
                         .padding(.leading, -10)
                     
