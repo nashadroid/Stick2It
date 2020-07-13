@@ -60,7 +60,7 @@ struct ReflectView: View {
                                             .fontWeight(.bold)
                                         ForEach(getPastWeek(), id: \.self){ day in
                                             Rectangle()
-                                                .fill(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == 1 ? Color.green : Color.red)
+                                                .fill(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == 0 ? Color.red : Color.green)
                                                 .opacity(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == -1 ? 0.1 : 1)
                                                 .frame(width: 30, height: 30)
                                         }
