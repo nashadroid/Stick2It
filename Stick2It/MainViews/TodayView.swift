@@ -52,7 +52,6 @@ struct TodayView: View {
                         .padding(.top, 10)
                     }
                     .padding()
-                    .frame(minWidth: UIScreen.main.bounds.size.width)
                 }
             }
             // ADD BUTTON

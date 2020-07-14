@@ -37,7 +37,6 @@ struct RoutineView: View {
                         }
                     }
                     .padding()
-                    .frame(minWidth: UIScreen.main.bounds.size.width)
                 }
             }
             
