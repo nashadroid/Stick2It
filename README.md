@@ -5,9 +5,9 @@
 A clean approach to goal setting and routine tracking. Increase your productivity and mindfulness with simple tools that promote progress and reflection. Coded in Swift using Apple's SwiftUI, designed for iPhone and iPad devices.
 
 <img src="https://imgur.com/ryO7kth.png" alt="Image of Goals" width="200"/>
-<img src="https://imgur.com/eWxFt4x" alt="Image of Routines" width="200"/>
+<img src="https://imgur.com/eWxFt4x.png" alt="Image of Routines" width="200"/>
 <br>
-<img src="https://imgur.com/mA2OeZn" alt="Image of Past Week" height="200"/>
+<img src="https://imgur.com/mA2OeZn.png" alt="Image of Past Week" height="200"/>
 
 ## Features
  - Simple interface to create new tasks and goals
