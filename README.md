@@ -4,7 +4,7 @@
 
 A clean approach to goal setting and routine tracking. Increase your productivity and mindfulness with simple tools that promote progress and reflection. Coded in Swift using Apple's SwiftUI, designed for iPhone and iPad devices.
 
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Image of Yaktocat](https://i.imgur.com/ryO7kth.png)
 
 ## Features
  - Simple interface to create new tasks and goals
