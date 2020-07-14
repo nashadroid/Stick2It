@@ -32,6 +32,11 @@ struct ReflectView: View {
                             ForEach(self.userData.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: getYesterday())})) {goal in
                                 
                                 ReflectionGoalBox(goal: goal)
+                                    .onLongPressGesture {
+                                        self.userData.userGoals[self.userData.getIndex(goal: goal)].done.toggle()
+                                        self.userData.saveGoal()
+                                        softGenerator.impactOccurred()
+                                    }
                                 
                             }
                         }

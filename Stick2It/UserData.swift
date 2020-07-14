@@ -135,6 +135,14 @@ final class UserData: ObservableObject  {
         userProjects = loadSavedProjects()
     }
     
+    //Get Index of Goal
+    func getIndex(goal: Goal) -> Int{
+        return self.userGoals.firstIndex(where: { $0.id == goal.id }) ?? 0
+    }
+    func getIndex(routine: Routine) -> Int{
+        return self.userRoutines.firstIndex(where: { $0.id == routine.id }) ?? 0
+    }
+    
     
     //Add goals from routine methods
     func checkRoutineAddGoalsAsNeeded(dayNum: Int){

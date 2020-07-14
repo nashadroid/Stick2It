@@ -48,13 +48,11 @@ struct ReflectionGoalBox: View {
                     .opacity(0.75)
                     .shadow(radius: 7)
             )
+        .onTapGesture {
+            ()
+        }
                     
-            .onLongPressGesture {
-                self.goal.done.toggle()
-                self.userData.userGoals[self.goalIndex].done.toggle()
-                self.userData.saveGoal()
-                softGenerator.impactOccurred()
-            }
+            
         
     }
 }
