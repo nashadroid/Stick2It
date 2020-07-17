@@ -166,7 +166,7 @@ struct EditRoutine: View {
                 
             }
         }
-        .padding(.leading, 30)
+        .padding(.leading, 20)
         .padding(.trailing, 30)
     }
 }

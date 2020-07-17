@@ -63,8 +63,6 @@ struct RoutineView: View {
                     
                     AddRoutineNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
                         .padding(.top, 40)
-                        .padding(.leading, -10)
-                    
                 }.background(
                     Color.black.opacity(0.65)
                         .edgesIgnoringSafeArea(.all)
@@ -84,7 +82,6 @@ struct RoutineView: View {
                     }
                     EditRoutine(currentOverlay: self.$currentOverlay, routineID: self.routineBeingEditedID)
                         .padding(.top, 40)
-                        .padding(.leading, -10)
                 }.background(
                     Color.black.opacity(0.65)
                         .edgesIgnoringSafeArea(.all)

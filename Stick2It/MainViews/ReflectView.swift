@@ -41,7 +41,6 @@ struct ReflectView: View {
                             }
                         }
                         .padding()
-                        .frame(minWidth: UIScreen.main.bounds.size.width)
                     }
                 }
             }

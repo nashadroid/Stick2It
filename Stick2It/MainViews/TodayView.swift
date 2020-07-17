@@ -77,7 +77,6 @@ struct TodayView: View {
                 }
                 AddGoalNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
                     .padding(.top, 40)
-                    .padding(.leading, -10)
             }.background(
                 Color.black.opacity(0.65)
                     .edgesIgnoringSafeArea(.all)
@@ -96,7 +95,6 @@ struct TodayView: View {
                 }
                 EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, currentOverlay: self.$currentOverlay)
                     .padding(.top, 40)
-                    .padding(.leading, -10)
             }.background(
                 Color.black.opacity(0.65)
                     .edgesIgnoringSafeArea(.all)
