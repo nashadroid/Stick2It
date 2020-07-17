@@ -29,15 +29,20 @@ struct ContentView: View {
             TabView(selection: $selection) {
                 
                 ReflectView().tabItem({
-//                    Image(systemName: "add")
+                    Image(systemName: "memories")
+                        .font(.system(size: 20))
                     Text("Past")
                 }).tag(0)
                 
                 TodayView().tabItem({
+                    Image(systemName: "circle.bottomthird.split")
+                        .font(.system(size: 20))
                     Text("Today")
                 }).tag(1)
                 
                 RoutineView().tabItem({
+                    Image(systemName: "calendar.circle")
+                        .font(.system(size: 20))
                     Text("Future")
                 }).tag(2)
                 
