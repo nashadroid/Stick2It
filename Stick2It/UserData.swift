@@ -91,14 +91,14 @@ final class UserData: ObservableObject  {
     
     //Save Objects
     func saveGoal(){
-        self.userGoals.sort(by: {$0.startTime < $1.startTime })
+        self.userGoals.sort(by: {getTimeIntFromDate($0.startTime) < getTimeIntFromDate($1.startTime)})
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(self.userGoals) {
             UserDefaults.standard.set(data, forKey: "Usergoals")
         }
     }
     func saveRoutine(){
-        self.userRoutines.sort(by: {$0.startTime < $1.startTime })
+        self.userRoutines.sort(by: {getTimeIntFromDate($0.startTime) < getTimeIntFromDate($1.startTime)})
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(self.userRoutines) {
             UserDefaults.standard.set(data, forKey: "UserRoutines")

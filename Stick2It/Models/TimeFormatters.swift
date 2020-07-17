@@ -16,6 +16,17 @@ func getTimeStringFromDate(_ date: Date) -> String{
     
 }
 
+func getTimeIntFromDate(_ date: Date) -> Int{
+    
+    
+    let formatter2 = DateFormatter()
+    formatter2.dateFormat = "HHmm"
+    print(Int(formatter2.string(from: date)) ?? 0)
+    return Int(formatter2.string(from: date)) ?? 0
+    
+}
+
+
 func getShortStringFromRepeatDays(repeatedOn: [Bool]) -> String {
     var strToReturn: String = ""
     
