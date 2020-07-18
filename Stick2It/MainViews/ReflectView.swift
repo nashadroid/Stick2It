@@ -19,6 +19,7 @@ struct ReflectView: View {
             if(orientationInfo.orientation == .portrait){
                 
                 VStack(alignment: .leading, spacing: 0){
+                    // Title
                     Text("Yesterday's Goals")
                         .foregroundColor(Color.black)
                         .font(.largeTitle)
@@ -27,6 +28,8 @@ struct ReflectView: View {
                         .padding(.leading, 20)
                         .padding(.bottom, 10)
                         .multilineTextAlignment(.leading)
+                    
+                    // Show Yesterday's goals
                     ScrollView(.vertical, showsIndicators: false){
                         VStack(spacing: 10){
                             
@@ -37,7 +40,7 @@ struct ReflectView: View {
                                         self.userData.userGoals[self.userData.getIndex(goal: goal)].done.toggle()
                                         self.userData.saveGoal()
                                         softGenerator.impactOccurred()
-                                    }
+                                }
                                 
                             }
                         }
@@ -45,21 +48,25 @@ struct ReflectView: View {
                     }
                 }
             }
+                
+                // Show the past week if in landscape mode
             else{
                 ScrollView(showsIndicators: false){
                     VStack(){
-                    Text("Past Week")
-                        .foregroundColor(Color.black)
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                        .multilineTextAlignment(.leading)
-                        .padding(.top, 20)
-                    HStack{
                         
+                        // Title
+                        Text("Past Week")
+                            .foregroundColor(Color.black)
+                            .font(.largeTitle)
+                            .fontWeight(.heavy)
+                            .multilineTextAlignment(.leading)
+                            .padding(.top, 20)
+                        HStack{
                             
-                            
+                            // Make a stack of all routines
                             VStack(alignment: .trailing){
                                 ForEach(userData.userRoutines, id: \.self){ routine in
+                                    // Make a stack of past day completions from routines
                                     HStack{
                                         Text(routine.routineName)
                                             .fontWeight(.bold)
@@ -82,9 +89,3 @@ struct ReflectView: View {
         }
     }
 }
-
-//struct ReflectView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ReflectView(, addingRoutine: <#Bool#>)
-//    }
-//}
