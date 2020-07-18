@@ -60,6 +60,11 @@ class Stick2ItTests: XCTestCase {
             userData.addGoal("TestGoal", Date(), Date(), "none")
         }
     }
+
+}
+
+class Stick2ItLongTermUseTest: XCTestCase {
+    
     func testPerformanceToAdd10k() {
         // If a person has on average say 25 goals per day, and uses the app for 10 years,
         // then after 10 years they will have aquired 91250 goals.
@@ -93,7 +98,4 @@ class Stick2ItTests: XCTestCase {
         }
     }
     
-    
-    
-
 }
