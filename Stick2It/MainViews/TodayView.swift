@@ -17,6 +17,8 @@ struct TodayView: View {
     var body: some View {
         ZStack{
             VStack(alignment: .leading, spacing: 0){
+                
+                // Title
                 Text("Today's Goals")
                     .foregroundColor(Color.black)
                     .font(.largeTitle)
@@ -24,23 +26,29 @@ struct TodayView: View {
                     .padding(.top, 10)
                     .padding(.leading, 20)
                     .multilineTextAlignment(.leading)
+                
+                // Show message from yesterday (My favorite part)
                 Text(userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Tomorrow") ))
                     .italic()
                     .foregroundColor(.gray)
                     .padding(.leading, 20)
                     .padding(.bottom, 10)
+                
+                // Show goals of today
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(spacing: 10){
                         
-                        ForEach(userData.userGoals) {goal in
-                            if  Calendar.current.isDateInToday(goal.startTime){
-                                GoalBox(goal: goal)
+                        ForEach(userData.userGoals.filter({Calendar.current.isDateInToday($0.startTime)})) {goal in
+                            GoalBox(goal: goal)
+                                // This is to allow it to still scroll
                                 .onLongPressGesture {
+                                    softGenerator.impactOccurred()
                                     self.goalBeingEditedID = goal.id
                                     self.currentOverlay = .editGoal
-                                }
                             }
                         }
+                        
+                        // Reflect button
                         Button(action: {
                             softGenerator.impactOccurred()
                             self.currentOverlay = .reflect
@@ -63,6 +71,7 @@ struct TodayView: View {
                 .offset(x: geo.size.width * 0.35, y: geo.size.height * 0.42)
             }
             
+            // Call the overlay
             overlayView()
             
         }
@@ -70,6 +79,8 @@ struct TodayView: View {
     func overlayView() -> AnyView {
         
         switch self.currentOverlay {
+        
+        // add goal screen
         case .addGoal:
             return AnyView(GeometryReader{_ in
                 BlurView(style: .light)
@@ -88,6 +99,7 @@ struct TodayView: View {
                 .edgesIgnoringSafeArea(.all)
             )
             
+        // edit a goal
         case .editGoal:
             return AnyView(GeometryReader{_ in
                 BlurView(style: .light)
@@ -106,6 +118,7 @@ struct TodayView: View {
                 .edgesIgnoringSafeArea(.all)
             )
             
+        // reflect page
         case .reflect:
             return AnyView(GeometryReader{_ in
                 BlurView(style: .light)
@@ -132,6 +145,7 @@ struct TodayView: View {
                 .edgesIgnoringSafeArea(.all)
             )
             
+        // It needs to return something, I think this is the best way to go about returning nothing
         default:
             return AnyView(Text(""))
             
