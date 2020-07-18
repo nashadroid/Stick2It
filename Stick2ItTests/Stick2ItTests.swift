@@ -23,8 +23,8 @@ class Stick2ItTests: XCTestCase {
         
         let testGoal = Goal(id: UUID().hashValue, goalName: "Test Goal", startTime: Date(), endTime: Date(), done: false)
         XCTAssertEqual(testGoal.goalName ,"Test Goal")
-        
     }
+    
     func testRoutineCanBuild() {
         
         let testRoutine = Routine(id: UUID().hashValue, routineName: "Test Routine", startTime: Date(), endTime: Date())
@@ -36,7 +36,6 @@ class Stick2ItTests: XCTestCase {
         let userData = UserData()
         userData.addGoal("TestGoal", Date(), Date(), "none")
         XCTAssertEqual(userData.userGoals[userData.userGoals.endIndex - 1].goalName, "TestGoal")
-        
     }
     
     func testUserDataCanAddRoutine() {
@@ -45,22 +44,58 @@ class Stick2ItTests: XCTestCase {
         let repeatOnDays = [true,true,true,true,true,true,true]
         userData.addRoutine("TestRoutine", Date(), Date(), repeatOnDays,"None")
         XCTAssertEqual(userData.userRoutines[userData.userRoutines.endIndex - 1].routineName, "TestRoutine")
-        
     }
-
+    
     func testPerformanceOfRefresh() {
+        
         let userData = UserData()
         self.measure {
             userData.refresh()
         }
     }
+    
     func testPerformanceToAddGoal() {
+        
         let userData = UserData()
         self.measure {
             userData.addGoal("TestGoal", Date(), Date(), "none")
         }
     }
-
+    
+    func testPerformanceAddFromRoutine() {
+        
+        let userData = UserData()
+        self.measure {
+            for i in 0...6 {
+                userData.checkRoutineAddGoalsAsNeeded(dayNum: i)
+            }
+        }
+    }
+    
+    func testPerformanceSave() {
+        
+        let userData = UserData()
+        self.measure {
+            userData.saveGoal()
+            userData.saveNotes()
+            userData.saveRoutine()
+        }
+    }
+    
+    func testGoalIndex() {
+        
+        let userData = UserData()
+        userData.addGoal("TestGoal", Date(), Date(), "none")
+        XCTAssertEqual(userData.getIndex(goal: userData.userGoals[userData.userGoals.endIndex - 1]), userData.userGoals.endIndex - 1)
+    }
+    
+    func testRoutineIndex() {
+        
+        let userData = UserData()
+        let repeatOnDays = [true,true,true,true,true,true,true]
+        userData.addRoutine("TestRoutine", Date(), Date(), repeatOnDays,"None")
+        XCTAssertEqual(userData.getIndex(routine: userData.userRoutines[userData.userRoutines.endIndex - 1]), userData.userRoutines.endIndex - 1)
+    }
 }
 
 class Stick2ItLongTermUseTest: XCTestCase {
