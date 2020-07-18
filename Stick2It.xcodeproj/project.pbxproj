@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8416DA332476D43700AD7E96 /* EditRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416DA322476D43700AD7E96 /* EditRoutine.swift */; };
 		8416DA352486C04400AD7E96 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416DA342486C04400AD7E96 /* Orientation.swift */; };
-		8420A71D2461062800E44DC9 /* todaySample.json in Resources */ = {isa = PBXBuildFile; fileRef = 8420A71C2461062800E44DC9 /* todaySample.json */; };
 		8420A7242461F2EE00E44DC9 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A7232461F2EE00E44DC9 /* UserData.swift */; };
 		8420A7282462657D00E44DC9 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A7272462657D00E44DC9 /* BlurView.swift */; };
 		8420A72A24626A8100E44DC9 /* AddGoalNoBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8420A72924626A8100E44DC9 /* AddGoalNoBack.swift */; };
@@ -62,7 +61,6 @@
 /* Begin PBXFileReference section */
 		8416DA322476D43700AD7E96 /* EditRoutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoutine.swift; sourceTree = "<group>"; };
 		8416DA342486C04400AD7E96 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
-		8420A71C2461062800E44DC9 /* todaySample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = todaySample.json; sourceTree = "<group>"; };
 		8420A7232461F2EE00E44DC9 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		8420A7272462657D00E44DC9 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		8420A72924626A8100E44DC9 /* AddGoalNoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalNoBack.swift; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 		8420A71B246105D900E44DC9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8420A71C2461062800E44DC9 /* todaySample.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -374,7 +371,6 @@
 				84AE44D1246071BB00043CDA /* LaunchScreen.storyboard in Resources */,
 				84AE44CE246071BB00043CDA /* Preview Assets.xcassets in Resources */,
 				84AE44CB246071BB00043CDA /* Assets.xcassets in Resources */,
-				8420A71D2461062800E44DC9 /* todaySample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
