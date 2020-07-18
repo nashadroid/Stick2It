@@ -5,6 +5,7 @@
 //  Created by Nashad Rahman on 5/4/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
+//  This goal box is used in today view
 
 import SwiftUI
 
