@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProjectDetailedView: View {
     @EnvironmentObject var userData: UserData
-    @State var project: Project //TODO: Change this to be an index or ID only
+    @State var project: Project 
     
     var projIndex: Int {
         userData.userProjects.firstIndex(where: { $0.id == project.id }) ?? 0

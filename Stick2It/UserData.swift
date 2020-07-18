@@ -9,6 +9,7 @@
 import SwiftUI
 import Combine
 
+//These functions are needed at startup and thus are placed at top level
 func loadSavedGoals() -> [Goal]{
     if let savedGoals = UserDefaults.standard.object(forKey: "Usergoals") as? Data {
         let decoder = JSONDecoder()
@@ -48,6 +49,7 @@ func loadSavedNotes() -> Dictionary<String, String>{
     return ["Default":"Error"]
 }
 
+// This object is used to store all user info throughout the app
 final class UserData: ObservableObject  {
     @Published var userGoals: [Goal]
     @Published var userRoutines: [Routine]
@@ -82,6 +84,7 @@ final class UserData: ObservableObject  {
         saveNotes()
     }
     
+    // Get note from a day. A string:string dictionary seems the most reliable for this as date components can be optionals
     func getNote(day: String) -> String {
         if let note = userNotes[day] {
             return note

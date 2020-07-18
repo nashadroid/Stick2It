@@ -44,13 +44,13 @@ struct ProjectView: View {
                     .edgesIgnoringSafeArea(.all)
             }
             else{
-                Button(action: {self.addingProject.toggle()}) {
-                    AddButton()
+                GeometryReader { geo in
+                    Button(action: {self.currentOverlay = .addGoal}) {
+                        AddButton()
+                    }
+                    .scaleEffect(0.2)
+                    .offset(x: geo.size.width * 0.35, y: geo.size.height * 0.42)
                 }
-                .scaleEffect(0.2)
-                .offset(x: 130, y: 270)
-                //TODO: This needs to be adjusted to work with all screen sizes
-                
                 
             }
         }

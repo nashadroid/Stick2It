@@ -67,10 +67,8 @@ func getShortStringFromRepeatDays(repeatedOn: [Bool]) -> String {
 
 func getPastWeek() -> [Date]{
     var listOfDays: [Date] = []
-    //var aDate = Date()
-    
     for i in -7...0{
-        listOfDays += [Calendar.current.date(byAdding: .day, value: i, to: Date())!] //TODO: Fix this!
+        listOfDays += [Calendar.current.date(byAdding: .day, value: i, to: Date()) ?? Date()]
     }
     
     return listOfDays
@@ -89,7 +87,7 @@ func getNextHour() -> Date {
 }
 
 func getYesterday() -> Date {
-    return Calendar.current.date(byAdding: .day, value: -1, to: Date())! //TODO: Fix this!
+    return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
 }
 
 func getStringFromDate(date: Date) -> String {

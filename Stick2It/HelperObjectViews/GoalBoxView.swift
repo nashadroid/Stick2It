@@ -10,10 +10,10 @@ import SwiftUI
 
 struct GoalBox: View {
     @EnvironmentObject var userData: UserData
-    @State var goal: Goal //TODO: Change this to be an index or ID only
+    @State var goal: Goal
     
     var goalIndex: Int {
-        userData.userGoals.firstIndex(where: { $0.id == goal.id }) ?? 0
+        userData.getIndex(goal: goal)
     }
     
     var body: some View {

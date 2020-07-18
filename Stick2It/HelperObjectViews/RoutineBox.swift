@@ -10,10 +10,10 @@ import SwiftUI
 
 struct RoutineBox: View {
     @EnvironmentObject var userData: UserData
-    @State var routine: Routine //TODO: Change this to be an index or ID only
+    @State var routine: Routine
     
     var routineIndex: Int {
-        userData.userRoutines.firstIndex(where: { $0.id == routine.id }) ?? 0
+        userData.getIndex(routine: routine)
     }
     
     var body: some View{
