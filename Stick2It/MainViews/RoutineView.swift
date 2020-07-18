@@ -13,6 +13,7 @@ struct RoutineView: View {
     @EnvironmentObject var orientationInfo : OrientationInfo
     @State var currentOverlay = overlayViews.none
     @State var routineBeingEditedID: Int = 0
+    let generator = UIImpactFeedbackGenerator(style: .soft)
     
     var body: some View {
         ZStack{
@@ -21,8 +22,9 @@ struct RoutineView: View {
                     .foregroundColor(Color.black)
                     .font(.largeTitle)
                     .fontWeight(.heavy)
-                    .padding()
-                    .padding(.leading, 10)
+                    .padding(.top, 10)
+                    .padding(.leading, 20)
+                    .padding(.bottom, 10)
                     .multilineTextAlignment(.leading)
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(spacing: 10){
@@ -36,16 +38,17 @@ struct RoutineView: View {
                         }
                     }
                     .padding()
-                    .frame(minWidth: UIScreen.main.bounds.size.width)
                 }
             }
             
-            Button(action: {self.currentOverlay = .addRoutine}) {
-                AddButton()
+            GeometryReader { geo in
+                Button(action: {self.currentOverlay = .addRoutine}) {
+                    AddButton()
+                }
+                .scaleEffect(0.2)
+                .offset(x: geo.size.width * 0.35, y: geo.size.height * 0.42)
             }
-            .scaleEffect(0.2)
-            .offset(x: 130, y: 270)
-            //TODO: This needs to be adjusted to work with all screen sizes
+            
             overlayView()
         }
     }
@@ -63,8 +66,6 @@ struct RoutineView: View {
                     
                     AddRoutineNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
                         .padding(.top, 40)
-                        .padding(.leading, -10)
-                    
                 }.background(
                     Color.black.opacity(0.65)
                         .edgesIgnoringSafeArea(.all)
@@ -84,7 +85,6 @@ struct RoutineView: View {
                     }
                     EditRoutine(currentOverlay: self.$currentOverlay, routineID: self.routineBeingEditedID)
                         .padding(.top, 40)
-                        .padding(.leading, -10)
                 }.background(
                     Color.black.opacity(0.65)
                         .edgesIgnoringSafeArea(.all)

@@ -11,7 +11,7 @@ import SwiftUI
 struct AddButton: View {
     
     var body: some View {
-        let size = UIScreen.main.bounds.size.width
+        let size = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
         
         return ZStack {
             Circle()

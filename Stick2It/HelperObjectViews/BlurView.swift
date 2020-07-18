@@ -4,6 +4,7 @@
 //
 //  Created by Nashad Rahman on 5/5/20.
 //  Copyright © 2020 NashApps. All rights reserved.
+//  From Stack Exchange
 //
 
 import SwiftUI

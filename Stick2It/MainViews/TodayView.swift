@@ -13,7 +13,6 @@ struct TodayView: View {
     @State var goalBeingEditedID: Int = 0
     @State var currentOverlay = overlayViews.none
     let dayIndex = Calendar.current.component(.weekday, from: Date()) - 1
-    let generator = UIImpactFeedbackGenerator(style: .heavy)
     
     var body: some View {
         ZStack{
@@ -22,9 +21,14 @@ struct TodayView: View {
                     .foregroundColor(Color.black)
                     .font(.largeTitle)
                     .fontWeight(.heavy)
-                    .padding()
-                    .padding(.leading, 10)
+                    .padding(.top, 10)
+                    .padding(.leading, 20)
                     .multilineTextAlignment(.leading)
+                Text(userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Tomorrow") ))
+                    .italic()
+                    .foregroundColor(.gray)
+                    .padding(.leading, 20)
+                    .padding(.bottom, 10)
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(spacing: 10){
                         
@@ -38,7 +42,7 @@ struct TodayView: View {
                             }
                         }
                         Button(action: {
-                            self.generator.impactOccurred()
+                            softGenerator.impactOccurred()
                             self.currentOverlay = .reflect
                         }){
                             
@@ -48,16 +52,16 @@ struct TodayView: View {
                         .padding(.top, 10)
                     }
                     .padding()
-                    .frame(minWidth: UIScreen.main.bounds.size.width)
                 }
             }
             // ADD BUTTON
-            Button(action: {self.currentOverlay = .addGoal}) {
-                AddButton()
+            GeometryReader { geo in
+                Button(action: {self.currentOverlay = .addGoal}) {
+                    AddButton()
+                }
+                .scaleEffect(0.2)
+                .offset(x: geo.size.width * 0.35, y: geo.size.height * 0.42)
             }
-            .scaleEffect(0.2)
-            .offset(x: 130, y: 270)
-            //TODO: This needs to be adjusted to work with all screen sizes
             
             overlayView()
             
@@ -74,7 +78,6 @@ struct TodayView: View {
                 }
                 AddGoalNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
                     .padding(.top, 40)
-                    .padding(.leading, -10)
             }.background(
                 Color.black.opacity(0.65)
                     .edgesIgnoringSafeArea(.all)
@@ -93,7 +96,6 @@ struct TodayView: View {
                 }
                 EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, currentOverlay: self.$currentOverlay)
                     .padding(.top, 40)
-                    .padding(.leading, -10)
             }.background(
                 Color.black.opacity(0.65)
                     .edgesIgnoringSafeArea(.all)
@@ -112,7 +114,11 @@ struct TodayView: View {
                 }
                 VStack{
                     Spacer()
-                    ReflectionPage(currentOverlay: self.$currentOverlay)
+                    ReflectionPage(
+                        currentOverlay: self.$currentOverlay,
+                        todayReflect: self.userData.getNote(day: getStringFromDate(date: Date())+"Today"),
+                        tomorrowMessage: self.userData.getNote(day: getStringFromDate(date: Date())+"Tomorrow")
+                    )
                         .padding(20)
                     Spacer()
                 }

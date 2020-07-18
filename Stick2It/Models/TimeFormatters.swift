@@ -16,6 +16,16 @@ func getTimeStringFromDate(_ date: Date) -> String{
     
 }
 
+func getTimeIntFromDate(_ date: Date) -> Int{
+    
+    
+    let formatter2 = DateFormatter()
+    formatter2.dateFormat = "HHmm"
+    return Int(formatter2.string(from: date)) ?? 0
+    
+}
+
+
 func getShortStringFromRepeatDays(repeatedOn: [Bool]) -> String {
     var strToReturn: String = ""
     
@@ -66,15 +76,13 @@ func getPastWeek() -> [Date]{
     return listOfDays
 }
 func getLastHour() -> Date {
-    if let roundedHours = try? Calendar.current.date(bySetting: .minute, value: 0, of: Date()){
-        if let lastHour = try? Calendar.current.date(byAdding: .hour, value: -1, to: roundedHours) {
-            return lastHour
-        }
+    if let roundedHours = Calendar.current.date(bySetting: .minute, value: 0, of: Date()){
+            return Calendar.current.date(byAdding: .hour, value: -1, to: roundedHours) ?? Date()
     }
     return Date()
 }
 func getNextHour() -> Date {
-    if let roundedHours = try? Calendar.current.date(bySetting: .minute, value: 0, of: Date()){
+    if let roundedHours = Calendar.current.date(bySetting: .minute, value: 0, of: Date()){
         return roundedHours
     }
     return Date()
@@ -82,4 +90,10 @@ func getNextHour() -> Date {
 
 func getYesterday() -> Date {
     return Calendar.current.date(byAdding: .day, value: -1, to: Date())! //TODO: Fix this!
+}
+
+func getStringFromDate(date: Date) -> String {
+    let formatter1 = DateFormatter()
+    formatter1.dateFormat = "YD"
+    return formatter1.string(from: date)
 }

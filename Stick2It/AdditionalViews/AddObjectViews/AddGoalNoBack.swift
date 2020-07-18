@@ -119,7 +119,7 @@ struct AddGoalNoBack: View {
             .padding(.bottom,500)
             }
         }
-        .padding(.leading, 30)
+        .padding(.leading, 20)
         .padding(.trailing, 30)
     }
 }

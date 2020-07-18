@@ -17,7 +17,7 @@ struct EditRoutine: View {
     var routineIndex: Int {
         userData.userRoutines.firstIndex(where: { $0.id == routineID }) ?? 0
     }
-
+    
     var body: some View {
         VStack{
             
@@ -34,13 +34,13 @@ struct EditRoutine: View {
                 }
                 Spacer()
                 Button(action: {
-                    self.userData.removeRoutine(routine: self.userData.userRoutines[self.routineIndex])
+                    self.userData.saveRoutine()
                     self.currentOverlay = .none
                 }) {
-                    Text("Delete")
+                    Text("Done")
                         .foregroundColor(Color.white)
-                    .padding(.top, 15)
-                    .padding(.bottom, 15)
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
                 }
             }
             
@@ -72,9 +72,9 @@ struct EditRoutine: View {
                             .foregroundColor(Color.white)
                         
                         
-                            DatePicker("Please enter a date", selection: $userData.userRoutines[self.routineIndex].startTime, displayedComponents: .hourAndMinute)
-                                .labelsHidden()
-                                .multilineTextAlignment(.center)
+                        DatePicker("Please enter a date", selection: $userData.userRoutines[self.routineIndex].startTime, displayedComponents: .hourAndMinute)
+                            .labelsHidden()
+                            .multilineTextAlignment(.center)
                         
                     }
                     .padding(5)
@@ -149,13 +149,24 @@ struct EditRoutine: View {
                             .padding(.top, 20)
                         
                     }
+                    
+                    Button(action: {
+                        self.userData.removeRoutine(routine: self.userData.userRoutines[self.routineIndex])
+                        self.currentOverlay = .none
+                    }) {
+                        Text("Delete")
+                            .foregroundColor(Color.red)
+                        
+                    }
+                    .padding(.top, 30)
+                    .padding(.bottom, 15)
                 }
                 .padding(5)
                 .padding(.bottom,500)
                 
             }
         }
-        .padding(.leading, 30)
+        .padding(.leading, 20)
         .padding(.trailing, 30)
     }
 }

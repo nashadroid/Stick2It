@@ -40,28 +40,25 @@ func loadSavedProjects() -> [Project]{
     return []
 }
 
-func loadSavedNotes() -> [Project]{
+func loadSavedNotes() -> Dictionary<String, String>{
     
-    if let savedNotes = UserDefaults.standard.object(forKey: "UserNotes") as? Data {
-        let decoder = JSONDecoder()
-        if let loadedNotes = try? decoder.decode([Project].self, from: savedNotes) {
-            return loadedNotes
-        }
+    if let savedNotes = UserDefaults.standard.object(forKey: "UserNotes") as? Dictionary<String, String> {
+        return savedNotes
     }
-    return []
+    return ["Default":"Error"]
 }
 
 final class UserData: ObservableObject  {
     @Published var userGoals: [Goal]
     @Published var userRoutines: [Routine]
     @Published var userProjects: [Project]
-    @Published var userNotes: Dictionary<Int, String>
+    @Published var userNotes: Dictionary<String, String>
     
     init() {
         userGoals = loadSavedGoals()
         userRoutines = loadSavedRoutines()
         userProjects = loadSavedProjects()
-        userNotes = [1: "Note"]
+        userNotes = loadSavedNotes()
         checkRoutineAddGoalsAsNeeded(dayNum: Calendar.current.component(.weekday, from: Date()) - 1)
         
     }
@@ -80,21 +77,28 @@ final class UserData: ObservableObject  {
         self.userProjects += [newProject]
         self.saveProjects()
     }
-    func addNote(note: String) {
-        userNotes[1] = note
+    func addNote(note: String, day: String) {
+        userNotes[day] = note
         saveNotes()
+    }
+    
+    func getNote(day: String) -> String {
+        if let note = userNotes[day] {
+            return note
+        }
+        return ""
     }
     
     //Save Objects
     func saveGoal(){
-        self.userGoals.sort(by: {$0.startTime < $1.startTime })
+        self.userGoals.sort(by: {getTimeIntFromDate($0.startTime) < getTimeIntFromDate($1.startTime)})
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(self.userGoals) {
             UserDefaults.standard.set(data, forKey: "Usergoals")
         }
     }
     func saveRoutine(){
-        self.userRoutines.sort(by: {$0.startTime < $1.startTime })
+        self.userRoutines.sort(by: {getTimeIntFromDate($0.startTime) < getTimeIntFromDate($1.startTime)})
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(self.userRoutines) {
             UserDefaults.standard.set(data, forKey: "UserRoutines")
@@ -107,7 +111,7 @@ final class UserData: ObservableObject  {
         }
     }
     func saveNotes(){
-        UserDefaults.standard.set(self.userNotes, forKey: "UserProjects")
+        UserDefaults.standard.set(self.userNotes, forKey: "UserNotes")
     }
     
     //Remove Objects
@@ -129,6 +133,14 @@ final class UserData: ObservableObject  {
         userGoals = loadSavedGoals()
         userRoutines = loadSavedRoutines()
         userProjects = loadSavedProjects()
+    }
+    
+    //Get Index of Goal
+    func getIndex(goal: Goal) -> Int{
+        return self.userGoals.firstIndex(where: { $0.id == goal.id }) ?? 0
+    }
+    func getIndex(routine: Routine) -> Int{
+        return self.userRoutines.firstIndex(where: { $0.id == routine.id }) ?? 0
     }
     
     
