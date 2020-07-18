@@ -41,13 +41,13 @@ struct GoalBox: View {
                 .fontWeight(.heavy)
                 .padding()
                 .background(
-                    RoundedRectangle(cornerRadius: 3)
+                    RoundedRectangle(cornerRadius: 5)
                     .fill(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.red)
                    
                 )
         }
         .background(
-            RoundedRectangle(cornerRadius: 3)
+            RoundedRectangle(cornerRadius: 5)
             .fill(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.white)
             .shadow(radius: 7)
            

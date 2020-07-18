@@ -45,7 +45,7 @@ struct ReflectView: View {
                 }
             }
             else{
-                ScrollView{
+                ScrollView(showsIndicators: false){
                     VStack(){
                     Text("Past Week")
                         .foregroundColor(Color.black)
@@ -63,7 +63,7 @@ struct ReflectView: View {
                                         Text(routine.routineName)
                                             .fontWeight(.bold)
                                         ForEach(getPastWeek(), id: \.self){ day in
-                                            Rectangle()
+                                            RoundedRectangle(cornerRadius: 3)
                                                 .fill(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == 0 ? Color.red : Color.green)
                                                 .opacity(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == -1 ? 0.1 : 1)
                                                 .frame(width: 30, height: 30)
