@@ -22,8 +22,9 @@ struct RoutineView: View {
                     .foregroundColor(Color.black)
                     .font(.largeTitle)
                     .fontWeight(.heavy)
-                    .padding()
-                    .padding(.leading, 10)
+                    .padding(.top, 10)
+                    .padding(.leading, 20)
+                    .padding(.bottom, 10)
                     .multilineTextAlignment(.leading)
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(spacing: 10){
