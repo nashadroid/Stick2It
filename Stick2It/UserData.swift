@@ -149,7 +149,7 @@ final class UserData: ObservableObject  {
     
     //Add goals from routine methods
     func checkRoutineAddGoalsAsNeeded(dayNum: Int){
-        let dayRoutines = getDaysRoutines(dayNum: dayNum)
+        let dayRoutines = self.userRoutines.filter({$0.repeatOn[dayNum] && $0.running})
         
         for routine in dayRoutines{
             
@@ -162,16 +162,6 @@ final class UserData: ObservableObject  {
             self.addGoalAvoidingRepeat(goalToBeAdded: tempGoal)
         }
         self.saveGoal()
-    }
-    func getDaysRoutines(dayNum: Int) -> [Routine]{
-        var routinesToReturn: [Routine] = []
-        
-        for routine in self.userRoutines{
-            if routine.repeatOn[dayNum] && routine.running {
-                routinesToReturn += [routine]
-            }
-        }
-        return routinesToReturn
     }
     func combineTimeAndDay(time: Date, day: Date) -> Date {
         
@@ -186,10 +176,8 @@ final class UserData: ObservableObject  {
     }
     func addGoalAvoidingRepeat(goalToBeAdded: Goal){
         
-        for usergoal in userGoals {
-            if(usergoal.goalName == goalToBeAdded.goalName && usergoal.startTime == goalToBeAdded.startTime) {
-                return
-            }
+        if self.userGoals.firstIndex(where: {$0.goalName == goalToBeAdded.goalName && $0.startTime == goalToBeAdded.startTime}) != nil{
+            return
         }
         userGoals += [goalToBeAdded]
     }
@@ -199,7 +187,7 @@ final class UserData: ObservableObject  {
         var done: [Bool] = []
         done = self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: Date) && $0.goalName == goalName}).map({return $0.done})
         
-        if (done.count == 1){
+        if (done != []){
             if done[0] == true {
                 return 1
             }

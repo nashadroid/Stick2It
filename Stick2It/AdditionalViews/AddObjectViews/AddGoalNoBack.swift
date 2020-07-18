@@ -124,8 +124,3 @@ struct AddGoalNoBack: View {
     }
 }
 
-//struct AddItemNoBack_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddGoalNoBack(currentOverlay: constant(.addGoal))
-//    }
-//}
