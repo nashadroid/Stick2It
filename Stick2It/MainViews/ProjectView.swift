@@ -26,10 +26,10 @@ struct ProjectView: View {
             
             if(addingProject){
                 GeometryReader{_ in
-                    BlurView(style: .light)
-                        .onTapGesture {
-                            self.addingProject.toggle()
-                    }
+//                    BlurView(style: .light)
+//                        .onTapGesture {
+//                            self.addingProject.toggle()
+//                    }
                     AddProjectNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
                         .padding(.top, 40)
                         .padding(.leading, -10)

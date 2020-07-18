@@ -83,67 +83,69 @@ struct TodayView: View {
         
         // add goal screen
         case .addGoal:
-            return AnyView(GeometryReader{_ in
-                BlurView(style: .light)
-                    .onTapGesture {
-                        self.currentOverlay = .none
+            return AnyView(
+                ZStack{
+                    BlurView()
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    AddGoalNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
+                        .background(
+                            Color.black.opacity(0.4)
+                                .edgesIgnoringSafeArea(.all)
+                                .onTapGesture {
+                                    self.currentOverlay = .none
+                            }
+                            
+                    )
                 }
-                AddGoalNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
-                    .padding(.top, 40)
-            }.background(
-                Color.black.opacity(0.65)
-                    .edgesIgnoringSafeArea(.all)
-                    .onTapGesture {
-                        self.currentOverlay = .none
-                }
-            )
-                .edgesIgnoringSafeArea(.all)
             )
             
         // edit a goal
         case .editGoal:
-            return AnyView(GeometryReader{_ in
-                BlurView(style: .light)
-                    .onTapGesture {
-                        self.currentOverlay = .none
-                }
-                EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, currentOverlay: self.$currentOverlay)
-                    .padding(.top, 40)
-            }.background(
-                Color.black.opacity(0.65)
-                    .edgesIgnoringSafeArea(.all)
-                    .onTapGesture {
-                        self.currentOverlay = .none
+            return AnyView(
+                ZStack{
+                    BlurView()
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, currentOverlay: self.$currentOverlay)
+                        .background(
+                            Color.black.opacity(0.4)
+                                .edgesIgnoringSafeArea(.all)
+                                .onTapGesture {
+                                    self.currentOverlay = .none
+                            }
+                            
+                    )
                 }
             )
-                .edgesIgnoringSafeArea(.all)
-            )
+            
             
         // reflect page
         case .reflect:
-            return AnyView(GeometryReader{_ in
-                BlurView(style: .light)
-                    .onTapGesture {
-                        self.currentOverlay = .none
-                }
-                VStack{
-                    Spacer()
-                    ReflectionPage(
-                        currentOverlay: self.$currentOverlay,
-                        todayReflect: self.userData.getNote(day: getStringFromDate(date: Date())+"Today"),
-                        tomorrowMessage: self.userData.getNote(day: getStringFromDate(date: Date())+"Tomorrow")
+            return AnyView(
+                ZStack{
+                    BlurView()
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    VStack{
+                        Spacer()
+                        ReflectionPage(
+                            currentOverlay: self.$currentOverlay,
+                            todayReflect: self.userData.getNote(day: getStringFromDate(date: Date())+"Today"),
+                            tomorrowMessage: self.userData.getNote(day: getStringFromDate(date: Date())+"Tomorrow")
+                        )
+                            .padding(20)
+                            
+                        Spacer()
+                    }
+                    .background(
+                            Color.black.opacity(0.4)
+                                .edgesIgnoringSafeArea(.all)
+                                .onTapGesture {
+                                    self.currentOverlay = .none
+                            }
                     )
-                        .padding(20)
-                    Spacer()
                 }
-            }.background(
-                Color.black.opacity(0.65)
-                    .edgesIgnoringSafeArea(.all)
-                    .onTapGesture {
-                        self.currentOverlay = .none
-                }
-            )
-                .edgesIgnoringSafeArea(.all)
             )
             
         // It needs to return something, I think this is the best way to go about returning nothing

@@ -66,42 +66,40 @@ struct RoutineView: View {
         // Add Routine overlay
         case .addRoutine:
             return AnyView(
-                GeometryReader{_ in
-                    BlurView(style: .light)
-                        .onTapGesture {
-                            self.currentOverlay = .none
-                    }
+                ZStack{
+                    BlurView()
+                        .edgesIgnoringSafeArea(.all)
                     
                     AddRoutineNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
-                        .padding(.top, 40)
-                }.background(
-                    Color.black.opacity(0.65)
-                        .edgesIgnoringSafeArea(.all)
-                        .onTapGesture {
-                            self.currentOverlay = .none
-                    }
-                )
-                    .edgesIgnoringSafeArea(.all)
+                        .background(
+                            Color.black.opacity(0.4)
+                                .edgesIgnoringSafeArea(.all)
+                                .onTapGesture {
+                                    self.currentOverlay = .none
+                            }
+                            
+                    )
+                }
             )
             
         // Edit Routine Overlay
         case .editRoutine:
             return AnyView(
-                GeometryReader{_ in
-                    BlurView(style: .light)
-                        .onTapGesture {
-                            self.currentOverlay = .none
-                    }
+                ZStack{
+                    BlurView()
+                        .edgesIgnoringSafeArea(.all)
+                    
                     EditRoutine(currentOverlay: self.$currentOverlay, routineID: self.routineBeingEditedID)
                         .padding(.top, 40)
-                }.background(
-                    Color.black.opacity(0.65)
-                        .edgesIgnoringSafeArea(.all)
-                        .onTapGesture {
-                            self.currentOverlay = .none
-                    }
-                )
-                    .edgesIgnoringSafeArea(.all)
+                        .background(
+                            Color.black.opacity(0.4)
+                                .edgesIgnoringSafeArea(.all)
+                                .onTapGesture {
+                                    self.currentOverlay = .none
+                            }
+                            
+                    )
+                }
             )
             
         default:
