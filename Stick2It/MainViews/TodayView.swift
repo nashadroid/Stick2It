@@ -65,7 +65,10 @@ struct TodayView: View {
             }
             // ADD BUTTON
             GeometryReader { geo in
-                Button(action: {self.currentOverlay = .addGoal}) {
+                Button(action: {
+                    softGenerator.impactOccurred()
+                    self.currentOverlay = .addGoal
+                }) {
                     AddButton()
                 }
                 .scaleEffect(0.2)

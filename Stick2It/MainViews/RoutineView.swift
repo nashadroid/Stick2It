@@ -36,6 +36,7 @@ struct RoutineView: View {
                         ForEach(userData.userRoutines) {routine in
                             RoutineBox(routine: routine)
                                 .onLongPressGesture {
+                                    softGenerator.impactOccurred()
                                     self.routineBeingEditedID = routine.id
                                     self.currentOverlay = .editRoutine
                             }
@@ -47,8 +48,12 @@ struct RoutineView: View {
             
             // Add Buttone
             GeometryReader { geo in
-                Button(action: {self.currentOverlay = .addRoutine}) {
+                Button(action: {
+                    softGenerator.impactOccurred()
+                    self.currentOverlay = .addRoutine
+                }) {
                     AddButton()
+                    
                 }
                 .scaleEffect(0.2)
                 .offset(x: geo.size.width * 0.35, y: geo.size.height * 0.42)
@@ -90,7 +95,6 @@ struct RoutineView: View {
                         .edgesIgnoringSafeArea(.all)
                     
                     EditRoutine(currentOverlay: self.$currentOverlay, routineID: self.routineBeingEditedID)
-                        .padding(.top, 40)
                         .background(
                             Color.black.opacity(0.4)
                                 .edgesIgnoringSafeArea(.all)

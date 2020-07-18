@@ -138,7 +138,7 @@ struct EditGoal: View {
             }
             
         }
-        .padding(.leading, 20)
+        .padding(.leading, 30)
         .padding(.trailing, 30)
     }
 }
