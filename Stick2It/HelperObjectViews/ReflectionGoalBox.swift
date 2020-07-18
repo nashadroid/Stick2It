@@ -5,6 +5,7 @@
 //  Created by Nashad Rahman on 7/10/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
+//  Used in past view
 
 import SwiftUI
 
@@ -51,8 +52,5 @@ struct ReflectionGoalBox: View {
         .onTapGesture {
             ()
         }
-                    
-            
-        
     }
 }

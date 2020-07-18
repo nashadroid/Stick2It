@@ -46,8 +46,3 @@ struct ProjectDetailedView: View {
     }
 }
 
-//struct ProjectDetailedView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProjectDetailedView()
-//    }
-//}

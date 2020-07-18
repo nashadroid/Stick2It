@@ -5,6 +5,7 @@
 //  Created by Nashad Rahman on 7/10/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
+//  Button used in TodayView
 
 import SwiftUI
 
@@ -25,16 +26,11 @@ struct ReflectButton: View {
                 
             }
         }
-//        .border(Color.white, width: 3)
-            
             .background(
                 RoundedRectangle(cornerRadius: 5)
                     .fill(Color(red: 246/255, green: 247/255, blue: 248/255))
                     .shadow(radius: 7)
             )
-//        .onTapGesture {
-//            self.generator.impactOccurred()
-//        }
     }
 }
 
