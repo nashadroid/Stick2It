@@ -21,7 +21,6 @@ func getTimeIntFromDate(_ date: Date) -> Int{
     
     let formatter2 = DateFormatter()
     formatter2.dateFormat = "HHmm"
-    print(Int(formatter2.string(from: date)) ?? 0)
     return Int(formatter2.string(from: date)) ?? 0
     
 }
@@ -77,15 +76,13 @@ func getPastWeek() -> [Date]{
     return listOfDays
 }
 func getLastHour() -> Date {
-    if let roundedHours = try? Calendar.current.date(bySetting: .minute, value: 0, of: Date()){
-        if let lastHour = try? Calendar.current.date(byAdding: .hour, value: -1, to: roundedHours) {
-            return lastHour
-        }
+    if let roundedHours = Calendar.current.date(bySetting: .minute, value: 0, of: Date()){
+            return Calendar.current.date(byAdding: .hour, value: -1, to: roundedHours) ?? Date()
     }
     return Date()
 }
 func getNextHour() -> Date {
-    if let roundedHours = try? Calendar.current.date(bySetting: .minute, value: 0, of: Date()){
+    if let roundedHours = Calendar.current.date(bySetting: .minute, value: 0, of: Date()){
         return roundedHours
     }
     return Date()
