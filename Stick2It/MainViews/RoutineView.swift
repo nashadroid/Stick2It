@@ -10,7 +10,6 @@ import SwiftUI
 
 struct RoutineView: View {
     @EnvironmentObject var userData: UserData
-    @EnvironmentObject var orientationInfo : OrientationInfo
     @State var currentOverlay = overlayViews.none
     @State var routineBeingEditedID: Int = 0
     let generator = UIImpactFeedbackGenerator(style: .soft)

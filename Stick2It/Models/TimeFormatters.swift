@@ -8,24 +8,23 @@
 
 import SwiftUI
 
+// Gets a string from any date
 func getTimeStringFromDate(_ date: Date) -> String{
     
     let formatter2 = DateFormatter()
     formatter2.timeStyle = .short
     return formatter2.string(from: date)
-    
 }
 
+// Gets an int from any date object to compare time of day across any day
 func getTimeIntFromDate(_ date: Date) -> Int{
-    
     
     let formatter2 = DateFormatter()
     formatter2.dateFormat = "HHmm"
     return Int(formatter2.string(from: date)) ?? 0
-    
 }
 
-
+// Returns a string to represent which says a routine is repeated on
 func getShortStringFromRepeatDays(repeatedOn: [Bool]) -> String {
     var strToReturn: String = ""
     
@@ -65,6 +64,7 @@ func getShortStringFromRepeatDays(repeatedOn: [Bool]) -> String {
     return strToReturn
 }
 
+// Returns a list of Date objects corresponding to the past week
 func getPastWeek() -> [Date]{
     var listOfDays: [Date] = []
     for i in -7...0{
@@ -73,12 +73,16 @@ func getPastWeek() -> [Date]{
     
     return listOfDays
 }
+
+// Returns nearest hour as date, to default new goals and routines
 func getLastHour() -> Date {
     if let roundedHours = Calendar.current.date(bySetting: .minute, value: 0, of: Date()){
             return Calendar.current.date(byAdding: .hour, value: -1, to: roundedHours) ?? Date()
     }
     return Date()
 }
+
+// Returns next hour as date, to default new goals and routines
 func getNextHour() -> Date {
     if let roundedHours = Calendar.current.date(bySetting: .minute, value: 0, of: Date()){
         return roundedHours
@@ -86,10 +90,12 @@ func getNextHour() -> Date {
     return Date()
 }
 
+// Returns yesterday's date
 func getYesterday() -> Date {
     return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
 }
 
+// Returns string of date
 func getStringFromDate(date: Date) -> String {
     let formatter1 = DateFormatter()
     formatter1.dateFormat = "YD"
