@@ -5,7 +5,7 @@
 //  Created by Nashad Rahman on 5/4/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
-//  Working Comment Test
+//  First View, calls on all others
 
 import SwiftUI
 
@@ -17,7 +17,6 @@ let generator = UIImpactFeedbackGenerator(style: .heavy)
 let softGenerator = UIImpactFeedbackGenerator(style: .soft)
 
 struct ContentView: View {
-    
     @EnvironmentObject var userData: UserData
     @State var currentOverlay : overlayViews = .none
     @State var addingItem = false
@@ -25,34 +24,28 @@ struct ContentView: View {
     
     var body: some View {
         
-        ZStack{
-            TabView(selection: $selection) {
-                
-                ReflectView().tabItem({
-                    Image(systemName: "memories")
-                        .font(.system(size: 20))
-                    Text("Past")
-                }).tag(0)
-                
-                TodayView().tabItem({
-                    Image(systemName: "circle.bottomthird.split")
-                        .font(.system(size: 20))
-                    Text("Today")
-                }).tag(1)
-                
-                RoutineView().tabItem({
-                    Image(systemName: "calendar.circle")
-                        .font(.system(size: 20))
-                    Text("Future")
-                }).tag(2)
-                
-//                ProjectView(userData: _userData, addingProject: false).tabItem({
-//
-//                    Text("Projects")
-//
-//                })
-            }
+        TabView(selection: $selection) {
+            
+            ReflectView().tabItem({
+                Image(systemName: "memories")
+                    .font(.system(size: 20))
+                Text("Past")
+            }).tag(0)
+            
+            TodayView().tabItem({
+                Image(systemName: "circle.bottomthird.split")
+                    .font(.system(size: 20))
+                Text("Today")
+            }).tag(1)
+            
+            RoutineView().tabItem({
+                Image(systemName: "calendar.circle")
+                    .font(.system(size: 20))
+                Text("Future")
+            }).tag(2)
+            
         }
+        
     }
     
 }
