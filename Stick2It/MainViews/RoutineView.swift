@@ -5,6 +5,7 @@
 //  Created by Nashad Rahman on 5/8/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
+//  Shows routines
 
 import SwiftUI
 
@@ -17,6 +18,8 @@ struct RoutineView: View {
     var body: some View {
         ZStack{
             VStack(alignment: .leading, spacing: 0){
+                
+                // Title
                 Text("Routines")
                     .foregroundColor(Color.black)
                     .font(.largeTitle)
@@ -25,6 +28,8 @@ struct RoutineView: View {
                     .padding(.leading, 20)
                     .padding(.bottom, 10)
                     .multilineTextAlignment(.leading)
+                
+                // Show Routines
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(spacing: 10){
                         
@@ -40,6 +45,7 @@ struct RoutineView: View {
                 }
             }
             
+            // Add Buttone
             GeometryReader { geo in
                 Button(action: {self.currentOverlay = .addRoutine}) {
                     AddButton()
@@ -48,6 +54,7 @@ struct RoutineView: View {
                 .offset(x: geo.size.width * 0.35, y: geo.size.height * 0.42)
             }
             
+            // Call on overlay
             overlayView()
         }
     }
@@ -55,6 +62,8 @@ struct RoutineView: View {
     func overlayView() -> AnyView {
         
         switch self.currentOverlay {
+            
+        // Add Routine overlay
         case .addRoutine:
             return AnyView(
                 GeometryReader{_ in
@@ -75,6 +84,7 @@ struct RoutineView: View {
                     .edgesIgnoringSafeArea(.all)
             )
             
+        // Edit Routine Overlay
         case .editRoutine:
             return AnyView(
                 GeometryReader{_ in
