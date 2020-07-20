@@ -27,7 +27,9 @@ func loadSavedRoutines() -> [Routine]{
             return loadedRoutine
         }
     }
-    return [Routine(id: UUID().hashValue, routineName: "Add a routine to get started!", startTime: oldestDate(), endTime: oldestDate())]
+    
+    return[]
+//return [Routine(id: UUID().hashValue, routineName: "Add a routine to get started!", startTime: oldestDate(), endTime: oldestDate())]
 }
 
 func loadSavedProjects() -> [Project]{
