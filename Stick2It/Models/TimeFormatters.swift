@@ -101,3 +101,7 @@ func getStringFromDate(date: Date) -> String {
     formatter1.dateFormat = "YD"
     return formatter1.string(from: date)
 }
+func oldestDate() -> Date {
+    
+    return Calendar.current.date(byAdding: .year, value: -1000, to: Date()) ?? Date()
+}

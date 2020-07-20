@@ -17,7 +17,7 @@ func loadSavedGoals() -> [Goal]{
             return loadedGoals
         }
     }
-    return []
+    return [Goal(id: UUID().hashValue , goalName: "Add a Goal to get started!", startTime: oldestDate(), endTime: oldestDate(), done: false)]
 }
 
 func loadSavedRoutines() -> [Routine]{
@@ -27,7 +27,7 @@ func loadSavedRoutines() -> [Routine]{
             return loadedRoutine
         }
     }
-    return []
+    return [Routine(id: UUID().hashValue, routineName: "Add a routine to get started!", startTime: oldestDate(), endTime: oldestDate())]
 }
 
 func loadSavedProjects() -> [Project]{
