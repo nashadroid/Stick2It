@@ -46,6 +46,7 @@ struct ReflectView: View {
                             }
                         }
                         .padding()
+                        .frame(maxWidth: .infinity)
                     }
                 }
             }

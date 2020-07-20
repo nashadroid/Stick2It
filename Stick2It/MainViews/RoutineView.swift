@@ -43,6 +43,7 @@ struct RoutineView: View {
                         }
                     }
                     .padding()
+                    .frame(maxWidth: .infinity)
                 }
             }
             

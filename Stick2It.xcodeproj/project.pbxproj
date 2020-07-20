@@ -80,7 +80,7 @@
 		8452261D24690FF800E9CA66 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		8452261F2469150300E9CA66 /* AddProjectNoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectNoBack.swift; sourceTree = "<group>"; };
 		84522621246C55D200E9CA66 /* ProjectDetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailedView.swift; sourceTree = "<group>"; };
-		84AE44C1246071BA00043CDA /* Stick2It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stick2It.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84AE44C1246071BA00043CDA /* Koalati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Koalati.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AE44C4246071BA00043CDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84AE44C6246071BA00043CDA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		84AE44C8246071BA00043CDA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 		84AE44C2246071BA00043CDA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84AE44C1246071BA00043CDA /* Stick2It.app */,
+				84AE44C1246071BA00043CDA /* Koalati.app */,
 				84AE44D7246071BC00043CDA /* Stick2ItTests.xctest */,
 				84AE44E2246071BC00043CDA /* Stick2ItUITests.xctest */,
 			);
@@ -281,7 +281,7 @@
 			);
 			name = Stick2It;
 			productName = Stick2It;
-			productReference = 84AE44C1246071BA00043CDA /* Stick2It.app */;
+			productReference = 84AE44C1246071BA00043CDA /* Koalati.app */;
 			productType = "com.apple.product-type.application";
 		};
 		84AE44D6246071BC00043CDA /* Stick2ItTests */ = {
@@ -595,8 +595,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Nashad.Stick2It;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = Koalati1;
+				PRODUCT_NAME = Koalati;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -615,8 +615,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Nashad.Stick2It;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = Koalati1;
+				PRODUCT_NAME = Koalati;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

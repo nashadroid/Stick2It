@@ -28,6 +28,7 @@ struct TodayView: View {
                     .padding(.leading, 20)
                     .multilineTextAlignment(.leading)
                 
+                
                 // Show message from yesterday (My favorite part)
                 Text(userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Tomorrow") ))
                     .italic()
@@ -37,7 +38,7 @@ struct TodayView: View {
                 
                 // Show goals of today
                 ScrollView(.vertical, showsIndicators: false){
-                    VStack(spacing: 10){
+                    VStack(alignment: .center, spacing: 10){
                         
                         ForEach(userData.userGoals.filter({Calendar.current.isDateInToday($0.startTime)})) {goal in
                             GoalBox(goal: goal)
@@ -61,7 +62,10 @@ struct TodayView: View {
                         .padding(.top, 10)
                     }
                     .padding()
+                    .frame(maxWidth: .infinity)
                 }
+                
+                
             }
             // ADD BUTTON
             GeometryReader { geo in
@@ -79,6 +83,7 @@ struct TodayView: View {
             overlayView()
             
         }
+        .frame(maxWidth: .infinity)
     }
     func overlayView() -> AnyView {
         
