@@ -123,8 +123,9 @@ struct EditGoal: View {
                     }
                     
                     Button(action: {
-                        self.userData.removeGoal(goal: self.userData.userGoals[self.goalIndex])
                         self.currentOverlay = .none
+                        self.userData.removeGoal(goal: self.userData.userGoals[self.goalIndex])
+                        
                     }) {
                         Text("Delete")
                             .foregroundColor(Color.red)

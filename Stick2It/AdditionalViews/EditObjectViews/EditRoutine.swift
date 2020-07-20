@@ -151,8 +151,9 @@ struct EditRoutine: View {
                     }
                     
                     Button(action: {
-                        self.userData.removeRoutine(routine: self.userData.userRoutines[self.routineIndex])
                         self.currentOverlay = .none
+                        self.userData.removeRoutine(routine: self.userData.userRoutines[self.routineIndex])
+                        
                     }) {
                         Text("Delete")
                             .foregroundColor(Color.red)

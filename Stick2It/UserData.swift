@@ -51,6 +51,10 @@ func loadSavedNotes() -> Dictionary<String, String>{
     return ["Default":"Error"]
 }
 
+enum loadError: Error {
+    case outOfIndex
+}
+
 // This object is used to store all user info throughout the app
 final class UserData: ObservableObject  {
     @Published var userGoals: [Goal]
