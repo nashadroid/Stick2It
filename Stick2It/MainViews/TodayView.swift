@@ -100,9 +100,7 @@ struct TodayView: View {
                         .background(
                             Color.black.opacity(0.4)
                                 .edgesIgnoringSafeArea(.all)
-                                .onTapGesture {
-                                    self.currentOverlay = .none
-                            }
+                                
                             
                     )
                 }
@@ -119,9 +117,7 @@ struct TodayView: View {
                         .background(
                             Color.black.opacity(0.4)
                                 .edgesIgnoringSafeArea(.all)
-                                .onTapGesture {
-                                    self.currentOverlay = .none
-                            }
+                                
                             
                     )
                 }

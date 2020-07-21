@@ -80,10 +80,7 @@ struct RoutineView: View {
                         .background(
                             Color.black.opacity(0.4)
                                 .edgesIgnoringSafeArea(.all)
-                                .onTapGesture {
-                                    self.currentOverlay = .none
-                            }
-                            
+                                
                     )
                 }
             )
@@ -99,10 +96,7 @@ struct RoutineView: View {
                         .background(
                             Color.black.opacity(0.4)
                                 .edgesIgnoringSafeArea(.all)
-                                .onTapGesture {
-                                    self.currentOverlay = .none
-                            }
-                            
+                                
                     )
                 }
             )
