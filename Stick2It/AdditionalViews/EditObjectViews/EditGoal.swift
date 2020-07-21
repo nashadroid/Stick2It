@@ -134,7 +134,7 @@ struct EditGoal: View {
                     .padding(.top, 30)
                 }
             .padding(5)
-            .padding(.bottom,500)
+            .padding(.bottom,250)
                 
             }
             

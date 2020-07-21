@@ -163,7 +163,7 @@ struct EditRoutine: View {
                     .padding(.bottom, 15)
                 }
                 .padding(5)
-                .padding(.bottom,500)
+                .padding(.bottom,250)
                 
             }
         }

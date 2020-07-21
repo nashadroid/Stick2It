@@ -148,7 +148,7 @@ struct AddRoutineNoBack: View {
                     }
                 }
                 .padding(5)
-                .padding(.bottom,500)
+                .padding(.bottom,250)
                 
             }
         }
