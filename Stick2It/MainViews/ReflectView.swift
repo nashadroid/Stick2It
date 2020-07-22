@@ -57,7 +57,6 @@ struct ReflectView: View {
             else{
                 ScrollView(showsIndicators: false){
                     VStack(){
-                        
                         // Title
                         Text("Past Week")
                             .foregroundColor(Color.black)
@@ -65,29 +64,27 @@ struct ReflectView: View {
                             .fontWeight(.heavy)
                             .multilineTextAlignment(.leading)
                             .padding(.top, 20)
-                        HStack{
-                            
-                            // Make a stack of all routines
-                            VStack(alignment: .trailing){
-                                ForEach(userData.userRoutines, id: \.self){ routine in
-                                    // Make a stack of past day completions from routines
-                                    HStack{
-                                        Text(routine.routineName)
-                                            .fontWeight(.bold)
-                                        ForEach(getPastWeek(), id: \.self){ day in
-                                            RoundedRectangle(cornerRadius: 3)
-                                                .fill(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == 0 ? Color.red : Color.green)
-                                                .opacity(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == -1 ? 0.1 : 1)
-                                                .frame(width: 30, height: 30)
-                                        }
+                        
+                        // Make a stack of all routines
+                        VStack(alignment: .trailing){
+                            ForEach(userData.userRoutines, id: \.self){ routine in
+                                // Make a stack of past day completions from routines
+                                HStack{
+                                    Text(routine.routineName)
+                                        .fontWeight(.bold)
+                                    ForEach(getPastWeek(), id: \.self){ day in
+                                        RoundedRectangle(cornerRadius: 3)
+                                            .fill(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == 0 ? Color.red : Color.green)
+                                            .opacity(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == -1 ? 0.1 : 1)
+                                            .frame(width: 30, height: 30)
                                     }
                                 }
                             }
                         }
                         .padding(.leading)
                         .padding(.bottom, 40)
-                        Spacer()
                     }
+                    .frame(maxWidth: .infinity)
                 }
             }
         }
