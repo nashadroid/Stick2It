@@ -53,7 +53,7 @@ struct RoutineView: View {
                 GeometryReader { geo in
                     Button(action: {
                         softGenerator.impactOccurred()
-                        self.currentOverlay = .addRoutine
+                        self.currentOverlay = .futureDecide
                     }) {
                         AddButton()
                         
@@ -107,6 +107,26 @@ struct RoutineView: View {
         
         switch self.currentOverlay {
             
+        case .futureDecide:
+            return AnyView(
+                ZStack{
+                    BlurView()
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    VStack{
+                        Button(action: {self.currentOverlay = .addRoutine}){
+                            Text("Routine")
+                        }
+                        .padding()
+                        Button(action: {self.currentOverlay = .addFutureGoal}){
+                            Text("Goal")
+                        }
+                        .padding()
+                        
+                    }
+                }
+            )
+            
         // Add Routine overlay
         case .addRoutine:
             return AnyView(
@@ -122,6 +142,24 @@ struct RoutineView: View {
                     )
                 }
             )
+        
+            
+        // Add Future Goal
+        case .addFutureGoal:
+            
+            return AnyView(
+                           ZStack{
+                               BlurView()
+                                   .edgesIgnoringSafeArea(.all)
+                               
+                               AddFutureGoalNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
+                                   .background(
+                                       Color.black.opacity(0.4)
+                                           .edgesIgnoringSafeArea(.all)
+                                           
+                               )
+                           }
+                       )
             
         // Edit Routine Overlay
         case .editRoutine:
