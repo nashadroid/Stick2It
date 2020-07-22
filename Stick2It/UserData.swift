@@ -67,8 +67,9 @@ final class UserData: ObservableObject  {
         userRoutines = loadSavedRoutines()
         userProjects = loadSavedProjects()
         userNotes = loadSavedNotes()
-        checkRoutineAddGoalsAsNeeded(dayNum: Calendar.current.component(.weekday, from: Date()) - 1)
-        
+        for day in getNextWeek(){
+            checkRoutineAddGoalsAsNeeded(day: day)
+        }
     }
     
     //Add objects
@@ -154,13 +155,14 @@ final class UserData: ObservableObject  {
     
     
     //Add goals from routine methods
-    func checkRoutineAddGoalsAsNeeded(dayNum: Int){
+    func checkRoutineAddGoalsAsNeeded(day: Date){
+        let dayNum =  Calendar.current.component(.weekday, from: day) - 1
         let dayRoutines = self.userRoutines.filter({$0.repeatOn[dayNum] && $0.running})
         
         for routine in dayRoutines{
             
-            let startDate = combineTimeAndDay(time: routine.startTime, day: Date())
-            let endDate = combineTimeAndDay(time: routine.endTime, day: Date())
+            let startDate = combineTimeAndDay(time: routine.startTime, day: day)
+            let endDate = combineTimeAndDay(time: routine.endTime, day: day)
             
             
             let tempGoal = Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: startDate, endTime: endDate, project: routine.project, done: false)

@@ -64,7 +64,7 @@ struct RoutineView: View {
             } else {
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack{
-                        ForEach(getPastWeek(), id: \.self){ day in
+                        ForEach(getNextWeek(), id: \.self){ day in
                             ScrollView(.vertical, showsIndicators: false){
                             VStack(alignment: .center, spacing: 10){
                                 
