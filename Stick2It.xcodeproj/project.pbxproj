@@ -28,6 +28,7 @@
 		8452261E24690FF800E9CA66 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452261D24690FF800E9CA66 /* Project.swift */; };
 		845226202469150300E9CA66 /* AddProjectNoBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452261F2469150300E9CA66 /* AddProjectNoBack.swift */; };
 		84522622246C55D200E9CA66 /* ProjectDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84522621246C55D200E9CA66 /* ProjectDetailedView.swift */; };
+		8484B57224C8C611000EDFD4 /* FutureGoalBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B57124C8C611000EDFD4 /* FutureGoalBox.swift */; };
 		84AE44C5246071BA00043CDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44C4246071BA00043CDA /* AppDelegate.swift */; };
 		84AE44C7246071BA00043CDA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44C6246071BA00043CDA /* SceneDelegate.swift */; };
 		84AE44C9246071BA00043CDA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44C8246071BA00043CDA /* ContentView.swift */; };
@@ -80,6 +81,7 @@
 		8452261D24690FF800E9CA66 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		8452261F2469150300E9CA66 /* AddProjectNoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectNoBack.swift; sourceTree = "<group>"; };
 		84522621246C55D200E9CA66 /* ProjectDetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailedView.swift; sourceTree = "<group>"; };
+		8484B57124C8C611000EDFD4 /* FutureGoalBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureGoalBox.swift; sourceTree = "<group>"; };
 		84AE44C1246071BA00043CDA /* Koalati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Koalati.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AE44C4246071BA00043CDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84AE44C6246071BA00043CDA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			children = (
 				84AE44F624607F3400043CDA /* GoalBoxView.swift */,
 				843DCF6824B8CE450060BEF5 /* ReflectionGoalBox.swift */,
+				8484B57124C8C611000EDFD4 /* FutureGoalBox.swift */,
 				8420A7332465FFA700E44DC9 /* RoutineBox.swift */,
 				84522621246C55D200E9CA66 /* ProjectDetailedView.swift */,
 				8420A72B2464A13300E44DC9 /* AddButton.swift */,
@@ -408,6 +411,7 @@
 				84C1C3092472EB850049E5B9 /* EditGoal.swift in Sources */,
 				84AE44C5246071BA00043CDA /* AppDelegate.swift in Sources */,
 				8416DA332476D43700AD7E96 /* EditRoutine.swift in Sources */,
+				8484B57224C8C611000EDFD4 /* FutureGoalBox.swift in Sources */,
 				8416DA352486C04400AD7E96 /* Orientation.swift in Sources */,
 				8420A7242461F2EE00E44DC9 /* UserData.swift in Sources */,
 				84AE44C7246071BA00043CDA /* SceneDelegate.swift in Sources */,

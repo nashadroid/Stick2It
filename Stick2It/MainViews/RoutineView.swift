@@ -69,7 +69,7 @@ struct RoutineView: View {
                             VStack(alignment: .center, spacing: 10){
                                 
                                 ForEach(self.userData.userGoals.filter({Calendar.current.isDate(day, inSameDayAs: $0.startTime)})) {goal in
-                                    ReflectionGoalBox(goal: goal)
+                                    FutureGoalBox(goal: goal)
                                     // This is to allow it to still scroll
                                     //                                    .onLongPressGesture {
                                     //                                        softGenerator.impactOccurred()
