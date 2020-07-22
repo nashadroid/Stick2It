@@ -103,6 +103,10 @@ func getYesterday() -> Date {
     return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
 }
 
+func getTomorrow() -> Date {
+    return Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
+}
+
 // Returns string of date
 func getStringFromDate(date: Date) -> String {
     let formatter1 = DateFormatter()
@@ -112,4 +116,8 @@ func getStringFromDate(date: Date) -> String {
 func oldestDate() -> Date {
     
     return Calendar.current.date(byAdding: .year, value: -1000, to: Date()) ?? Date()
+}
+func getDayOfWeek(day: Date) -> String {
+    let f = DateFormatter()
+    return f.weekdaySymbols[Calendar.current.component(.weekday, from: day) - 1]
 }

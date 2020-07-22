@@ -67,7 +67,19 @@ struct RoutineView: View {
                         ForEach(getNextWeek(), id: \.self){ day in
                             ScrollView(.vertical, showsIndicators: false){
                             VStack(alignment: .center, spacing: 10){
-                                
+                                if Calendar.current.isDateInToday(day){
+                                    Text("Today")
+                                    .font(.largeTitle)
+                                    .fontWeight(.heavy)
+                                } else if (Calendar.current.isDate(day, inSameDayAs: getTomorrow())) {
+                                    Text("Tomorrow")
+                                    .font(.largeTitle)
+                                    .fontWeight(.heavy)
+                                } else {
+                                Text(getDayOfWeek(day: day))
+                                    .font(.largeTitle)
+                                    .fontWeight(.heavy)
+                                }
                                 ForEach(self.userData.userGoals.filter({Calendar.current.isDate(day, inSameDayAs: $0.startTime)})) {goal in
                                     FutureGoalBox(goal: goal)
                                     // This is to allow it to still scroll
