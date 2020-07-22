@@ -109,27 +109,27 @@ struct AddRoutineNoBack: View {
                     }
                     .padding(.top, 10)
                     
-                    VStack(alignment: .leading){
-                        Text("Project:")
-                            .font(.footnote)
-                            .fontWeight(.heavy)
-                            .padding(.leading, 5)
-                            .foregroundColor(Color.white)
-                        
-                        Picker("Select Project", selection: $project) {
-                            Text("none")
-                            ForEach(userData.userProjects.map({ (project: Project) -> String in project.projectName}), id: \.self) {option in
-                                Text(option)
-                            }
-                        }
-                        .labelsHidden()
-                        .pickerStyle(WheelPickerStyle())
-                    }
-                    .padding(5)
-                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-                    .padding(.top, 20)
-                    
-                    
+//                    VStack(alignment: .leading){
+//                        Text("Project:")
+//                            .font(.footnote)
+//                            .fontWeight(.heavy)
+//                            .padding(.leading, 5)
+//                            .foregroundColor(Color.white)
+//                        
+//                        Picker("Select Project", selection: $project) {
+//                            Text("none")
+//                            ForEach(userData.userProjects.map({ (project: Project) -> String in project.projectName}), id: \.self) {option in
+//                                Text(option)
+//                            }
+//                        }
+//                        .labelsHidden()
+//                        .pickerStyle(WheelPickerStyle())
+//                    }
+//                    .padding(5)
+//                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+//                    .padding(.top, 20)
+//                    
+//                    
                     
                     Button(action:{
                         self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, self.project)
