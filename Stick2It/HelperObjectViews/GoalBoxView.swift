@@ -41,26 +41,34 @@ struct GoalBox: View {
                 .foregroundColor(Color.white)
                 .fontWeight(.heavy)
                 .padding()
+                .animation(.none)
                 .background(
                     RoundedRectangle(cornerRadius: 5)
                     .fill(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.red)
+                        
                    
                 )
         }
         .background(
+            
             RoundedRectangle(cornerRadius: 5)
             .fill(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.white)
             .shadow(radius: 7)
-           
         )
         .onTapGesture {
-            self.goal.done.toggle()
-            self.userData.userGoals[self.goalIndex].done.toggle()
-            self.userData.saveGoal()
-            generator.impactOccurred()
+            withAnimation(.easeInOut(duration: 0.20),{
+                self.goal.done.toggle()
+                self.userData.userGoals[self.goalIndex].done.toggle()
+                self.userData.saveGoal()
+                generator.impactOccurred()
+            }
+                          
+          )
+            
         }
         
     }
+    
 }
 
 var testGoal = Goal(id: 2020, goalName: "Name1", startTime: Date(), endTime: Date(), project: "none", done: true)

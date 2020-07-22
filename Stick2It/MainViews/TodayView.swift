@@ -80,6 +80,7 @@ struct TodayView: View {
             }
             
             // Call the overlay
+            
             overlayView()
             
         }
@@ -100,11 +101,12 @@ struct TodayView: View {
                         .background(
                             Color.black.opacity(0.4)
                                 .edgesIgnoringSafeArea(.all)
-                                
                             
                     )
                 }
+                
             )
+            
             
         // edit a goal
         case .editGoal:
