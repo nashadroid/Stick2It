@@ -116,25 +116,25 @@ struct EditRoutine: View {
                     }
                     .padding(.top, 10)
                     
-                    VStack(alignment: .leading){
-                        Text("Project:")
-                            .font(.footnote)
-                            .fontWeight(.heavy)
-                            .padding(.leading, 5)
-                            .foregroundColor(Color.white)
-                        
-                        Picker("Select Project", selection: $userData.userRoutines[self.routineIndex].project) {
-                            Text("none")
-                            ForEach(userData.userProjects.map({ (project: Project) -> String in project.projectName}), id: \.self) {option in
-                                Text(option)
-                            }
-                        }
-                        .labelsHidden()
-                        .pickerStyle(WheelPickerStyle())
-                    }
-                    .padding(5)
-                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-                    .padding(.top, 20)
+//                    VStack(alignment: .leading){
+//                        Text("Project:")
+//                            .font(.footnote)
+//                            .fontWeight(.heavy)
+//                            .padding(.leading, 5)
+//                            .foregroundColor(Color.white)
+//                        
+//                        Picker("Select Project", selection: $userData.userRoutines[self.routineIndex].project) {
+//                            Text("none")
+//                            ForEach(userData.userProjects.map({ (project: Project) -> String in project.projectName}), id: \.self) {option in
+//                                Text(option)
+//                            }
+//                        }
+//                        .labelsHidden()
+//                        .pickerStyle(WheelPickerStyle())
+//                    }
+//                    .padding(5)
+//                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+//                    .padding(.top, 20)
                     
                     Button(action:{
                         self.userData.saveRoutine()
@@ -151,8 +151,9 @@ struct EditRoutine: View {
                     }
                     
                     Button(action: {
-                        self.userData.removeRoutine(routine: self.userData.userRoutines[self.routineIndex])
                         self.currentOverlay = .none
+                        self.userData.removeRoutine(routine: self.userData.userRoutines[self.routineIndex])
+                        
                     }) {
                         Text("Delete")
                             .foregroundColor(Color.red)
@@ -162,11 +163,11 @@ struct EditRoutine: View {
                     .padding(.bottom, 15)
                 }
                 .padding(5)
-                .padding(.bottom,500)
+                .padding(.bottom,250)
                 
             }
         }
-        .padding(.leading, 20)
+        .padding(.leading, 30)
         .padding(.trailing, 30)
     }
 }

@@ -4,33 +4,14 @@
 //
 //  Created by Nashad Rahman on 5/5/20.
 //  Copyright © 2020 NashApps. All rights reserved.
-//  From Stack Exchange
+//  From Stack Overflow https://stackoverflow.com/questions/56610957/is-there-a-method-to-blur-a-background-in-swiftui/56611342
 //
 
 import SwiftUI
 import UIKit
 
 struct BlurView: UIViewRepresentable {
-
-    let style: UIBlurEffect.Style
-
-    func makeUIView(context: UIViewRepresentableContext<BlurView>) -> UIView {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = .clear
-        let blurEffect = UIBlurEffect(style: style)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.translatesAutoresizingMaskIntoConstraints = false
-        view.insertSubview(blurView, at: 0)
-        NSLayoutConstraint.activate([
-            blurView.heightAnchor.constraint(equalTo: view.heightAnchor),
-            blurView.widthAnchor.constraint(equalTo: view.widthAnchor),
-        ])
-        return view
-    }
-
-    func updateUIView(_ uiView: UIView,
-                      context: UIViewRepresentableContext<BlurView>) {
-
-    }
-
+    var effect: UIVisualEffect? = UIBlurEffect(style: .light)
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
 }

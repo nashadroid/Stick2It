@@ -5,11 +5,13 @@
 //  Created by Nashad Rahman on 5/8/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
+//  Shows todays goals, allows reflection
 
 import SwiftUI
 
 struct TodayView: View {
     @EnvironmentObject var userData: UserData
+    @EnvironmentObject var orientationInfo : OrientationInfo
     @State var goalBeingEditedID: Int = 0
     @State var currentOverlay = overlayViews.none
     let dayIndex = Calendar.current.component(.weekday, from: Date()) - 1
@@ -17,6 +19,8 @@ struct TodayView: View {
     var body: some View {
         ZStack{
             VStack(alignment: .leading, spacing: 0){
+                
+                // Title
                 Text("Today's Goals")
                     .foregroundColor(Color.black)
                     .font(.largeTitle)
@@ -24,23 +28,30 @@ struct TodayView: View {
                     .padding(.top, 10)
                     .padding(.leading, 20)
                     .multilineTextAlignment(.leading)
+                
+                
+                // Show message from yesterday (My favorite part)
                 Text(userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Tomorrow") ))
                     .italic()
                     .foregroundColor(.gray)
                     .padding(.leading, 20)
                     .padding(.bottom, 10)
+                
+                // Show goals of today
                 ScrollView(.vertical, showsIndicators: false){
-                    VStack(spacing: 10){
+                    VStack(alignment: .center, spacing: 10){
                         
-                        ForEach(userData.userGoals) {goal in
-                            if  Calendar.current.isDateInToday(goal.startTime){
-                                GoalBox(goal: goal)
+                        ForEach(userData.userGoals.filter({Calendar.current.isDateInToday($0.startTime)})) {goal in
+                            GoalBox(goal: goal)
+                                // This is to allow it to still scroll
                                 .onLongPressGesture {
+                                    softGenerator.impactOccurred()
                                     self.goalBeingEditedID = goal.id
                                     self.currentOverlay = .editGoal
-                                }
                             }
                         }
+                        
+                        // Reflect button
                         Button(action: {
                             softGenerator.impactOccurred()
                             self.currentOverlay = .reflect
@@ -52,86 +63,95 @@ struct TodayView: View {
                         .padding(.top, 10)
                     }
                     .padding()
+                    .frame(maxWidth: .infinity)
                 }
+                
+                
             }
+            
+            if(orientationInfo.orientation == .portrait){
             // ADD BUTTON
             GeometryReader { geo in
-                Button(action: {self.currentOverlay = .addGoal}) {
+                Button(action: {
+                    softGenerator.impactOccurred()
+                    self.currentOverlay = .addGoal
+                }) {
                     AddButton()
                 }
                 .scaleEffect(0.2)
                 .offset(x: geo.size.width * 0.35, y: geo.size.height * 0.42)
             }
-            
+            // Call the overlay
             overlayView()
+            }
             
         }
+        .frame(maxWidth: .infinity)
     }
     func overlayView() -> AnyView {
         
         switch self.currentOverlay {
+        
+        // add goal screen
         case .addGoal:
-            return AnyView(GeometryReader{_ in
-                BlurView(style: .light)
-                    .onTapGesture {
-                        self.currentOverlay = .none
-                }
-                AddGoalNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
-                    .padding(.top, 40)
-            }.background(
-                Color.black.opacity(0.65)
-                    .edgesIgnoringSafeArea(.all)
-                    .onTapGesture {
-                        self.currentOverlay = .none
-                }
-            )
-                .edgesIgnoringSafeArea(.all)
-            )
-            
-        case .editGoal:
-            return AnyView(GeometryReader{_ in
-                BlurView(style: .light)
-                    .onTapGesture {
-                        self.currentOverlay = .none
-                }
-                EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, currentOverlay: self.$currentOverlay)
-                    .padding(.top, 40)
-            }.background(
-                Color.black.opacity(0.65)
-                    .edgesIgnoringSafeArea(.all)
-                    .onTapGesture {
-                        self.currentOverlay = .none
-                }
-            )
-                .edgesIgnoringSafeArea(.all)
-            )
-            
-        case .reflect:
-            return AnyView(GeometryReader{_ in
-                BlurView(style: .light)
-                    .onTapGesture {
-                        self.currentOverlay = .none
-                }
-                VStack{
-                    Spacer()
-                    ReflectionPage(
-                        currentOverlay: self.$currentOverlay,
-                        todayReflect: self.userData.getNote(day: getStringFromDate(date: Date())+"Today"),
-                        tomorrowMessage: self.userData.getNote(day: getStringFromDate(date: Date())+"Tomorrow")
+            return AnyView(
+                ZStack{
+                    BlurView()
+                        .edgesIgnoringSafeArea(.all)
+                        .background(
+                            Color.black.opacity(0.4)
+                                .edgesIgnoringSafeArea(.all)
                     )
-                        .padding(20)
-                    Spacer()
+                    AddGoalNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
                 }
-            }.background(
-                Color.black.opacity(0.65)
-                    .edgesIgnoringSafeArea(.all)
-                    .onTapGesture {
-                        self.currentOverlay = .none
-                }
-            )
-                .edgesIgnoringSafeArea(.all)
             )
             
+            
+        // edit a goal
+        case .editGoal:
+            return AnyView(
+                ZStack{
+                    BlurView()
+                        .edgesIgnoringSafeArea(.all)
+                        .background(
+                                Color.black.opacity(0.4)
+                                    .edgesIgnoringSafeArea(.all)
+                        )
+                    EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, currentOverlay: self.$currentOverlay)
+                }
+            )
+            
+        // reflect page
+        case .reflect:
+            return AnyView(
+                ZStack{
+                    BlurView()
+                        .edgesIgnoringSafeArea(.all)
+                        .background(
+                            Color.black.opacity(0.4)
+                                .edgesIgnoringSafeArea(.all)
+                    )
+                    .onTapGesture {
+                            self.currentOverlay = .none
+                    }
+                    
+                    ScrollView{
+                        VStack{
+                            ReflectionPage(
+                                currentOverlay: self.$currentOverlay,
+                                todayReflect: self.userData.getNote(day: getStringFromDate(date: Date())+"Today"),
+                                tomorrowMessage: self.userData.getNote(day: getStringFromDate(date: Date())+"Tomorrow")
+                            )
+                                .padding(20)
+                                .padding(.top, 100)
+                                .padding(.bottom, 400)
+                            
+                        }
+                    }
+                }
+            )
+            
+        // It needs to return something, I think this is the best way to go about returning nothing
         default:
             return AnyView(Text(""))
             

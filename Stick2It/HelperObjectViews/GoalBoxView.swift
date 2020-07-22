@@ -5,15 +5,16 @@
 //  Created by Nashad Rahman on 5/4/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
+//  This goal box is used in today view
 
 import SwiftUI
 
 struct GoalBox: View {
     @EnvironmentObject var userData: UserData
-    @State var goal: Goal //TODO: Change this to be an index or ID only
+    @State var goal: Goal
     
     var goalIndex: Int {
-        userData.userGoals.firstIndex(where: { $0.id == goal.id }) ?? 0
+        userData.getIndex(goal: goal)
     }
     
     var body: some View {
@@ -40,26 +41,34 @@ struct GoalBox: View {
                 .foregroundColor(Color.white)
                 .fontWeight(.heavy)
                 .padding()
+                .animation(.none)
                 .background(
                     RoundedRectangle(cornerRadius: 5)
                     .fill(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.red)
+                        
                    
                 )
         }
         .background(
+            
             RoundedRectangle(cornerRadius: 5)
             .fill(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.white)
             .shadow(radius: 7)
-           
         )
         .onTapGesture {
-            self.goal.done.toggle()
-            self.userData.userGoals[self.goalIndex].done.toggle()
-            self.userData.saveGoal()
-            generator.impactOccurred()
+            withAnimation(.easeInOut(duration: 0.15),{
+                self.goal.done.toggle()
+                self.userData.userGoals[self.goalIndex].done.toggle()
+                self.userData.saveGoal()
+                generator.impactOccurred()
+            }
+                          
+          )
+            
         }
         
     }
+    
 }
 
 var testGoal = Goal(id: 2020, goalName: "Name1", startTime: Date(), endTime: Date(), project: "none", done: true)

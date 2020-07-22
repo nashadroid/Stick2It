@@ -1,17 +1,16 @@
 //
-//  ReflectionGoalBox.swift
+//  FutureGoalBox.swift
 //  Stick2It
 //
-//  Created by Nashad Rahman on 7/10/20.
+//  Created by Nashad Rahman on 7/22/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
-//  Used in past view
 
 import SwiftUI
 
-struct ReflectionGoalBox: View {
+struct FutureGoalBox: View {
     @EnvironmentObject var userData: UserData
-    @State var goal: Goal 
+    @State var goal: Goal
     
     var goalIndex: Int {
         userData.getIndex(goal: goal)
@@ -45,8 +44,8 @@ struct ReflectionGoalBox: View {
             }
             .background(
                 RoundedRectangle(cornerRadius: 5)
-                    .fill(self.userData.userGoals[self.goalIndex].done ? Color.green : Color.red)
-                    .opacity(0.75)
+                    .fill(Color.green)
+                    .opacity(self.userData.userGoals[self.goalIndex].done ? 1 : 0.45)
                     .shadow(radius: 7)
             )
         .onTapGesture {

@@ -9,6 +9,7 @@
 import SwiftUI
 import Combine
 
+//These functions are needed at startup and thus are placed at top level
 func loadSavedGoals() -> [Goal]{
     if let savedGoals = UserDefaults.standard.object(forKey: "Usergoals") as? Data {
         let decoder = JSONDecoder()
@@ -16,7 +17,7 @@ func loadSavedGoals() -> [Goal]{
             return loadedGoals
         }
     }
-    return []
+    return [Goal(id: UUID().hashValue , goalName: "Add a Goal to get started!", startTime: oldestDate(), endTime: oldestDate(), done: false)]
 }
 
 func loadSavedRoutines() -> [Routine]{
@@ -26,7 +27,9 @@ func loadSavedRoutines() -> [Routine]{
             return loadedRoutine
         }
     }
-    return []
+    
+    return[]
+//return [Routine(id: UUID().hashValue, routineName: "Add a routine to get started!", startTime: oldestDate(), endTime: oldestDate())]
 }
 
 func loadSavedProjects() -> [Project]{
@@ -48,6 +51,11 @@ func loadSavedNotes() -> Dictionary<String, String>{
     return ["Default":"Error"]
 }
 
+enum loadError: Error {
+    case outOfIndex
+}
+
+// This object is used to store all user info throughout the app
 final class UserData: ObservableObject  {
     @Published var userGoals: [Goal]
     @Published var userRoutines: [Routine]
@@ -59,8 +67,9 @@ final class UserData: ObservableObject  {
         userRoutines = loadSavedRoutines()
         userProjects = loadSavedProjects()
         userNotes = loadSavedNotes()
-        checkRoutineAddGoalsAsNeeded(dayNum: Calendar.current.component(.weekday, from: Date()) - 1)
-        
+        for day in getNextWeek(){
+            checkRoutineAddGoalsAsNeeded(day: day)
+        }
     }
     
     //Add objects
@@ -82,6 +91,7 @@ final class UserData: ObservableObject  {
         saveNotes()
     }
     
+    // Get note from a day. A string:string dictionary seems the most reliable for this as date components can be optionals
     func getNote(day: String) -> String {
         if let note = userNotes[day] {
             return note
@@ -145,13 +155,14 @@ final class UserData: ObservableObject  {
     
     
     //Add goals from routine methods
-    func checkRoutineAddGoalsAsNeeded(dayNum: Int){
-        let dayRoutines = getDaysRoutines(dayNum: dayNum)
+    func checkRoutineAddGoalsAsNeeded(day: Date){
+        let dayNum =  Calendar.current.component(.weekday, from: day) - 1
+        let dayRoutines = self.userRoutines.filter({$0.repeatOn[dayNum] && $0.running})
         
         for routine in dayRoutines{
             
-            let startDate = combineTimeAndDay(time: routine.startTime, day: Date())
-            let endDate = combineTimeAndDay(time: routine.endTime, day: Date())
+            let startDate = combineTimeAndDay(time: routine.startTime, day: day)
+            let endDate = combineTimeAndDay(time: routine.endTime, day: day)
             
             
             let tempGoal = Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: startDate, endTime: endDate, project: routine.project, done: false)
@@ -159,16 +170,6 @@ final class UserData: ObservableObject  {
             self.addGoalAvoidingRepeat(goalToBeAdded: tempGoal)
         }
         self.saveGoal()
-    }
-    func getDaysRoutines(dayNum: Int) -> [Routine]{
-        var routinesToReturn: [Routine] = []
-        
-        for routine in self.userRoutines{
-            if routine.repeatOn[dayNum] && routine.running {
-                routinesToReturn += [routine]
-            }
-        }
-        return routinesToReturn
     }
     func combineTimeAndDay(time: Date, day: Date) -> Date {
         
@@ -183,10 +184,8 @@ final class UserData: ObservableObject  {
     }
     func addGoalAvoidingRepeat(goalToBeAdded: Goal){
         
-        for usergoal in userGoals {
-            if(usergoal.goalName == goalToBeAdded.goalName && usergoal.startTime == goalToBeAdded.startTime) {
-                return
-            }
+        if self.userGoals.firstIndex(where: {$0.goalName == goalToBeAdded.goalName && $0.startTime == goalToBeAdded.startTime}) != nil{
+            return
         }
         userGoals += [goalToBeAdded]
     }
@@ -196,7 +195,7 @@ final class UserData: ObservableObject  {
         var done: [Bool] = []
         done = self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: Date) && $0.goalName == goalName}).map({return $0.done})
         
-        if (done.count == 1){
+        if (done != []){
             if done[0] == true {
                 return 1
             }

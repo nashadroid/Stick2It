@@ -5,6 +5,7 @@
 //  Created by Nashad Rahman on 5/11/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
+//  struct used to make all
 
 import SwiftUI
 

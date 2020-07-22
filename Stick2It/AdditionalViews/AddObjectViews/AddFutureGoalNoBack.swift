@@ -1,15 +1,14 @@
 //
-//  AddGoalNoBack.swift
+//  AddFutureGoalNoBack.swift
 //  Stick2It
 //
-//  Created by Nashad Rahman on 5/7/20.
+//  Created by Nashad Rahman on 7/22/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
-//  This view helps create a new goal
 
 import SwiftUI
 
-struct AddGoalNoBack: View {
+struct AddFutureGoalNoBack: View {
     @EnvironmentObject var userData: UserData
     @Binding var currentOverlay: overlayViews
     @State private var name: String = ""
@@ -60,7 +59,7 @@ struct AddGoalNoBack: View {
                             .fontWeight(.heavy)
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
-                        DatePicker("Please enter a date", selection: $startTime, displayedComponents: .hourAndMinute)
+                        DatePicker("Please enter a date", selection: $startTime)
                         .labelsHidden()
                     }
                     .padding(5)
@@ -74,7 +73,7 @@ struct AddGoalNoBack: View {
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
                         
-                        DatePicker("Please enter a date", selection: $endTime, displayedComponents: .hourAndMinute)
+                        DatePicker("Please enter a date", selection: $endTime)
                         .labelsHidden()
                     }
                     .padding(5)

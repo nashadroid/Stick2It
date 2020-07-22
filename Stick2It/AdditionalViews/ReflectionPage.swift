@@ -21,14 +21,18 @@ struct ReflectionPage: View {
                 .font(.headline)
                 .padding(15)
                 .foregroundColor(Color.black)
+                .lineLimit(2)
             TextField("Write something about today", text: self.$todayReflect)
             .padding(15)
+            .lineLimit(2)
             
             Text("What would you like to tell yourself tomorrow?")
                 .font(.headline)
                 .padding(15)
                 .foregroundColor(Color.black)
+                .lineLimit(2)
             TextField("Write something for tomorrow", text: $tomorrowMessage)
+                .lineLimit(2)
                 .padding(15)
             HStack{
                 Spacer()

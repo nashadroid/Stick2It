@@ -1,11 +1,11 @@
 //
-//  AddItem.swift
+//  AddRoutineNoBack.swift
 //  Stick2It
 //
 //  Created by Nashad Rahman on 5/5/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
-//  This view helps create a new goal
+//  This view helps create a new Routine
 
 import SwiftUI
 
@@ -109,27 +109,27 @@ struct AddRoutineNoBack: View {
                     }
                     .padding(.top, 10)
                     
-                    VStack(alignment: .leading){
-                        Text("Project:")
-                            .font(.footnote)
-                            .fontWeight(.heavy)
-                            .padding(.leading, 5)
-                            .foregroundColor(Color.white)
-                        
-                        Picker("Select Project", selection: $project) {
-                            Text("none")
-                            ForEach(userData.userProjects.map({ (project: Project) -> String in project.projectName}), id: \.self) {option in
-                                Text(option)
-                            }
-                        }
-                        .labelsHidden()
-                        .pickerStyle(WheelPickerStyle())
-                    }
-                    .padding(5)
-                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-                    .padding(.top, 20)
-                    
-                    
+//                    VStack(alignment: .leading){
+//                        Text("Project:")
+//                            .font(.footnote)
+//                            .fontWeight(.heavy)
+//                            .padding(.leading, 5)
+//                            .foregroundColor(Color.white)
+//                        
+//                        Picker("Select Project", selection: $project) {
+//                            Text("none")
+//                            ForEach(userData.userProjects.map({ (project: Project) -> String in project.projectName}), id: \.self) {option in
+//                                Text(option)
+//                            }
+//                        }
+//                        .labelsHidden()
+//                        .pickerStyle(WheelPickerStyle())
+//                    }
+//                    .padding(5)
+//                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+//                    .padding(.top, 20)
+//                    
+//                    
                     
                     Button(action:{
                         self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, self.project)
@@ -148,11 +148,11 @@ struct AddRoutineNoBack: View {
                     }
                 }
                 .padding(5)
-                .padding(.bottom,500)
+                .padding(.bottom,250)
                 
             }
         }
-        .padding(.leading, 20)
+        .padding(.leading, 30)
         .padding(.trailing, 30)
     }
 }

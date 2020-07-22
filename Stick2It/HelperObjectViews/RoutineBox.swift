@@ -5,15 +5,16 @@
 //  Created by Nashad Rahman on 5/8/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
+//  Box used in routine view
 
 import SwiftUI
 
 struct RoutineBox: View {
     @EnvironmentObject var userData: UserData
-    @State var routine: Routine //TODO: Change this to be an index or ID only
+    @State var routine: Routine
     
     var routineIndex: Int {
-        userData.userRoutines.firstIndex(where: { $0.id == routine.id }) ?? 0
+        userData.getIndex(routine: routine)
     }
     
     var body: some View{
@@ -55,8 +56,10 @@ struct RoutineBox: View {
                 .shadow(radius: 7)
         )
         .onTapGesture {
-            self.userData.userRoutines[self.routineIndex].running.toggle()
-            softGenerator.impactOccurred()
+            withAnimation(.easeInOut(duration: 0.15),{
+                self.userData.userRoutines[self.routineIndex].running.toggle()
+                softGenerator.impactOccurred()
+            })
         }
     }
 }

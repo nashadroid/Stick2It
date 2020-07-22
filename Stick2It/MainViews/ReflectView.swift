@@ -5,6 +5,7 @@
 //  Created by Nashad Rahman on 7/10/20.
 //  Copyright © 2020 NashApps. All rights reserved.
 //
+//  Shows past goals
 
 import SwiftUI
 
@@ -19,6 +20,7 @@ struct ReflectView: View {
             if(orientationInfo.orientation == .portrait){
                 
                 VStack(alignment: .leading, spacing: 0){
+                    // Title
                     Text("Yesterday's Goals")
                         .foregroundColor(Color.black)
                         .font(.largeTitle)
@@ -27,6 +29,8 @@ struct ReflectView: View {
                         .padding(.leading, 20)
                         .padding(.bottom, 10)
                         .multilineTextAlignment(.leading)
+                    
+                    // Show Yesterday's goals
                     ScrollView(.vertical, showsIndicators: false){
                         VStack(spacing: 10){
                             
@@ -34,57 +38,55 @@ struct ReflectView: View {
                                 
                                 ReflectionGoalBox(goal: goal)
                                     .onLongPressGesture {
-                                        self.userData.userGoals[self.userData.getIndex(goal: goal)].done.toggle()
+                                        withAnimation(.easeInOut(duration: 0.15),{
+                                            self.userData.userGoals[self.userData.getIndex(goal: goal)].done.toggle()
+                                        })
                                         self.userData.saveGoal()
                                         softGenerator.impactOccurred()
-                                    }
+                                }
                                 
                             }
                         }
                         .padding()
+                        .frame(maxWidth: .infinity)
                     }
                 }
             }
+                
+                // Show the past week if in landscape mode
             else{
                 ScrollView(showsIndicators: false){
                     VStack(){
-                    Text("Past Week")
-                        .foregroundColor(Color.black)
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                        .multilineTextAlignment(.leading)
-                        .padding(.top, 20)
-                    HStack{
+                        // Title
+                        Text("Past Week")
+                            .foregroundColor(Color.black)
+                            .font(.largeTitle)
+                            .fontWeight(.heavy)
+                            .multilineTextAlignment(.leading)
+                            .padding(.top, 20)
                         
-                            
-                            
-                            VStack(alignment: .trailing){
-                                ForEach(userData.userRoutines, id: \.self){ routine in
-                                    HStack{
-                                        Text(routine.routineName)
-                                            .fontWeight(.bold)
-                                        ForEach(getPastWeek(), id: \.self){ day in
-                                            RoundedRectangle(cornerRadius: 3)
-                                                .fill(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == 0 ? Color.red : Color.green)
-                                                .opacity(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == -1 ? 0.1 : 1)
-                                                .frame(width: 30, height: 30)
-                                        }
+                        // Make a stack of all routines
+                        VStack(alignment: .trailing){
+                            ForEach(userData.userRoutines, id: \.self){ routine in
+                                // Make a stack of past day completions from routines
+                                HStack{
+                                    Text(routine.routineName)
+                                        .fontWeight(.bold)
+                                    ForEach(getPastWeek(), id: \.self){ day in
+                                        RoundedRectangle(cornerRadius: 3)
+                                            .fill(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == 0 ? Color.red : Color.green)
+                                            .opacity(self.userData.goalDoneOnDay(goalName: routine.routineName, Date: day) == -1 ? 0.1 : 1)
+                                            .frame(width: 30, height: 30)
                                     }
                                 }
                             }
                         }
                         .padding(.leading)
                         .padding(.bottom, 40)
-                        Spacer()
                     }
+                    .frame(maxWidth: .infinity)
                 }
             }
         }
     }
 }
-
-//struct ReflectView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ReflectView(, addingRoutine: <#Bool#>)
-//    }
-//}
