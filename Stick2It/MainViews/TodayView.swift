@@ -11,6 +11,7 @@ import SwiftUI
 
 struct TodayView: View {
     @EnvironmentObject var userData: UserData
+    @EnvironmentObject var orientationInfo : OrientationInfo
     @State var goalBeingEditedID: Int = 0
     @State var currentOverlay = overlayViews.none
     let dayIndex = Calendar.current.component(.weekday, from: Date()) - 1
@@ -67,6 +68,8 @@ struct TodayView: View {
                 
                 
             }
+            
+            if(orientationInfo.orientation == .portrait){
             // ADD BUTTON
             GeometryReader { geo in
                 Button(action: {
@@ -78,10 +81,9 @@ struct TodayView: View {
                 .scaleEffect(0.2)
                 .offset(x: geo.size.width * 0.35, y: geo.size.height * 0.42)
             }
-            
             // Call the overlay
-            
             overlayView()
+            }
             
         }
         .frame(maxWidth: .infinity)

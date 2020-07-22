@@ -61,6 +61,11 @@ struct RoutineView: View {
                     .scaleEffect(0.2)
                     .offset(x: geo.size.width * 0.35, y: geo.size.height * 0.42)
                 }
+                
+
+                // Call on overlay
+                overlayView()
+                
             } else {
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack{
@@ -98,8 +103,6 @@ struct RoutineView: View {
                     }
                 }
             }
-            // Call on overlay
-            overlayView()
         }
     }
     
