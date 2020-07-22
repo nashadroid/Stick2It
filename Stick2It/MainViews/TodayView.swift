@@ -96,15 +96,12 @@ struct TodayView: View {
                 ZStack{
                     BlurView()
                         .edgesIgnoringSafeArea(.all)
-                    
-                    AddGoalNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
                         .background(
                             Color.black.opacity(0.4)
                                 .edgesIgnoringSafeArea(.all)
-                            
                     )
+                    AddGoalNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
                 }
-                
             )
             
             
@@ -114,17 +111,13 @@ struct TodayView: View {
                 ZStack{
                     BlurView()
                         .edgesIgnoringSafeArea(.all)
-                    
-                    EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, currentOverlay: self.$currentOverlay)
                         .background(
-                            Color.black.opacity(0.4)
-                                .edgesIgnoringSafeArea(.all)
-                                
-                            
-                    )
+                                Color.black.opacity(0.4)
+                                    .edgesIgnoringSafeArea(.all)
+                        )
+                    EditGoal(userData: self._userData, goalID: self.goalBeingEditedID, currentOverlay: self.$currentOverlay)
                 }
             )
-            
             
         // reflect page
         case .reflect:
@@ -132,6 +125,13 @@ struct TodayView: View {
                 ZStack{
                     BlurView()
                         .edgesIgnoringSafeArea(.all)
+                        .background(
+                            Color.black.opacity(0.4)
+                                .edgesIgnoringSafeArea(.all)
+                    )
+                    .onTapGesture {
+                            self.currentOverlay = .none
+                    }
                     
                     ScrollView{
                         VStack{
@@ -146,13 +146,6 @@ struct TodayView: View {
                             
                         }
                     }
-                    .background(
-                            Color.black.opacity(0.4)
-                                .edgesIgnoringSafeArea(.all)
-                                .onTapGesture {
-                                    self.currentOverlay = .none
-                            }
-                    )
                 }
             )
             

@@ -156,13 +156,14 @@ struct RoutineView: View {
                 ZStack{
                     BlurView()
                         .edgesIgnoringSafeArea(.all)
+                        .background(
+                                Color.black.opacity(0.4)
+                                    .edgesIgnoringSafeArea(.all)
+                                    
+                        )
                     
                     AddRoutineNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
-                        .background(
-                            Color.black.opacity(0.4)
-                                .edgesIgnoringSafeArea(.all)
-                                
-                    )
+                        
                 }
             )
         
@@ -171,18 +172,19 @@ struct RoutineView: View {
         case .addFutureGoal:
             
             return AnyView(
-                           ZStack{
-                               BlurView()
-                                   .edgesIgnoringSafeArea(.all)
-                               
-                               AddFutureGoalNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
-                                   .background(
-                                       Color.black.opacity(0.4)
-                                           .edgesIgnoringSafeArea(.all)
-                                           
-                               )
-                           }
-                       )
+                ZStack{
+                    BlurView()
+                        .edgesIgnoringSafeArea(.all)
+                        .background(
+                            Color.black.opacity(0.4)
+                                .edgesIgnoringSafeArea(.all)
+                            
+                    )
+                    
+                    AddFutureGoalNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
+                    
+                }
+            )
             
         // Edit Routine Overlay
         case .editRoutine:
@@ -190,13 +192,14 @@ struct RoutineView: View {
                 ZStack{
                     BlurView()
                         .edgesIgnoringSafeArea(.all)
-                    
-                    EditRoutine(currentOverlay: self.$currentOverlay, routineID: self.routineBeingEditedID)
                         .background(
                             Color.black.opacity(0.4)
                                 .edgesIgnoringSafeArea(.all)
                                 
                     )
+                    
+                    EditRoutine(currentOverlay: self.$currentOverlay, routineID: self.routineBeingEditedID)
+                        
                 }
             )
             
