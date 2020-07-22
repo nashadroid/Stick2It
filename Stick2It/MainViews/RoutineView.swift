@@ -143,7 +143,7 @@ struct RoutineView: View {
                         
                     }
                     .padding(40)
-                    .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.0))
+                    .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.000001))
                     .onTapGesture {
                             
                     }
