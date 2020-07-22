@@ -56,7 +56,7 @@ struct GoalBox: View {
             .shadow(radius: 7)
         )
         .onTapGesture {
-            withAnimation(.easeInOut(duration: 0.20),{
+            withAnimation(.easeInOut(duration: 0.15),{
                 self.goal.done.toggle()
                 self.userData.userGoals[self.goalIndex].done.toggle()
                 self.userData.saveGoal()

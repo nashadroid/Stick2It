@@ -38,7 +38,9 @@ struct ReflectView: View {
                                 
                                 ReflectionGoalBox(goal: goal)
                                     .onLongPressGesture {
-                                        self.userData.userGoals[self.userData.getIndex(goal: goal)].done.toggle()
+                                        withAnimation(.easeInOut(duration: 0.15),{
+                                            self.userData.userGoals[self.userData.getIndex(goal: goal)].done.toggle()
+                                        })
                                         self.userData.saveGoal()
                                         softGenerator.impactOccurred()
                                 }

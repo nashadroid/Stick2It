@@ -56,8 +56,10 @@ struct RoutineBox: View {
                 .shadow(radius: 7)
         )
         .onTapGesture {
-            self.userData.userRoutines[self.routineIndex].running.toggle()
-            softGenerator.impactOccurred()
+            withAnimation(.easeInOut(duration: 0.15),{
+                self.userData.userRoutines[self.routineIndex].running.toggle()
+                softGenerator.impactOccurred()
+            })
         }
     }
 }
