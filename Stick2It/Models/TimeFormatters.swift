@@ -73,7 +73,15 @@ func getPastWeek() -> [Date]{
     
     return listOfDays
 }
-
+// Returns a list of Date objects corresponding to the next week
+func getNextWeek() -> [Date]{
+    var listOfDays: [Date] = []
+    for i in 0...7{
+        listOfDays += [Calendar.current.date(byAdding: .day, value: i, to: Date()) ?? Date()]
+    }
+    
+    return listOfDays
+}
 // Returns nearest hour as date, to default new goals and routines
 func getLastHour() -> Date {
     if let roundedHours = Calendar.current.date(bySetting: .minute, value: 0, of: Date()){
