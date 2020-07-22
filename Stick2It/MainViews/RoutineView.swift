@@ -116,6 +116,9 @@ struct RoutineView: View {
                                 Color.black.opacity(0.4)
                                     .edgesIgnoringSafeArea(.all)
                         )
+                        .onTapGesture {
+                            self.currentOverlay = .none
+                    }
                     
                     VStack(spacing: 30){
                         Button(action: {self.currentOverlay = .addRoutine}){
@@ -127,11 +130,9 @@ struct RoutineView: View {
                             .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
                             .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                         }
-                        .padding(.leading, 40)
-                        .padding(.trailing, 40)
                         
                         Button(action: {self.currentOverlay = .addFutureGoal}){
-                            Text("Goal")
+                            Text("Future Goal")
                             .foregroundColor(Color.white)
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: .infinity)
@@ -139,8 +140,12 @@ struct RoutineView: View {
                             .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
                             .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                         }
-                        .padding(.leading, 40)
-                        .padding(.trailing, 40)
+                        
+                    }
+                    .padding(40)
+                    .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.0))
+                    .onTapGesture {
+                            
                     }
                 }
             )
