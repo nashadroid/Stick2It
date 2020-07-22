@@ -99,7 +99,7 @@ struct AddGoalNoBack: View {
 //                    .padding(5)
 //                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
 //                    .padding(.top, 20)
-                    
+//
                     Button(action:{
                         self.userData.addGoal(self.name, self.startTime, self.endTime, self.project)
                         self.userData.saveGoal()

@@ -103,9 +103,9 @@ struct EditGoal: View {
 //                        .labelsHidden()
 //                        .pickerStyle(WheelPickerStyle())
 //                    }
-                    .padding(5)
-                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-                    .padding(.top, 20)
+//                    .padding(5)
+//                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+//                    .padding(.top, 20)
                     
                     Button(action:{
                         self.userData.saveGoal()
