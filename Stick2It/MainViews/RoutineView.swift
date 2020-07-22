@@ -112,17 +112,35 @@ struct RoutineView: View {
                 ZStack{
                     BlurView()
                         .edgesIgnoringSafeArea(.all)
+                        .background(
+                                Color.black.opacity(0.4)
+                                    .edgesIgnoringSafeArea(.all)
+                        )
                     
-                    VStack{
+                    VStack(spacing: 30){
                         Button(action: {self.currentOverlay = .addRoutine}){
                             Text("Routine")
+                            .foregroundColor(Color.white)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
+                            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                         }
-                        .padding()
+                        .padding(.leading, 40)
+                        .padding(.trailing, 40)
+                        
                         Button(action: {self.currentOverlay = .addFutureGoal}){
                             Text("Goal")
+                            .foregroundColor(Color.white)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
+                            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                         }
-                        .padding()
-                        
+                        .padding(.leading, 40)
+                        .padding(.trailing, 40)
                     }
                 }
             )
