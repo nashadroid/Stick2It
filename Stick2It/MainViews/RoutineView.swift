@@ -58,7 +58,6 @@ struct RoutineView: View {
                         AddButton()
                         
                     }
-                    .scaleEffect(0.2)
                     .offset(x: geo.size.width * 0.35, y: geo.size.height * 0.42)
                 }
                 
