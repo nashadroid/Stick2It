@@ -31,11 +31,15 @@ struct TodayView: View {
                 
                 
                 // Show message from yesterday (My favorite part)
-                Text(userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Tomorrow")))
-                    .italic()
-                    .foregroundColor(.gray)
-                    .padding(.leading, 20)
-                    .padding(.bottom, 10)
+                if userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Tomorrow")) != "" {
+                    Text(userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Tomorrow")))
+                        .italic()
+                        .foregroundColor(.gray)
+                        .padding(.leading, 20)
+                        .padding(.bottom, 10)
+                } else {
+                    Spacer(minLength: 10)
+                }
                 
                 // Show goals of today
                 ScrollView(.vertical, showsIndicators: false){
