@@ -81,10 +81,12 @@ struct TodayView: View {
                     self.currentOverlay = .addGoal
                 }) {
                     AddButton()
+                    
                 }
-                .scaleEffect(0.2)
+                
                 .offset(x: geo.size.width * 0.35, y: geo.size.height * 0.42)
             }
+                
             // Call the overlay
             overlayView()
             }
