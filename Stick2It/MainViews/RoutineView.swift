@@ -49,7 +49,7 @@ struct RoutineView: View {
                     }
                 }
                 
-                // Add Buttone
+                // Add Button
                 GeometryReader { geo in
                     Button(action: {
                         softGenerator.impactOccurred()

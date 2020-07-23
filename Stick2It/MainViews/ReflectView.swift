@@ -46,6 +46,15 @@ struct ReflectView: View {
                                 }
                                 
                             }
+                            
+                            Text(userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Today")) != "" ?
+                                "\"" + userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Today")) + "\"" : "")
+                                .italic()
+                                .foregroundColor(.gray)
+                                .padding(.leading, 20)
+                                .padding(.top, 10)
+                                .lineLimit(50)
+                                .multilineTextAlignment(.leading)
                         }
                         .padding()
                         .frame(maxWidth: .infinity)
@@ -67,6 +76,8 @@ struct ReflectView: View {
                         
                         // Make a stack of all routines
                         VStack(alignment: .trailing){
+                            
+                            
                             ForEach(userData.userRoutines, id: \.self){ routine in
                                 // Make a stack of past day completions from routines
                                 HStack{
@@ -80,6 +91,7 @@ struct ReflectView: View {
                                     }
                                 }
                             }
+                            
                         }
                         .padding(.leading)
                         .padding(.bottom, 40)
