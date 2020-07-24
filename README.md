@@ -27,3 +27,5 @@ The 'past' tab allows you to quickly see what you had accomplished yesterday, an
  - Integration with iCal and Google Cal
  - Regular notifications for timely check-ins
  - In-app analysis of goals to give feedback about adjustments to make
+ 
+ Artwork by <a href="https://www.instagram.com/jkuart/">Jessica Kulp</a>
