@@ -12,7 +12,7 @@ import SwiftUI
 struct AddButton: View {
     
     var body: some View {
-        let size: CGFloat = 75.0
+        let size: CGFloat = 65.0
         
         return ZStack {
             Circle()
