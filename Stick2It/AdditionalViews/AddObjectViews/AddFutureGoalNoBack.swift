@@ -30,6 +30,16 @@ struct AddFutureGoalNoBack: View {
                         .padding(.bottom, 15)
                 }
                 Spacer()
+                Button(action: {
+                    self.userData.addGoal(self.name, self.startTime, self.endTime, self.project)
+                    self.userData.saveGoal()
+                    self.currentOverlay = .none
+                }) {
+                    Text("Done")
+                        .foregroundColor(Color.white)
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
+                }
             }
             
             

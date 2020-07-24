@@ -35,6 +35,17 @@ struct AddRoutineNoBack: View {
                         .padding(.bottom, 15)
                 }
                 Spacer()
+                
+                Button(action:{
+                    self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, self.project)
+                    self.userData.saveRoutine()
+                    self.currentOverlay = .none
+                }){
+                    Text("Done")
+                        .foregroundColor(Color.white)
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
+                }
             }
             
             Text("New Routine")
