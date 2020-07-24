@@ -18,6 +18,7 @@ struct TodayView: View {
     
     var body: some View {
         ZStack{
+            
             VStack(alignment: .leading, spacing: 0){
                 
                 // Title
@@ -36,13 +37,14 @@ struct TodayView: View {
                         .italic()
                         .foregroundColor(.gray)
                         .padding(.leading, 20)
+                        .padding(.trailing, 20)
                         .padding(.bottom, 10)
                 } else {
                     Spacer(minLength: 10)
                 }
                 
                 // Show goals of today
-                ScrollView(.vertical, showsIndicators: false){
+                ScrollView(.vertical){
                     VStack(alignment: .center, spacing: 10){
                         
                         ForEach(userData.userGoals.filter({Calendar.current.isDateInToday($0.startTime)})) {goal in
@@ -93,6 +95,7 @@ struct TodayView: View {
             
         }
         .frame(maxWidth: .infinity)
+//        .background(Color.black)
     }
     func overlayView() -> AnyView {
         
@@ -141,7 +144,7 @@ struct TodayView: View {
                             self.currentOverlay = .none
                     }
                     
-                    ScrollView{
+                    ScrollView(showsIndicators: false){
                         VStack{
                             ReflectionPage(
                                 currentOverlay: self.$currentOverlay,

@@ -32,7 +32,7 @@ struct RoutineView: View {
                         .multilineTextAlignment(.leading)
                     
                     // Show Routines
-                    ScrollView(.vertical, showsIndicators: false){
+                    ScrollView(.vertical, showsIndicators: true){
                         VStack(spacing: 10){
                             
                             ForEach(userData.userRoutines) {routine in
@@ -66,7 +66,7 @@ struct RoutineView: View {
                 overlayView()
                 
             } else {
-                ScrollView(.horizontal, showsIndicators: false){
+                ScrollView(.horizontal, showsIndicators: true){
                     HStack{
                         ForEach(getNextWeek(), id: \.self){ day in
                             ScrollView(.vertical, showsIndicators: false){

@@ -31,7 +31,7 @@ struct ReflectView: View {
                         .multilineTextAlignment(.leading)
                     
                     // Show Yesterday's goals
-                    ScrollView(.vertical, showsIndicators: false){
+                    ScrollView(.vertical, showsIndicators: true){
                         VStack(spacing: 10){
                             
                             ForEach(self.userData.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: getYesterday())})) {goal in
