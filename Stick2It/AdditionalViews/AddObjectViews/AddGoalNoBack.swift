@@ -34,7 +34,12 @@ struct AddGoalNoBack: View {
                 Spacer()
                 
                 Button(action: {
-                    self.userData.addGoal(self.name, self.startTime, self.endTime, self.project)
+                    self.userData.addGoal(
+                        goalName: self.name,
+                        startTime: self.startTime,
+                        endTime: self.endTime,
+                        scheduled: self.scheduled,
+                        project: self.project)
                     self.userData.saveGoal()
                     self.currentOverlay = .none
                 }) {
@@ -132,7 +137,12 @@ struct AddGoalNoBack: View {
 //                    .padding(.top, 20)
 //
                     Button(action:{
-                        self.userData.addGoal(self.name, self.startTime, self.endTime, self.project)
+                        self.userData.addGoal(
+                            goalName: self.name,
+                            startTime: self.startTime,
+                            endTime: self.endTime,
+                            scheduled: self.scheduled,
+                            project: self.project)
                         self.userData.saveGoal()
                         self.currentOverlay = .none
                     }){

@@ -73,12 +73,12 @@ final class UserData: ObservableObject  {
     }
     
     //Add objects
-    func addGoal(_ goalName: String, _ startTime: Date, _ endTime: Date, _ project: String){
-        let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, project: project, done: false)
+    func addGoal(goalName: String, startTime: Date, endTime: Date, scheduled: Bool, project: String){
+        let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, scheduled: scheduled, project: project, done: false)
         userGoals += [newGoal]
     }
-    func addRoutine(_ routineName: String, _ startTime: Date, _ endTime: Date, _ repeatOn: [Bool], _ project: String){
-        let newRoutine = Routine(id: UUID().hashValue, routineName: routineName, startTime: startTime, endTime: endTime, repeatOn: repeatOn, project: project)
+    func addRoutine(routineName: String, startTime: Date, endTime: Date, scheduled: Bool, repeatOn: [Bool], project: String){
+        let newRoutine = Routine(id: UUID().hashValue, routineName: routineName, startTime: startTime, endTime: endTime, scheduled: scheduled, repeatOn: repeatOn, project: project)
         userRoutines += [newRoutine]
     }
     func addProject(projectName: String){

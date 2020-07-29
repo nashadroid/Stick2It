@@ -38,7 +38,13 @@ struct AddRoutineNoBack: View {
                 Spacer()
                 
                 Button(action:{
-                    self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, self.project)
+                    self.userData.addRoutine(
+                        routineName: self.name,
+                        startTime: self.startTime,
+                        endTime: self.endTime,
+                        scheduled: self.scheduled,
+                        repeatOn: self.daysSelected,
+                        project: self.project)
                     self.userData.saveRoutine()
                     self.currentOverlay = .none
                 }){
@@ -162,7 +168,14 @@ struct AddRoutineNoBack: View {
 //                    
                     
                     Button(action:{
-                        self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, self.project)
+                        self.userData.addRoutine(
+                            routineName: self.name,
+                            startTime: self.startTime,
+                            endTime: self.endTime,
+                            scheduled: self.scheduled,
+                            repeatOn: self.daysSelected,
+                            project: self.project)
+                        
                         self.userData.saveRoutine()
                         self.currentOverlay = .none
                         
