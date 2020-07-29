@@ -27,11 +27,12 @@ struct FutureGoalBox: View {
                         .padding(.leading, 10)
                         .foregroundColor(Color.white)
                         .lineLimit(1)
-                    Text("\(getTimeStringFromDate(goal.startTime)) - \(getTimeStringFromDate(goal.endTime))")
-                        .font(.footnote)
-                        .padding(.leading, 10)
-                        .foregroundColor(Color.white)
-                    
+                    if goal.scheduled {
+                        Text("\(getTimeStringFromDate(goal.startTime)) - \(getTimeStringFromDate(goal.endTime))")
+                            .font(.footnote)
+                            .padding(.leading, 10)
+                            .foregroundColor(Color.white)
+                    }
                     
                 }
                 Spacer()

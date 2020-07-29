@@ -25,9 +25,12 @@ struct RoutineBox: View {
                 .foregroundColor(Color.white)
             
             HStack{
-                Text("\(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].startTime)) - \(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].endTime))")
-                    .foregroundColor(Color.white)
-                    .font(.footnote)
+                
+                if routine.scheduled {
+                    Text("\(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].startTime)) - \(getTimeStringFromDate(self.userData.userRoutines[self.routineIndex].endTime))")
+                        .foregroundColor(Color.white)
+                        .font(.footnote)
+                }
                 
                 Spacer()
                 

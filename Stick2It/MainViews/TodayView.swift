@@ -47,7 +47,7 @@ struct TodayView: View {
                 ScrollView(.vertical){
                     VStack(alignment: .center, spacing: 10){
                         
-                        ForEach(userData.userGoals.filter({Calendar.current.isDateInToday($0.startTime)})) {goal in
+                        ForEach(userData.userGoals.filter({Calendar.current.isDateInToday($0.startTime)  && $0.scheduled})) {goal in
                             GoalBox(goal: goal)
                                 // This is to allow it to still scroll
                                 .onLongPressGesture {
@@ -56,6 +56,18 @@ struct TodayView: View {
                                 self.currentOverlay = .editGoal
                                 }
                         }
+                        
+                        ForEach(userData.userGoals.filter({Calendar.current.isDateInToday($0.startTime)  && !$0.scheduled})) {goal in
+                            GoalBox(goal: goal)
+                                // This is to allow it to still scroll
+                                .onLongPressGesture {
+                                softGenerator.impactOccurred()
+                                self.goalBeingEditedID = goal.id
+                                self.currentOverlay = .editGoal
+                                }
+                        }
+                        
+                        
                         
                         // Reflect button
                         Button(action: {
