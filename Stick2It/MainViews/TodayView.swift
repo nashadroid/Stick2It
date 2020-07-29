@@ -31,10 +31,13 @@ struct TodayView: View {
                     .padding(.leading, 20)
                     .multilineTextAlignment(.leading)
                 Spacer()
-                MenuBurger()
-                    .padding(.trailing)
-                    .padding(.leading)
-                }
+                    Button(action: {self.currentOverlay = .settingsMenu}){
+                        MenuBurger()
+                            .padding(.trailing)
+                            .padding(.leading)
+                        }
+                    }
+                
                 
                 // Show message from yesterday (My favorite part)
                 if userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Tomorrow")) != "" {
@@ -174,6 +177,20 @@ struct TodayView: View {
                             
                         }
                     }
+                }
+            )
+            
+        // settings
+        case .settingsMenu:
+            return AnyView(
+                ZStack{
+                    BlurView()
+                        .edgesIgnoringSafeArea(.all)
+                        .background(
+                                Color.black.opacity(0.4)
+                                    .edgesIgnoringSafeArea(.all)
+                        )
+                    SettingsMenu(currentOverlay: self.$currentOverlay)
                 }
             )
             
