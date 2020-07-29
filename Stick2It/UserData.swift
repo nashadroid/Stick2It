@@ -77,6 +77,7 @@ final class UserData: ObservableObject  {
     func addGoal(goalName: String, startTime: Date, endTime: Date, scheduled: Bool, remain: Bool, project: String){
         let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, scheduled: scheduled, remain: remain, project: project, done: false)
         userGoals += [newGoal]
+        newNotificationFromGoal(goal: newGoal)
     }
     func addRoutine(routineName: String, startTime: Date, endTime: Date, scheduled: Bool, repeatOn: [Bool], project: String){
         let newRoutine = Routine(id: UUID().hashValue, routineName: routineName, startTime: startTime, endTime: endTime, scheduled: scheduled, repeatOn: repeatOn, project: project)
@@ -196,6 +197,7 @@ final class UserData: ObservableObject  {
         if self.userGoals.firstIndex(where: {$0.goalName == goalToBeAdded.goalName && $0.startTime == goalToBeAdded.startTime}) != nil{
             return
         }
+        newNotificationFromGoal(goal: goalToBeAdded)
         userGoals += [goalToBeAdded]
     }
     
@@ -229,6 +231,21 @@ final class UserData: ObservableObject  {
             return -1
         }
         
+    }
+    
+    func newNotificationFromGoal(goal: Goal) {
+        let content = UNMutableNotificationContent()
+        content.title = goal.goalName
+        content.body = getTimeStringFromDate(goal.startTime)
+        content.sound = UNNotificationSound.default
+        
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: goal.startTime)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request)
     }
 }
 

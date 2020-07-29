@@ -87,6 +87,13 @@ struct TodayView: View {
                             
                         }
                         .padding(.top, 10)
+                        
+                        Button(action: {
+                            self.userData.newNotificationFromGoal(goal: self.userData.userGoals[0])
+                        }){
+                            Text("Notification")
+                        }
+                        
                     }
                     .padding()
                     .frame(maxWidth: .infinity)
