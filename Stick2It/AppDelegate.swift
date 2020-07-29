@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import EventKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         registerForPushNotifications() //TODO: Move this to later
-
+        
         return true
     }
 
@@ -53,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Notification settings: \(settings)")
       }
     }
+    
 
 
 }

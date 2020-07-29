@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Combine
+import EventKit
 
 //These functions are needed at startup and thus are placed at top level
 func loadSavedGoals() -> [Goal]{
@@ -68,6 +69,7 @@ final class UserData: ObservableObject  {
         userProjects = loadSavedProjects()
         userNotes = loadSavedNotes()
         changeOldRemainGoalsToday()
+        addGoalsFromCal() //TODO Move this
         for day in getNextWeek(){
             checkRoutineAddGoalsAsNeeded(day: day)
         }
@@ -82,6 +84,9 @@ final class UserData: ObservableObject  {
     func addRoutine(routineName: String, startTime: Date, endTime: Date, scheduled: Bool, repeatOn: [Bool], project: String){
         let newRoutine = Routine(id: UUID().hashValue, routineName: routineName, startTime: startTime, endTime: endTime, scheduled: scheduled, repeatOn: repeatOn, project: project)
         userRoutines += [newRoutine]
+        for day in getNextWeek(){
+            checkRoutineAddGoalsAsNeeded(day: day)
+        }
     }
     func addProject(projectName: String){
         let newProject = Project(id: UUID().hashValue, projectName: projectName)
@@ -246,6 +251,27 @@ final class UserData: ObservableObject  {
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request)
+    }
+    func addGoalsFromCal() {
+        let store = EKEventStore()
+        store.requestAccess(to: .event, completion: {_,_ in })
+        let calendars = store.calendars(for: .event)
+        for cal in calendars {
+            print(cal.title)
+        }
+        
+        let predicate = store.predicateForEvents(withStart: getYesterday(), end: getTomorrow(), calendars: store.calendars(for: .event))
+        
+        let calEvents = store.events(matching: predicate)
+        
+        print(calEvents)
+        
+        for event in calEvents {
+            print(event.title ?? "FAILED")
+            print(getTimeStringFromDate(event.startDate ?? Date()))
+            let goalToBeAdded = Goal(id: UUID().hashValue, goalName: event.title, startTime: event.startDate, endTime: event.endDate, scheduled: true, remain: false, project: "none", catagory: "none", done: false)
+            addGoalAvoidingRepeat(goalToBeAdded: goalToBeAdded)
+        }
     }
 }
 
