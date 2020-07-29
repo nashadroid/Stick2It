@@ -59,9 +59,11 @@ func getShortStringFromRepeatDays(repeatedOn: [Bool]) -> String {
         strToReturn += "Sat"
     }
     
+    if strToReturn != "" {
+        return strToReturn
+    }
+    return "No Days Selected :("
     
-    
-    return strToReturn
 }
 
 // Returns a list of Date objects corresponding to the past week

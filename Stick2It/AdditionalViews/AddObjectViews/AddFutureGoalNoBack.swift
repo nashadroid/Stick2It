@@ -36,6 +36,7 @@ struct AddFutureGoalNoBack: View {
                         startTime: self.startTime,
                         endTime: self.endTime,
                         scheduled: true,
+                        remain: false,
                         project: self.project)
                     self.userData.saveGoal()
                     self.currentOverlay = .none
@@ -122,6 +123,7 @@ struct AddFutureGoalNoBack: View {
                             startTime: self.startTime,
                             endTime: self.endTime,
                             scheduled: true,
+                            remain: false,
                             project: self.project)
                         self.userData.saveGoal()
                         self.currentOverlay = .none

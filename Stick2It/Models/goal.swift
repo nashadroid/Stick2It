@@ -16,6 +16,7 @@ struct Goal: Hashable, Codable, Identifiable {
     var startTime: Date
     var endTime: Date
     var scheduled: Bool = true
+    var remain: Bool = false
     var project: String = "none"
     var done: Bool
 }

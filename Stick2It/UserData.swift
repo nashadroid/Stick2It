@@ -67,14 +67,15 @@ final class UserData: ObservableObject  {
         userRoutines = loadSavedRoutines()
         userProjects = loadSavedProjects()
         userNotes = loadSavedNotes()
+        changeOldRemainGoalsToday()
         for day in getNextWeek(){
             checkRoutineAddGoalsAsNeeded(day: day)
         }
     }
     
     //Add objects
-    func addGoal(goalName: String, startTime: Date, endTime: Date, scheduled: Bool, project: String){
-        let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, scheduled: scheduled, project: project, done: false)
+    func addGoal(goalName: String, startTime: Date, endTime: Date, scheduled: Bool, remain: Bool, project: String){
+        let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, scheduled: scheduled, remain: remain, project: project, done: false)
         userGoals += [newGoal]
     }
     func addRoutine(routineName: String, startTime: Date, endTime: Date, scheduled: Bool, repeatOn: [Bool], project: String){
@@ -165,7 +166,15 @@ final class UserData: ObservableObject  {
             let endDate = combineTimeAndDay(time: routine.endTime, day: day)
             
             
-            let tempGoal = Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: startDate, endTime: endDate, project: routine.project, done: false)
+            let tempGoal = Goal(
+                id: UUID().hashValue,
+                goalName: routine.routineName,
+                startTime: startDate,
+                endTime: endDate,
+                scheduled: routine.scheduled,
+                project: routine.project,
+                done: false
+            )
             
             self.addGoalAvoidingRepeat(goalToBeAdded: tempGoal)
         }
@@ -188,6 +197,19 @@ final class UserData: ObservableObject  {
             return
         }
         userGoals += [goalToBeAdded]
+    }
+    
+    
+    
+    //Change unfinished remain goals to be today
+    func changeOldRemainGoalsToday() {
+        for goal in self.userGoals.filter({$0.remain && !$0.done}) {
+            
+            if let goalIndex = self.userGoals.firstIndex(of: goal){
+                self.userGoals[goalIndex].startTime = Date()
+                self.userGoals[goalIndex].endTime = Date()
+            }
+        }
     }
     
     func goalDoneOnDay(goalName: String, Date: Date) -> Int{
