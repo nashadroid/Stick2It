@@ -13,6 +13,7 @@ struct AddGoalNoBack: View {
     @EnvironmentObject var userData: UserData
     @Binding var currentOverlay: overlayViews
     @State private var name: String = ""
+    @State private var scheduled: Bool = true
     @State private var startTime: Date = getLastHour()
     @State private var endTime: Date = getNextHour()
     @State private var date: String = "none"
@@ -65,6 +66,24 @@ struct AddGoalNoBack: View {
                     .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     
+                    HStack(alignment: .center){
+                        Text("Scheduled")
+                            .font(.footnote)
+                            .fontWeight(.heavy)
+                            .padding(.leading, 5)
+                            .foregroundColor(Color.white)
+                        Toggle(isOn: $scheduled){
+                            Text("")
+                        }
+                        .padding(5)
+                    }
+                    .padding(5)
+                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                    .padding(.top, 20)
+                    
+                    if self.scheduled{
+                        
+                    
                     VStack(alignment: .leading){
                         Text("Start Time:")
                             .font(.footnote)
@@ -92,6 +111,7 @@ struct AddGoalNoBack: View {
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     .padding(.top, 20)
                     
+                    }
 //                    VStack(alignment: .leading){
 //                        Text("Project:")
 //                            .font(.footnote)

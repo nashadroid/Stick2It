@@ -51,10 +51,10 @@ struct TodayView: View {
                             GoalBox(goal: goal)
                                 // This is to allow it to still scroll
                                 .onLongPressGesture {
-                                    softGenerator.impactOccurred()
-                                    self.goalBeingEditedID = goal.id
-                                    self.currentOverlay = .editGoal
-                            }
+                                softGenerator.impactOccurred()
+                                self.goalBeingEditedID = goal.id
+                                self.currentOverlay = .editGoal
+                                }
                         }
                         
                         // Reflect button

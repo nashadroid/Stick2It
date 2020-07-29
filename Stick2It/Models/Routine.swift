@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  Routine.swift
 //  Stick2It
 //
 //  Created by Nashad Rahman on 5/8/20.
@@ -15,6 +15,7 @@ struct Routine: Hashable, Codable, Identifiable {
     var routineName: String
     var startTime: Date
     var endTime: Date
+    var scheduled: Bool = true
     var repeatOn: [Bool] = [false, false, false, false, false, false, false]
     var running: Bool = true
     var project: String = "none"
