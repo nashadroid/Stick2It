@@ -45,7 +45,7 @@ struct AddGoalNoBack: View {
                     self.userData.saveGoal()
                     self.currentOverlay = .none
                 }) {
-                    Text("Done")
+                    Text("Add")
                         .foregroundColor(Color.white)
                         .padding(.top, 15)
                         .padding(.bottom, 15)

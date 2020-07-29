@@ -48,7 +48,7 @@ struct AddRoutineNoBack: View {
                     self.userData.saveRoutine()
                     self.currentOverlay = .none
                 }){
-                    Text("Done")
+                    Text("Add")
                         .foregroundColor(Color.white)
                         .padding(.top, 15)
                         .padding(.bottom, 15)
