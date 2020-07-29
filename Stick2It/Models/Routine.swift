@@ -19,5 +19,6 @@ struct Routine: Hashable, Codable, Identifiable {
     var repeatOn: [Bool] = [false, false, false, false, false, false, false]
     var running: Bool = true
     var project: String = "none"
-    
+    var catagory: String = "none"
+    var details: Dictionary<String, String> = ["Default":"None"]
 }

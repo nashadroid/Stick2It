@@ -18,6 +18,8 @@ struct Goal: Hashable, Codable, Identifiable {
     var scheduled: Bool = true
     var remain: Bool = false
     var project: String = "none"
+    var catagory: String = "none"
     var done: Bool
+    var details: Dictionary<String, String> = ["Default":"None"]
 }
 

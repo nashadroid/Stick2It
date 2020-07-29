@@ -86,6 +86,7 @@
 		84522621246C55D200E9CA66 /* ProjectDetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailedView.swift; sourceTree = "<group>"; };
 		8481799C24D1372B009C840D /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
 		8481799E24D139CB009C840D /* MenuBurger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBurger.swift; sourceTree = "<group>"; };
+		848179A024D1DD09009C840D /* Koalati.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Koalati.entitlements; sourceTree = "<group>"; };
 		8484B57124C8C611000EDFD4 /* FutureGoalBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureGoalBox.swift; sourceTree = "<group>"; };
 		8484B57324C8CCC5000EDFD4 /* AddFutureGoalNoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFutureGoalNoBack.swift; sourceTree = "<group>"; };
 		84AE44C1246071BA00043CDA /* Koalati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Koalati.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +226,7 @@
 		84AE44C3246071BA00043CDA /* Stick2It */ = {
 			isa = PBXGroup;
 			children = (
+				848179A024D1DD09009C840D /* Koalati.entitlements */,
 				8420A7232461F2EE00E44DC9 /* UserData.swift */,
 				8420A71E2461065F00E44DC9 /* Models */,
 				8420A7412467A20300E44DC9 /* MainViews */,
@@ -602,6 +604,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Stick2It/Koalati.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Stick2It/Preview Content\"";
@@ -624,6 +627,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Stick2It/Koalati.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Stick2It/Preview Content\"";

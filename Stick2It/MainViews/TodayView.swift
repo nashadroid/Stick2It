@@ -21,7 +21,7 @@ struct TodayView: View {
             
             VStack(alignment: .leading, spacing: 0){
                 
-                HStack{
+                HStack {
                 // Title
                 Text("Today's Goals")
                     .foregroundColor(Color.black)
