@@ -12,6 +12,7 @@ struct SettingsMenu: View {
     @EnvironmentObject var userData: UserData
     @Binding var currentOverlay: overlayViews
     @State private var allowNotifications: Bool = false
+    @State private var connectToCal: Bool = false
     
     
     var body: some View {
@@ -56,6 +57,21 @@ struct SettingsMenu: View {
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
                         Toggle(isOn: $allowNotifications){
+                            Spacer()
+                        }
+                        .padding(5)
+                    }
+                    .padding(5)
+                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                    .padding(.top, 20)
+                    
+                    HStack(alignment: .center){
+                        Text("Connect to Calendar")
+                            .font(.footnote)
+                            .fontWeight(.heavy)
+                            .padding(.leading, 5)
+                            .foregroundColor(Color.white)
+                        Toggle(isOn: $connectToCal){
                             Spacer()
                         }
                         .padding(5)

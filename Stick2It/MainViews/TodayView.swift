@@ -21,6 +21,7 @@ struct TodayView: View {
             
             VStack(alignment: .leading, spacing: 0){
                 
+                HStack{
                 // Title
                 Text("Today's Goals")
                     .foregroundColor(Color.black)
@@ -29,7 +30,11 @@ struct TodayView: View {
                     .padding(.top, 10)
                     .padding(.leading, 20)
                     .multilineTextAlignment(.leading)
-                
+                Spacer()
+                MenuBurger()
+                    .padding(.trailing)
+                    .padding(.leading)
+                }
                 
                 // Show message from yesterday (My favorite part)
                 if userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Tomorrow")) != "" {

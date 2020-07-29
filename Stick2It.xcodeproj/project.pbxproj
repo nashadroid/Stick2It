@@ -29,6 +29,7 @@
 		845226202469150300E9CA66 /* AddProjectNoBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452261F2469150300E9CA66 /* AddProjectNoBack.swift */; };
 		84522622246C55D200E9CA66 /* ProjectDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84522621246C55D200E9CA66 /* ProjectDetailedView.swift */; };
 		8481799D24D1372B009C840D /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8481799C24D1372B009C840D /* SettingsMenu.swift */; };
+		8481799F24D139CB009C840D /* MenuBurger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8481799E24D139CB009C840D /* MenuBurger.swift */; };
 		8484B57224C8C611000EDFD4 /* FutureGoalBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B57124C8C611000EDFD4 /* FutureGoalBox.swift */; };
 		8484B57424C8CCC5000EDFD4 /* AddFutureGoalNoBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8484B57324C8CCC5000EDFD4 /* AddFutureGoalNoBack.swift */; };
 		84AE44C5246071BA00043CDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE44C4246071BA00043CDA /* AppDelegate.swift */; };
@@ -84,6 +85,7 @@
 		8452261F2469150300E9CA66 /* AddProjectNoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectNoBack.swift; sourceTree = "<group>"; };
 		84522621246C55D200E9CA66 /* ProjectDetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailedView.swift; sourceTree = "<group>"; };
 		8481799C24D1372B009C840D /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
+		8481799E24D139CB009C840D /* MenuBurger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBurger.swift; sourceTree = "<group>"; };
 		8484B57124C8C611000EDFD4 /* FutureGoalBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureGoalBox.swift; sourceTree = "<group>"; };
 		8484B57324C8CCC5000EDFD4 /* AddFutureGoalNoBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFutureGoalNoBack.swift; sourceTree = "<group>"; };
 		84AE44C1246071BA00043CDA /* Koalati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Koalati.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,6 +171,7 @@
 				8484B57124C8C611000EDFD4 /* FutureGoalBox.swift */,
 				8420A7332465FFA700E44DC9 /* RoutineBox.swift */,
 				84522621246C55D200E9CA66 /* ProjectDetailedView.swift */,
+				8481799E24D139CB009C840D /* MenuBurger.swift */,
 				8420A72B2464A13300E44DC9 /* AddButton.swift */,
 				8420A7272462657D00E44DC9 /* BlurView.swift */,
 				8420A7442467A69A00E44DC9 /* DaysOfWeekSelector.swift */,
@@ -430,6 +433,7 @@
 				8420A7322465FE9900E44DC9 /* RoutineView.swift in Sources */,
 				8420A72E2465C3CF00E44DC9 /* TodayView.swift in Sources */,
 				843DCF6724B8C6720060BEF5 /* ReflectView.swift in Sources */,
+				8481799F24D139CB009C840D /* MenuBurger.swift in Sources */,
 				845226202469150300E9CA66 /* AddProjectNoBack.swift in Sources */,
 				843DCF6924B8CE450060BEF5 /* ReflectionGoalBox.swift in Sources */,
 				8420A7342465FFA700E44DC9 /* RoutineBox.swift in Sources */,
