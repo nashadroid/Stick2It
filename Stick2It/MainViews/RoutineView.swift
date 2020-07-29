@@ -35,7 +35,7 @@ struct RoutineView: View {
                     ScrollView(.vertical, showsIndicators: true){
                         VStack(spacing: 10){
                             
-                            ForEach(userData.userRoutines) {routine in
+                            ForEach(userData.userRoutines.filter({$0.scheduled})) {routine in
                                 RoutineBox(routine: routine)
                                     .onLongPressGesture {
                                         softGenerator.impactOccurred()
@@ -43,6 +43,15 @@ struct RoutineView: View {
                                         self.currentOverlay = .editRoutine
                                 }
                             }
+                            ForEach(userData.userRoutines.filter({!$0.scheduled})) {routine in
+                                RoutineBox(routine: routine)
+                                    .onLongPressGesture {
+                                        softGenerator.impactOccurred()
+                                        self.routineBeingEditedID = routine.id
+                                        self.currentOverlay = .editRoutine
+                                }
+                            }
+
                         }
                         .padding()
                         .frame(maxWidth: .infinity)
