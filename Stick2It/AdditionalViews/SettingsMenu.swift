@@ -80,6 +80,10 @@ struct SettingsMenu: View {
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     .padding(.top, 20)
                     
+                    ForEach(self.userData.userCalendars){cal in
+                        Text(cal.calendarName)
+                    }
+                    
                     
                     Button(action:{
                         self.currentOverlay = .none

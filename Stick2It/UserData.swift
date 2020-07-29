@@ -43,6 +43,16 @@ func loadSavedProjects() -> [Project]{
     }
     return []
 }
+func loadSavedCalendars() -> [NCalendar]{
+    
+    if let savedProjects = UserDefaults.standard.object(forKey: "UserCalendars") as? Data {
+        let decoder = JSONDecoder()
+        if let loadedCals = try? decoder.decode([NCalendar].self, from: savedProjects) {
+            return loadedCals
+        }
+    }
+    return []
+}
 
 func loadSavedNotes() -> Dictionary<String, String>{
     
@@ -61,15 +71,18 @@ final class UserData: ObservableObject  {
     @Published var userGoals: [Goal]
     @Published var userRoutines: [Routine]
     @Published var userProjects: [Project]
+    @Published var userCalendars: [NCalendar]
     @Published var userNotes: Dictionary<String, String>
     
     init() {
         userGoals = loadSavedGoals()
         userRoutines = loadSavedRoutines()
         userProjects = loadSavedProjects()
+        userCalendars = loadSavedCalendars()
         userNotes = loadSavedNotes()
         changeOldRemainGoalsToday()
         addGoalsFromCal() //TODO Move this
+        checkCalendarsAddAccordingly()
         for day in getNextWeek(){
             checkRoutineAddGoalsAsNeeded(day: day)
         }
@@ -125,6 +138,12 @@ final class UserData: ObservableObject  {
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(self.userProjects) {
             UserDefaults.standard.set(data, forKey: "UserProjects")
+        }
+    }
+    func saveCalendars(){
+        let encoder = JSONEncoder()
+        if let data = try? encoder.encode(self.userCalendars) {
+            UserDefaults.standard.set(data, forKey: "UserCalendars")
         }
     }
     func saveNotes(){
@@ -252,24 +271,55 @@ final class UserData: ObservableObject  {
 
         UNUserNotificationCenter.current().add(request)
     }
+    func getListOfCal() -> [String] {
+        let store = EKEventStore()
+        store.requestAccess(to: .event, completion: {_,_ in })
+        let calendars = store.calendars(for: .event)
+        
+        let calendarTitles = calendars.map{(cal) -> String in
+            return cal.title
+        }
+        return calendarTitles
+    }
+    func checkCalendarsAddAccordingly() {
+        let store = EKEventStore()
+        store.requestAccess(to: .event, completion: {_,_ in })
+        let calendars = store.calendars(for: .event)
+        
+        let calendarTitles = calendars.map{(cal) -> String in
+            return cal.title
+        }
+        
+        for calTitle in calendarTitles {
+            print(calTitle)
+            addCalAvoidRepeat(calTitle: calTitle)
+        }
+    }
+    func addCalAvoidRepeat(calTitle: String) {
+        if self.userCalendars.firstIndex(where: {$0.calendarName == calTitle}) != nil{
+            return
+        }
+        self.userCalendars += [NCalendar(id: UUID().hashValue, calendarName: calTitle)]
+        self.saveCalendars()
+    }
     func addGoalsFromCal() {
         let store = EKEventStore()
         store.requestAccess(to: .event, completion: {_,_ in })
         let calendars = store.calendars(for: .event)
-        for cal in calendars {
-            print(cal.title)
+        
+        let calendarTitles = calendars.map{(cal) -> String in
+            return cal.title
         }
+        print(calendarTitles)
         
         let predicate = store.predicateForEvents(withStart: getYesterday(), end: getTomorrow(), calendars: store.calendars(for: .event))
         
         let calEvents = store.events(matching: predicate)
         
-        print(calEvents)
-        
         for event in calEvents {
-            print(event.title ?? "FAILED")
-            print(getTimeStringFromDate(event.startDate ?? Date()))
+            
             let goalToBeAdded = Goal(id: UUID().hashValue, goalName: event.title, startTime: event.startDate, endTime: event.endDate, scheduled: true, remain: false, project: "none", catagory: "none", done: false)
+            
             addGoalAvoidingRepeat(goalToBeAdded: goalToBeAdded)
         }
     }

@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .requestAuthorization(options: [.alert, .sound, .badge]) {
                 [weak self] granted, error in
                 
-                print("Permission granted: \(granted)")
+//                print("Permission granted: \(granted)")
                 guard granted else { return }
                 self?.getNotificationSettings()
         }
@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getNotificationSettings() {
       UNUserNotificationCenter.current().getNotificationSettings { settings in
-        print("Notification settings: \(settings)")
+//        print("Notification settings: \(settings)")
       }
     }
     
