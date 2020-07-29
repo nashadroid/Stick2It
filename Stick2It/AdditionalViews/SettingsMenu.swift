@@ -52,7 +52,6 @@ struct SettingsMenu: View {
                     
                     HStack(alignment: .center){
                         Text("Allow Notifications")
-                            .font(.footnote)
                             .fontWeight(.heavy)
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
@@ -65,24 +64,54 @@ struct SettingsMenu: View {
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     .padding(.top, 20)
                     
-                    HStack(alignment: .center){
-                        Text("Connect to Calendar")
-                            .font(.footnote)
-                            .fontWeight(.heavy)
-                            .padding(.leading, 5)
-                            .foregroundColor(Color.white)
-                        Toggle(isOn: $connectToCal){
-                            Spacer()
+                    VStack(alignment: .leading){
+                        HStack(alignment: .center){
+                            Text("Connect to Calendar")
+                                .fontWeight(.heavy)
+                                .padding(.leading, 5)
+                                .foregroundColor(Color.white)
+                            Toggle(isOn: $connectToCal){
+                                Spacer()
+                            }
+                            .padding(5)
                         }
-                        .padding(5)
                     }
                     .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     .padding(.top, 20)
                     
-                    ForEach(self.userData.userCalendars){cal in
-                        Text(cal.calendarName)
+                    if self.connectToCal {
+                        VStack(alignment: .leading){
+                            HStack(alignment: .center){
+                                Text("Select Calendars:")
+                                    .fontWeight(.heavy)
+                                    .padding(10)
+                                    .foregroundColor(Color.white)
+                            }
+                            ForEach(self.userData.userCalendars){cal in
+                                Button(action: {
+                                    self.userData.userCalendars[
+                                        self.userData.userCalendars.firstIndex(where: {cal.calendarName == $0.calendarName}) ?? 0].enabled.toggle() }){
+                                                HStack{
+                                                    Text(cal.calendarName)
+                                                        .foregroundColor(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: cal.enabled ? 1 : 0.6))
+                                                        .font(.footnote)
+                                                        .fontWeight(.heavy)
+                                                        
+                                                    Spacer()
+                                                }
+                                                .padding(10)
+                                                .padding(.leading, 10)
+                                                .frame(maxWidth: .infinity)
+                                                .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: cal.enabled ? 0.3 : 0))
+                                }
+                                
+                            }
+                        }
+                        .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                        .padding(.top, 20)
                     }
+                    
                     
                     
                     Button(action:{
