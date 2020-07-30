@@ -303,6 +303,11 @@ final class UserData: ObservableObject  {
         self.saveCalendars()
     }
     func addGoalsFromCal() {
+        
+        if !(UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
+            return
+        }
+        
         let store = EKEventStore()
         store.requestAccess(to: .event, completion: {_,_ in }) //TODO
         let calendars = store.calendars(for: .event)

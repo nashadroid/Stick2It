@@ -20,6 +20,8 @@ struct SettingsMenu: View {
             HStack{
                 Button(action: {
                     self.currentOverlay = .none
+                    self.userData.saveCalendars()
+                    self.userData.addGoalsFromCal()
                     UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
                     UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
                 }) {
