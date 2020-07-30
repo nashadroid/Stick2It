@@ -144,7 +144,10 @@ final class UserData: ObservableObject  {
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(self.userCalendars) {
             UserDefaults.standard.set(data, forKey: "UserCalendars")
+        } else {
+            print("could not save calendar")
         }
+        
     }
     func saveNotes(){
         UserDefaults.standard.set(self.userNotes, forKey: "UserNotes")
@@ -225,8 +228,6 @@ final class UserData: ObservableObject  {
         userGoals += [goalToBeAdded]
     }
     
-    
-    
     //Change unfinished remain goals to be today
     func changeOldRemainGoalsToday() {
         for goal in self.userGoals.filter({$0.remain && !$0.done}) {
@@ -291,7 +292,6 @@ final class UserData: ObservableObject  {
         }
         
         for calTitle in calendarTitles {
-            print(calTitle)
             addCalAvoidRepeat(calTitle: calTitle)
         }
     }
@@ -304,19 +304,20 @@ final class UserData: ObservableObject  {
     }
     func addGoalsFromCal() {
         let store = EKEventStore()
-        store.requestAccess(to: .event, completion: {_,_ in })
+        store.requestAccess(to: .event, completion: {_,_ in }) //TODO
         let calendars = store.calendars(for: .event)
         
-        let calendarTitles = calendars.map{(cal) -> String in
-            return cal.title
+        let ONCalendarTitles = self.userCalendars.filter({$0.enabled}).map{(cal) -> String in
+            return cal.calendarName
         }
-        print(calendarTitles)
+        let ONCalendars = calendars.filter({ONCalendarTitles.contains($0.title)})
         
-        let predicate = store.predicateForEvents(withStart: getYesterday(), end: getTomorrow(), calendars: store.calendars(for: .event))
+        let predicate = store.predicateForEvents(withStart: getYesterday(), end: getTomorrow(), calendars: ONCalendars)
         
         let calEvents = store.events(matching: predicate)
+        let ONCalEvents = calEvents.filter({ONCalendars.contains($0.calendar)})
         
-        for event in calEvents {
+        for event in ONCalEvents {
             
             let goalToBeAdded = Goal(id: UUID().hashValue, goalName: event.title, startTime: event.startDate, endTime: event.endDate, scheduled: true, remain: false, project: "none", catagory: "none", done: false)
             
