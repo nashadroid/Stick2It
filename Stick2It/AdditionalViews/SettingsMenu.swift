@@ -32,6 +32,8 @@ struct SettingsMenu: View {
                 }
                 Spacer()
             }
+            .padding(.leading, 20)
+            .padding(.trailing, 20)
             
             
             Text("Settings")
@@ -108,10 +110,10 @@ struct SettingsMenu: View {
                 }
                 .padding(5)
                 .padding(.bottom,250)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
             }
         }
-        .padding(.leading, 30)
-        .padding(.trailing, 30)
         .onAppear {
             self.allowNotifications = UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false
             self.connectToCal = UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false
