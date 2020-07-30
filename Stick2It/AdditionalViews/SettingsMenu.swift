@@ -14,29 +14,21 @@ struct SettingsMenu: View {
     @State private var allowNotifications: Bool = false
     @State private var connectToCal: Bool = false
     
-    
     var body: some View {
         VStack{
             
             HStack{
-                Button(action: {self.currentOverlay = .none})
-                {
-                    Text("Cancel")
+                Button(action: {
+                    self.currentOverlay = .none
+                    UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
+                    UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
+                }) {
+                    Text("Back")
                         .foregroundColor(Color.white)
                         .padding(.top, 15)
                         .padding(.bottom, 15)
                 }
                 Spacer()
-                
-                Button(action: {
-                    self.userData.saveGoal()
-                    self.currentOverlay = .none
-                }) {
-                    Text("Done")
-                        .foregroundColor(Color.white)
-                        .padding(.top, 15)
-                        .padding(.bottom, 15)
-                }
             }
             
             
@@ -111,21 +103,6 @@ struct SettingsMenu: View {
                         .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                         .padding(.top, 20)
                     }
-                    
-                    
-                    
-                    Button(action:{
-                        self.currentOverlay = .none
-                    }){
-                        Text("Done")
-                            .foregroundColor(Color.white)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                            .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
-                            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-                            .padding(.top, 20)
-                        
-                    }
                 }
                 .padding(5)
                 .padding(.bottom,250)
@@ -133,6 +110,10 @@ struct SettingsMenu: View {
         }
         .padding(.leading, 30)
         .padding(.trailing, 30)
+        .onAppear {
+            self.allowNotifications = UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false
+            self.connectToCal = UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false
+        }
     }
 }
 
