@@ -34,7 +34,7 @@ struct ReflectView: View {
                     ScrollView(.vertical, showsIndicators: true){
                         VStack(spacing: 10){
                             
-                            ForEach(self.userData.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: getYesterday())})) {goal in
+                            ForEach(self.userData.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: getYesterday()) && $0.enabled })) {goal in
                                 
                                 ReflectionGoalBox(goal: goal)
                                     .onLongPressGesture {

@@ -155,7 +155,7 @@ final class UserData: ObservableObject  {
     
     //Remove Objects
     func removeGoal(goal: Goal){
-        self.userGoals.removeAll { $0 == goal}
+        self.userGoals[self.userGoals.firstIndex(where: {$0 == goal}) ?? 0].enabled.toggle()
         self.saveGoal()
     }
     func removeRoutine(routine: Routine){

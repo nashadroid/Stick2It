@@ -93,7 +93,7 @@ struct RoutineView: View {
                                     .font(.largeTitle)
                                     .fontWeight(.heavy)
                                 }
-                                ForEach(self.userData.userGoals.filter({Calendar.current.isDate(day, inSameDayAs: $0.startTime)})) {goal in
+                                ForEach(self.userData.userGoals.filter({Calendar.current.isDate(day, inSameDayAs: $0.startTime) && $0.enabled})) {goal in
                                     FutureGoalBox(goal: goal)
                                     // This is to allow it to still scroll
                                     //                                    .onLongPressGesture {
