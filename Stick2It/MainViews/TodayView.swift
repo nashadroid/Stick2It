@@ -44,8 +44,6 @@ struct TodayView: View {
                     Text(userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Tomorrow")))
                         .italic()
                         .foregroundColor(.gray)
-                        .padding(.leading, 20)
-                        .padding(.trailing, 20)
                         .padding(.bottom, 10)
                 } else {
                     Spacer(minLength: 10)
@@ -64,7 +62,6 @@ struct TodayView: View {
                                 self.currentOverlay = .editGoal
                                 }
                         }
-                        
                         ForEach(userData.userGoals.filter({Calendar.current.isDateInToday($0.startTime)  && !$0.scheduled && $0.enabled && !$0.deleted})) {goal in
                             GoalBox(goal: goal)
                                 // This is to allow it to still scroll
@@ -75,6 +72,13 @@ struct TodayView: View {
                                 }
                         }
                         
+                        if !(userData.userGoals.filter({Calendar.current.isDateInToday($0.startTime) && $0.enabled && !$0.deleted}).count > 0) {
+                            Text("Looks like you haven't added any goals yet, press the \"+\" button to get started!")
+                                .italic()
+                                .foregroundColor(.gray)
+                                .padding(.bottom, 10)
+                                .multilineTextAlignment(.center)
+                        }
                         
                         
                         // Reflect button

@@ -51,10 +51,17 @@ struct RoutineView: View {
                                         self.currentOverlay = .editRoutine
                                 }
                             }
-
+                            if !(userData.userRoutines.count > 0) {
+                                Text("Looks like you haven't added any routines yet, press the \"+\" button to get started!")
+                                    .italic()
+                                    .foregroundColor(.gray)
+                                    .multilineTextAlignment(.center)
+                            }
+                            
                         }
                         .padding()
                         .frame(maxWidth: .infinity)
+                        
                     }
                 }
                 
@@ -69,7 +76,7 @@ struct RoutineView: View {
                     .offset(x: geo.size.width * 0.35, y: geo.size.height * 0.42)
                 }
                 
-
+                
                 // Call on overlay
                 overlayView()
                 
@@ -78,33 +85,33 @@ struct RoutineView: View {
                     HStack{
                         ForEach(getNextWeek(), id: \.self){ day in
                             ScrollView(.vertical, showsIndicators: false){
-                            VStack(alignment: .center, spacing: 10){
-                                if Calendar.current.isDateInToday(day){
-                                    Text("Today")
-                                    .font(.largeTitle)
-                                    .fontWeight(.heavy)
-                                } else if (Calendar.current.isDate(day, inSameDayAs: getTomorrow())) {
-                                    Text("Tomorrow")
-                                    .font(.largeTitle)
-                                    .fontWeight(.heavy)
-                                } else {
-                                Text(getDayOfWeek(day: day))
-                                    .font(.largeTitle)
-                                    .fontWeight(.heavy)
+                                VStack(alignment: .center, spacing: 10){
+                                    if Calendar.current.isDateInToday(day){
+                                        Text("Today")
+                                            .font(.largeTitle)
+                                            .fontWeight(.heavy)
+                                    } else if (Calendar.current.isDate(day, inSameDayAs: getTomorrow())) {
+                                        Text("Tomorrow")
+                                            .font(.largeTitle)
+                                            .fontWeight(.heavy)
+                                    } else {
+                                        Text(getDayOfWeek(day: day))
+                                            .font(.largeTitle)
+                                            .fontWeight(.heavy)
+                                    }
+                                    ForEach(self.userData.userGoals.filter({Calendar.current.isDate(day, inSameDayAs: $0.startTime) && $0.enabled && !$0.deleted})) {goal in
+                                        FutureGoalBox(goal: goal)
+                                        // This is to allow it to still scroll
+                                        //                                    .onLongPressGesture {
+                                        //                                        softGenerator.impactOccurred()
+                                        //                                        self.goalBeingEditedID = goal.id
+                                        //                                        self.currentOverlay = .editGoal
+                                        //                                }
+                                    }
+                                    
                                 }
-                                ForEach(self.userData.userGoals.filter({Calendar.current.isDate(day, inSameDayAs: $0.startTime) && $0.enabled && !$0.deleted})) {goal in
-                                    FutureGoalBox(goal: goal)
-                                    // This is to allow it to still scroll
-                                    //                                    .onLongPressGesture {
-                                    //                                        softGenerator.impactOccurred()
-                                    //                                        self.goalBeingEditedID = goal.id
-                                    //                                        self.currentOverlay = .editGoal
-                                    //                                }
-                                }
+                                .padding()
                                 
-                            }
-                            .padding()
-                            
                             }
                         }
                     }
@@ -123,9 +130,9 @@ struct RoutineView: View {
                     BlurView()
                         .edgesIgnoringSafeArea(.all)
                         .background(
-                                Color.black.opacity(0.4)
-                                    .edgesIgnoringSafeArea(.all)
-                        )
+                            Color.black.opacity(0.4)
+                                .edgesIgnoringSafeArea(.all)
+                    )
                         .onTapGesture {
                             self.currentOverlay = .none
                     }
@@ -133,29 +140,29 @@ struct RoutineView: View {
                     VStack(spacing: 30){
                         Button(action: {self.currentOverlay = .addRoutine}){
                             Text("Routine")
-                            .foregroundColor(Color.white)
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
-                            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                                .foregroundColor(Color.white)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
+                                .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                         }
                         
                         Button(action: {self.currentOverlay = .addFutureGoal}){
                             Text("Future Goal")
-                            .foregroundColor(Color.white)
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
-                            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                                .foregroundColor(Color.white)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.1))
+                                .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                         }
                         
                     }
                     .padding(40)
                     .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 0.000001))
                     .onTapGesture {
-                            
+                        
                     }
                 }
             )
@@ -167,16 +174,16 @@ struct RoutineView: View {
                     BlurView()
                         .edgesIgnoringSafeArea(.all)
                         .background(
-                                Color.black.opacity(0.4)
-                                    .edgesIgnoringSafeArea(.all)
-                                    
-                        )
+                            Color.black.opacity(0.4)
+                                .edgesIgnoringSafeArea(.all)
+                            
+                    )
                     
                     AddRoutineNoBack(userData: self._userData, currentOverlay: self.$currentOverlay)
-                        
+                    
                 }
             )
-        
+            
             
         // Add Future Goal
         case .addFutureGoal:
@@ -205,11 +212,11 @@ struct RoutineView: View {
                         .background(
                             Color.black.opacity(0.4)
                                 .edgesIgnoringSafeArea(.all)
-                                
+                            
                     )
                     
                     EditRoutine(currentOverlay: self.$currentOverlay, routineID: self.routineBeingEditedID)
-                        
+                    
                 }
             )
             

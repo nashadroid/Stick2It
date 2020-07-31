@@ -92,7 +92,9 @@ final class UserData: ObservableObject  {
     func addGoal(goalName: String, startTime: Date, endTime: Date, scheduled: Bool, remain: Bool, project: String){
         let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, scheduled: scheduled, remain: remain, project: project, done: false)
         userGoals += [newGoal]
-        newNotificationFromGoal(goal: newGoal)
+        if scheduled {
+            newNotificationFromGoal(goal: newGoal)
+        }
     }
     func addRoutine(routineName: String, startTime: Date, endTime: Date, scheduled: Bool, repeatOn: [Bool], project: String){
         let newRoutine = Routine(id: UUID().hashValue, routineName: routineName, startTime: startTime, endTime: endTime, scheduled: scheduled, repeatOn: repeatOn, project: project)
@@ -343,7 +345,7 @@ final class UserData: ObservableObject  {
         
         if (UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
             for day in getNextWeek() {
-                for goal in self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: day) && $0.enabled && !$0.deleted}) {
+                for goal in self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: day) && $0.enabled && !$0.deleted && $0.scheduled}) {
                     self.newNotificationFromGoal(goal: goal)
                 }
             }

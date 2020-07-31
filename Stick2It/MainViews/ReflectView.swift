@@ -46,12 +46,20 @@ struct ReflectView: View {
                                 }
                                 
                             }
+                            if !(self.userData.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: getYesterday()) && $0.enabled && !$0.deleted}).count > 0) {
+                                Text("Looks like you didn't have any goals yesterday, check back again tomorrow!")
+                                    .italic()
+                                    .foregroundColor(.gray)
+                                    .padding(.bottom, 10)
+                                    .multilineTextAlignment(.center)
+                            }
                             
                             Text(userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Today")) != "" ?
                                 "\"" + userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Today")) + "\"" : "")
                                 .italic()
                                 .foregroundColor(.gray)
                                 .padding(.leading, 20)
+                                .padding(.trailing, 20)
                                 .padding(.top, 10)
                                 .lineLimit(50)
                                 .multilineTextAlignment(.leading)
