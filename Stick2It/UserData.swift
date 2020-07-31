@@ -311,7 +311,7 @@ final class UserData: ObservableObject  {
     }
     func addGoalsFromCal() {
         
-        if !(UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
+        if !(UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) {
             return
         }
         
@@ -343,7 +343,7 @@ final class UserData: ObservableObject  {
         
         if (UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
             for day in getNextWeek() {
-                for goal in self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: day) && $0.enabled}) {
+                for goal in self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: day) && $0.enabled && !$0.deleted}) {
                     self.newNotificationFromGoal(goal: goal)
                 }
             }
