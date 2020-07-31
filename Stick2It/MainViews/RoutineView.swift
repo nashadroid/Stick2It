@@ -215,8 +215,9 @@ struct RoutineView: View {
                             
                     )
                     
-                    EditRoutine(currentOverlay: self.$currentOverlay, routineID: self.routineBeingEditedID)
-                    
+                    if self.userData.userRoutines.count > 0 {
+                        EditRoutine(currentOverlay: self.$currentOverlay, routineID: self.routineBeingEditedID)
+                    }
                 }
             )
             
