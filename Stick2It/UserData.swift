@@ -147,7 +147,6 @@ final class UserData: ObservableObject  {
         } else {
             print("could not save calendar")
         }
-        
     }
     func saveNotes(){
         UserDefaults.standard.set(self.userNotes, forKey: "UserNotes")
@@ -157,6 +156,7 @@ final class UserData: ObservableObject  {
     func removeGoal(goal: Goal){
         self.userGoals[self.userGoals.firstIndex(where: {$0 == goal}) ?? 0].enabled.toggle()
         self.saveGoal()
+        self.refreshNotifications()
     }
     func removeRoutine(routine: Routine){
         self.userRoutines.removeAll { $0 == routine}
