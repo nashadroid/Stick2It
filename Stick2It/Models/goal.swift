@@ -21,6 +21,7 @@ struct Goal: Hashable, Codable, Identifiable {
     var catagory: String = "none"
     var done: Bool = false
     var enabled: Bool = true
+    var deleted: Bool = false
     var calendar: NCalendar? = nil
     var details: Dictionary<String, String> = ["Default":"None"]
 

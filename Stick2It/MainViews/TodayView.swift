@@ -55,7 +55,7 @@ struct TodayView: View {
                 ScrollView(.vertical){
                     VStack(alignment: .center, spacing: 10){
                         
-                        ForEach(userData.userGoals.filter({Calendar.current.isDateInToday($0.startTime)  && $0.scheduled && $0.enabled})) {goal in
+                        ForEach(userData.userGoals.filter({Calendar.current.isDateInToday($0.startTime)  && $0.scheduled && $0.enabled && !$0.deleted})) {goal in
                             GoalBox(goal: goal)
                                 // This is to allow it to still scroll
                                 .onLongPressGesture {
@@ -65,7 +65,7 @@ struct TodayView: View {
                                 }
                         }
                         
-                        ForEach(userData.userGoals.filter({Calendar.current.isDateInToday($0.startTime)  && !$0.scheduled && $0.enabled})) {goal in
+                        ForEach(userData.userGoals.filter({Calendar.current.isDateInToday($0.startTime)  && !$0.scheduled && $0.enabled && !$0.deleted})) {goal in
                             GoalBox(goal: goal)
                                 // This is to allow it to still scroll
                                 .onLongPressGesture {

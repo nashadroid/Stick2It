@@ -154,10 +154,17 @@ final class UserData: ObservableObject  {
     
     //Remove Objects
     func removeGoal(goal: Goal){
-        self.userGoals[self.userGoals.firstIndex(where: {$0 == goal}) ?? 0].enabled.toggle()
+//        self.userGoals[self.userGoals.firstIndex(where: {$0 == goal}) ?? 0].enabled = false
+        self.userGoals[self.userGoals.firstIndex(where: {$0 == goal}) ?? 0].deleted = true
         self.saveGoal()
         self.refreshNotifications()
     }
+    func disableGoal(goal: Goal){
+        self.userGoals[self.userGoals.firstIndex(where: {$0 == goal}) ?? 0].enabled = false
+        self.saveGoal()
+        self.refreshNotifications()
+    }
+    
     func removeRoutine(routine: Routine){
         self.userRoutines.removeAll { $0 == routine}
         self.saveRoutine()
@@ -333,9 +340,12 @@ final class UserData: ObservableObject  {
     }
     func refreshNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        for day in getNextWeek() {
-            for goal in self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: day) && $0.enabled}) {
-                self.newNotificationFromGoal(goal: goal)
+        
+        if (UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
+            for day in getNextWeek() {
+                for goal in self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: day) && $0.enabled}) {
+                    self.newNotificationFromGoal(goal: goal)
+                }
             }
         }
     }
@@ -362,6 +372,7 @@ final class UserData: ObservableObject  {
                 }
             }
         }
+        self.saveGoal()
     }
 }
 

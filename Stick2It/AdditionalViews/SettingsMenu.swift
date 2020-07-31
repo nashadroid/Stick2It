@@ -107,6 +107,9 @@ struct SettingsMenu: View {
                                 
                             }
                         }
+                        .onAppear(){
+                            self.userData.checkCalendarsAddAccordingly()
+                        }
                         .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                         .padding(.top, 20)
                     }
