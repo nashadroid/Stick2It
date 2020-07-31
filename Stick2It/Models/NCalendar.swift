@@ -7,11 +7,14 @@
 //
 
 import SwiftUI
+import EventKit
 
 struct NCalendar: Hashable, Codable, Identifiable {
     
     var id: Int
     var calendarName: String
     var enabled: Bool = false
+    //var EKCal: EKCalendar? = nil
+    //var calendar: EKCalendar? = nil
     
 }

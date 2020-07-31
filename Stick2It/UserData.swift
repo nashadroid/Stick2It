@@ -324,7 +324,9 @@ final class UserData: ObservableObject  {
         
         for event in ONCalEvents {
             
-            let goalToBeAdded = Goal(id: UUID().hashValue, goalName: event.title, startTime: event.startDate, endTime: event.endDate, scheduled: true, remain: false, project: "none", catagory: "none", done: false)
+            let nCal = userCalendars.first(where: {$0.calendarName == event.calendar.title})
+            
+            let goalToBeAdded = Goal(id: UUID().hashValue, goalName: event.title, startTime: event.startDate, endTime: event.endDate, scheduled: true, remain: false, project: "none", catagory: "none", done: false, calendar: nCal)
             
             addGoalAvoidingRepeat(goalToBeAdded: goalToBeAdded)
         }
@@ -334,6 +336,30 @@ final class UserData: ObservableObject  {
         for day in getNextWeek() {
             for goal in self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: day) && $0.enabled}) {
                 self.newNotificationFromGoal(goal: goal)
+            }
+        }
+    }
+    func refeshEnabledFromCalendars() {
+//        for cal in self.userCalendars {
+//            for goal in userGoals.filter({$0.calendar == cal}) {
+//                if self.userGoals.firstIndex(of: goal) != nil {
+//                    self.userGoals[self.userGoals.firstIndex(of: goal) ?? 0].enabled = cal.enabled
+//                }
+//            }
+//        }
+        let ONCalendarTitles = self.userCalendars.filter({$0.enabled}).map{(cal) -> String in
+            return cal.calendarName
+        }
+        
+        for goal in self.userGoals {
+            
+            if goal.calendar != nil {
+                
+                if ((UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) && ONCalendarTitles.contains(goal.calendar?.calendarName ?? "")){
+                    self.userGoals[self.userGoals.firstIndex(of: goal) ?? 0].enabled = true
+                } else {
+                    self.userGoals[self.userGoals.firstIndex(of: goal) ?? 0].enabled = false
+                }
             }
         }
     }

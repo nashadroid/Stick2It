@@ -24,6 +24,7 @@ struct SettingsMenu: View {
                     self.userData.addGoalsFromCal()
                     UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
                     UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
+                    self.userData.refeshEnabledFromCalendars()
                     self.userData.refreshNotifications()
                 }) {
                     Text("Back")
@@ -67,6 +68,7 @@ struct SettingsMenu: View {
                                 .fontWeight(.heavy)
                                 .padding(.leading, 5)
                                 .foregroundColor(Color.white)
+                                .lineLimit(2)
                             Toggle(isOn: $connectToCal){
                                 Spacer()
                             }
