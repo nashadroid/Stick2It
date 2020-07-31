@@ -24,6 +24,7 @@ struct SettingsMenu: View {
                     self.userData.addGoalsFromCal()
                     UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
                     UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
+                    self.userData.refreshNotifications()
                 }) {
                     Text("Back")
                         .foregroundColor(Color.white)

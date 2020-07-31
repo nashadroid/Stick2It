@@ -230,7 +230,7 @@ final class UserData: ObservableObject  {
     
     //Change unfinished remain goals to be today
     func changeOldRemainGoalsToday() {
-        for goal in self.userGoals.filter({$0.remain && !$0.done}) {
+        for goal in self.userGoals.filter({$0.remain && !$0.done && $0.enabled}) {
             
             if let goalIndex = self.userGoals.firstIndex(of: goal){
                 self.userGoals[goalIndex].startTime = Date()
@@ -327,6 +327,14 @@ final class UserData: ObservableObject  {
             let goalToBeAdded = Goal(id: UUID().hashValue, goalName: event.title, startTime: event.startDate, endTime: event.endDate, scheduled: true, remain: false, project: "none", catagory: "none", done: false)
             
             addGoalAvoidingRepeat(goalToBeAdded: goalToBeAdded)
+        }
+    }
+    func refreshNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        for day in getNextWeek() {
+            for goal in self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: day) && $0.enabled}) {
+                self.newNotificationFromGoal(goal: goal)
+            }
         }
     }
 }

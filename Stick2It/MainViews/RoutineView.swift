@@ -65,7 +65,6 @@ struct RoutineView: View {
                         self.currentOverlay = .futureDecide
                     }) {
                         AddButton()
-                        
                     }
                     .offset(x: geo.size.width * 0.35, y: geo.size.height * 0.42)
                 }
