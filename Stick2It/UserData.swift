@@ -159,6 +159,7 @@ final class UserData: ObservableObject  {
 //        self.userGoals[self.userGoals.firstIndex(where: {$0 == goal}) ?? 0].enabled = false
         self.userGoals[self.userGoals.firstIndex(where: {$0 == goal}) ?? 0].deleted = true
         self.saveGoal()
+        
         self.refreshNotifications()
     }
     func disableGoal(goal: Goal){
@@ -266,8 +267,31 @@ final class UserData: ObservableObject  {
         }
         
     }
+    func registerForPushNotifications() {
+        if !(UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
+            return
+        }
+        UNUserNotificationCenter.current()
+            .requestAuthorization(options: [.alert, .sound, .badge]) {
+                [weak self] granted, error in
+                guard granted else { return }
+                self?.getNotificationSettings()
+        }
+        
+    }
+    
+    func getNotificationSettings() {
+      UNUserNotificationCenter.current().getNotificationSettings { settings in
+      }
+    }
     
     func newNotificationFromGoal(goal: Goal) {
+        if !(UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
+            return
+        }
+        
+        self.registerForPushNotifications()
+        
         let content = UNMutableNotificationContent()
         content.title = goal.goalName
         content.body = getTimeStringFromDate(goal.startTime)
@@ -281,7 +305,28 @@ final class UserData: ObservableObject  {
 
         UNUserNotificationCenter.current().add(request)
     }
+    func refreshNotifications() {
+        
+        if !(UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
+            return
+        }
+        
+        self.registerForPushNotifications()
+        
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        
+        if (UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
+            for day in getNextWeek() {
+                for goal in self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: day) && $0.enabled && !$0.deleted && $0.scheduled}) {
+                    self.newNotificationFromGoal(goal: goal)
+                }
+            }
+        }
+    }
     func getListOfCal() -> [String] {
+        if !(UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) {
+            return [""]
+        }
         let store = EKEventStore()
         store.requestAccess(to: .event, completion: {_,_ in })
         let calendars = store.calendars(for: .event)
@@ -292,6 +337,10 @@ final class UserData: ObservableObject  {
         return calendarTitles
     }
     func checkCalendarsAddAccordingly() {
+        if !(UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) {
+            return
+        }
+        
         let store = EKEventStore()
         store.requestAccess(to: .event, completion: {_,_ in })
         let calendars = store.calendars(for: .event)
@@ -326,7 +375,7 @@ final class UserData: ObservableObject  {
         }
         let ONCalendars = calendars.filter({ONCalendarTitles.contains($0.title)})
         
-        let predicate = store.predicateForEvents(withStart: getYesterday(), end: getTomorrow(), calendars: ONCalendars)
+        let predicate = store.predicateForEvents(withStart: Date(), end: getWeekFromToday(), calendars: ONCalendars)
         
         let calEvents = store.events(matching: predicate)
         let ONCalEvents = calEvents.filter({ONCalendars.contains($0.calendar)})
@@ -340,17 +389,7 @@ final class UserData: ObservableObject  {
             addGoalAvoidingRepeat(goalToBeAdded: goalToBeAdded)
         }
     }
-    func refreshNotifications() {
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        
-        if (UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
-            for day in getNextWeek() {
-                for goal in self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: day) && $0.enabled && !$0.deleted && $0.scheduled}) {
-                    self.newNotificationFromGoal(goal: goal)
-                }
-            }
-        }
-    }
+    
     func refeshEnabledFromCalendars() {
 //        for cal in self.userCalendars {
 //            for goal in userGoals.filter({$0.calendar == cal}) {

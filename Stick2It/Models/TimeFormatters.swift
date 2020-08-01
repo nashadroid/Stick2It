@@ -108,6 +108,9 @@ func getYesterday() -> Date {
 func getTomorrow() -> Date {
     return Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
 }
+func getWeekFromToday() -> Date {
+    return Calendar.current.date(byAdding: .day, value: 7, to: Date()) ?? Date()
+}
 
 // Returns string of date
 func getStringFromDate(date: Date) -> String {

@@ -20,12 +20,14 @@ struct SettingsMenu: View {
             HStack{
                 Button(action: {
                     self.currentOverlay = .none
-                    UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
-                    UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
-                    self.userData.saveCalendars()
-                    self.userData.addGoalsFromCal()
-                    self.userData.refeshEnabledFromCalendars()
-                    self.userData.refreshNotifications()
+                    DispatchQueue.main.asyncAfter(deadline: .now()){
+                        UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
+                        UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
+                        self.userData.saveCalendars()
+                        self.userData.addGoalsFromCal()
+                        self.userData.refeshEnabledFromCalendars()
+                        self.userData.refreshNotifications()
+                    }
                 }) {
                     Text("Back")
                         .foregroundColor(Color.white)

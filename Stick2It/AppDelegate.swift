@@ -38,6 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func registerForPushNotifications() {
+        if !(UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
+            return
+        }
         UNUserNotificationCenter.current()
             .requestAuthorization(options: [.alert, .sound, .badge]) {
                 [weak self] granted, error in
@@ -51,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getNotificationSettings() {
       UNUserNotificationCenter.current().getNotificationSettings { settings in
-//        print("Notification settings: \(settings)")
       }
     }
     
