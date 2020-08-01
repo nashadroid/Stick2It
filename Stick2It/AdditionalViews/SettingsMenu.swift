@@ -13,6 +13,7 @@ struct SettingsMenu: View {
     @Binding var currentOverlay: overlayViews
     @State private var allowNotifications: Bool = false
     @State private var connectToCal: Bool = false
+    @State private var loaded = false
     
     var body: some View {
         VStack{
@@ -59,8 +60,13 @@ struct SettingsMenu: View {
                             Spacer()
                         }
                         .onReceive([self.allowNotifications].publisher.first()) { (value) in
-                            UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
-                            self.userData.refreshNotifications()
+                            print("New value is: \(value)")
+                            if self.loaded {
+                                UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+                                    self.userData.refreshNotifications()
+                                }
+                            }
                         }
                         .padding(5)
                     }
@@ -82,13 +88,27 @@ struct SettingsMenu: View {
                                 .padding(.leading, 5)
                                 .foregroundColor(Color.white)
                                 .animation(nil)
-                            Toggle(isOn: $connectToCal){
-                                Spacer()
-                            }
-                            .onReceive([self.connectToCal].publisher.first()) { (value) in
-                                UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
-//                                self.userData.refeshEnabledFromCalendars()
-                            }
+                            
+                            Toggle("", isOn: $connectToCal)
+                                .onReceive([self.connectToCal].publisher.first()) { (value) in
+                                    print("New value is: \(value)")
+                                    if self.loaded {
+                                        UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+                                            self.userData.checkCalendarsAddAccordingly()
+                                        }
+                                    }
+                                }
+                            
+//                            Toggle(isOn: $connectToCal){
+//                                Spacer()
+//                            }
+//                            .onTapGesture {
+//                                UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+//                                    self.userData.checkCalendarsAddAccordingly()
+//                                }
+//                            }
                             .padding(5)
                         }
 //                    }
@@ -144,6 +164,8 @@ struct SettingsMenu: View {
         .onAppear {
             self.allowNotifications = UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false
             self.connectToCal = UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false
+            print("Appeared")
+            self.loaded = true
         }
     }
 }
