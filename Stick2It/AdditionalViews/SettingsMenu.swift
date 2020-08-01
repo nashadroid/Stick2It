@@ -58,25 +58,40 @@ struct SettingsMenu: View {
                         Toggle(isOn: $allowNotifications){
                             Spacer()
                         }
+                        .onReceive([self.allowNotifications].publisher.first()) { (value) in
+                            UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
+                            self.userData.refreshNotifications()
+                        }
                         .padding(5)
                     }
                     .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     .padding(.top, 20)
                     
-                    VStack(alignment: .leading){
+//                    VStack(alignment: .leading){
                         HStack(alignment: .center){
-                            Text("Connect to Calendar")
+                            Text("Connect to\nCalendar")
+//                                .lineLimit(nil)
+//                                .truncationMode()
                                 .fontWeight(.heavy)
+                                
+                                .lineLimit(2)
+                                .fixedSize(horizontal: false, vertical: true)
+                                //.minimumScaleFactor(0.999)
+//                                .frame(maxWidth: .infinity)
                                 .padding(.leading, 5)
                                 .foregroundColor(Color.white)
-                                .lineLimit(2)
+                                .animation(nil)
                             Toggle(isOn: $connectToCal){
                                 Spacer()
                             }
+                            .onReceive([self.connectToCal].publisher.first()) { (value) in
+                                UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
+//                                self.userData.refeshEnabledFromCalendars()
+                            }
                             .padding(5)
                         }
-                    }
+//                    }
                     .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     .padding(.top, 20)
@@ -88,7 +103,11 @@ struct SettingsMenu: View {
                                     .fontWeight(.heavy)
                                     .padding(10)
                                     .foregroundColor(Color.white)
+                                    .onTapGesture {
+                                        self.userData.checkCalendarsAddAccordingly()
+                                }
                             }
+                            .frame(maxWidth: .infinity)
                             ForEach(self.userData.userCalendars){cal in
                                 Button(action: {
                                     self.userData.userCalendars[

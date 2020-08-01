@@ -342,7 +342,9 @@ final class UserData: ObservableObject  {
         }
         
         let store = EKEventStore()
-        store.requestAccess(to: .event, completion: {_,_ in })
+        store.requestAccess(to: .event, completion: {_,_ in
+            
+        })
         let calendars = store.calendars(for: .event)
         
         let calendarTitles = calendars.map{(cal) -> String in
