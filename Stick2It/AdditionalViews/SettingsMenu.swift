@@ -15,6 +15,7 @@ struct SettingsMenu: View {
     @State private var connectToCal: Bool = false
     @State private var loaded = false
     @State private var notificationTime = 0
+    @State private var updater: Bool = true
     
     var body: some View {
         VStack{
@@ -58,7 +59,7 @@ struct SettingsMenu: View {
                             .fontWeight(.heavy)
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
-                        Toggle(isOn: $allowNotifications){
+                        Toggle(isOn: $allowNotifications.animation()){
                             Spacer()
                         }
                         .onReceive([self.allowNotifications].publisher.first()) { (value) in
@@ -75,8 +76,8 @@ struct SettingsMenu: View {
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     .padding(.top, 20)
                     
-                    if self.allowNotifications {
-                        if self.userData.notificationsAllowed() {
+                    if allowNotifications {
+                        
                             VStack(alignment: .center){
                                 Text("Notify me \(notificationTime) min before")
                                     .fontWeight(.heavy)
@@ -96,7 +97,8 @@ struct SettingsMenu: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                             .padding(.top, 20)
-                        } else {
+                        
+                        if !self.userData.notificationsAllowed() {
                             Text("It looks like you haven't allowed Koalati to send you notifications. Go to Settings > Notifications to toggle.")
                                 .fontWeight(.light)
                                 .italic()
@@ -120,9 +122,9 @@ struct SettingsMenu: View {
                             //                                .frame(maxWidth: .infinity)
                             .padding(.leading, 5)
                             .foregroundColor(Color.white)
-                            .animation(nil)
+                            //.animation(nil)
                         
-                        Toggle("", isOn: $connectToCal)
+                        Toggle("", isOn: $connectToCal.animation())
                             .onReceive([self.connectToCal].publisher.first()) { (value) in
                                 if self.loaded {
                                     UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
@@ -139,6 +141,16 @@ struct SettingsMenu: View {
                         .padding(.top, 20)
                     
                     if self.connectToCal {
+                        if self.userData.getListOfCal().count == 0
+                        {
+                            Text("It looks like you haven't allowed Koalati to access your calendars. Go to Settings > Privacy > Calendar to toggle.")
+                                .fontWeight(.light)
+                                .italic()
+                                .font(.footnote)
+                                .padding(.leading, 5)
+                                .foregroundColor(Color.white)
+                                .frame(maxWidth: .infinity)
+                        }
                         if self.userData.getListOfCal().count > 0 {
                             VStack(alignment: .leading){
                                 HStack(alignment: .center){
@@ -176,14 +188,6 @@ struct SettingsMenu: View {
                             }
                             .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                             .padding(.top, 20)
-                        } else {
-                            Text("It looks like you haven't allowed Koalati to access your calendars. Go to Settings > Privacy > Calendar to toggle.")
-                                .fontWeight(.light)
-                                .italic()
-                                .font(.footnote)
-                                .padding(.leading, 5)
-                                .foregroundColor(Color.white)
-                                .frame(maxWidth: .infinity)
                         }
                     }
                 }
@@ -198,7 +202,6 @@ struct SettingsMenu: View {
             self.connectToCal = UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false
             _ = self.userData.notificationsAllowed()
             self.loaded = true
-            
         }
     }
 }
