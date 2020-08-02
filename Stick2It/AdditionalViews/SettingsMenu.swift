@@ -6,6 +6,7 @@
 //  Copyright © 2020 NashApps. All rights reserved.
 //
 
+import EventKit
 import SwiftUI
 
 struct SettingsMenu: View {
@@ -64,10 +65,22 @@ struct SettingsMenu: View {
                         }
                         .onReceive([self.allowNotifications].publisher.first()) { (value) in
                             if self.loaded {
-                                UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
-                                    self.userData.refreshNotifications()
+                                if self.allowNotifications{
+//                                    let store = EKEventStore()
+//                                    store.requestAccess(to: .event, completion: {success, error in
+//                                        if success {
+//                                            self.updater.toggle()
+//                                            self.userData.refreshNotifications()
+//
+//                                        }
+//
+//                                    })
                                 }
+                                
+                                UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+                                    self.userData.refreshNotifications()
+//                                }
                             }
                         }
                         .padding(5)
@@ -128,6 +141,19 @@ struct SettingsMenu: View {
                             .onReceive([self.connectToCal].publisher.first()) { (value) in
                                 if self.loaded {
                                     UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
+                                    
+                                    if self.connectToCal {
+                                        let store = EKEventStore()
+                                        store.requestAccess(to: .event, completion: {success, error in
+                                            if success {
+                                                self.updater.toggle()
+                                                self.userData.checkCalendarsAddAccordingly()
+                                                self.updater.toggle()
+                                            }
+                                            
+                                        })
+                                    }
+                                    
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
                                         self.userData.checkCalendarsAddAccordingly()
                                     }
