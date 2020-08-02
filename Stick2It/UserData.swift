@@ -305,12 +305,20 @@ final class UserData: ObservableObject  {
         
         self.registerForPushNotifications()
         
+        let notificationTime: Int = UserDefaults.standard.object(forKey: "notificationTime") as? Int ?? 0
+        
         let content = UNMutableNotificationContent()
         content.title = goal.goalName
-        content.body = getTimeStringFromDate(goal.startTime)
+        
+        var message = getTimeStringFromDate(goal.startTime)
+        if (notificationTime == 0) {
+            message += " (now)"
+        } else {
+            message += " (in \(notificationTime) minutes)"
+        }
+        content.body = message
         content.sound = UNNotificationSound.default
         
-        let notificationTime: Int = UserDefaults.standard.object(forKey: "notificationTime") as? Int ?? 0
         
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute],
                                                              from: Calendar.current.date(byAdding: .minute, value: -notificationTime, to: goal.startTime) ?? goal.startTime)
