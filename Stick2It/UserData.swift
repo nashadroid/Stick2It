@@ -83,6 +83,7 @@ final class UserData: ObservableObject  {
         changeOldRemainGoalsToday()
         addGoalsFromCal() //TODO Move this
         checkCalendarsAddAccordingly()
+        _ = notificationsAllowed()
         for day in getNextWeek(){
             checkRoutineAddGoalsAsNeeded(day: day)
         }
@@ -283,17 +284,18 @@ final class UserData: ObservableObject  {
     func getNotificationSettings() {
       UNUserNotificationCenter.current().getNotificationSettings { settings in
 //        return settings
-        print(settings.authorizationStatus.rawValue)
+        //print(settings.authorizationStatus.rawValue)
       }
     }
     
+    var notificationAllowedVar = false
     func notificationsAllowed() -> Bool{
-        var valToRet = false
         UNUserNotificationCenter.current().getNotificationSettings() { settings in
-            valToRet = (settings.authorizationStatus == .authorized)
-            print(settings.authorizationStatus == .authorized)
+            self.notificationAllowedVar = (settings.authorizationStatus == .authorized)
+            //print(self.notificationAllowedVar)
+//            return valToRet
         }
-        return valToRet
+        return self.notificationAllowedVar
     }
     
     func newNotificationFromGoal(goal: Goal) {

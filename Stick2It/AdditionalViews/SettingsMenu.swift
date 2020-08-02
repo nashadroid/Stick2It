@@ -14,6 +14,7 @@ struct SettingsMenu: View {
     @State private var allowNotifications: Bool = false
     @State private var connectToCal: Bool = false
     @State private var loaded = false
+    @State private var notificationTime = 0
     
     var body: some View {
         VStack{
@@ -74,8 +75,36 @@ struct SettingsMenu: View {
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     .padding(.top, 20)
                     
-                    
-                    
+                    if self.allowNotifications {
+                        if self.userData.notificationsAllowed() {
+                            VStack(alignment: .center){
+                                Text("Notify me \(notificationTime) min before")
+                                    .fontWeight(.heavy)
+                                    .padding(.leading, 5)
+                                    .foregroundColor(Color.white)
+                                Picker(selection: $notificationTime, label: Text("Please choose a time")) {
+                                    ForEach((0 ..< 121)) {
+                                    Text(String($0))
+                                   }
+                                }
+                                .frame(maxWidth: 100, maxHeight: 200)
+                        
+                                
+                                //.padding(5)
+                            }
+                            .padding(5)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                            .padding(.top, 20)
+                        } else {
+                            Text("It looks like you haven't allowed Koalati to send you notifications. Go to Settings > Notifications to toggle.")
+                                .fontWeight(.light)
+                            .italic()
+                                .font(.footnote)
+                            .padding(.leading, 5)
+                            .foregroundColor(Color.white)
+                        }
+                    }
                     
                     //                    VStack(alignment: .leading){
                     HStack(alignment: .center){
@@ -117,7 +146,6 @@ struct SettingsMenu: View {
                                     .foregroundColor(Color.white)
                                     .onTapGesture {
                                         self.userData.checkCalendarsAddAccordingly()
-                                        //self.userData.getNotificationSettings()
                                 }
                             }
                             .frame(maxWidth: .infinity)
@@ -157,7 +185,9 @@ struct SettingsMenu: View {
         .onAppear {
             self.allowNotifications = UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false
             self.connectToCal = UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false
+            _ = self.userData.notificationsAllowed()
             self.loaded = true
+            
         }
     }
 }
