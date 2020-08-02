@@ -334,6 +334,13 @@ final class UserData: ObservableObject  {
             }
         }
     }
+    func isCalAllowed() {
+        if !(UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) {
+            return
+        }
+        //let store = EKEventStore()
+    }
+    
     func getListOfCal() -> [String] {
         if !(UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) {
             return [""]

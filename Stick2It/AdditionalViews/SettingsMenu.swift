@@ -21,7 +21,7 @@ struct SettingsMenu: View {
             HStack{
                 Button(action: {
                     self.currentOverlay = .none
-                    DispatchQueue.main.asyncAfter(deadline: .now()){
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.001){
                         UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
                         UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
                         self.userData.saveCalendars()
@@ -34,11 +34,12 @@ struct SettingsMenu: View {
                         .foregroundColor(Color.white)
                         .padding(.top, 15)
                         .padding(.bottom, 15)
+                        .padding(.leading, 20)
+                        .padding(.trailing, 20)
                 }
                 Spacer()
             }
-            .padding(.leading, 20)
-            .padding(.trailing, 20)
+            
             
             
             Text("Settings")
@@ -73,37 +74,39 @@ struct SettingsMenu: View {
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     .padding(.top, 20)
                     
-//                    VStack(alignment: .leading){
-                        HStack(alignment: .center){
-                            Text("Connect to\nCalendar")
-//                                .lineLimit(nil)
-//                                .truncationMode()
-                                .fontWeight(.heavy)
-                                
-                                .lineLimit(2)
-                                .fixedSize(horizontal: false, vertical: true)
-                                //.minimumScaleFactor(0.999)
-//                                .frame(maxWidth: .infinity)
-                                .padding(.leading, 5)
-                                .foregroundColor(Color.white)
-                                .animation(nil)
+                    
+                    
+                    
+                    //                    VStack(alignment: .leading){
+                    HStack(alignment: .center){
+                        Text("Connect to\nCalendar")
+                            //                                .lineLimit(nil)
+                            //                                .truncationMode()
+                            .fontWeight(.heavy)
                             
-                            Toggle("", isOn: $connectToCal)
-                                .onReceive([self.connectToCal].publisher.first()) { (value) in
-                                    print("New value is: \(value)")
-                                    if self.loaded {
-                                        UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
-                                            self.userData.checkCalendarsAddAccordingly()
-                                        }
+                            .lineLimit(2)
+                            .fixedSize(horizontal: false, vertical: true)
+                            //.minimumScaleFactor(0.999)
+                            //                                .frame(maxWidth: .infinity)
+                            .padding(.leading, 5)
+                            .foregroundColor(Color.white)
+                            .animation(nil)
+                        
+                        Toggle("", isOn: $connectToCal)
+                            .onReceive([self.connectToCal].publisher.first()) { (value) in
+                                if self.loaded {
+                                    UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+                                        self.userData.checkCalendarsAddAccordingly()
                                     }
                                 }
-                            .padding(5)
                         }
-//                    }
-                    .padding(5)
-                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-                    .padding(.top, 20)
+                        .padding(5)
+                    }
+                        //                    }
+                        .padding(5)
+                        .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                        .padding(.top, 20)
                     
                     if self.connectToCal {
                         VStack(alignment: .leading){
@@ -114,8 +117,7 @@ struct SettingsMenu: View {
                                     .foregroundColor(Color.white)
                                     .onTapGesture {
                                         self.userData.checkCalendarsAddAccordingly()
-                                        self.userData.getNotificationSettings()
-                                        print(self.userData.notificationsAllowed())
+                                        //self.userData.getNotificationSettings()
                                 }
                             }
                             .frame(maxWidth: .infinity)
@@ -123,18 +125,18 @@ struct SettingsMenu: View {
                                 Button(action: {
                                     self.userData.userCalendars[
                                         self.userData.userCalendars.firstIndex(where: {cal.calendarName == $0.calendarName}) ?? 0].enabled.toggle() }){
-                                                HStack{
-                                                    Text(cal.calendarName)
-                                                        .foregroundColor(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: cal.enabled ? 1 : 0.6))
-                                                        .font(.footnote)
-                                                        .fontWeight(.heavy)
-                                                        
-                                                    Spacer()
-                                                }
-                                                .padding(10)
-                                                .padding(.leading, 10)
-                                                .frame(maxWidth: .infinity)
-                                                .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: cal.enabled ? 0.3 : 0))
+                                            HStack{
+                                                Text(cal.calendarName)
+                                                    .foregroundColor(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: cal.enabled ? 1 : 0.6))
+                                                    .font(.footnote)
+                                                    .fontWeight(.heavy)
+                                                
+                                                Spacer()
+                                            }
+                                            .padding(10)
+                                            .padding(.leading, 10)
+                                            .frame(maxWidth: .infinity)
+                                            .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: cal.enabled ? 0.3 : 0))
                                 }
                                 
                             }
