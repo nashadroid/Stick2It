@@ -29,6 +29,7 @@ struct SettingsMenu: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.001){
                         UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
                         UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
+                        UserDefaults.standard.set(self.notificationTime, forKey: "notificationTime")
                         self.userData.saveCalendars()
                         self.userData.addGoalsFromCal()
                         self.userData.refeshEnabledFromCalendars()
@@ -233,6 +234,7 @@ struct SettingsMenu: View {
         .onAppear {
             self.allowNotifications = UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false
             self.connectToCal = UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false
+            self.notificationTime = UserDefaults.standard.object(forKey: "notificationTime") as? Int ?? 0
             _ = self.userData.notificationsAllowed()
             self.loaded = true
         }

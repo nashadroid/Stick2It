@@ -310,7 +310,10 @@ final class UserData: ObservableObject  {
         content.body = getTimeStringFromDate(goal.startTime)
         content.sound = UNNotificationSound.default
         
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: goal.startTime)
+        let notificationTime: Int = UserDefaults.standard.object(forKey: "notificationTime") as? Int ?? 0
+        
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute],
+                                                             from: Calendar.current.date(byAdding: .minute, value: -notificationTime, to: goal.startTime) ?? goal.startTime)
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         
