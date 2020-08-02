@@ -98,16 +98,6 @@ struct SettingsMenu: View {
                                         }
                                     }
                                 }
-                            
-//                            Toggle(isOn: $connectToCal){
-//                                Spacer()
-//                            }
-//                            .onTapGesture {
-//                                UserDefaults.standard.set(self.connectToCal, forKey: "connectCalendar")
-//                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
-//                                    self.userData.checkCalendarsAddAccordingly()
-//                                }
-//                            }
                             .padding(5)
                         }
 //                    }
@@ -124,6 +114,8 @@ struct SettingsMenu: View {
                                     .foregroundColor(Color.white)
                                     .onTapGesture {
                                         self.userData.checkCalendarsAddAccordingly()
+                                        self.userData.getNotificationSettings()
+                                        print(self.userData.notificationsAllowed())
                                 }
                             }
                             .frame(maxWidth: .infinity)

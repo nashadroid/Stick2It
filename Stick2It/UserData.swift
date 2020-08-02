@@ -282,7 +282,18 @@ final class UserData: ObservableObject  {
     
     func getNotificationSettings() {
       UNUserNotificationCenter.current().getNotificationSettings { settings in
+//        return settings
+        print(settings.authorizationStatus.rawValue)
       }
+    }
+    
+    func notificationsAllowed() -> Bool{
+        var valToRet = false
+        UNUserNotificationCenter.current().getNotificationSettings() { settings in
+            valToRet = (settings.authorizationStatus == .authorized)
+            print(settings.authorizationStatus == .authorized)
+        }
+        return valToRet
     }
     
     func newNotificationFromGoal(goal: Goal) {
