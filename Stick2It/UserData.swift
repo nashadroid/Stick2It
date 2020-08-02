@@ -306,16 +306,37 @@ final class UserData: ObservableObject  {
         self.registerForPushNotifications()
         
         let notificationTime: Int = UserDefaults.standard.object(forKey: "notificationTime") as? Int ?? 0
+        let (h, m) = notificationTime.quotientAndRemainder(dividingBy: 60)
         
         let content = UNMutableNotificationContent()
         content.title = goal.goalName
         
         var message = getTimeStringFromDate(goal.startTime)
         if (notificationTime == 0) {
-            message += " (now)"
+            message += "\n(now)"
         } else {
-            message += " (in \(notificationTime) minutes)"
+            if h == 1 {
+                message += "\n(in \(h) hour"
+                if m > 0 {
+                    message += " and \(m) minutes)"
+                } else {
+                    message += ")"
+                }
+            } else if h > 1 {
+                message += "\n(in \(h) hours"
+                if m > 0 {
+                    message += " and \(m) minutes)"
+                }
+                else {
+                   message += ")"
+               }
+            }
+            else {
+                message += "\n(in \(notificationTime) minutes)"
+            }
         }
+        
+        
         content.body = message
         content.sound = UNNotificationSound.default
         
