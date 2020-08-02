@@ -347,6 +347,8 @@ final class UserData: ObservableObject  {
         if !(UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) {
             return [""]
         }
+        checkCalendarsAddAccordingly()
+        
         let store = EKEventStore()
         store.requestAccess(to: .event, completion: {_,_ in })
         let calendars = store.calendars(for: .event)

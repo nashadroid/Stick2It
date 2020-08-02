@@ -84,11 +84,11 @@ struct SettingsMenu: View {
                                     .foregroundColor(Color.white)
                                 Picker(selection: $notificationTime, label: Text("Please choose a time")) {
                                     ForEach((0 ..< 121)) {
-                                    Text(String($0))
-                                   }
+                                        Text(String($0))
+                                    }
                                 }
                                 .frame(maxWidth: 100, maxHeight: 200)
-                        
+                                
                                 
                                 //.padding(5)
                             }
@@ -99,10 +99,11 @@ struct SettingsMenu: View {
                         } else {
                             Text("It looks like you haven't allowed Koalati to send you notifications. Go to Settings > Notifications to toggle.")
                                 .fontWeight(.light)
-                            .italic()
+                                .italic()
                                 .font(.footnote)
-                            .padding(.leading, 5)
-                            .foregroundColor(Color.white)
+                                .padding(.leading, 5)
+                                .foregroundColor(Color.white)
+                                .frame(maxWidth: .infinity)
                         }
                     }
                     
@@ -138,42 +139,52 @@ struct SettingsMenu: View {
                         .padding(.top, 20)
                     
                     if self.connectToCal {
-                        VStack(alignment: .leading){
-                            HStack(alignment: .center){
-                                Text("Tap to Select Calendars:")
-                                    .fontWeight(.heavy)
-                                    .padding(10)
-                                    .foregroundColor(Color.white)
-                                    .onTapGesture {
-                                        self.userData.checkCalendarsAddAccordingly()
+                        if self.userData.getListOfCal().count > 0 {
+                            VStack(alignment: .leading){
+                                HStack(alignment: .center){
+                                    Text("Tap to Select Calendars:")
+                                        .fontWeight(.heavy)
+                                        .padding(10)
+                                        .foregroundColor(Color.white)
+                                        .onTapGesture {
+                                            self.userData.checkCalendarsAddAccordingly()
+                                    }
+                                }
+                                .frame(maxWidth: .infinity)
+                                ForEach(self.userData.userCalendars){cal in
+                                    Button(action: {
+                                        self.userData.userCalendars[
+                                            self.userData.userCalendars.firstIndex(where: {cal.calendarName == $0.calendarName}) ?? 0].enabled.toggle() }){
+                                                HStack{
+                                                    Text(cal.calendarName)
+                                                        .foregroundColor(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: cal.enabled ? 1 : 0.6))
+                                                        .font(.footnote)
+                                                        .fontWeight(.heavy)
+                                                    
+                                                    Spacer()
+                                                }
+                                                .padding(10)
+                                                .padding(.leading, 10)
+                                                .frame(maxWidth: .infinity)
+                                                .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: cal.enabled ? 0.3 : 0))
+                                    }
+                                    
                                 }
                             }
-                            .frame(maxWidth: .infinity)
-                            ForEach(self.userData.userCalendars){cal in
-                                Button(action: {
-                                    self.userData.userCalendars[
-                                        self.userData.userCalendars.firstIndex(where: {cal.calendarName == $0.calendarName}) ?? 0].enabled.toggle() }){
-                                            HStack{
-                                                Text(cal.calendarName)
-                                                    .foregroundColor(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: cal.enabled ? 1 : 0.6))
-                                                    .font(.footnote)
-                                                    .fontWeight(.heavy)
-                                                
-                                                Spacer()
-                                            }
-                                            .padding(10)
-                                            .padding(.leading, 10)
-                                            .frame(maxWidth: .infinity)
-                                            .background(Color(red: 1.0, green: 1.0, blue: 1.0, opacity: cal.enabled ? 0.3 : 0))
-                                }
-                                
+                            .onAppear(){
+                                self.userData.checkCalendarsAddAccordingly()
                             }
+                            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                            .padding(.top, 20)
+                        } else {
+                            Text("It looks like you haven't allowed Koalati to access your calendars. Go to Settings > Privacy > Calendar to toggle.")
+                                .fontWeight(.light)
+                                .italic()
+                                .font(.footnote)
+                                .padding(.leading, 5)
+                                .foregroundColor(Color.white)
+                                .frame(maxWidth: .infinity)
                         }
-                        .onAppear(){
-                            self.userData.checkCalendarsAddAccordingly()
-                        }
-                        .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
-                        .padding(.top, 20)
                     }
                 }
                 .padding(5)
