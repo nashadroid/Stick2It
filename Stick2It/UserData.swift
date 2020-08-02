@@ -356,6 +356,10 @@ final class UserData: ObservableObject  {
         }
     }
     func addCalAvoidRepeat(calTitle: String) {
+        if !(UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) {
+            return
+        }
+        
         if self.userCalendars.firstIndex(where: {$0.calendarName == calTitle}) != nil{
             return
         }
@@ -363,7 +367,6 @@ final class UserData: ObservableObject  {
         self.saveCalendars()
     }
     func addGoalsFromCal() {
-        
         if !(UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) {
             return
         }

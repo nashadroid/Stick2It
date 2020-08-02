@@ -60,7 +60,6 @@ struct SettingsMenu: View {
                             Spacer()
                         }
                         .onReceive([self.allowNotifications].publisher.first()) { (value) in
-                            print("New value is: \(value)")
                             if self.loaded {
                                 UserDefaults.standard.set(self.allowNotifications, forKey: "allowNotifications")
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
@@ -119,7 +118,7 @@ struct SettingsMenu: View {
                     if self.connectToCal {
                         VStack(alignment: .leading){
                             HStack(alignment: .center){
-                                Text("Select Calendars:")
+                                Text("Tap to Select Calendars:")
                                     .fontWeight(.heavy)
                                     .padding(10)
                                     .foregroundColor(Color.white)
@@ -164,7 +163,6 @@ struct SettingsMenu: View {
         .onAppear {
             self.allowNotifications = UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false
             self.connectToCal = UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false
-            print("Appeared")
             self.loaded = true
         }
     }
