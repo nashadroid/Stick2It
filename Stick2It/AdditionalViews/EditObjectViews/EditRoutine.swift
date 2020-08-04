@@ -152,7 +152,9 @@ struct EditRoutine: View {
                     
                     Button(action: {
                         self.currentOverlay = .none
-                        self.userData.removeRoutine(routine: self.userData.userRoutines[self.routineIndex])
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                            self.userData.removeRoutine(routine: self.userData.userRoutines[self.routineIndex])
+                        }
                         
                     }) {
                         Text("Delete")

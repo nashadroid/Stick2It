@@ -30,6 +30,24 @@ struct AddFutureGoalNoBack: View {
                         .padding(.bottom, 15)
                 }
                 Spacer()
+                Button(action: {
+                    self.userData.addGoal(
+                        goalName: self.name,
+                        startTime: self.startTime,
+                        endTime: self.endTime,
+                        scheduled: true,
+                        remain: false,
+                        project: self.project)
+                    self.userData.saveGoal()
+                    self.currentOverlay = .none
+                    self.userData.saveGoal()
+                    self.currentOverlay = .none
+                }) {
+                    Text("Add")
+                        .foregroundColor(Color.white)
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
+                }
             }
             
             
@@ -100,7 +118,13 @@ struct AddFutureGoalNoBack: View {
 //                    .padding(.top, 20)
 //
                     Button(action:{
-                        self.userData.addGoal(self.name, self.startTime, self.endTime, self.project)
+                        self.userData.addGoal(
+                            goalName: self.name,
+                            startTime: self.startTime,
+                            endTime: self.endTime,
+                            scheduled: true,
+                            remain: false,
+                            project: self.project)
                         self.userData.saveGoal()
                         self.currentOverlay = .none
                     }){

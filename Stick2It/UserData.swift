@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Combine
+import EventKit
 
 //These functions are needed at startup and thus are placed at top level
 func loadSavedGoals() -> [Goal]{
@@ -42,6 +43,16 @@ func loadSavedProjects() -> [Project]{
     }
     return []
 }
+func loadSavedCalendars() -> [NCalendar]{
+    
+    if let savedProjects = UserDefaults.standard.object(forKey: "UserCalendars") as? Data {
+        let decoder = JSONDecoder()
+        if let loadedCals = try? decoder.decode([NCalendar].self, from: savedProjects) {
+            return loadedCals
+        }
+    }
+    return []
+}
 
 func loadSavedNotes() -> Dictionary<String, String>{
     
@@ -60,26 +71,38 @@ final class UserData: ObservableObject  {
     @Published var userGoals: [Goal]
     @Published var userRoutines: [Routine]
     @Published var userProjects: [Project]
+    @Published var userCalendars: [NCalendar]
     @Published var userNotes: Dictionary<String, String>
     
     init() {
         userGoals = loadSavedGoals()
         userRoutines = loadSavedRoutines()
         userProjects = loadSavedProjects()
+        userCalendars = loadSavedCalendars()
         userNotes = loadSavedNotes()
+        changeOldRemainGoalsToday()
+        addGoalsFromCal() //TODO Move this
+        checkCalendarsAddAccordingly()
+        _ = notificationsAllowed()
         for day in getNextWeek(){
             checkRoutineAddGoalsAsNeeded(day: day)
         }
     }
     
     //Add objects
-    func addGoal(_ goalName: String, _ startTime: Date, _ endTime: Date, _ project: String){
-        let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, project: project, done: false)
+    func addGoal(goalName: String, startTime: Date, endTime: Date, scheduled: Bool, remain: Bool, project: String){
+        let newGoal = Goal(id: UUID().hashValue, goalName: goalName, startTime: startTime, endTime: endTime, scheduled: scheduled, remain: remain, project: project, done: false)
         userGoals += [newGoal]
+        if scheduled {
+            newNotificationFromGoal(goal: newGoal)
+        }
     }
-    func addRoutine(_ routineName: String, _ startTime: Date, _ endTime: Date, _ repeatOn: [Bool], _ project: String){
-        let newRoutine = Routine(id: UUID().hashValue, routineName: routineName, startTime: startTime, endTime: endTime, repeatOn: repeatOn, project: project)
+    func addRoutine(routineName: String, startTime: Date, endTime: Date, scheduled: Bool, repeatOn: [Bool], project: String){
+        let newRoutine = Routine(id: UUID().hashValue, routineName: routineName, startTime: startTime, endTime: endTime, scheduled: scheduled, repeatOn: repeatOn, project: project)
         userRoutines += [newRoutine]
+        for day in getNextWeek(){
+            checkRoutineAddGoalsAsNeeded(day: day)
+        }
     }
     func addProject(projectName: String){
         let newProject = Project(id: UUID().hashValue, projectName: projectName)
@@ -120,15 +143,32 @@ final class UserData: ObservableObject  {
             UserDefaults.standard.set(data, forKey: "UserProjects")
         }
     }
+    func saveCalendars(){
+        let encoder = JSONEncoder()
+        if let data = try? encoder.encode(self.userCalendars) {
+            UserDefaults.standard.set(data, forKey: "UserCalendars")
+        } else {
+            print("could not save calendar")
+        }
+    }
     func saveNotes(){
         UserDefaults.standard.set(self.userNotes, forKey: "UserNotes")
     }
     
     //Remove Objects
     func removeGoal(goal: Goal){
-        self.userGoals.removeAll { $0 == goal}
+//        self.userGoals[self.userGoals.firstIndex(where: {$0 == goal}) ?? 0].enabled = false
+        self.userGoals[self.userGoals.firstIndex(where: {$0 == goal}) ?? 0].deleted = true
         self.saveGoal()
+        
+        self.refreshNotifications()
     }
+    func disableGoal(goal: Goal){
+        self.userGoals[self.userGoals.firstIndex(where: {$0 == goal}) ?? 0].enabled = false
+        self.saveGoal()
+        self.refreshNotifications()
+    }
+    
     func removeRoutine(routine: Routine){
         self.userRoutines.removeAll { $0 == routine}
         self.saveRoutine()
@@ -165,7 +205,15 @@ final class UserData: ObservableObject  {
             let endDate = combineTimeAndDay(time: routine.endTime, day: day)
             
             
-            let tempGoal = Goal(id: UUID().hashValue, goalName: routine.routineName, startTime: startDate, endTime: endDate, project: routine.project, done: false)
+            let tempGoal = Goal(
+                id: UUID().hashValue,
+                goalName: routine.routineName,
+                startTime: startDate,
+                endTime: endDate,
+                scheduled: routine.scheduled,
+                project: routine.project,
+                done: false
+            )
             
             self.addGoalAvoidingRepeat(goalToBeAdded: tempGoal)
         }
@@ -187,7 +235,19 @@ final class UserData: ObservableObject  {
         if self.userGoals.firstIndex(where: {$0.goalName == goalToBeAdded.goalName && $0.startTime == goalToBeAdded.startTime}) != nil{
             return
         }
+        newNotificationFromGoal(goal: goalToBeAdded)
         userGoals += [goalToBeAdded]
+    }
+    
+    //Change unfinished remain goals to be today
+    func changeOldRemainGoalsToday() {
+        for goal in self.userGoals.filter({$0.remain && !$0.done && $0.enabled}) {
+            
+            if let goalIndex = self.userGoals.firstIndex(of: goal){
+                self.userGoals[goalIndex].startTime = Date()
+                self.userGoals[goalIndex].endTime = Date()
+            }
+        }
     }
     
     func goalDoneOnDay(goalName: String, Date: Date) -> Int{
@@ -207,6 +267,212 @@ final class UserData: ObservableObject  {
             return -1
         }
         
+    }
+    func registerForPushNotifications() {
+        if !(UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
+            return
+        }
+        UNUserNotificationCenter.current()
+            .requestAuthorization(options: [.alert, .sound, .badge]) {
+                [weak self] granted, error in
+                guard granted else { return }
+                self?.getNotificationSettings()
+        }
+        
+    }
+    
+    func getNotificationSettings() {
+      UNUserNotificationCenter.current().getNotificationSettings { settings in
+//        return settings
+        //print(settings.authorizationStatus.rawValue)
+      }
+    }
+    
+    var notificationAllowedVar = false
+    func notificationsAllowed() -> Bool{
+        UNUserNotificationCenter.current().getNotificationSettings() { settings in
+            self.notificationAllowedVar = (settings.authorizationStatus == .authorized)
+            //print(self.notificationAllowedVar)
+//            return valToRet
+        }
+        return self.notificationAllowedVar
+    }
+    
+    func newNotificationFromGoal(goal: Goal) {
+        if !(UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
+            return
+        }
+        
+        self.registerForPushNotifications()
+        
+        let notificationTime: Int = UserDefaults.standard.object(forKey: "notificationTime") as? Int ?? 0
+        let (h, m) = notificationTime.quotientAndRemainder(dividingBy: 60)
+        
+        let content = UNMutableNotificationContent()
+        content.title = goal.goalName
+        
+        var message = getTimeStringFromDate(goal.startTime)
+        if (notificationTime == 0) {
+            message += "\n(now)"
+        } else {
+            if h == 1 {
+                message += "\n(in \(h) hour"
+                if m > 0 {
+                    message += " and \(m) minutes)"
+                } else {
+                    message += ")"
+                }
+            } else if h > 1 {
+                message += "\n(in \(h) hours"
+                if m > 0 {
+                    message += " and \(m) minutes)"
+                }
+                else {
+                   message += ")"
+               }
+            }
+            else {
+                message += "\n(in \(notificationTime) minutes)"
+            }
+        }
+        
+        
+        content.body = message
+        content.sound = UNNotificationSound.default
+        
+        
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute],
+                                                             from: Calendar.current.date(byAdding: .minute, value: -notificationTime, to: goal.startTime) ?? goal.startTime)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request)
+    }
+    func refreshNotifications() {
+        
+        if !(UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
+            return
+        }
+        
+        self.registerForPushNotifications()
+        
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        
+        if (UserDefaults.standard.object(forKey: "allowNotifications") as? Bool ?? false) {
+            for day in getNextWeek() {
+                for goal in self.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: day) && $0.enabled && !$0.deleted && $0.scheduled}) {
+                    self.newNotificationFromGoal(goal: goal)
+                }
+            }
+        }
+    }
+    func isCalAllowed() {
+        if !(UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) {
+            return
+        }
+        //let store = EKEventStore()
+    }
+    
+    func getListOfCal() -> [String] {
+        if !(UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) {
+            return [""]
+        }
+        checkCalendarsAddAccordingly()
+        
+        let store = EKEventStore()
+        store.requestAccess(to: .event, completion: {_,_ in })
+        let calendars = store.calendars(for: .event)
+        
+        let calendarTitles = calendars.map{(cal) -> String in
+            return cal.title
+        }
+        return calendarTitles
+    }
+    func checkCalendarsAddAccordingly() {
+        if !(UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) {
+            return
+        }
+        
+        let store = EKEventStore()
+        store.requestAccess(to: .event, completion: {_,_ in
+            
+        })
+        let calendars = store.calendars(for: .event)
+        
+        let calendarTitles = calendars.map{(cal) -> String in
+            return cal.title
+        }
+        
+        for calTitle in calendarTitles {
+            addCalAvoidRepeat(calTitle: calTitle)
+        }
+    }
+    func addCalAvoidRepeat(calTitle: String) {
+        if !(UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) {
+            return
+        }
+        
+        if self.userCalendars.firstIndex(where: {$0.calendarName == calTitle}) != nil{
+            return
+        }
+        self.userCalendars += [NCalendar(id: UUID().hashValue, calendarName: calTitle)]
+        self.saveCalendars()
+    }
+    func addGoalsFromCal() {
+        if !(UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) {
+            return
+        }
+        
+        let store = EKEventStore()
+        store.requestAccess(to: .event, completion: {_,_ in }) //TODO
+        let calendars = store.calendars(for: .event)
+        
+        let ONCalendarTitles = self.userCalendars.filter({$0.enabled}).map{(cal) -> String in
+            return cal.calendarName
+        }
+        let ONCalendars = calendars.filter({ONCalendarTitles.contains($0.title)})
+        
+        let predicate = store.predicateForEvents(withStart: Date(), end: getWeekFromToday(), calendars: ONCalendars)
+        
+        let calEvents = store.events(matching: predicate)
+        let ONCalEvents = calEvents.filter({ONCalendars.contains($0.calendar)})
+        
+        for event in ONCalEvents {
+            
+            let nCal = userCalendars.first(where: {$0.calendarName == event.calendar.title})
+            
+            let goalToBeAdded = Goal(id: UUID().hashValue, goalName: event.title, startTime: event.startDate, endTime: event.endDate, scheduled: true, remain: false, project: "none", catagory: "none", done: false, calendar: nCal)
+            
+            addGoalAvoidingRepeat(goalToBeAdded: goalToBeAdded)
+        }
+    }
+    
+    func refeshEnabledFromCalendars() {
+//        for cal in self.userCalendars {
+//            for goal in userGoals.filter({$0.calendar == cal}) {
+//                if self.userGoals.firstIndex(of: goal) != nil {
+//                    self.userGoals[self.userGoals.firstIndex(of: goal) ?? 0].enabled = cal.enabled
+//                }
+//            }
+//        }
+        let ONCalendarTitles = self.userCalendars.filter({$0.enabled}).map{(cal) -> String in
+            return cal.calendarName
+        }
+        
+        for goal in self.userGoals {
+            
+            if goal.calendar != nil {
+                
+                if ((UserDefaults.standard.object(forKey: "connectCalendar") as? Bool ?? false) && ONCalendarTitles.contains(goal.calendar?.calendarName ?? "")){
+                    self.userGoals[self.userGoals.firstIndex(of: goal) ?? 0].enabled = true
+                } else {
+                    self.userGoals[self.userGoals.firstIndex(of: goal) ?? 0].enabled = false
+                }
+            }
+        }
+        self.saveGoal()
     }
 }
 

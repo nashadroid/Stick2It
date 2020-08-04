@@ -59,9 +59,11 @@ func getShortStringFromRepeatDays(repeatedOn: [Bool]) -> String {
         strToReturn += "Sat"
     }
     
+    if strToReturn != "" {
+        return strToReturn
+    }
+    return "No Days Selected :("
     
-    
-    return strToReturn
 }
 
 // Returns a list of Date objects corresponding to the past week
@@ -105,6 +107,9 @@ func getYesterday() -> Date {
 
 func getTomorrow() -> Date {
     return Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
+}
+func getWeekFromToday() -> Date {
+    return Calendar.current.date(byAdding: .day, value: 7, to: Date()) ?? Date()
 }
 
 // Returns string of date

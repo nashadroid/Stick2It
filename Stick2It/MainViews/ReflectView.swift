@@ -31,10 +31,10 @@ struct ReflectView: View {
                         .multilineTextAlignment(.leading)
                     
                     // Show Yesterday's goals
-                    ScrollView(.vertical, showsIndicators: false){
+                    ScrollView(.vertical, showsIndicators: true){
                         VStack(spacing: 10){
                             
-                            ForEach(self.userData.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: getYesterday())})) {goal in
+                            ForEach(self.userData.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: getYesterday()) && $0.enabled && !$0.deleted})) {goal in
                                 
                                 ReflectionGoalBox(goal: goal)
                                     .onLongPressGesture {
@@ -46,6 +46,23 @@ struct ReflectView: View {
                                 }
                                 
                             }
+                            if !(self.userData.userGoals.filter({Calendar.current.isDate($0.startTime, inSameDayAs: getYesterday()) && $0.enabled && !$0.deleted}).count > 0) {
+                                Text("Looks like you didn't have any goals yesterday, check back again tomorrow!")
+                                    .italic()
+                                    .foregroundColor(.gray)
+                                    .padding(.bottom, 10)
+                                    .multilineTextAlignment(.center)
+                            }
+                            
+                            Text(userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Today")) != "" ?
+                                "\"" + userData.getNote(day: (getStringFromDate(date: getYesterday()) + "Today")) + "\"" : "")
+                                .italic()
+                                .foregroundColor(.gray)
+                                .padding(.leading, 20)
+                                .padding(.trailing, 20)
+                                .padding(.top, 10)
+                                .lineLimit(50)
+                                .multilineTextAlignment(.leading)
                         }
                         .padding()
                         .frame(maxWidth: .infinity)
@@ -67,6 +84,8 @@ struct ReflectView: View {
                         
                         // Make a stack of all routines
                         VStack(alignment: .trailing){
+                            
+                            
                             ForEach(userData.userRoutines, id: \.self){ routine in
                                 // Make a stack of past day completions from routines
                                 HStack{
@@ -80,6 +99,7 @@ struct ReflectView: View {
                                     }
                                 }
                             }
+                            
                         }
                         .padding(.leading)
                         .padding(.bottom, 40)

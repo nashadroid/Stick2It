@@ -15,7 +15,8 @@ struct AddRoutineNoBack: View {
     @State private var name: String = ""
     @State private var startTime: Date = getLastHour()
     @State private var endTime: Date = getNextHour()
-    @State private var date: String = "none"
+    @State private var scheduled: Bool = true
+    //@State private var date: String = "none" 
     @State private var project: String = "none"
     @State private var repeatDays = [1,2]
     @State var daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
@@ -35,6 +36,23 @@ struct AddRoutineNoBack: View {
                         .padding(.bottom, 15)
                 }
                 Spacer()
+                
+                Button(action:{
+                    self.userData.addRoutine(
+                        routineName: self.name,
+                        startTime: self.startTime,
+                        endTime: self.endTime,
+                        scheduled: self.scheduled,
+                        repeatOn: self.daysSelected,
+                        project: self.project)
+                    self.userData.saveRoutine()
+                    self.currentOverlay = .none
+                }){
+                    Text("Add")
+                        .foregroundColor(Color.white)
+                        .padding(.top, 15)
+                        .padding(.bottom, 15)
+                }
             }
             
             Text("New Routine")
@@ -57,6 +75,23 @@ struct AddRoutineNoBack: View {
                     .padding(5)
                     .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
                     
+                    HStack(alignment: .center){
+                        Text("Scheduled")
+                            .font(.footnote)
+                            .fontWeight(.heavy)
+                            .padding(.leading, 5)
+                            .foregroundColor(Color.white)
+                        Toggle(isOn: $scheduled){
+                            Text("")
+                        }
+                        .padding(5)
+                    }
+                    .padding(5)
+                    .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.white, lineWidth: 1))
+                    .padding(.top, 20)
+                    
+                    if self.scheduled{
+                        
                     VStack(alignment: .leading){
                         Text("Start Time:")
                             .font(.footnote)
@@ -109,6 +144,7 @@ struct AddRoutineNoBack: View {
                     }
                     .padding(.top, 10)
                     
+                    }
 //                    VStack(alignment: .leading){
 //                        Text("Project:")
 //                            .font(.footnote)
@@ -132,7 +168,14 @@ struct AddRoutineNoBack: View {
 //                    
                     
                     Button(action:{
-                        self.userData.addRoutine(self.name, self.startTime, self.endTime, self.daysSelected, self.project)
+                        self.userData.addRoutine(
+                            routineName: self.name,
+                            startTime: self.startTime,
+                            endTime: self.endTime,
+                            scheduled: self.scheduled,
+                            repeatOn: self.daysSelected,
+                            project: self.project)
+                        
                         self.userData.saveRoutine()
                         self.currentOverlay = .none
                         

@@ -10,7 +10,7 @@
 import SwiftUI
 
 enum overlayViews {
-    case addGoal, editGoal, reflect, addRoutine, editRoutine, addProject, addFutureGoal, futureDecide, none
+    case addGoal, editGoal, reflect, addRoutine, editRoutine, addProject, addFutureGoal, futureDecide, settingsMenu, none
 }
 
 let generator = UIImpactFeedbackGenerator(style: .heavy)
